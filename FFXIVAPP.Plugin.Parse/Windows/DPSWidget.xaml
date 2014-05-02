@@ -1,0 +1,242 @@
+﻿<Window x:Class="FFXIVAPP.Plugin.Parse.Windows.DPSWidget"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:PluginProperties="clr-namespace:FFXIVAPP.Plugin.Parse.Properties"
+        xmlns:ViewModels="clr-namespace:FFXIVAPP.Plugin.Parse.Windows"
+        xmlns:commonConverters="clr-namespace:FFXIVAPP.Common.Converters;assembly=FFXIVAPP.Common"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:converters="clr-namespace:FFXIVAPP.Plugin.Parse.Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="DPSWidget"
+        Width="{Binding DPSWidgetWidth,
+                        Source={x:Static PluginProperties:Settings.Default},
+                        Mode=TwoWay}"
+        Height="{Binding DPSWidgetHeight,
+                         Source={x:Static PluginProperties:Settings.Default},
+                         Mode=TwoWay}"
+        MinWidth="200"
+        MinHeight="360"
+        MaxWidth="375"
+        MaxHeight="600"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Closing="Widget_OnClosing"
+        Left="{Binding DPSWidgetLeft,
+                       Mode=TwoWay,
+                       Source={x:Static PluginProperties:Settings.Default}}"
+        Opacity="{Binding WidgetOpacity,
+                          Source={x:Static PluginProperties:Settings.Default}}"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Top="{Binding DPSWidgetTop,
+                      Mode=TwoWay,
+                      Source={x:Static PluginProperties:Settings.Default}}"
+        WindowStyle="None">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <x:Static x:Key="Settings"
+                      Member="PluginProperties:Settings.Default" />
+            <x:Static x:Key="DPSWidgetViewModel"
+                      Member="ViewModels:DPSWidgetViewModel.Instance" />
+            <converters:StringToBrushConverter x:Key="StringToBrushConverter" />
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+            <commonConverters:VisibilityConverter x:Key="VisibilityConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FFXIVAPP.Plugin.Parse;component/Resources/WidgetStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding DPSWidgetUIScale,
+                                             Source={StaticResource Settings}}"
+                            ScaleY="{Binding DPSWidgetUIScale,
+                                             Source={StaticResource Settings}}" />
+        </Grid.LayoutTransform>
+        <StackPanel>
+            <DockPanel LastChildFill="True"
+                       Visibility="{Binding ShowTitlesOnWidgets,
+                                            Source={StaticResource Settings},
+                                            Converter={StaticResource VisibilityConverter}}">
+                <Border Margin="5 0 5 5"
+                        Background="WhiteSmoke"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        CornerRadius="2">
+                    <DockPanel LastChildFill="True">
+                        <Button x:Name="WidgetClose"
+                                Width="15"
+                                Height="15"
+                                Margin="2"
+                                Click="WidgetClose_OnClick"
+                                DockPanel.Dock="Right"
+                                Padding="0"
+                                ToolTip="Close">
+                            <Path Data="M0,0 L5,5 M0,5 L5,0"
+                                  Stretch="None"
+                                  Stroke="Black" />
+                        </Button>
+                        <DockPanel Background="WhiteSmoke"
+                                   PreviewMouseDown="TitleBar_OnPreviewMouseDown">
+                            <Grid>
+                                <TextBlock Grid.Row="0"
+                                           Margin="5 -1"
+                                           HorizontalAlignment="Right"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="Black"
+                                           Padding="0"
+                                           Text="[DPS]" />
+                                <TextBlock Grid.Row="0"
+                                           Margin="5 2"
+                                           HorizontalAlignment="Left"
+                                           FontSize="10"
+                                           FontWeight="Bold"
+                                           Foreground="Black"
+                                           Padding="0"
+                                           Text="FFXIV-APP" />
+                            </Grid>
+                        </DockPanel>
+                    </DockPanel>
+                </Border>
+            </DockPanel>
+            <ItemsControl x:Name="Party">
+                <ItemsControl.Resources>
+                    <CollectionViewSource x:Key="Party"
+                                          Source="{Binding ParseEntity.Players,
+                                                           Source={StaticResource DPSWidgetViewModel}}" />
+                </ItemsControl.Resources>
+                <ItemsControl.ItemsSource>
+                    <Binding Source="{StaticResource Party}" />
+                </ItemsControl.ItemsSource>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5 1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="1"
+                                        Margin="5 0"
+                                        VerticalAlignment="Bottom"
+                                        Background="WhiteSmoke"
+                                        BorderBrush="Black"
+                                        BorderThickness="1"
+                                        CornerRadius="2">
+                                    <DockPanel Margin="1"
+                                               LastChildFill="True">
+                                        <DockPanel DockPanel.Dock="Right">
+                                            <TextBlock Margin="5 0"
+                                                       HorizontalAlignment="Left"
+                                                       FontSize="12"
+                                                       FontWeight="Bold"
+                                                       Foreground="Black"
+                                                       Style="{StaticResource DecimalStyle}"
+                                                       Tag="DPS"
+                                                       Text="{Binding DPS,
+                                                                      StringFormat={}{0:F2}}"
+                                                       Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                                            Path=Tag,
+                                                                            Converter={StaticResource StringToVisibilityConverter}}" />
+                                            <TextBlock Margin="5 0"
+                                                       HorizontalAlignment="Left"
+                                                       FontSize="12"
+                                                       FontWeight="Bold"
+                                                       Foreground="Black"
+                                                       Style="{StaticResource DecimalStyle}"
+                                                       Tag="CombinedDPS"
+                                                       Text="{Binding CombinedDPS,
+                                                                      StringFormat={}{0:F2}}"
+                                                       Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                                            Path=Tag,
+                                                                            Converter={StaticResource StringToVisibilityConverter}}" />
+                                        </DockPanel>
+                                        <DockPanel>
+                                            <TextBlock Margin="5 0"
+                                                       HorizontalAlignment="Left"
+                                                       FontSize="12"
+                                                       FontWeight="Bold"
+                                                       Foreground="Black"
+                                                       Style="{StaticResource StatLabelStyle}"
+                                                       Text="{Binding Name}" />
+                                        </DockPanel>
+                                    </DockPanel>
+                                </Border>
+                                <ProgressBar Grid.Row="0"
+                                             Grid.RowSpan="2"
+                                             Height="18"
+                                             VerticalAlignment="Top"
+                                             BorderBrush="Black"
+                                             Foreground="{Binding Job,
+                                                                  Converter={StaticResource StringToBrushConverter}}"
+                                             Maximum="1"
+                                             Minimum="0"
+                                             Style="{StaticResource ProgressBarStyleStopAnimation}"
+                                             Value="{Binding PercentOfTotalOverallDamage}" />
+                                <TextBlock Grid.Row="0"
+                                           Margin="5 0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Bold"
+                                           Foreground="Black"
+                                           Style="{StaticResource CommaNumberStyle}"
+                                           Tag="TotalOverallDamage"
+                                           Text="{Binding TotalOverallDamage,
+                                                          StringFormat={}{0:N0}}"
+                                           Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                                Path=Tag,
+                                                                Converter={StaticResource StringToVisibilityConverter}}" />
+                                <TextBlock Grid.Row="0"
+                                           Margin="5 0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Bold"
+                                           Foreground="Black"
+                                           Style="{StaticResource CommaNumberStyle}"
+                                           Tag="CombinedTotalOverallDamage"
+                                           Text="{Binding CombinedTotalOverallDamage,
+                                                          StringFormat={}{0:N0}}"
+                                           Visibility="{Binding RelativeSource={RelativeSource Self},
+                                                                Path=Tag,
+                                                                Converter={StaticResource StringToVisibilityConverter}}" />
+                                <StackPanel Grid.Row="0"
+                                            Margin="5 0"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <TextBlock Margin="2 0"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"
+                                               Foreground="Black"
+                                               Style="{StaticResource PercentStyle}"
+                                               Text="{Binding PercentOfTotalOverallDamage,
+                                                              StringFormat={}{0:P}}" />
+                                    <TextBlock Margin="3 0"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Bold"
+                                               Foreground="Black"
+                                               Style="{StaticResource StatLabelStyle}"
+                                               Text="{Binding Job,
+                                                              StringFormat=[{0}]}"
+                                               Visibility="{Binding ShowJobNameInWidgets,
+                                                                    Source={StaticResource Settings},
+                                                                    Converter={StaticResource VisibilityConverter}}" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</Window>
