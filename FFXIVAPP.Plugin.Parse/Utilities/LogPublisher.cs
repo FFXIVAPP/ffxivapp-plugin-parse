@@ -75,6 +75,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                     NeedGreedHistory.Add(chatLogEntry.Line);
                 }
                 DispatcherHelper.Invoke(() => EventParser.Instance.ParseAndPublish(chatLogEntry));
+                HandleCommands(chatLogEntry);
             }
             catch (Exception ex)
             {
