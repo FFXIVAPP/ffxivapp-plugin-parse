@@ -148,6 +148,6 @@ namespace FFXIVAPP.Plugin.Parse.RegularExpressions
 
         public static Regex ObtainsDe = new Regex(@"^(D(u|einer|(i|e)r|ich|as|ie|en) )?(?<source>.+) has?t (?<item>.+) erhalten\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex DefeatsDe = new Regex(@"^(?<source>Du|.+) has?t (d(u|einer|(i|e)r|ich|as|ie|en) )?(?<target>.+) besiegt\.$", SharedRegEx.DefaultOptions);
+        public static Regex DefeatsDe = new Regex(@"^((?<source>Du|.+) has?t (d(u|einer|(i|e)r|ich|as|ie|en) )?(?<target>.+) besiegt|(D(u|einer|(i|e)r|ich|as|ie|en) )?(?<target>.+) bricht bewusstlos zusammen)\.$", SharedRegEx.DefaultOptions);
     }
 }
