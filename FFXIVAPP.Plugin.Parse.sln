@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVAPP.Plugin.Parse", "FFXIVAPP.Plugin.Parse\FFXIVAPP.Plugin.Parse.csproj", "{BDF0777F-306F-464C-A30B-3FAE6CDDF527}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVAPP.Plugin.Parse", "FFXIVAPP.Plugin.Parse\FFXIVAPP.Plugin.Parse.csproj", "{A917E7D4-7E17-4FA4-8B96-FDEBE8C9721F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2F1A5D9D-E459-430E-A589-76C6A41E4157}"
 	ProjectSection(SolutionItems) = preProject
