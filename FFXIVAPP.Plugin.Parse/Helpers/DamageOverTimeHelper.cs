@@ -1,33 +1,12 @@
 ﻿// FFXIVAPP.Plugin.Parse
 // DamageOverTimeHelper.cs
 // 
-// Copyright © 2007 - 2014 Ryan Wilson - All Rights Reserved
+// Created by Ryan Wilson.
 // 
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions are met: 
-// 
-//  * Redistributions of source code must retain the above copyright notice, 
-//    this list of conditions and the following disclaimer. 
-//  * Redistributions in binary form must reproduce the above copyright 
-//    notice, this list of conditions and the following disclaimer in the 
-//    documentation and/or other materials provided with the distribution. 
-//  * Neither the name of SyndicatedLife nor the names of its contributors may 
-//    be used to endorse or promote products derived from this software 
-//    without specific prior written permission. 
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
-// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
-// POSSIBILITY OF SUCH DAMAGE. 
+// Copyright © 2014 - 2014 Ryan Wilson - All Rights Reserved
 
 using System.Collections.Generic;
+using System.Windows;
 using FFXIVAPP.Plugin.Parse.Models;
 
 namespace FFXIVAPP.Plugin.Parse.Helpers
@@ -146,9 +125,42 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 15,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("kreis der verachtung", _playerActions["circle of scorn"]);
                 _playerActions.Add("cercle du destin", _playerActions["circle of scorn"]);
+                _playerActions.Add("kreis der verachtung", _playerActions["circle of scorn"]);
                 _playerActions.Add("サークル・オブ・ドゥーム", _playerActions["circle of scorn"]);
+
+                _playerActions.Add("storm's path", new XOverTimeAction
+                {
+                    ActionPotency = 100,
+                    ActionOverTimePotency = 250,
+                    Duration = 20,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("couperet de justice", _playerActions["storm's path"]);
+                _playerActions.Add("sturmkeil", _playerActions["storm's path"]);
+                _playerActions.Add("シュトルムヴィント", _playerActions["storm's path"]);
+
+                _playerActions.Add("storm's eye", new XOverTimeAction
+                {
+                    ActionPotency = 100,
+                    ActionOverTimePotency = 270,
+                    Duration = 20,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("œil de la tempête", _playerActions["storm's eye"]);
+                _playerActions.Add("sturmbrecher", _playerActions["storm's eye"]);
+                _playerActions.Add("シュトルムブレハ", _playerActions["storm's eye"]);
+
+                _playerActions.Add("demolish", new XOverTimeAction
+                {
+                    ActionPotency = 30,
+                    ActionOverTimePotency = 40,
+                    Duration = 18,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("démolition", _playerActions["demolish"]);
+                _playerActions.Add("demolieren", _playerActions["demolish"]);
+                _playerActions.Add("破砕拳", _playerActions["demolish"]);
 
                 _playerActions.Add("touch of death", new XOverTimeAction
                 {
@@ -157,31 +169,20 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 30,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("hauch des todes", _playerActions["touch of death"]);
                 _playerActions.Add("toucher mortel", _playerActions["touch of death"]);
+                _playerActions.Add("hauch des todes", _playerActions["touch of death"]);
                 _playerActions.Add("秘孔拳", _playerActions["touch of death"]);
 
-                _playerActions.Add("demolish", new XOverTimeAction
-                {
-                    ActionPotency = 55,
-                    ActionOverTimePotency = 40,
-                    Duration = 18,
-                    HasNoInitialResult = false
-                });
-                _playerActions.Add("demolieren", _playerActions["demolish"]);
-                _playerActions.Add("démolition", _playerActions["demolish"]);
-                _playerActions.Add("破砕拳", _playerActions["demolish"]);
-
-                _playerActions.Add("fracture", new XOverTimeAction
+                _playerActions.Add("chaos thrust", new XOverTimeAction
                 {
                     ActionPotency = 100,
-                    ActionOverTimePotency = 20,
+                    ActionOverTimePotency = 200,
                     Duration = 30,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("knochenbrecher", _playerActions["fracture"]);
-                //_playerActions.Add("fracture", _playerActions["fracture"]);
-                _playerActions.Add("フラクチャー", _playerActions["fracture"]);
+                _playerActions.Add("percée chaotique", _playerActions["chaos thrust"]);
+                _playerActions.Add("chaotischer tjost", _playerActions["chaos thrust"]);
+                _playerActions.Add("桜華狂咲", _playerActions["chaos thrust"]);
 
                 _playerActions.Add("phlebotomize", new XOverTimeAction
                 {
@@ -190,31 +191,9 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 18,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("phlebotomie", _playerActions["phlebotomize"]);
                 _playerActions.Add("double percée", _playerActions["phlebotomize"]);
+                _playerActions.Add("phlebotomie", _playerActions["phlebotomize"]);
                 _playerActions.Add("二段突き", _playerActions["phlebotomize"]);
-
-                _playerActions.Add("chaos thrust", new XOverTimeAction
-                {
-                    ActionPotency = 200,
-                    ActionOverTimePotency = 30,
-                    Duration = 30,
-                    HasNoInitialResult = false
-                });
-                _playerActions.Add("chaotischer tjost", _playerActions["chaos thrust"]);
-                _playerActions.Add("percée chaotique", _playerActions["chaos thrust"]);
-                _playerActions.Add("桜華狂咲", _playerActions["chaos thrust"]);
-
-                _playerActions.Add("venomous bite", new XOverTimeAction
-                {
-                    ActionPotency = 100,
-                    ActionOverTimePotency = 35,
-                    Duration = 18,
-                    HasNoInitialResult = false
-                });
-                _playerActions.Add("giftbiss", _playerActions["venomous bite"]);
-                _playerActions.Add("morsure venimeuse", _playerActions["venomous bite"]);
-                _playerActions.Add("ベノムバイト", _playerActions["venomous bite"]);
 
                 _playerActions.Add("windbite", new XOverTimeAction
                 {
@@ -223,8 +202,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 18,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("beißender Wind", _playerActions["windbite"]);
                 _playerActions.Add("morsure du vent", _playerActions["windbite"]);
+                _playerActions.Add("beißender wind", _playerActions["windbite"]);
                 _playerActions.Add("ウィンドバイト", _playerActions["windbite"]);
 
                 _playerActions.Add("aero", new XOverTimeAction
@@ -234,8 +213,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 18,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("wind", _playerActions["aero"]);
                 _playerActions.Add("vent", _playerActions["aero"]);
+                _playerActions.Add("wind", _playerActions["aero"]);
                 _playerActions.Add("エアロ", _playerActions["aero"]);
 
                 _playerActions.Add("aero ii", new XOverTimeAction
@@ -245,8 +224,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 12,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("windra", _playerActions["aero ii"]);
                 _playerActions.Add("extra vent", _playerActions["aero ii"]);
+                _playerActions.Add("windra", _playerActions["aero ii"]);
                 _playerActions.Add("エアロラ", _playerActions["aero ii"]);
 
                 _playerActions.Add("thunder", new XOverTimeAction
@@ -256,8 +235,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 18,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("blitz", _playerActions["thunder"]);
                 _playerActions.Add("foudre", _playerActions["thunder"]);
+                _playerActions.Add("blitz", _playerActions["thunder"]);
                 _playerActions.Add("サンダー", _playerActions["thunder"]);
 
                 _playerActions.Add("thunder ii", new XOverTimeAction
@@ -267,8 +246,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 21,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("blitzra", _playerActions["thunder ii"]);
                 _playerActions.Add("extra foudre", _playerActions["thunder ii"]);
+                _playerActions.Add("blitzra", _playerActions["thunder ii"]);
                 _playerActions.Add("サンダラ", _playerActions["thunder ii"]);
 
                 _playerActions.Add("thunder iii", new XOverTimeAction
@@ -278,8 +257,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 24,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("blitzga", _playerActions["thunder iii"]);
                 _playerActions.Add("méga foudre", _playerActions["thunder iii"]);
+                _playerActions.Add("blitzga", _playerActions["thunder iii"]);
                 _playerActions.Add("サンダガ", _playerActions["thunder iii"]);
 
                 _playerActions.Add("bio", new XOverTimeAction
@@ -289,20 +268,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 18,
                     HasNoInitialResult = true
                 });
-                //_playerActions.Add("bio", _playerActions["bio"]);
                 _playerActions.Add("bactérie", _playerActions["bio"]);
                 _playerActions.Add("バイオ", _playerActions["bio"]);
-
-                _playerActions.Add("bio ii", new XOverTimeAction
-                {
-                    ActionPotency = 0,
-                    ActionOverTimePotency = 35,
-                    Duration = 30,
-                    HasNoInitialResult = true
-                });
-                _playerActions.Add("biora", _playerActions["bio ii"]);
-                _playerActions.Add("extra bactérie", _playerActions["bio ii"]);
-                _playerActions.Add("バイオラ", _playerActions["bio ii"]);
 
                 _playerActions.Add("miasma", new XOverTimeAction
                 {
@@ -311,7 +278,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 24,
                     HasNoInitialResult = false
                 });
-                //_playerActions.Add("miasma", _playerActions["miasma"]);
                 _playerActions.Add("miasmes", _playerActions["miasma"]);
                 _playerActions.Add("ミアズマ", _playerActions["miasma"]);
 
@@ -322,9 +288,53 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 15,
                     HasNoInitialResult = false
                 });
-                //_playerActions.Add("miasma ii", _playerActions["miasma ii"]);
                 _playerActions.Add("extra miasmes", _playerActions["miasma ii"]);
+                _playerActions.Add("miasra", _playerActions["miasma ii"]);
                 _playerActions.Add("ミアズラ", _playerActions["miasma ii"]);
+
+                _playerActions.Add("bio ii", new XOverTimeAction
+                {
+                    ActionPotency = 0,
+                    ActionOverTimePotency = 35,
+                    Duration = 30,
+                    HasNoInitialResult = true
+                });
+                _playerActions.Add("extra bactérie", _playerActions["bio ii"]);
+                _playerActions.Add("biora", _playerActions["bio ii"]);
+                _playerActions.Add("バイオラ", _playerActions["bio ii"]);
+
+                _playerActions.Add("inferno", new XOverTimeAction
+                {
+                    ActionPotency = 200,
+                    ActionOverTimePotency = 20,
+                    Duration = 15,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("flammes de l'enfer", _playerActions["inferno"]);
+                _playerActions.Add("地獄の火炎", _playerActions["inferno"]);
+
+                _playerActions.Add("full swing", new XOverTimeAction
+                {
+                    ActionPotency = 150,
+                    ActionOverTimePotency = 30,
+                    Duration = 15,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("plein élan", _playerActions["full swing"]);
+                _playerActions.Add("voller schwinger", _playerActions["full swing"]);
+                _playerActions.Add("フルスイング", _playerActions["full swing"]);
+
+                _playerActions.Add("shadow fang", new XOverTimeAction
+                {
+                    ActionPotency = 100,
+                    ActionOverTimePotency = 200,
+                    Duration = 18,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("croc d'ombre", _playerActions["shadow fang"]);
+                _playerActions.Add("schattenfang", _playerActions["shadow fang"]);
+                _playerActions.Add("影牙", _playerActions["shadow fang"]);
+
                 return _playerActions;
             }
             set { _playerActions = value; }

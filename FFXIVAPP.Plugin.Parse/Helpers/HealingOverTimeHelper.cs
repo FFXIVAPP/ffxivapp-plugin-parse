@@ -118,8 +118,8 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 30,
                     HasNoInitialResult = false
                 });
-                _playerActions.Add("resedra", _playerActions["medica ii"]);
                 _playerActions.Add("extra médica", _playerActions["medica ii"]);
+                _playerActions.Add("resedra", _playerActions["medica ii"]);
                 _playerActions.Add("メディカラ", _playerActions["medica ii"]);
 
                 _playerActions.Add("regen", new XOverTimeAction
@@ -129,20 +129,20 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     Duration = 21,
                     HasNoInitialResult = true
                 });
-                _playerActions.Add("regena", _playerActions["regen"]);
                 _playerActions.Add("récup", _playerActions["regen"]);
+                _playerActions.Add("regena", _playerActions["regen"]);
                 _playerActions.Add("リジェネ", _playerActions["regen"]);
 
-                _playerActions.Add("chocobo regen", new XOverTimeAction
+                _playerActions.Add("choco regen", new XOverTimeAction
                 {
                     ActionPotency = 0,
-                    ActionOverTimePotency = 150,
-                    Duration = 21,
+                    ActionOverTimePotency = 25,
+                    Duration = 18,
                     HasNoInitialResult = true
                 });
-                _playerActions.Add("choco-regena", _playerActions["chocobo regen"]);
-                _playerActions.Add("choco-récup", _playerActions["chocobo regen"]);
-                _playerActions.Add("チョコリジェネ", _playerActions["chocobo regen"]);
+                _playerActions.Add("choco-récup", _playerActions["choco regen"]);
+                _playerActions.Add("chocobo-regena", _playerActions["choco regen"]);
+                _playerActions.Add("チョコリジェネ", _playerActions["choco regen"]);
 
                 _playerActions.Add("whispering dawn", new XOverTimeAction
                 {
@@ -154,6 +154,17 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("erhebendes flüstern", _playerActions["whispering dawn"]);
                 _playerActions.Add("murmure de l'aurore", _playerActions["whispering dawn"]);
                 _playerActions.Add("光の囁き", _playerActions["whispering dawn"]);
+
+                _playerActions.Add("sacred prism", new XOverTimeAction
+                {
+                    ActionPotency = 0,
+                    ActionOverTimePotency = 70,
+                    Duration = 24,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("prisme sacré", _playerActions["sacred prism"]);
+                _playerActions.Add("barmherzigkeit", _playerActions["sacred prism"]);
+                _playerActions.Add("女神の慈悲", _playerActions["sacred prism"]);
 
                 return _playerActions;
             }
