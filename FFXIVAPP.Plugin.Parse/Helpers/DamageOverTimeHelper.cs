@@ -176,7 +176,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("chaos thrust", new XOverTimeAction
                 {
                     ActionPotency = 100,
-                    ActionOverTimePotency = 200,
+                    ActionOverTimePotency = 30,
                     Duration = 30,
                     HasNoInitialResult = false
                 });
