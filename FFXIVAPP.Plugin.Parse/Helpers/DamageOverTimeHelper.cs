@@ -327,7 +327,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("shadow fang", new XOverTimeAction
                 {
                     ActionPotency = 100,
-                    ActionOverTimePotency = 200,
+                    ActionOverTimePotency = 40,
                     Duration = 18,
                     HasNoInitialResult = false
                 });
