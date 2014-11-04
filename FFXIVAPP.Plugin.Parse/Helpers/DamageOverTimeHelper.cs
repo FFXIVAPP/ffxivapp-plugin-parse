@@ -324,6 +324,17 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("voller schwinger", _playerActions["full swing"]);
                 _playerActions.Add("フルスイング", _playerActions["full swing"]);
 
+                _playerActions.Add("mutilate", new XOverTimeAction
+                {
+                    ActionPotency = 60,
+                    ActionOverTimePotency = 30,
+                    Duration = 30,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("attaque mutilante", _playerActions["mutilate"]);
+                _playerActions.Add("verstümmeln", _playerActions["mutilate"]);
+                _playerActions.Add("無双旋", _playerActions["mutilate"]);
+
                 _playerActions.Add("shadow fang", new XOverTimeAction
                 {
                     ActionPotency = 100,
