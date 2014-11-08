@@ -129,28 +129,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("kreis der verachtung", _playerActions["circle of scorn"]);
                 _playerActions.Add("サークル・オブ・ドゥーム", _playerActions["circle of scorn"]);
 
-                _playerActions.Add("storm's path", new XOverTimeAction
-                {
-                    ActionPotency = 100,
-                    ActionOverTimePotency = 250,
-                    Duration = 20,
-                    HasNoInitialResult = false
-                });
-                _playerActions.Add("couperet de justice", _playerActions["storm's path"]);
-                _playerActions.Add("sturmkeil", _playerActions["storm's path"]);
-                _playerActions.Add("シュトルムヴィント", _playerActions["storm's path"]);
-
-                _playerActions.Add("storm's eye", new XOverTimeAction
-                {
-                    ActionPotency = 100,
-                    ActionOverTimePotency = 270,
-                    Duration = 20,
-                    HasNoInitialResult = false
-                });
-                _playerActions.Add("œil de la tempête", _playerActions["storm's eye"]);
-                _playerActions.Add("sturmbrecher", _playerActions["storm's eye"]);
-                _playerActions.Add("シュトルムブレハ", _playerActions["storm's eye"]);
-
                 _playerActions.Add("demolish", new XOverTimeAction
                 {
                     ActionPotency = 30,
