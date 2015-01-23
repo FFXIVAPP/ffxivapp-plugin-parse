@@ -160,7 +160,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("démolition", _playerActions["demolish"]);
                 _playerActions.Add("demolieren", _playerActions["demolish"]);
                 _playerActions.Add("破砕拳", _playerActions["demolish"]);
-                
+
                 _playerActions.Add("touch of death", new XOverTimeAction
                 {
                     ActionPotency = 20,
@@ -171,7 +171,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("toucher mortel", _playerActions["touch of death"]);
                 _playerActions.Add("hauch des todes", _playerActions["touch of death"]);
                 _playerActions.Add("秘孔拳", _playerActions["touch of death"]);
-                
+
                 _playerActions.Add("chaos thrust", new XOverTimeAction
                 {
                     ActionPotency = 100,
@@ -182,7 +182,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("percée chaotique", _playerActions["chaos thrust"]);
                 _playerActions.Add("chaotischer tjost", _playerActions["chaos thrust"]);
                 _playerActions.Add("桜華狂咲", _playerActions["chaos thrust"]);
-                
+
                 _playerActions.Add("phlebotomize", new XOverTimeAction
                 {
                     ActionPotency = 170,
@@ -193,7 +193,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("double percée", _playerActions["phlebotomize"]);
                 _playerActions.Add("phlebotomie", _playerActions["phlebotomize"]);
                 _playerActions.Add("二段突き", _playerActions["phlebotomize"]);
-                
+
                 _playerActions.Add("windbite", new XOverTimeAction
                 {
                     ActionPotency = 60,
@@ -204,7 +204,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("morsure du vent", _playerActions["windbite"]);
                 _playerActions.Add("beißender wind", _playerActions["windbite"]);
                 _playerActions.Add("ウィンドバイト", _playerActions["windbite"]);
-                
+
                 _playerActions.Add("aero", new XOverTimeAction
                 {
                     ActionPotency = 50,
@@ -215,7 +215,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("vent", _playerActions["aero"]);
                 _playerActions.Add("wind", _playerActions["aero"]);
                 _playerActions.Add("エアロ", _playerActions["aero"]);
-                
+
                 _playerActions.Add("aero ii", new XOverTimeAction
                 {
                     ActionPotency = 50,
@@ -226,7 +226,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("extra vent", _playerActions["aero ii"]);
                 _playerActions.Add("windra", _playerActions["aero ii"]);
                 _playerActions.Add("エアロラ", _playerActions["aero ii"]);
-                
+
                 _playerActions.Add("thunder", new XOverTimeAction
                 {
                     ActionPotency = 30,
@@ -343,7 +343,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 });
                 _playerActions.Add("knochenbrecher", _playerActions["fracture"]);
                 _playerActions.Add("フラクチャー", _playerActions["fracture"]);
-                
+
                 _playerActions.Add("shadow fang", new XOverTimeAction
                 {
                     ActionPotency = 100,
