@@ -185,6 +185,7 @@
     <Compile Include="Models\History\IHistoryContainer.cs" />
     <Compile Include="Models\History\NumericHistoryStat.cs" />
     <Compile Include="Models\IParsingControl.cs" />
+    <Compile Include="Models\ItemUsedHistoryItem.cs" />
     <Compile Include="Models\LimitBreaks.cs" />
     <Compile Include="Models\Line.cs" />
     <Compile Include="Models\LineHistory.cs" />

@@ -68,6 +68,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             Last20DamageActions = new List<LineHistory>();
             Last20DamageTakenActions = new List<LineHistory>();
             Last20HealingActions = new List<LineHistory>();
+            Last20Items = new List<LineHistory>();
             LastActionTime = DateTime.Now;
             InitStats();
             StatusUpdateTimer.Elapsed += StatusUpdateTimerOnElapsed;
@@ -91,6 +92,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         public List<LineHistory> Last20DamageActions { get; set; }
         public List<LineHistory> Last20DamageTakenActions { get; set; }
         public List<LineHistory> Last20HealingActions { get; set; }
+        public List<LineHistory> Last20Items { get; set; }
 
         private void StatusUpdateTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {

@@ -670,6 +670,10 @@
                                                           Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
+                                            <Button Margin="3"
+                                                    Command="{Binding ShowLast20PlayerItemsUsedCommand,
+                                                                      Source={StaticResource MainViewModel}}"
+                                                    Content="Show Last 20 Items Used (Selected Player)" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
                                                     <TextBlock Foreground="White"

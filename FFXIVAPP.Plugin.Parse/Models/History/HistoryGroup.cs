@@ -73,11 +73,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
             Last20DamageActions = new List<LineHistory>();
             Last20DamageTakenActions = new List<LineHistory>();
             Last20HealingActions = new List<LineHistory>();
+            Last20Items = new List<LineHistory>();
         }
 
         public List<LineHistory> Last20DamageActions { get; set; }
         public List<LineHistory> Last20DamageTakenActions { get; set; }
         public List<LineHistory> Last20HealingActions { get; set; }
+        public List<LineHistory> Last20Items { get; set; }
 
         public HistoryGroup this[int i]
         {

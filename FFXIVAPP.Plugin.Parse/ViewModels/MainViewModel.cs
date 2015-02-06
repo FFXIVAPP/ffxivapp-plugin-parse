@@ -35,11 +35,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.ViewModelBase;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.Events;
@@ -154,6 +156,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 
         public ICommand ShowLast20PlayerActionsCommand { get; private set; }
         public ICommand ShowLast20MonsterActionsCommand { get; private set; }
+        public ICommand ShowLast20PlayerItemsUsedCommand { get; private set; }
         public ICommand RefreshSelectedCommand { get; private set; }
         public ICommand ProcessSampleCommand { get; private set; }
         public ICommand SwitchInfoViewSourceCommand { get; private set; }
@@ -168,6 +171,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
             IsCurrent = true;
             ShowLast20PlayerActionsCommand = new DelegateCommand<string>(ShowLast20PlayerActions);
             ShowLast20MonsterActionsCommand = new DelegateCommand<string>(ShowLast20MonsterActions);
+            ShowLast20PlayerItemsUsedCommand = new DelegateCommand(ShowLast20PlayerItemsUsed);
             RefreshSelectedCommand = new DelegateCommand(RefreshSelected);
             ProcessSampleCommand = new DelegateCommand(ProcessSample);
             SwitchInfoViewSourceCommand = new DelegateCommand(SwitchInfoViewSource);
@@ -366,6 +370,67 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
                         });
                     }
                     break;
+            }
+            if (!source.Any())
+            {
+                return;
+            }
+            var x = new xMetroWindowDataGrid
+            {
+                Title = title,
+                xMetroWindowDG =
+                {
+                    ItemsSource = source
+                }
+            };
+            x.Show();
+        }
+
+        private void ShowLast20PlayerItemsUsed()
+        {
+            var title = "UNKNOWN";
+            var source = new List<ItemUsedHistoryItem>();
+            dynamic players = null;
+            dynamic player = null;
+            if (IsHistory)
+            {
+                players = ((HistoryGroup) Instance.PlayerInfoSource).Children;
+            }
+            if (IsCurrent)
+            {
+                players = ((StatGroup) Instance.PlayerInfoSource).Children;
+            }
+            if (IsHistory)
+            {
+                player = ((List<HistoryGroup>) players).Where(p => p != null)
+                                                       .Where(p => String.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer))
+                                                       .Cast<HistoryGroup>()
+                                                       .FirstOrDefault();
+                if (player == null)
+                {
+                    return;
+                }
+                title = player.Name;
+            }
+            if (IsCurrent)
+            {
+                player = ((List<StatGroup>) players).Where(p => p != null)
+                                                    .Where(p => String.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer))
+                                                    .Cast<Player>()
+                                                    .FirstOrDefault();
+                if (player == null)
+                {
+                    return;
+                }
+                title = player.Name;
+            }
+            foreach (var item in player.Last20Items)
+            {
+                source.Add(new ItemUsedHistoryItem
+                {
+                    Item = Regex.Replace(item.Line.Action, @"\[Hq\]", "[HQ]", SharedRegEx.DefaultOptions),
+                    TimeStamp = item.TimeStamp
+                });
             }
             if (!source.Any())
             {

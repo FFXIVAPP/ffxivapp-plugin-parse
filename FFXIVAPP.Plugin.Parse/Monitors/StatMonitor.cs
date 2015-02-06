@@ -136,6 +136,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                     playerInstance.Last20DamageActions = ((Player) player).Last20DamageActions.ToList();
                     playerInstance.Last20DamageTakenActions = ((Player) player).Last20DamageTakenActions.ToList();
                     playerInstance.Last20HealingActions = ((Player) player).Last20HealingActions.ToList();
+                    playerInstance.Last20Items = ((Player) player).Last20Items.ToList();
                     foreach (var stat in player.Stats)
                     {
                         playerInstance.Stats.EnsureStatValue(stat.Name, stat.Value);
@@ -149,6 +150,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                     monsterInstance.Last20DamageActions = ((Monster) monster).Last20DamageActions.ToList();
                     monsterInstance.Last20DamageTakenActions = ((Monster) monster).Last20DamageTakenActions.ToList();
                     monsterInstance.Last20HealingActions = ((Monster) monster).Last20HealingActions.ToList();
+                    monsterInstance.Last20Items = ((Monster) monster).Last20Items.ToList();
                     foreach (var stat in monster.Stats)
                     {
                         monsterInstance.Stats.EnsureStatValue(stat.Name, stat.Value);
