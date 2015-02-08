@@ -101,7 +101,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 var activeTitle = WinAPI.GetActiveWindowTitle();
 
                 var stayOnTop = Application.Current.Windows.OfType<Window>()
-                                           .Any(w => w.Title == activeTitle) || Regex.IsMatch(activeTitle.ToUpper(), @"^(FINAL FANTASY XIV)", SharedRegEx.DefaultOptions);
+                                           .Any(w => w.Title == activeTitle) || Regex.IsMatch(activeTitle.ToUpper(), @"^(FINAL FANTASY |最终幻想)XIV", SharedRegEx.DefaultOptions);
 
                 // If any of the widgets are focused, don't try to hide any of them, or it'll prevent us from moving/closing them
                 if (handle == DPSWidgetInteropHelper.Handle)
