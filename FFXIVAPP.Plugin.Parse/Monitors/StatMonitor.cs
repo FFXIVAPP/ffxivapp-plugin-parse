@@ -173,13 +173,17 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                             zone = ZoneHelper.GetMapInfo(mapIndex)
                                              .French;
                             break;
+                        case "Japanese":
+                            zone = ZoneHelper.GetMapInfo(mapIndex)
+                                             .Japanese;
+                            break;
                         case "German":
                             zone = ZoneHelper.GetMapInfo(mapIndex)
                                              .German;
                             break;
-                        case "Japanese":
+                        case "Chinese":
                             zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .Japanese;
+                                             .Chinese;
                             break;
                     }
                 }

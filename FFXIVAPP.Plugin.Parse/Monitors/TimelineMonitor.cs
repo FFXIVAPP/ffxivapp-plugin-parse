@@ -105,6 +105,9 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                 case "German":
                     matches = PlayerRegEx.DefeatsDe.Match(e.ChatLogEntry.Line);
                     break;
+                case "Chinese":
+                    matches = PlayerRegEx.DefeatsZh.Match(e.ChatLogEntry.Line);
+                    break;
                 default:
                     matches = PlayerRegEx.DefeatsEn.Match(e.ChatLogEntry.Line);
                     break;
@@ -155,6 +158,9 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                     break;
                 case "German":
                     matches = PlayerRegEx.ObtainsDe.Match(e.ChatLogEntry.Line);
+                    break;
+                case "Chinese":
+                    matches = PlayerRegEx.ObtainsZh.Match(e.ChatLogEntry.Line);
                     break;
                 default:
                     matches = PlayerRegEx.ObtainsEn.Match(e.ChatLogEntry.Line);
@@ -219,6 +225,10 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
             //        join = PlayerRegEx.JoinDe.Match(line);
             //        disband = PlayerRegEx.DisbandDe.Match(line);
             //        left = PlayerRegEx.LeftDe.Match(line);
+            //    case "Chinese":
+            //        join = PlayerRegEx.JoinZh.Match(line);
+            //        disband = PlayerRegEx.DisbandZh.Match(line);
+            //        left = PlayerRegEx.LeftZh.Match(line);
             //        break;
             //    default:
             //        join = PlayerRegEx.JoinEn.Match(line);

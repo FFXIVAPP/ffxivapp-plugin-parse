@@ -54,20 +54,20 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 try
                 {
                     var statusInfo = StatusEffectHelper.StatusInfo(statusEntry.StatusID);
-                    var statusKey = "";
+                    var statusKey = statusInfo.Name.English;
                     switch (Constants.GameLanguage)
                     {
-                        case "English":
-                            statusKey = statusInfo.Name.English;
-                            break;
                         case "French":
                             statusKey = statusInfo.Name.French;
+                            break;
+                        case "Japanese":
+                            statusKey = statusInfo.Name.Japanese;
                             break;
                         case "German":
                             statusKey = statusInfo.Name.German;
                             break;
-                        case "Japanese":
-                            statusKey = statusInfo.Name.Japanese;
+                        case "Chinese":
+                            statusKey = statusInfo.Name.Chinese;
                             break;
                     }
                     if (String.IsNullOrWhiteSpace(statusKey))
@@ -235,20 +235,20 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 try
                 {
                     var statusInfo = StatusEffectHelper.StatusInfo(statusEntry.StatusID);
-                    var statusKey = "";
+                    var statusKey = statusInfo.Name.English;
                     switch (Constants.GameLanguage)
                     {
-                        case "English":
-                            statusKey = statusInfo.Name.English;
-                            break;
                         case "French":
                             statusKey = statusInfo.Name.French;
+                            break;
+                        case "Japanese":
+                            statusKey = statusInfo.Name.Japanese;
                             break;
                         case "German":
                             statusKey = statusInfo.Name.German;
                             break;
-                        case "Japanese":
-                            statusKey = statusInfo.Name.Japanese;
+                        case "Chinese":
+                            statusKey = statusInfo.Name.Chinese;
                             break;
                     }
                     if (String.IsNullOrWhiteSpace(statusKey))
@@ -436,20 +436,20 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 try
                 {
                     var statusInfo = StatusEffectHelper.StatusInfo(statusEntry.StatusID);
-                    var statusKey = "";
+                    var statusKey = statusInfo.Name.English;
                     switch (Constants.GameLanguage)
                     {
-                        case "English":
-                            statusKey = statusInfo.Name.English;
-                            break;
                         case "French":
                             statusKey = statusInfo.Name.French;
+                            break;
+                        case "Japanese":
+                            statusKey = statusInfo.Name.Japanese;
                             break;
                         case "German":
                             statusKey = statusInfo.Name.German;
                             break;
-                        case "Japanese":
-                            statusKey = statusInfo.Name.Japanese;
+                        case "Chinese":
+                            statusKey = statusInfo.Name.Chinese;
                             break;
                     }
                     if (String.IsNullOrWhiteSpace(statusKey))

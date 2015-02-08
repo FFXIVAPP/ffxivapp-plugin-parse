@@ -269,6 +269,50 @@ namespace FFXIVAPP.Plugin.Parse
                         #endregion
 
                         break;
+                    case "ZH":
+
+                        #region Handle Chinese Regular Expressions
+
+                        switch (xKey)
+                        {
+                            case "Damage":
+                                PlayerRegEx.DamageZh = regex;
+                                break;
+                            case "DamageAuto":
+                                PlayerRegEx.DamageAutoZh = regex;
+                                break;
+                            case "Failed":
+                                PlayerRegEx.FailedZh = regex;
+                                break;
+                            case "FailedAuto":
+                                PlayerRegEx.FailedAutoZh = regex;
+                                break;
+                            case "Actions":
+                                PlayerRegEx.ActionsZh = regex;
+                                break;
+                            case "Items":
+                                PlayerRegEx.ItemsZh = regex;
+                                break;
+                            case "Cure":
+                                PlayerRegEx.CureZh = regex;
+                                break;
+                            case "BeneficialGain":
+                                PlayerRegEx.BeneficialGainZh = regex;
+                                break;
+                            case "BeneficialLose":
+                                PlayerRegEx.BeneficialLoseZh = regex;
+                                break;
+                            case "DetrimentalGain":
+                                PlayerRegEx.DetrimentalGainZh = regex;
+                                break;
+                            case "DetrimentalLose":
+                                PlayerRegEx.DetrimentalLoseZh = regex;
+                                break;
+                        }
+
+                        #endregion
+
+                        break;    
                 }
             }
         }
@@ -468,6 +512,50 @@ namespace FFXIVAPP.Plugin.Parse
                                 break;
                             case "DetrimentalLose":
                                 MonsterRegEx.DetrimentalLoseDe = regex;
+                                break;
+                        }
+
+                        #endregion
+
+                        break;
+                    case "ZH":
+
+                        #region Handle Chinese Regular Expressions
+
+                        switch (xKey)
+                        {
+                            case "Damage":
+                                MonsterRegEx.DamageZh = regex;
+                                break;
+                            case "DamageAuto":
+                                MonsterRegEx.DamageAutoZh = regex;
+                                break;
+                            case "Failed":
+                                MonsterRegEx.FailedZh = regex;
+                                break;
+                            case "FailedAuto":
+                                MonsterRegEx.FailedAutoZh = regex;
+                                break;
+                            case "Actions":
+                                MonsterRegEx.ActionsZh = regex;
+                                break;
+                            case "Items":
+                                MonsterRegEx.ItemsZh = regex;
+                                break;
+                            case "Cure":
+                                MonsterRegEx.CureZh = regex;
+                                break;
+                            case "BeneficialGain":
+                                MonsterRegEx.BeneficialGainZh = regex;
+                                break;
+                            case "BeneficialLose":
+                                MonsterRegEx.BeneficialLoseZh = regex;
+                                break;
+                            case "DetrimentalGain":
+                                MonsterRegEx.DetrimentalGainZh = regex;
+                                break;
+                            case "DetrimentalLose":
+                                MonsterRegEx.DetrimentalLoseZh = regex;
                                 break;
                         }
 

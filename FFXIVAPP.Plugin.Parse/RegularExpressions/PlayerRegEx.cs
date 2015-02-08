@@ -149,5 +149,34 @@ namespace FFXIVAPP.Plugin.Parse.RegularExpressions
         public static Regex ObtainsDe = new Regex(@"^(D(u|einer|(i|e)r|ich|as|ie|en) )?(?<source>.+) has?t (?<item>.+) erhalten\.$", SharedRegEx.DefaultOptions);
 
         public static Regex DefeatsDe = new Regex(@"^((?<source>Du|.+) has?t (d(u|einer|(i|e)r|ich|as|ie|en) )?(?<target>.+) besiegt|(D(u|einer|(i|e)r|ich|as|ie|en) )?(?<target>.+) bricht bewusstlos zusammen)\.$", SharedRegEx.DefaultOptions);
+
+        //CHINESE REGULAR EXPRESSIONS
+        public static Regex DamageZh = new Regex(@"^ ⇒ (?<block>Blocked! )?(?<parry>Parried! )?(?<crit>Critical! )?((T|t)he )?(?<target>.+) takes? (?<amount>\d+) ?(\((?<modifier>.\d+)%\) )?damage\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex DamageAutoZh = new Regex(@"^(?! ⇒)(?<block>Blocked! )?(?<parry>Parried! )?(?<crit>Critical! )?(?<source>You|.+) hits? ((T|t)he )?(?<target>.+) for (?<amount>\d+) ?(\((?<modifier>.\d+)%\) )?damage\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex ResistZh = new Regex(@"^(?! ⇒)(?<resist>(Full|Partial|Half) resist! )(?<source>You|.+) takes? ((?<amount>\d+) ?(\((?<modifier>.\d+)%\) )?|no )damage\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex FailedZh = new Regex(@"^( ⇒ )?The attack miss(es)?( ((T|t)he )?(?<target>.+))?\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex FailedAutoZh = new Regex(@"^(?! ⇒)(?<source>You|.+) miss(es)? ((T|t)he )?(?<target>.+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex ActionsZh = new Regex(@"^(?<source>You|.+) (use|cast)s? (?<action>.+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex ItemsZh = new Regex(@"^(?<source>You|.+) uses? (an? |the )?(?<item>.+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex CureZh = new Regex(@"( ⇒ )?(?<crit>Critical! )?((T|t)he )?(?<target>You|.+) recovers? (?<amount>\d+) ?(\((?<modifier>.\d+)%\) )?(?<type>\w+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex BeneficialGainZh = new Regex(@"^( ⇒ )?(?<target>You|.+) gains? the effect of (?<status>.+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex BeneficialLoseZh = new Regex(@"^( ⇒ )?(?<target>You|.+) loses? the effect of (?<status>.+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex DetrimentalGainZh = new Regex(@"^( ⇒ )?(?<target>You|.+) suffers? the effect of (?<status>.+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex DetrimentalLoseZh = new Regex(@"^( ⇒ )?(?<target>You|.+) recovers? from the effect of (?<status>.+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex ObtainsZh = new Regex(@"^(?<source>You|.+) obtains? (an? |the )?(?<item>.+)\.$", SharedRegEx.DefaultOptions);
+
+        public static Regex DefeatsZh = new Regex(@"^((?<source>You|.+) defeats? ((T|t)he )?(?<target>.+)|((T|t)he )?(?<target>.+) is defeated)\.$", SharedRegEx.DefaultOptions);
     }
 }

@@ -406,6 +406,38 @@ namespace FFXIVAPP.Plugin.Parse.Models
                     YouString = "Du";
                     Mitigated = "Schäden Gemildert (Zauberschild)";
                     break;
+                case "Chinese":
+                    pDamage = PlayerRegEx.DamageZh.Match(Cleaned);
+                    pDamageAuto = PlayerRegEx.DamageAutoZh.Match(Cleaned);
+                    pFailed = PlayerRegEx.FailedZh.Match(Cleaned);
+                    pFailedAuto = PlayerRegEx.FailedAutoZh.Match(Cleaned);
+                    pActions = PlayerRegEx.ActionsZh.Match(Cleaned);
+                    pItems = PlayerRegEx.ItemsZh.Match(Cleaned);
+                    pCure = PlayerRegEx.CureZh.Match(Cleaned);
+                    pBeneficialGain = PlayerRegEx.BeneficialGainZh.Match(Cleaned);
+                    pBeneficialLose = PlayerRegEx.BeneficialLoseZh.Match(Cleaned);
+                    pDetrimentalGain = PlayerRegEx.DetrimentalGainZh.Match(Cleaned);
+                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseZh.Match(Cleaned);
+                    mDamage = MonsterRegEx.DamageZh.Match(Cleaned);
+                    mDamageAuto = MonsterRegEx.DamageAutoZh.Match(Cleaned);
+                    mFailed = MonsterRegEx.FailedZh.Match(Cleaned);
+                    mFailedAuto = MonsterRegEx.FailedAutoZh.Match(Cleaned);
+                    mActions = MonsterRegEx.ActionsZh.Match(Cleaned);
+                    mItems = MonsterRegEx.ItemsZh.Match(Cleaned);
+                    mCure = MonsterRegEx.CureZh.Match(Cleaned);
+                    mBeneficialGain = MonsterRegEx.BeneficialGainZh.Match(Cleaned);
+                    mBeneficialLose = MonsterRegEx.BeneficialLoseZh.Match(Cleaned);
+                    mDetrimentalGain = MonsterRegEx.DetrimentalGainZh.Match(Cleaned);
+                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseZh.Match(Cleaned);
+                    Counter = "Counter";
+                    Added = "Additional Effect";
+                    HealingType = "HP";
+                    RAttack = "Ranged Attack";
+                    Attack = "Attack";
+                    You = @"^[Yy]ou?$";
+                    YouString = "You";
+                    Mitigated = "Mitigated Damage (Magic Shield)";
+                    break;
                 default:
                     pDamage = PlayerRegEx.DamageEn.Match(Cleaned);
                     pDamageAuto = PlayerRegEx.DamageAutoEn.Match(Cleaned);
