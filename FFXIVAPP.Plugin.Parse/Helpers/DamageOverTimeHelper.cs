@@ -55,24 +55,21 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     "thunder",
                     "blitz",
                     "foudre",
-                    "サンダー",
-                    "闪雷"
+                    "サンダー"
                 });
                 _thunderActions.Add("II", new List<string>
                 {
                     "thunder ii",
                     "blitzra",
                     "extra foudre",
-                    "サンダラ",
-                    "震雷"
+                    "サンダラ"
                 });
                 _thunderActions.Add("III", new List<string>
                 {
                     "thunder iii",
                     "blitzga",
                     "méga foudre",
-                    "サンダガ",
-                    "暴雷"
+                    "サンダガ"
                 });
                 return _thunderActions;
             }
@@ -92,16 +89,14 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     "bio",
                     "bactérie",
-                    "バイオ",
-                    "毒菌"
+                    "バイオ"
                 });
                 _bioActions.Add("II", new List<string>
                 {
                     "bio ii",
                     "biora",
                     "extra bactérie",
-                    "バイオラ",
-                    "猛毒菌"
+                    "バイオラ"
                 });
                 return _bioActions;
             }
@@ -121,16 +116,14 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     "ruin",
                     "ruine",
-                    "ルイン",
-                    "毁灭"
+                    "ルイン"
                 });
                 _ruinActions.Add("II", new List<string>
                 {
                     "ruin ii",
                     "ruinra",
                     "extra ruine",
-                    "ルインラ",
-                    "毁坏"
+                    "ルインラ"
                 });
                 return _ruinActions;
             }
@@ -156,7 +149,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("cercle du destin", _playerActions["circle of scorn"]);
                 _playerActions.Add("kreis der verachtung", _playerActions["circle of scorn"]);
                 _playerActions.Add("サークル・オブ・ドゥーム", _playerActions["circle of scorn"]);
-                _playerActions.Add("厄运流转", _playerActions["circle of scorn"]);
 
                 _playerActions.Add("demolish", new XOverTimeAction
                 {
@@ -168,7 +160,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("démolition", _playerActions["demolish"]);
                 _playerActions.Add("demolieren", _playerActions["demolish"]);
                 _playerActions.Add("破砕拳", _playerActions["demolish"]);
-                _playerActions.Add("破碎拳", _playerActions["demolish"]);
 
                 _playerActions.Add("touch of death", new XOverTimeAction
                 {
@@ -191,8 +182,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("percée chaotique", _playerActions["chaos thrust"]);
                 _playerActions.Add("chaotischer tjost", _playerActions["chaos thrust"]);
                 _playerActions.Add("桜華狂咲", _playerActions["chaos thrust"]);
-                _playerActions.Add("樱花怒放", _playerActions["chaos thrust"]);
-                
+
                 _playerActions.Add("phlebotomize", new XOverTimeAction
                 {
                     ActionPotency = 170,
@@ -203,20 +193,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("double percée", _playerActions["phlebotomize"]);
                 _playerActions.Add("phlebotomie", _playerActions["phlebotomize"]);
                 _playerActions.Add("二段突き", _playerActions["phlebotomize"]);
-                _playerActions.Add("二段突击", _playerActions["phlebotomize"]);
-
-                _playerActions.Add("venomous bite", new XOverTimeAction
-                {
-                    ActionPotency = 100,
-                    ActionOverTimePotency = 35,
-                    Duration = 18,
-                    HasNoInitialResult = false
-                });
-                _playerActions.Add("giftbiss", _playerActions["venomous bite"]);
-                _playerActions.Add("morsure venimeuse", _playerActions["venomous bite"]);
-                _playerActions.Add("ベノムバイト", _playerActions["venomous bite"]);
-                _playerActions.Add("毒咬箭", _playerActions["venomous bite"]);
-
 
                 _playerActions.Add("windbite", new XOverTimeAction
                 {
@@ -228,7 +204,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("morsure du vent", _playerActions["windbite"]);
                 _playerActions.Add("beißender wind", _playerActions["windbite"]);
                 _playerActions.Add("ウィンドバイト", _playerActions["windbite"]);
-                _playerActions.Add("风蚀箭", _playerActions["windbite"]);
 
                 _playerActions.Add("aero", new XOverTimeAction
                 {
@@ -240,7 +215,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("vent", _playerActions["aero"]);
                 _playerActions.Add("wind", _playerActions["aero"]);
                 _playerActions.Add("エアロ", _playerActions["aero"]);
-                _playerActions.Add("疾风", _playerActions["aero"]);
 
                 _playerActions.Add("aero ii", new XOverTimeAction
                 {
@@ -252,8 +226,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("extra vent", _playerActions["aero ii"]);
                 _playerActions.Add("windra", _playerActions["aero ii"]);
                 _playerActions.Add("エアロラ", _playerActions["aero ii"]);
-                _playerActions.Add("烈风", _playerActions["aero ii"]);
-                
+
                 _playerActions.Add("thunder", new XOverTimeAction
                 {
                     ActionPotency = 30,
@@ -264,8 +237,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("foudre", _playerActions["thunder"]);
                 _playerActions.Add("blitz", _playerActions["thunder"]);
                 _playerActions.Add("サンダー", _playerActions["thunder"]);
-                _playerActions.Add("闪雷", _playerActions["thunder"]);
-                
+
                 _playerActions.Add("thunder ii", new XOverTimeAction
                 {
                     ActionPotency = 50,
@@ -276,7 +248,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("extra foudre", _playerActions["thunder ii"]);
                 _playerActions.Add("blitzra", _playerActions["thunder ii"]);
                 _playerActions.Add("サンダラ", _playerActions["thunder ii"]);
-                _playerActions.Add("震雷", _playerActions["thunder ii"]);
 
                 _playerActions.Add("thunder iii", new XOverTimeAction
                 {
@@ -288,7 +259,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("méga foudre", _playerActions["thunder iii"]);
                 _playerActions.Add("blitzga", _playerActions["thunder iii"]);
                 _playerActions.Add("サンダガ", _playerActions["thunder iii"]);
-                _playerActions.Add("暴雷", _playerActions["thunder iii"]);
 
                 _playerActions.Add("bio", new XOverTimeAction
                 {
@@ -299,7 +269,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 });
                 _playerActions.Add("bactérie", _playerActions["bio"]);
                 _playerActions.Add("バイオ", _playerActions["bio"]);
-                _playerActions.Add("毒菌", _playerActions["bio"]);
 
                 _playerActions.Add("miasma", new XOverTimeAction
                 {
@@ -310,8 +279,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 });
                 _playerActions.Add("miasmes", _playerActions["miasma"]);
                 _playerActions.Add("ミアズマ", _playerActions["miasma"]);
-                _playerActions.Add("瘴气", _playerActions["miasma"]);
-                
+
                 _playerActions.Add("miasma ii", new XOverTimeAction
                 {
                     ActionPotency = 20,
@@ -322,7 +290,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("extra miasmes", _playerActions["miasma ii"]);
                 _playerActions.Add("miasra", _playerActions["miasma ii"]);
                 _playerActions.Add("ミアズラ", _playerActions["miasma ii"]);
-                _playerActions.Add("瘴疠", _playerActions["miasma ii"]);
 
                 _playerActions.Add("bio ii", new XOverTimeAction
                 {
@@ -334,8 +301,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("extra bactérie", _playerActions["bio ii"]);
                 _playerActions.Add("biora", _playerActions["bio ii"]);
                 _playerActions.Add("バイオラ", _playerActions["bio ii"]);
-                _playerActions.Add("猛毒菌", _playerActions["bio ii"]);
-                
+
                 _playerActions.Add("inferno", new XOverTimeAction
                 {
                     ActionPotency = 200,
@@ -377,7 +343,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 });
                 _playerActions.Add("knochenbrecher", _playerActions["fracture"]);
                 _playerActions.Add("フラクチャー", _playerActions["fracture"]);
-                _playerActions.Add("碎骨打", _playerActions["fracture"]);
 
                 _playerActions.Add("shadow fang", new XOverTimeAction
                 {

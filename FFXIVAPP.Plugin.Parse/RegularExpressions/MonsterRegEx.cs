@@ -135,28 +135,28 @@ namespace FFXIVAPP.Plugin.Parse.RegularExpressions
         public static Regex DetrimentalLoseDe = new Regex(@"^\.$", SharedRegEx.DefaultOptions);
 
         //CHINESE REGULAR EXPRESSIONS
-        public static Regex DamageZh = new Regex(@"^: ⇒ (?<crit>暴击！ )?(?<target>.+)(?<block>招架住了！ )?(?<parry>格挡住了！ )?(受到(了)?)(?<amount>\d+) ?(\((?<modifier>.\d+)%\) ?)?点伤害。$", SharedRegEx.DefaultOptions);
+        public static Regex DamageZh = new Regex(@"^ ⇒ (?<block>Blocked! )?(?<parry>Parried! )?(?<crit>Critical! )?(?<target>You|.+) takes? (?<amount>\d+) ?(\((?<modifier>.\d+)%\) )?damage\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex DamageAutoZh = new Regex(@"^:(?<source>.+)发动攻击( ⇒ )?(?<crit>暴击！ )?(?<target>.+)(?<block>招架住了！ )?(?<parry>格挡住了！ )?(受到(了)?)(?<amount>\d+) ?(\((?<modifier>.\d+)%\) ?)?点伤害。$", SharedRegEx.DefaultOptions);
+        public static Regex DamageAutoZh = new Regex(@"^(?! ⇒)(?<block>Blocked! )?(?<parry>Parried! )?(?<crit>Critical! )?((T|t)he )?(?<source>.+) hits? (?<target>you|.+) for (?<amount>\d+) ?(\((?<modifier>.\d+)%\) )?damage\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex ResistZh = new Regex(@"^: ⇒ (?<resist>无效！)(?<target>.+)((?<resist>没有受到伤害。)|(?<resist>クォータレジストした！ )?(?<resist>ハーフレジストした！ )?(?<amount>\d+) ?(\((?<modifier>.\d+)%\) ?)?ダメージ。)$", SharedRegEx.DefaultOptions);
+        public static Regex ResistZh = new Regex(@"^(?<resist>(Full|Partial|Half) resist! )((T|t)he )?(?<source>.+) takes? ((?<amount>\d+) ?(\((?<modifier>.\d+)%\) )?|no )damage\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex FailedZh = new Regex(@"^: ⇒ 失误(了)?！$", SharedRegEx.DefaultOptions);
+        public static Regex FailedZh = new Regex(@"^ ⇒ The attack misses( (?<target>you|.+))?\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex FailedAutoZh = new Regex(@"^:(?<source>.+)发动攻击( ⇒ )?失误了！$", SharedRegEx.DefaultOptions);
+        public static Regex FailedAutoZh = new Regex(@"^(?! ⇒)((T|t)he )?(?<source>.+) misses (?<target>you|.+)\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex ActionsZh = new Regex(@"^:(?<source>.+)(发动了|咏唱了|正在咏唱|正在发动)“(?<action>.+)”。$", SharedRegEx.DefaultOptions);
+        public static Regex ActionsZh = new Regex(@"^((T|t)he )?(?<source>.+) (use|cast)s? (?<action>.+)\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex ItemsZh = new Regex(@"^:\.$", SharedRegEx.DefaultOptions);
+        public static Regex ItemsZh = new Regex(@"^\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex CureZh = new Regex(@"^:\.$", SharedRegEx.DefaultOptions);
+        public static Regex CureZh = new Regex(@"^\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex BeneficialGainZh = new Regex(@"^:( ⇒ )?对(?<target>.+)附加了“?(?<status>.+)”的效果。$", SharedRegEx.DefaultOptions);
+        public static Regex BeneficialGainZh = new Regex(@"^( ⇒ )?((T|t)he )?(?<target>.+) gains? the effect of (?<status>.+)\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex BeneficialLoseZh = new Regex(@"^:( ⇒ )?(?<target>.+)的“(?<status>.+)”状态效果消失了。$", SharedRegEx.DefaultOptions);
+        public static Regex BeneficialLoseZh = new Regex(@"^( ⇒ )?((T|t)he )?(?<target>.+) loses? the effect of (?<status>.+)\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex DetrimentalGainZh = new Regex(@"^:( ⇒ )?对(?<target>.+)附加了“?(?<status>.+)”的效果。$", SharedRegEx.DefaultOptions);
+        public static Regex DetrimentalGainZh = new Regex(@"^( ⇒ )?((T|t)he )?(?<target>.+) suffers? the effect of (?<status>.+)\.$", SharedRegEx.DefaultOptions);
 
-        public static Regex DetrimentalLoseZh = new Regex(@"^:( ⇒ )?(?<target>.+)的“(?<status>.+)”状态效果消失了。$", SharedRegEx.DefaultOptions);
+        public static Regex DetrimentalLoseZh = new Regex(@"^( ⇒ )?((T|t)he )?(?<target>.+) recovers? from the effect of (?<status>.+)\.$", SharedRegEx.DefaultOptions);
     }
 }
