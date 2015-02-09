@@ -312,7 +312,7 @@ namespace FFXIVAPP.Plugin.Parse
 
                         #endregion
 
-                        break;    
+                        break;
                 }
             }
         }

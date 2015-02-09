@@ -45,9 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\distribution\FFXIVAPP.IPluginInterface.dll</HintPath>
     </Reference>
-    <Reference Include="FFXIVAPP.Localization">
-      <HintPath>..\distribution\FFXIVAPP.Localization.dll</HintPath>
-    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\distribution\HtmlAgilityPack.dll</HintPath>
@@ -156,6 +153,7 @@
     <Compile Include="Helpers\FilterHelper.cs" />
     <Compile Include="Helpers\HealingOverTimeHelper.cs" />
     <Compile Include="Helpers\LineHelper.cs" />
+    <Compile Include="Helpers\LocaleHelper.cs" />
     <Compile Include="Helpers\MagicBarrierHelper.cs" />
     <Compile Include="Helpers\ParseHelper.cs" />
     <Compile Include="Helpers\ParsingLogHelper.cs" />
@@ -164,6 +162,11 @@
     <Compile Include="Interfaces\IParseEntity.cs" />
     <Compile Include="Interfaces\IPlayerEntity.cs" />
     <Compile Include="Interop\WinAPI.cs" />
+    <Compile Include="Localization\Chinese.cs" />
+    <Compile Include="Localization\English.cs" />
+    <Compile Include="Localization\French.cs" />
+    <Compile Include="Localization\German.cs" />
+    <Compile Include="Localization\Japanese.cs" />
     <Compile Include="Models\ActionHistoryItem.cs" />
     <Compile Include="Models\Events\Event.cs" />
     <Compile Include="Models\Events\EventCode.cs" />

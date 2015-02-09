@@ -192,7 +192,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("chaotischer tjost", _playerActions["chaos thrust"]);
                 _playerActions.Add("桜華狂咲", _playerActions["chaos thrust"]);
                 _playerActions.Add("樱花怒放", _playerActions["chaos thrust"]);
-                
+
                 _playerActions.Add("phlebotomize", new XOverTimeAction
                 {
                     ActionPotency = 170,
@@ -253,7 +253,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("windra", _playerActions["aero ii"]);
                 _playerActions.Add("エアロラ", _playerActions["aero ii"]);
                 _playerActions.Add("烈风", _playerActions["aero ii"]);
-                
+
                 _playerActions.Add("thunder", new XOverTimeAction
                 {
                     ActionPotency = 30,
@@ -265,7 +265,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("blitz", _playerActions["thunder"]);
                 _playerActions.Add("サンダー", _playerActions["thunder"]);
                 _playerActions.Add("闪雷", _playerActions["thunder"]);
-                
+
                 _playerActions.Add("thunder ii", new XOverTimeAction
                 {
                     ActionPotency = 50,
@@ -311,7 +311,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("miasmes", _playerActions["miasma"]);
                 _playerActions.Add("ミアズマ", _playerActions["miasma"]);
                 _playerActions.Add("瘴气", _playerActions["miasma"]);
-                
+
                 _playerActions.Add("miasma ii", new XOverTimeAction
                 {
                     ActionPotency = 20,
@@ -335,7 +335,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("biora", _playerActions["bio ii"]);
                 _playerActions.Add("バイオラ", _playerActions["bio ii"]);
                 _playerActions.Add("猛毒菌", _playerActions["bio ii"]);
-                
+
                 _playerActions.Add("inferno", new XOverTimeAction
                 {
                     ActionPotency = 200,
