@@ -5,7 +5,9 @@
 *.suo
 *.user
 *.sln.docstates
-
+*.csproj
+*.dll
+.gitignore
 # Build results
 
 [Dd]ebug*/
