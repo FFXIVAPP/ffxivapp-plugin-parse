@@ -87,8 +87,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         continue;
                     }
                     var zeroFoundInList = false;
-                    var bio = Regex.IsMatch(key, @"(バイオ|bactérie|bio)", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
-                    var thunder = Regex.IsMatch(key, @"(サンダ|foudre|blitz|thunder)", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+                    var bio = Regex.IsMatch(key, @"(バイオ|bactérie|bio|毒菌)", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+                    var thunder = Regex.IsMatch(key, @"(サンダ|foudre|blitz|thunder|闪雷)", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
                     var lastDamageAmountByActions = ParseHelper.LastAmountByAction.GetPlayer(Name)
                                                                .ToList();
                     var resolvedPotency = 80;
