@@ -54,21 +54,25 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     "cure",
                     "vita",
                     "soin",
-                    "ケアル"
+                    "ケアル",
+                    "治疗"
+
                 });
                 _cureActions.Add("II", new List<string>
                 {
                     "cure ii",
                     "vitra",
                     "extra soin",
-                    "ケアルラ"
+                    "ケアルラ",
+                    "救疗"
                 });
                 _cureActions.Add("III", new List<string>
                 {
                     "cure iii",
                     "vitaga",
                     "méga soin",
-                    "ケアルガ"
+                    "ケアルガ",
+                    "愈疗"
                 });
                 return _cureActions;
             }
@@ -88,14 +92,16 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     "reseda",
                     "médica",
-                    "メディカ"
+                    "メディカ",
+                    "医治"
                 });
                 _medicaActions.Add("II", new List<string>
                 {
                     "medica ii",
                     "resedra",
                     "extra médica",
-                    "メディカラ"
+                    "メディカラ",
+                    "医济"
                 });
                 return _medicaActions;
             }
@@ -121,6 +127,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("extra médica", _playerActions["medica ii"]);
                 _playerActions.Add("resedra", _playerActions["medica ii"]);
                 _playerActions.Add("メディカラ", _playerActions["medica ii"]);
+                _playerActions.Add("医济", _playerActions["medica ii"]);
 
                 _playerActions.Add("regen", new XOverTimeAction
                 {
@@ -132,6 +139,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("récup", _playerActions["regen"]);
                 _playerActions.Add("regena", _playerActions["regen"]);
                 _playerActions.Add("リジェネ", _playerActions["regen"]);
+                _playerActions.Add("再生", _playerActions["regen"]);
 
                 _playerActions.Add("choco regen", new XOverTimeAction
                 {
@@ -143,6 +151,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("choco-récup", _playerActions["choco regen"]);
                 _playerActions.Add("chocobo-regena", _playerActions["choco regen"]);
                 _playerActions.Add("チョコリジェネ", _playerActions["choco regen"]);
+                _playerActions.Add("陆行鸟再生", _playerActions["choco regen"]);
 
                 _playerActions.Add("whispering dawn", new XOverTimeAction
                 {
@@ -154,6 +163,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("erhebendes flüstern", _playerActions["whispering dawn"]);
                 _playerActions.Add("murmure de l'aurore", _playerActions["whispering dawn"]);
                 _playerActions.Add("光の囁き", _playerActions["whispering dawn"]);
+                _playerActions.Add("日光的低语", _playerActions["whispering dawn"]);
 
                 _playerActions.Add("sacred prism", new XOverTimeAction
                 {
@@ -165,6 +175,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("prisme sacré", _playerActions["sacred prism"]);
                 _playerActions.Add("barmherzigkeit", _playerActions["sacred prism"]);
                 _playerActions.Add("女神の慈悲", _playerActions["sacred prism"]);
+                _playerActions.Add("女神的慈悲", _playerActions["sacred prism"]);
 
                 return _playerActions;
             }

@@ -430,8 +430,8 @@ namespace FFXIVAPP.Plugin.Parse.Models
                     mDetrimentalGain = MonsterRegEx.DetrimentalGainZh.Match(Cleaned);
                     mDetrimentalLose = MonsterRegEx.DetrimentalLoseZh.Match(Cleaned);
                     Counter = "Counter";
-                    Added = "Additional Effect";
-                    HealingType = "HP";
+                    Added = "附加效果";
+                    HealingType = "体力";
                     RAttack = "Ranged Attack";
                     Attack = "Attack";
                     You = @"^[Yy]ou?$";
