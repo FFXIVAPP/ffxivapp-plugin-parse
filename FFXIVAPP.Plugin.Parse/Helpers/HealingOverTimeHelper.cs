@@ -56,7 +56,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     "soin",
                     "ケアル",
                     "治疗"
-
                 });
                 _cureActions.Add("II", new List<string>
                 {

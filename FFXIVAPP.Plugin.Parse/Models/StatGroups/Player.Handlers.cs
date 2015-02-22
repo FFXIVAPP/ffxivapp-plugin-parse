@@ -79,7 +79,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     XOverTimeAction actionData = null;
                     foreach (var damageOverTimeAction in DamageOverTimeHelper.PlayerActions.ToList()
                                                                              .Where(d => String.Equals(d.Key, key, Constants.InvariantComparer)))
-                    {           
+                    {
                         actionData = damageOverTimeAction.Value;
                     }
                     if (actionData == null)
