@@ -400,7 +400,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("choco-bec", _playerActions["choco beak"]);
                 _playerActions.Add("chocobo-schnabel", _playerActions["choco beak"]);
                 _playerActions.Add("チョコビーク", _playerActions["choco beak"]);
-
+                _playerActions.Add("陆行鸟猛啄", _playerActions["choco beak"]);
                 return _playerActions;
             }
             set { _playerActions = value; }
