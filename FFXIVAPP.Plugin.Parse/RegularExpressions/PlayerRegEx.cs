@@ -165,7 +165,7 @@ namespace FFXIVAPP.Plugin.Parse.RegularExpressions
 
         public static Regex ItemsZh = new Regex(@"^:(?<source>You|.+)使用了“(?<item>.+)”。$", SharedRegEx.DefaultOptions);
 
-        public static Regex CureZh = new Regex(@":( ⇒ )?(?<crit>暴击！)?(?<target>You|.+)恢复了?(?<amount>\d+) ?(\((?<modifier>.\d+)%\) )?点(?<type>\w+)。$", SharedRegEx.DefaultOptions);
+        public static Regex CureZh = new Regex(@"^:( ⇒ )?(?<crit>暴击！ )?(?<target>You|.+)恢复了?(?<amount>\d+)?(\((?<modifier>.\d+)%\))?点(?<type>\w+)。$", SharedRegEx.DefaultOptions);
 
         public static Regex BeneficialGainZh = new Regex(@"^:( ⇒ )?对(?<target>You|.+)附加了“?(?<status>.+)”的效果。$", SharedRegEx.DefaultOptions);
 

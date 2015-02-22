@@ -79,7 +79,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     XOverTimeAction actionData = null;
                     foreach (var damageOverTimeAction in DamageOverTimeHelper.PlayerActions.ToList()
                                                                              .Where(d => String.Equals(d.Key, key, Constants.InvariantComparer)))
-                    {
+                    {           
                         actionData = damageOverTimeAction.Value;
                     }
                     if (actionData == null)
@@ -268,7 +268,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         continue;
                     }
                     var zeroFoundInList = false;
-                    var regen = Regex.IsMatch(key, @"(リジェネ|récup|regen|whispering|murmure|erhebendes|光の囁き)", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+                    var regen = Regex.IsMatch(key, @"(リジェネ|récup|regen|再生|whispering|murmure|erhebendes|光の囁き|日光的低语)", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
                     var healingHistoryList = ParseHelper.LastAmountByAction.GetPlayer(Name)
                                                         .ToList();
                     var resolvedPotency = 350;
