@@ -132,6 +132,7 @@
     <Compile Include="Controls\PlayerInfoBox.xaml.cs">
       <DependentUpon>PlayerInfoBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\JobToIconConverter.cs" />
     <Compile Include="Converters\NameMultiValueConverter.cs" />
     <Compile Include="Converters\NameToAvatarConverter.cs" />
     <Compile Include="Converters\StringToBrushConverter.cs" />
@@ -294,6 +295,37 @@
   <ItemGroup>
     <Resource Include="Defaults\Settings.xml" />
     <Resource Include="Defaults\RegularExpressions.xml" />
+    <Resource Include="Media\Images\Jobs\ACN.png" />
+    <Resource Include="Media\Images\Jobs\ALC.png" />
+    <Resource Include="Media\Images\Jobs\ARC.png" />
+    <Resource Include="Media\Images\Jobs\ARM.png" />
+    <Resource Include="Media\Images\Jobs\BLM.png" />
+    <Resource Include="Media\Images\Jobs\BRD.png" />
+    <Resource Include="Media\Images\Jobs\BSM.png" />
+    <Resource Include="Media\Images\Jobs\BTN.png" />
+    <Resource Include="Media\Images\Jobs\CNJ.png" />
+    <Resource Include="Media\Images\Jobs\CPT.png" />
+    <Resource Include="Media\Images\Jobs\CUL.png" />
+    <Resource Include="Media\Images\Jobs\DRG.png" />
+    <Resource Include="Media\Images\Jobs\FSH.png" />
+    <Resource Include="Media\Images\Jobs\GLD.png" />
+    <Resource Include="Media\Images\Jobs\GSM.png" />
+    <Resource Include="Media\Images\Jobs\LNC.png" />
+    <Resource Include="Media\Images\Jobs\LTW.png" />
+    <Resource Include="Media\Images\Jobs\MIN.png" />
+    <Resource Include="Media\Images\Jobs\MNK.png" />
+    <Resource Include="Media\Images\Jobs\MRD.png" />
+    <Resource Include="Media\Images\Jobs\NIN.png" />
+    <Resource Include="Media\Images\Jobs\PGL.png" />
+    <Resource Include="Media\Images\Jobs\PLD.png" />
+    <Resource Include="Media\Images\Jobs\ROG.png" />
+    <Resource Include="Media\Images\Jobs\SCH.png" />
+    <Resource Include="Media\Images\Jobs\SMN.png" />
+    <Resource Include="Media\Images\Jobs\THM.png" />
+    <Resource Include="Media\Images\Jobs\Unknown.png" />
+    <Resource Include="Media\Images\Jobs\WAR.png" />
+    <Resource Include="Media\Images\Jobs\WHM.png" />
+    <Resource Include="Media\Images\Jobs\WVR.png" />
     <Content Include="PluginInfo.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

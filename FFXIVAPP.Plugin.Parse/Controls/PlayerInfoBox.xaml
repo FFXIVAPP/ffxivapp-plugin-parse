@@ -18,6 +18,7 @@
         <x:Static x:Key="PluginViewModel"
                   Member="Parse:PluginViewModel.Instance" />
         <converters:NameToAvatarConverter x:Key="NameToAvatarConverter" />
+        <converters:JobToIconConverter x:Key="JobToIconConverter" />
         <Style x:Key="StatLabelStyle">
             <Setter Property="Control.Padding" Value="0" />
             <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
@@ -94,6 +95,14 @@
                    Grid.RowSpan="3"
                    Grid.Column="3"
                    LastChildFill="True">
+            <DockPanel DockPanel.Dock="Left">
+                <Image Height="24"
+                       Width="24"
+                       Margin="5 0"
+                       Stretch="None"
+                       UseLayoutRounding="True"
+                       Source="{Binding NPCEntry.Job, Converter={StaticResource JobToIconConverter}}" />
+            </DockPanel>
             <DockPanel DockPanel.Dock="Right">
                 <TextBlock Margin="5 0"
                            VerticalAlignment="Center"
