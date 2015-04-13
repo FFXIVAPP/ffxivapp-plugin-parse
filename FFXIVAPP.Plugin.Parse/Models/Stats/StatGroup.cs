@@ -310,6 +310,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
             PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }
 
-        #endregion Implementation of INotifyPropertyChanged
+        #endregion
     }
 }
