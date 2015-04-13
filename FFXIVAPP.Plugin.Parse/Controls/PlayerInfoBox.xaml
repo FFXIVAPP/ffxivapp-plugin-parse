@@ -99,8 +99,8 @@
                 <Image Height="24"
                        Width="24"
                        Margin="5 0"
-                       Stretch="None"
-                       UseLayoutRounding="True"
+                       Stretch="UniformToFill"
+                       RenderOptions.BitmapScalingMode="HighQuality"
                        Source="{Binding NPCEntry.Job, Converter={StaticResource JobToIconConverter}}" />
             </DockPanel>
             <DockPanel DockPanel.Dock="Right">
