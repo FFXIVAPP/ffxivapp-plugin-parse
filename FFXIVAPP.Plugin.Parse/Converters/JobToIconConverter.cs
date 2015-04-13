@@ -1,20 +1,20 @@
-﻿using FFXIVAPP.Common.Core.Memory.Enums;
-using NLog;
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using FFXIVAPP.Common.Core.Memory.Enums;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Converters
 {
     public class JobToIconConverter : IValueConverter
     {
+        private const string BasePath = Constants.LibraryPack + "Media/Images/Jobs/";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private const string BasePath = FFXIVAPP.Plugin.Parse.Constants.LibraryPack + "Media/Images/Jobs/";
 
         /// <summary>
-        /// Converts a Actor.Job to the associated job icon as a BitmapImage.
+        ///     Converts a Actor.Job to the associated job icon as a BitmapImage.
         /// </summary>
         /// <param name="value"></param>
         /// <param name="targetType"></param>
@@ -25,7 +25,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
         {
             try
             {
-                return GetIcon((Actor.Job)value);
+                return GetIcon((Actor.Job) value);
             }
             catch (InvalidCastException ex)
             {

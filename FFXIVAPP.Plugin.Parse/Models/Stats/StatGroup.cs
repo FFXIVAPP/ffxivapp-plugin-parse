@@ -291,7 +291,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
             }
             if (dispatcher != null && dispatcher.CheckAccess() == false)
             {
-                dispatcher.Invoke(DispatcherPriority.DataBind, (Action)(() => DoCollectionChanged(action, statGroup)));
+                dispatcher.Invoke(DispatcherPriority.DataBind, (Action) (() => DoCollectionChanged(action, statGroup)));
             }
             else
             {
