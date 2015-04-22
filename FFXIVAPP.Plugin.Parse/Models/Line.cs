@@ -28,6 +28,7 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Helpers;
@@ -48,6 +49,25 @@ namespace FFXIVAPP.Plugin.Parse.Models
             }
         }
 
+        #region NPC ActorEntity Information
+
+        public ActorEntity SourceEntity { get; set; }
+        public ActorEntity TargetEntity { get; set; }
+
+        public List<StatusEntry> SourceStatusEntries
+        {
+            get { return _sourceStatusEntries ?? (_sourceStatusEntries = new List<StatusEntry>()); }
+            set { _sourceStatusEntries = value; }
+        }
+
+        public List<StatusEntry> TargetStatusEntries
+        {
+            get { return _targetStatusEntries ?? (_targetStatusEntries = new List<StatusEntry>()); }
+            set { _targetStatusEntries = value; }
+        }
+
+        #endregion
+
         #region Event Information
 
         public EventDirection EventDirection { get; set; }
@@ -63,6 +83,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
 
         #endregion
 
+        public bool XOverTime { get; set; }
         public decimal Amount { get; set; }
         public decimal Modifier { get; set; }
         public string RecLossType { get; set; }
@@ -82,7 +103,9 @@ namespace FFXIVAPP.Plugin.Parse.Models
         private string _direction;
         private string _part;
         private string _source;
+        private List<StatusEntry> _sourceStatusEntries;
         private string _target;
+        private List<StatusEntry> _targetStatusEntries;
 
         public string Source
         {

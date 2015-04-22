@@ -29,6 +29,7 @@
 
 using System;
 using System.Globalization;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using FFXIVAPP.Common.RegularExpressions;
@@ -563,6 +564,15 @@ namespace FFXIVAPP.Plugin.Parse
 
                         break;
                 }
+            }
+        }
+
+        public static void EnsureLogsDirectory()
+        {
+            var path = Path.Combine(Common.Constants.LogsPath, "Parser");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
             }
         }
 

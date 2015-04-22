@@ -193,7 +193,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         EventType = EventType.Damage,
                         EventSubject = EventSubject.Unknown,
                         Source = Name,
-                        Target = statusEntry.TargetName
+                        SourceEntity = NPCEntry,
+                        Target = statusEntry.TargetName,
+                        XOverTime = true
                     };
                     Controller.Timeline.FightingRightNow = true;
                     Controller.Timeline.FightingTimer.Stop();
@@ -355,7 +357,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         EventDirection = EventDirection.Unknown,
                         EventType = EventType.Cure,
                         EventSubject = EventSubject.Unknown,
-                        Source = Name
+                        Source = Name,
+                        SourceEntity = NPCEntry,
+                        XOverTime = true
                     };
                     try
                     {
@@ -464,6 +468,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         EventType = EventType.Unknown,
                         EventSubject = EventSubject.Unknown,
                         Source = Name,
+                        SourceEntity = NPCEntry
                     };
                     try
                     {

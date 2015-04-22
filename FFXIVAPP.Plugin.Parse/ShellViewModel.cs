@@ -61,6 +61,7 @@ namespace FFXIVAPP.Plugin.Parse
             Initializer.LoadSettings();
             Initializer.LoadPlayerRegEx();
             Initializer.LoadMonsterRegEx();
+            Initializer.EnsureLogsDirectory();
             Initializer.SetupWidgetTopMost();
             Settings.Default.PropertyChanged += DefaultOnPropertyChanged;
         }

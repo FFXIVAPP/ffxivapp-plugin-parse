@@ -103,6 +103,9 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                 monsterInstance.StatusUpdateTimer.Stop();
                 //monsterInstance.IsActiveTimer.Stop();
             }
+            // save parse to log
+
+            // move parse to history
             InitializeHistory();
             base.Clear();
         }
