@@ -33,6 +33,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
+using FFXIVAPP.Common.Core.Constant;
 using FFXIVAPP.Common.Helpers;
 
 namespace FFXIVAPP.Plugin.Parse
@@ -164,6 +165,7 @@ namespace FFXIVAPP.Plugin.Parse
 
         private static Dictionary<string, string> _autoTranslate;
         private static Dictionary<string, string> _chatCodes;
+        private static Dictionary<string, ActionInfo> _actions;
         private static Dictionary<string, string[]> _colors;
         private static CultureInfo _cultureInfo;
 
@@ -177,6 +179,12 @@ namespace FFXIVAPP.Plugin.Parse
         {
             get { return _chatCodes ?? (_chatCodes = new Dictionary<string, string>()); }
             set { _chatCodes = value; }
+        }
+
+        public static Dictionary<string, ActionInfo> Actions
+        {
+            get { return _actions ?? (_actions = new Dictionary<string, ActionInfo>()); }
+            set { _actions = value; }
         }
 
         public static string ChatCodesXml { get; set; }
@@ -206,6 +214,86 @@ namespace FFXIVAPP.Plugin.Parse
         public static bool EnableHelpLabels { get; set; }
         public static string Theme { get; set; }
         public static string UIScale { get; set; }
+
+        #endregion
+
+        #region Action Helpers
+
+        public static string GetActionNameByID(int key)
+        {
+            var skillKey = key.ToString(CultureInfo.InvariantCulture);
+            try
+            {
+                if (Actions.ContainsKey(skillKey))
+                {
+                    switch (GameLanguage)
+                    {
+                        case "French":
+                            return Actions[skillKey].FR;
+                        case "Japanese":
+                            return Actions[skillKey].JA;
+                        case "German":
+                            return Actions[skillKey].DE;
+                        case "Chinese":
+                            return Actions[skillKey].ZH;
+                        default:
+                            return Actions[skillKey].EN;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return "???";
+        }
+
+        public static ActionInfo GetActionInfoByName(string name)
+        {
+            try
+            {
+                foreach (var actionInfo in Actions)
+                {
+                    var info = actionInfo.Value;
+                    switch (GameLanguage)
+                    {
+                        case "French":
+                            if (String.Equals(info.FR, name, InvariantComparer))
+                            {
+                                return info;
+                            }
+                            break;
+                        case "Japanese":
+                            if (String.Equals(info.JA, name, InvariantComparer))
+                            {
+                                return info;
+                            }
+                            break;
+                        case "German":
+                            if (String.Equals(info.DE, name, InvariantComparer))
+                            {
+                                return info;
+                            }
+                            break;
+                        case "Chinese":
+                            if (String.Equals(info.EN, name, InvariantComparer))
+                            {
+                                return info;
+                            }
+                            break;
+                        default:
+                            if (String.Equals(info.EN, name, InvariantComparer))
+                            {
+                                return info;
+                            }
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return null;
+        }
 
         #endregion
     }

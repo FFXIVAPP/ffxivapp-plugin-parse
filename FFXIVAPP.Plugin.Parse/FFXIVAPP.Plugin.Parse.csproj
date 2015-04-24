@@ -144,6 +144,7 @@
     <Compile Include="Enums\EventSubject.cs" />
     <Compile Include="Enums\EventType.cs" />
     <Compile Include="Enums\FilterType.cs" />
+    <Compile Include="Enums\GroundEffectType.cs" />
     <Compile Include="Enums\HealingType.cs" />
     <Compile Include="Enums\PlayerType.cs" />
     <Compile Include="Enums\TimelineEventType.cs" />
@@ -202,6 +203,9 @@
     <Compile Include="Models\LinkedStats\PercentStat.cs" />
     <Compile Include="Models\LinkedStats\PerSecondAverageStat.cs" />
     <Compile Include="Models\LinkedStats\TotalStat.cs" />
+    <Compile Include="Models\Network\GroundEffect.cs" />
+    <Compile Include="Models\Network\Player.cs" />
+    <Compile Include="Models\Network\StatusEffect.cs" />
     <Compile Include="Models\ParseControl.cs" />
     <Compile Include="Models\ParseEntity.cs" />
     <Compile Include="Models\ParseHistoryItem.cs" />

@@ -50,6 +50,7 @@ namespace FFXIVAPP.Plugin.Parse
             //Plugin.PHost.NewPlayerEntity += OnNewPlayerEntity;
             //Plugin.PHost.NewTargetEntity += OnNewTargetEntity;
             //Plugin.PHost.NewPartyEntries += OnNewPartyEntries;
+            Plugin.PHost.NewNetworkPacket += OnNewNetworkPacket;
         }
 
         public static void UnSubscribe()
@@ -62,6 +63,7 @@ namespace FFXIVAPP.Plugin.Parse
             //Plugin.PHost.NewPlayerEntity -= OnNewPlayerEntity;
             //Plugin.PHost.NewTargetEntity -= OnNewTargetEntity;
             //Plugin.PHost.NewPartyEntries -= OnNewPartyEntries;
+            Plugin.PHost.NewNetworkPacket -= OnNewNetworkPacket;
         }
 
         #region Subscriptions
@@ -76,6 +78,7 @@ namespace FFXIVAPP.Plugin.Parse
             var constantsEntity = constantsEntityEvent.ConstantsEntity;
             Constants.AutoTranslate = constantsEntity.AutoTranslate;
             Constants.ChatCodes = constantsEntity.ChatCodes;
+            Constants.Actions = constantsEntity.Actions;
             Constants.ChatCodesXml = constantsEntity.ChatCodesXml;
             if (!String.IsNullOrWhiteSpace(Constants.ChatCodesXml))
             {
@@ -262,6 +265,31 @@ namespace FFXIVAPP.Plugin.Parse
         //    }
         //    var partyEntities = partyEntitiesEvent.PartyEntities;
         //}
+
+        private static void OnNewNetworkPacket(object sender, NetworkPacketEvent networkPacketEvent)
+        {
+            // delegate event from network worker, this will be all incoming packets for the game
+            if (sender == null)
+            {
+                return;
+            }
+            var networkPacket = networkPacketEvent.Packet;
+            // networkPacket.Key is unique for each type of packet
+            // you will have to implement your own parsing of the newPacket.Message/Buffer after this
+            // packets are already decrypted
+            switch (networkPacket.Key)
+            {
+                case 0x1400014:
+                case 0x1410014:
+                case 0x1420014:
+                case 0x1440014:
+                case 0x1470014:
+                case 0x1460014:
+                case 0x1960014:
+                default:
+                    break;
+            }
+        }
 
         #endregion
     }
