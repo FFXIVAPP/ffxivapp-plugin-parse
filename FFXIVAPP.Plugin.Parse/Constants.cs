@@ -202,7 +202,7 @@ namespace FFXIVAPP.Plugin.Parse
         public static string ServerName { get; set; }
 
         public static string GameLanguage { get; set; }
-
+        public static bool EnableNetworkReading { get; set; }
         public static bool EnableHelpLabels { get; set; }
         public static string Theme { get; set; }
         public static string UIScale { get; set; }

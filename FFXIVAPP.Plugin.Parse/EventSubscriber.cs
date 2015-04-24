@@ -86,6 +86,7 @@ namespace FFXIVAPP.Plugin.Parse
             Constants.CharacterName = constantsEntity.CharacterName;
             Constants.ServerName = constantsEntity.ServerName;
             Constants.GameLanguage = constantsEntity.GameLanguage;
+            Constants.EnableNetworkReading = constantsEntity.EnableNetworkReading;
             Constants.EnableHelpLabels = constantsEntity.EnableHelpLabels;
             Constants.Theme = constantsEntity.Theme;
             Constants.UIScale = constantsEntity.UIScale;

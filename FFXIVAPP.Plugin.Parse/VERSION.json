@@ -1,7 +1,7 @@
 ﻿{
     "PluginInfo": {
         "Name": "FFXIVAPP.Plugin.Parse",
-        "Version": "3.0.5589.22719",
+        "Version": "3.0.5591.31803",
         "Files": [
             {
                 "Name": "FFXIVAPP.Plugin.Parse.dll",
