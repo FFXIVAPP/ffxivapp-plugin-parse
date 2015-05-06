@@ -35,6 +35,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
     {
         public NumericStat(string name, decimal value) : base(name, 0m)
         {
+            Value = value;
         }
 
         public NumericStat(string name) : base(name, 0m)

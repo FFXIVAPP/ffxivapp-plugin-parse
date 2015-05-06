@@ -35,16 +35,16 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
-using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.ViewModelBase;
+using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
-using FFXIVAPP.Plugin.Parse.Models.Events;
 using FFXIVAPP.Plugin.Parse.Models.History;
 using FFXIVAPP.Plugin.Parse.Models.StatGroups;
 using FFXIVAPP.Plugin.Parse.Models.Stats;
@@ -476,45 +476,26 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
         {
             var openFileDialog = new OpenFileDialog
             {
-                InitialDirectory = Path.Combine(Common.Constants.CachePath, "Logs"),
+                InitialDirectory = Path.Combine(Common.Constants.LogsPath, "Parser"),
                 Multiselect = false,
-                Filter = "XML Files (*.xml)|*.xml"
+                Filter = "JSON Files (*.json)|*.json"
             };
             openFileDialog.FileOk += delegate
             {
-                var count = 0;
-                var sampleXml = XDocument.Load(openFileDialog.FileName);
-                var items = new Dictionary<int, string[]>();
-                foreach (var xElement in sampleXml.Descendants()
-                                                  .Elements("Entry"))
+                try
                 {
-                    var xKey = (string) xElement.Attribute("Key");
-                    var xBytes = (string) xElement.Element("Bytes");
-                    var xLine = (string) xElement.Element("Line");
-                    var xTimeStamp = (string) xElement.Element("TimeStamp");
-                    if (String.IsNullOrWhiteSpace(xKey) || String.IsNullOrWhiteSpace(xLine))
-                    {
-                        continue;
-                    }
-                    items.Add(count, new[]
-                    {
-                        xKey, xLine, xTimeStamp, xBytes
-                    });
-                    ++count;
+                    var parse = File.ReadAllText(openFileDialog.FileName, Encoding.UTF8);
+                    JsonHelper.ToParseControl.ConvertJson(openFileDialog.FileName, parse);
                 }
-                Func<bool> func = delegate
+                catch (Exception ex)
                 {
-                    foreach (var chatLogEntry in items.Select(item => new ChatLogEntry
+                    var popupContent = new PopupContent
                     {
-                        Code = item.Value[0],
-                        Line = item.Value[1].Replace("  ", " ")
-                    }))
-                    {
-                        EventParser.Instance.ParseAndPublish(chatLogEntry);
-                    }
-                    return true;
-                };
-                func.BeginInvoke(null, null);
+                        Title = PluginViewModel.Instance.Locale["app_WarningMessage"],
+                        Message = ex.Message
+                    };
+                    Plugin.PHost.PopupMessage(Plugin.PName, popupContent);
+                }
             };
             openFileDialog.ShowDialog();
         }
@@ -599,163 +580,8 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 
         private void Convert2Json()
         {
-            //MainView.View.InfoViewSource.SelectedIndex = 0;
-            //for (var i = 0; i < MainView.View.InfoViewSource.Items.Count - 1; i++)
-            //{
-            //    try
-            //    {
-            //        MainView.View.InfoViewSource.Items.RemoveAt(1);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //    }
-            //    try
-            //    {
-            //        ParseHistory[0].HistoryControl.Timeline.Overall.Clear();
-            //        ParseHistory[0].HistoryControl.Timeline.Party.Clear();
-            //        ParseHistory[0].HistoryControl.Timeline.Monster.Clear();
-            //        ParseHistory[0].HistoryControl = null;
-            //        ParseHistory.RemoveAt(1);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //    }
-            //}
-            //GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
-
-            //#region Generate Overall-Player-Monster
-
-            //dynamic overallStats = new Dictionary<string, object>();
-            //dynamic playerStats = new Dictionary<string, object>();
-            //dynamic monsterStats = new Dictionary<string, object>();
-            //overallStats.Add("Stats", ParseControl.Instance.Timeline.Overall.Stats.ToDictionary(s => s.Name, s => s.Value));
-            //var partyTimeline = ParseControl.Instance.Timeline.Party;
-            //var playerNames = partyTimeline.Select(p => p.Name)
-            //                               .ToList();
-            //foreach (var playerName in playerNames)
-            //{
-            //    var player = partyTimeline.GetGroup(playerName);
-            //    playerStats.Add(playerName, new Dictionary<string, object>
-            //    {
-            //        {
-            //            "Stats", new Dictionary<string, object>()
-            //        },
-            //        {
-            //            "Abilities", new Dictionary<string, object>()
-            //        },
-            //        {
-            //            "Monsters", new Dictionary<string, object>()
-            //        },
-            //        {
-            //            "Healing", new Dictionary<string, object>()
-            //        },
-            //        {
-            //            "Players", new Dictionary<string, object>()
-            //        },
-            //        {
-            //            "Damage", new Dictionary<string, object>()
-            //        }
-            //    });
-            //    playerStats[playerName]["Stats"] = player.Stats.ToDictionary(s => s.Name, s => s.Value);
-            //    var playerAbilities = player.GetGroup("Abilities");
-            //    foreach (var playerAbility in playerAbilities)
-            //    {
-            //        playerStats[playerName]["Abilities"].Add(playerAbility.Name, playerAbility.Stats.ToDictionary(s => s.Name, s => s.Value));
-            //    }
-            //    var playerMonsters = player.GetGroup("Monsters");
-            //    foreach (var playerMonster in playerMonsters)
-            //    {
-            //        playerStats[playerName]["Monsters"].Add(playerMonster.Name, new Dictionary<string, object>
-            //        {
-            //            {
-            //                "Stats", playerMonster.Stats.ToDictionary(s => s.Name, s => s.Value)
-            //            },
-            //            {
-            //                "Abilities", playerMonster.GetGroup("Abilities")
-            //                                          .ToDictionary(a => a.Name, a => a.Stats.ToDictionary(s => s.Name, s => s.Value))
-            //            }
-            //        });
-            //    }
-            //    var playerHealings = player.GetGroup("Healing");
-            //    foreach (var playerHealing in playerHealings)
-            //    {
-            //        playerStats[playerName]["Healing"].Add(playerHealing.Name, playerHealing.Stats.ToDictionary(s => s.Name, s => s.Value));
-            //    }
-            //    var playerPlayers = player.GetGroup("Players");
-            //    foreach (var playerPlayer in playerPlayers)
-            //    {
-            //        playerStats[playerName]["Players"].Add(playerPlayer.Name, new Dictionary<string, object>
-            //        {
-            //            {
-            //                "Stats", playerPlayer.Stats.ToDictionary(s => s.Name, s => s.Value)
-            //            },
-            //            {
-            //                "Abilities", playerPlayer.GetGroup("Abilities")
-            //                                         .ToDictionary(a => a.Name, a => a.Stats.ToDictionary(s => s.Name, s => s.Value))
-            //            }
-            //        });
-            //    }
-            //    var playerDamages = player.GetGroup("Damage");
-            //    foreach (var playerDamage in playerDamages)
-            //    {
-            //        playerStats[playerName]["Damage"].Add(playerDamage.Name, new Dictionary<string, object>
-            //        {
-            //            {
-            //                "Stats", playerDamage.Stats.ToDictionary(s => s.Name, s => s.Value)
-            //            },
-            //            {
-            //                "Abilities", playerDamage.GetGroup("Abilities")
-            //                                         .ToDictionary(a => a.Name, a => a.Stats.ToDictionary(s => s.Name, s => s.Value))
-            //            }
-            //        });
-            //    }
-            //}
-            //var monsterTimeline = ParseControl.Instance.Timeline.Monster;
-            //var monsterNames = monsterTimeline.Select(p => p.Name)
-            //                                  .ToList();
-            //foreach (var monsterName in monsterNames)
-            //{
-            //    var monster = monsterTimeline.GetGroup(monsterName);
-            //    monsterStats.Add(monsterName, new Dictionary<string, object>
-            //    {
-            //        {
-            //            "Stats", new Dictionary<string, object>()
-            //        },
-            //        {
-            //            "Abilities", new Dictionary<string, object>()
-            //        },
-            //        {
-            //            "Drops", new Dictionary<string, object>()
-            //        }
-            //    });
-            //    monsterStats[monsterName]["Stats"] = monster.Stats.ToDictionary(s => s.Name, s => s.Value);
-            //    var monsterAbilities = monster.GetGroup("Abilities");
-            //    foreach (var monsterAbility in monsterAbilities)
-            //    {
-            //        monsterStats[monsterName]["Abilities"].Add(monsterAbility.Name, monsterAbility.Stats.ToDictionary(s => s.Name, s => s.Value));
-            //    }
-            //    var monsterDrops = monster.GetGroup("Drops");
-            //    foreach (var monsterDrop in monsterDrops)
-            //    {
-            //        monsterStats[monsterName]["Drops"].Add(monsterDrop.Name, monsterDrop.Stats.ToDictionary(s => s.Name, s => s.Value));
-            //    }
-            //}
-            //dynamic results = new Dictionary<string, object>
-            //{
-            //    {
-            //        "Overall", overallStats
-            //    },
-            //    {
-            //        "Player", playerStats
-            //    },
-            //    {
-            //        "Monster", monsterStats
-            //    }
-            //};
-
-            //#endregion
-
-            //Clipboard.SetText(JsonConvert.SerializeObject(results));
+            //var results = JsonHelper.ToJson.ConvertParse();
+            //DispatcherHelper.Invoke(() => Clipboard.SetText(results));
         }
 
         #endregion

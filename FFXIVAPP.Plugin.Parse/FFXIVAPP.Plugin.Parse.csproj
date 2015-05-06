@@ -153,6 +153,7 @@
     <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\FilterHelper.cs" />
     <Compile Include="Helpers\HealingOverTimeHelper.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\LineHelper.cs" />
     <Compile Include="Helpers\LocaleHelper.cs" />
     <Compile Include="Helpers\MagicBarrierHelper.cs" />

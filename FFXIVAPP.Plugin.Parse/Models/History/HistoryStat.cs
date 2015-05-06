@@ -29,7 +29,7 @@
 
 namespace FFXIVAPP.Plugin.Parse.Models.History
 {
-    public class HistoryStat<T>
+    public abstract class HistoryStat<T>
     {
         /// <summary>
         /// </summary>
@@ -41,8 +41,15 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
             Value = value;
         }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         public T Value { get; set; }
+
+        /// <summary>
+        /// </summary>
+        public void Reset()
+        {
+            Value = default(T);
+        }
     }
 }

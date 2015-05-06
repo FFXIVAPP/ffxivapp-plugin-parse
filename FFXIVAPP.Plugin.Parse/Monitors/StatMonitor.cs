@@ -28,7 +28,10 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Delegates;
@@ -104,6 +107,26 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                 //monsterInstance.IsActiveTimer.Stop();
             }
             // save parse to log
+            try
+            {
+                var parse = JsonHelper.ToJson.ConvertParse();
+                if (parse.IsValid)
+                {
+                    var invalidCharacters = Regex.Escape(new string(Path.GetInvalidFileNameChars()));
+                    var invalidRegEx = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidCharacters);
+                    var fileName = Path.Combine(Common.Constants.LogsPath, "Parser", Regex.Replace(parse.Name, invalidRegEx, "_") + ".json");
+                    try
+                    {
+                        File.WriteAllText(fileName, parse.Parse, Encoding.UTF8);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
 
             // move parse to history
             InitializeHistory();

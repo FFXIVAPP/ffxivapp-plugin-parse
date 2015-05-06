@@ -33,6 +33,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
     {
         public NumericHistoryStat(string name, decimal value) : base(name, 0m)
         {
+            Value = value;
         }
 
         public NumericHistoryStat(string name) : base(name, 0m)
