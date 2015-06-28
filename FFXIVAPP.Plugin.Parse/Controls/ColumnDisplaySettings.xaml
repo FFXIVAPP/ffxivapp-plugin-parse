@@ -12,7 +12,8 @@
                   Member="Parse:PluginViewModel.Instance" />
     </StackPanel.Resources>
 
-    <Expander Header="Stats:Totals:Overall">
+    <Expander Header="{Binding Locale[parse_StatsTotalsOverallLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowTotalOverallDamageInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -38,7 +39,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:Totals:ActionsUsed">
+    <Expander Header="{Binding Locale[parse_StatsTotalsActionsUsedLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowTotalDamageActionsUsedInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -64,7 +66,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:PerSecond">
+    <Expander Header="{Binding Locale[parse_StatsPerSecondLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowDPSInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -90,7 +93,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:PercentOfTotals">
+    <Expander Header="{Binding Locale[parse_StatsPercentOfTotalsLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowPercentOfTotalOverallDamageInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -158,7 +162,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:Damage:Regular">
+    <Expander Header="{Binding Locale[parse_StatsDamageRegularLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowRegularDamageInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -226,7 +231,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:Damage:Critical">
+    <Expander Header="{Binding Locale[parse_StatsDamageCriticalLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowCriticalDamageInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -287,7 +293,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:Damage:Extended">
+    <Expander Header="{Binding Locale[parse_StatsDamageExtendedLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowDamageCounterInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -432,7 +439,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:Healing:Regular">
+    <Expander Header="{Binding Locale[parse_StatsHealingRegularLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowRegularHealingInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -486,7 +494,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:Healing:Critical">
+    <Expander Header="{Binding Locale[parse_StatsHealingCriticalLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowCriticalHealingInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -547,7 +556,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:Healing:Extended">
+    <Expander Header="{Binding Locale[parse_StatsHealing:ExtendedLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <TextBlock Text="{Binding Locale[app_ComingSoonText],
                                       Source={StaticResource PluginViewModel}}"
@@ -555,7 +565,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:DamageTaken:Regular">
+    <Expander Header="{Binding Locale[parse_StatsDamageTakenRegularLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowRegularDamageTakenInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -623,7 +634,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:DamageTaken:Critical">
+    <Expander Header="{Binding Locale[parse_StatsDamageTakenCriticalLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowCriticalDamageTakenInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
@@ -684,7 +696,8 @@
         </StackPanel>
     </Expander>
 
-    <Expander Header="Stats:DamageTaken:Extended">
+    <Expander Header="{Binding Locale[parse_StatsDamageTakenExtendedLabel],
+                                       Source={StaticResource PluginViewModel}}">
         <StackPanel>
             <GroupBox Header="{Binding Locale[parse_ShowDamageTakenCounterInfoHeader],
                                        Source={StaticResource PluginViewModel}}">
