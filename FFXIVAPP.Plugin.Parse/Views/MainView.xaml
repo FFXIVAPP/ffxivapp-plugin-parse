@@ -1048,7 +1048,8 @@
                                                     Command="{Binding ShowLast20MonsterActionsCommand,
                                                                       Source={StaticResource MainViewModel}}"
                                                     CommandParameter="Damage"
-                                                    Content="Show Last 20 Damage Actions (Selected Monster)" />
+                                                    Content="{Binding Locale[parse_ShowLast20DamageActions],
+                                                          Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
                                                     <TextBlock Foreground="White"
