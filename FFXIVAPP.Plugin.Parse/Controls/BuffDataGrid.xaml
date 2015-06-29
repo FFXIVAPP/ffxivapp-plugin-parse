@@ -30,15 +30,18 @@
                                              Source={StaticResource PluginViewModel}}"
                             Utilities:GridViewSort.PropertyName="Name" />
         <DataGridTextColumn Binding="{Binding TotalBuffHours}"
-                            Header="H"
+                            Header="{Binding Locale[parse_TimeHoursShortLabel],
+                                             Source={StaticResource PluginViewModel}}"
                             Utilities:GridViewSort.PropertyName="TotalBuffHours" />
         <DataGridTextColumn Binding="{Binding TotalBuffMinutes,
                                               StringFormat=\{0:00\}}"
-                            Header="M"
+                            Header="{Binding Locale[parse_TimeMinutesShortLabel],
+                                             Source={StaticResource PluginViewModel}}"
                             Utilities:GridViewSort.PropertyName="TotalBuffMinutes" />
         <DataGridTextColumn Binding="{Binding TotalBuffSeconds,
                                               StringFormat=\{0:00\}}"
-                            Header="S"
+                            Header="{Binding Locale[parse_TimeSecondsShortLabel],
+                                             Source={StaticResource PluginViewModel}}"
                             Utilities:GridViewSort.PropertyName="TotalBuffSeconds" />
     </DataGrid.Columns>
 </DataGrid>

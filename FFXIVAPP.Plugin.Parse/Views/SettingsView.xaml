@@ -116,7 +116,8 @@
                                       Source={StaticResource PluginViewModel}}">
                 <ScrollViewer>
                     <StackPanel>
-                        <TextBlock>* All options include parsing pets.</TextBlock>
+                        <TextBlock Text="{Binding Locale[AboutParsingPetsLabel],
+                                      Source={StaticResource PluginViewModel}}"/>
                         <GroupBox Header="{Binding Locale[parse_YouHeader],
                                                    Source={StaticResource PluginViewModel}}">
                             <StackPanel>
@@ -152,15 +153,15 @@
                                       Source={StaticResource PluginViewModel}}">
                 <ScrollViewer>
                     <StackPanel>
-                        <TextBlock TextWrapping="WrapWithOverflow">
-                            * Colors are used as either ARGB (Alpha, Red, Green, Blue) or a named color (SkyBlue)
-                        </TextBlock>
-                        <GroupBox Header="{Binding Locale[parse_DefaultProgressBarForegroundHeader],
+                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Locale[parse_AboutParsingPetsLabel],
+                                      Source={StaticResource PluginViewModel}}"/>
+                        <GroupBox Header="{Binding Locale[parse_AboutColorsParsingLabel],
                                                    Source={StaticResource PluginViewModel}}">
                             <TextBox Text="{Binding DefaultProgressBarForeground,
                                                     Source={StaticResource Settings}}" />
                         </GroupBox>
-                        <Expander Header="COLORS:JOBS">
+                        <Expander Header="{Binding Locale[parse_ColorsJobsLabel],
+                                                   Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="PLD">
                                     <TextBox Text="{Binding PLDProgressBarForeground,
@@ -208,7 +209,8 @@
                                       Source={StaticResource PluginViewModel}}">
                 <ScrollViewer>
                     <StackPanel>
-                        <Expander Header="Settings:DPS">
+                        <Expander Header="{Binding Locale[parse_DPSWidgetSettingsTabLabel],
+                                      Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="{Binding Locale[parse_UIScaleHeader],
                                                            Source={StaticResource PluginViewModel}}">
@@ -267,7 +269,8 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="Settings:DTPS">
+                        <Expander Header="{Binding Locale[parse_DTPSWidgetSettingsTabLabel],
+                                      Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="{Binding Locale[parse_UIScaleHeader],
                                                            Source={StaticResource PluginViewModel}}">
@@ -326,7 +329,8 @@
                                 </GroupBox>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="Settings:HPS">
+                        <Expander Header="{Binding Locale[parse_HPSWidgetSettingsTabLabel],
+                                      Source={StaticResource PluginViewModel}}">
                             <StackPanel>
                                 <GroupBox Header="{Binding Locale[parse_UIScaleHeader],
                                                            Source={StaticResource PluginViewModel}}">

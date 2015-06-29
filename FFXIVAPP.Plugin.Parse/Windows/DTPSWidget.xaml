@@ -8,6 +8,7 @@
         xmlns:converters="clr-namespace:FFXIVAPP.Plugin.Parse.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:parse="clr-namespace:FFXIVAPP.Plugin.Parse"
         Title="DTPSWidget"
         Width="{Binding DTPSWidgetWidth,
                         Source={x:Static PluginProperties:Settings.Default},
@@ -36,6 +37,8 @@
 
     <Window.Resources>
         <ResourceDictionary>
+            <x:Static x:Key="PluginViewModel"
+                      Member="parse:PluginViewModel.Instance" />
             <x:Static x:Key="Settings"
                       Member="PluginProperties:Settings.Default" />
             <x:Static x:Key="DTPSWidgetViewModel"
@@ -89,7 +92,8 @@
                                            FontWeight="Bold"
                                            Foreground="Black"
                                            Padding="0"
-                                           Text="[DTPS]" />
+                                           Text="{Binding Locale[parse_DTPSTitleBar],
+                                                          Source={StaticResource PluginViewModel}}" />
                                 <TextBlock Grid.Row="0"
                                            Margin="5 2"
                                            HorizontalAlignment="Left"

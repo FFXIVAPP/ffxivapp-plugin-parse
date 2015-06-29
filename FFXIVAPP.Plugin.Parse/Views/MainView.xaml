@@ -296,7 +296,8 @@
                                                     Command="{Binding ShowLast20PlayerActionsCommand,
                                                                       Source={StaticResource MainViewModel}}"
                                                     CommandParameter="Damage"
-                                                    Content="Show Last 20 Damage Actions (Selected Player)" />
+                                                    Content="{Binding Locale[parse_ShowLast20DamageActions],
+                                                          Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
                                                     <TextBlock Foreground="White"
@@ -427,7 +428,8 @@
                                                     Command="{Binding ShowLast20PlayerActionsCommand,
                                                                       Source={StaticResource MainViewModel}}"
                                                     CommandParameter="Healing"
-                                                    Content="Show Last 20 Healing Actions (Selected Player)" />
+                                                    Content="{Binding Locale[parse_ShowLast20HealingActions],
+                                                                      Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
                                                     <TextBlock Foreground="White"
@@ -673,7 +675,8 @@
                                             <Button Margin="3"
                                                     Command="{Binding ShowLast20PlayerItemsUsedCommand,
                                                                       Source={StaticResource MainViewModel}}"
-                                                    Content="Show Last 20 Items Used (Selected Player)" />
+                                                    Content="{Binding Locale[parse_ShowLast20ItemsUsed],
+                                                                      Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
                                                     <TextBlock Foreground="White"
@@ -736,7 +739,8 @@
                                                     Command="{Binding ShowLast20PlayerActionsCommand,
                                                                       Source={StaticResource MainViewModel}}"
                                                     CommandParameter="DamageTaken"
-                                                    Content="Show Last 20 Damage Taken Actions (Selected Player)" />
+                                                    Content="{Binding Locale[parse_ShowLast20DamageTakenActions],
+                                                                      Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
                                                     <TextBlock Foreground="White"
@@ -1175,7 +1179,8 @@
                                                     Command="{Binding ShowLast20MonsterActionsCommand,
                                                                       Source={StaticResource MainViewModel}}"
                                                     CommandParameter="DamageTaken"
-                                                    Content="Show Last 20 Damage Taken Actions (Selected Monster)" />
+                                                    Content="{Binding Locale[parse_ShowLast20DamageTakenActions],
+                                                          Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
                                                     <TextBlock Foreground="White"
@@ -1499,7 +1504,8 @@
                 </StackPanel>
             </Button>
             <CheckBox Margin="5 0"
-                      Content="Advanced"
+                      Content="{Binding Locale[parse_AdvancedCHBLabel],
+                                              Source={StaticResource PluginViewModel}}"
                       IsChecked="{Binding ParseAdvanced,
                                           Source={StaticResource Settings}}" />
             <!--

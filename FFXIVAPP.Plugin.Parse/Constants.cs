@@ -45,7 +45,7 @@ namespace FFXIVAPP.Plugin.Parse
 
         public static readonly string[] Supported = new[]
         {
-            "en", "ja", "fr", "de"
+            "en", "ja", "fr", "de", "ru"
         };
 
         public static StringComparison InvariantComparer = StringComparison.InvariantCultureIgnoreCase;
