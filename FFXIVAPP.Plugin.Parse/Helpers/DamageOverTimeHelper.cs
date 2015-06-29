@@ -146,6 +146,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 }
                 _playerActions = new Dictionary<string, XOverTimeAction>();
 
+
                 _playerActions.Add("circle of scorn", new XOverTimeAction
                 {
                     ActionPotency = 100,
@@ -162,7 +163,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     ActionPotency = 30,
                     ActionOverTimePotency = 40,
-                    Duration = 18,
+                    Duration = 21,
                     HasNoInitialResult = false
                 });
                 _playerActions.Add("démolition", _playerActions["demolish"]);
@@ -197,7 +198,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     ActionPotency = 170,
                     ActionOverTimePotency = 30,
-                    Duration = 18,
+                    Duration = 24,
                     HasNoInitialResult = false
                 });
                 _playerActions.Add("double percée", _playerActions["phlebotomize"]);
@@ -216,7 +217,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("morsure venimeuse", _playerActions["venomous bite"]);
                 _playerActions.Add("ベノムバイト", _playerActions["venomous bite"]);
                 _playerActions.Add("毒咬箭", _playerActions["venomous bite"]);
-
 
                 _playerActions.Add("windbite", new XOverTimeAction
                 {
@@ -245,7 +245,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("aero ii", new XOverTimeAction
                 {
                     ActionPotency = 50,
-                    ActionOverTimePotency = 40,
+                    ActionOverTimePotency = 50,
                     Duration = 12,
                     HasNoInitialResult = false
                 });
@@ -390,6 +390,50 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("schattenfang", _playerActions["shadow fang"]);
                 _playerActions.Add("影牙", _playerActions["shadow fang"]);
 
+                _playerActions.Add("goring blade", new XOverTimeAction
+                {
+                    ActionPotency = 100,
+                    ActionOverTimePotency = 220,
+                    Duration = 24,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("lame étripante", _playerActions["goring blade"]);
+                _playerActions.Add("ausweiden", _playerActions["goring blade"]);
+                _playerActions.Add("ゴアブレード", _playerActions["goring blade"]);
+
+                _playerActions.Add("aero iii", new XOverTimeAction
+                {
+                    ActionPotency = 50,
+                    ActionOverTimePotency = 40,
+                    Duration = 24,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("méga vent", _playerActions["aero iii"]);
+                _playerActions.Add("windga", _playerActions["aero iii"]);
+                _playerActions.Add("エアロガ", _playerActions["aero iii"]);
+
+                _playerActions.Add("combust", new XOverTimeAction
+                {
+                    ActionPotency = 0,
+                    ActionOverTimePotency = 40,
+                    Duration = 18,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("conjonction supérieure", _playerActions["combust"]);
+                _playerActions.Add("konjunktion", _playerActions["combust"]);
+                _playerActions.Add("コンバス", _playerActions["combust"]);
+
+                _playerActions.Add("combust ii", new XOverTimeAction
+                {
+                    ActionPotency = 0,
+                    ActionOverTimePotency = 45,
+                    Duration = 30,
+                    HasNoInitialResult = false
+                });
+                _playerActions.Add("conjonction supérieure ii", _playerActions["combust ii"]);
+                _playerActions.Add("konjunktion ii", _playerActions["combust ii"]);
+                _playerActions.Add("コンバラ", _playerActions["combust ii"]);
+
                 _playerActions.Add("choco beak", new XOverTimeAction
                 {
                     ActionPotency = 130,
@@ -401,6 +445,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _playerActions.Add("chocobo-schnabel", _playerActions["choco beak"]);
                 _playerActions.Add("チョコビーク", _playerActions["choco beak"]);
                 _playerActions.Add("陆行鸟猛啄", _playerActions["choco beak"]);
+
                 return _playerActions;
             }
             set { _playerActions = value; }
