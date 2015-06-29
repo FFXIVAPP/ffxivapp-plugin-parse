@@ -1,0 +1,1 @@
+Renew translation to Russian, add more parameters available to translation & add change to 3.0.
