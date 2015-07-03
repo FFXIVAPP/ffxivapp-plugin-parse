@@ -328,6 +328,9 @@
     <Resource Include="Media\Images\Jobs\WAR.png" />
     <Resource Include="Media\Images\Jobs\WHM.png" />
     <Resource Include="Media\Images\Jobs\WVR.png" />
+    <Resource Include="Media\Images\Jobs\AST.png" />
+    <Resource Include="Media\Images\Jobs\DRK.png" />
+    <Resource Include="Media\Images\Jobs\MCH.png" />
     <Content Include="PluginInfo.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
