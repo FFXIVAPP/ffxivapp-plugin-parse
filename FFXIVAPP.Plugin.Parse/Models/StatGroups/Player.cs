@@ -118,8 +118,12 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 return;
             }
             StatusUpdateTimerProcessing = true;
-            var monsterEntries = MonsterWorkerDelegate.GetNPCEntities();
-            var pcEntries = PCWorkerDelegate.GetNPCEntities();
+            var monsterEntries = MonsterWorkerDelegate.GetNPCEntities()
+                                                      .Select(entity => entity.Value)
+                                                      .ToList();
+            var pcEntries = PCWorkerDelegate.GetNPCEntities()
+                                            .Select(entity => entity.Value)
+                                            .ToList();
             StatusEntriesSelf.Clear();
             StatusEntriesPlayers.Clear();
             StatusEntriesMonsters.Clear();

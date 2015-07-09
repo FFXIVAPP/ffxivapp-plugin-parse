@@ -392,7 +392,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         // resolve player hp each tick to ensure they are not at max
                         try
                         {
-                            var players = PCWorkerDelegate.GetNPCEntities();
+                            var players = PCWorkerDelegate.GetNPCEntities()
+                                                          .Select(entity => entity.Value)
+                                                          .ToList();
                             if (!players.Any())
                             {
                                 return;

@@ -292,7 +292,9 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 player.LastActionTime = DateTime.Now;
                 try
                 {
-                    var players = PCWorkerDelegate.GetNPCEntities();
+                    var players = PCWorkerDelegate.GetNPCEntities()
+                                                  .Select(entity => entity.Value)
+                                                  .ToList();
                     if (!players.Any())
                     {
                         return;

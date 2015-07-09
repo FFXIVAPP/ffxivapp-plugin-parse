@@ -31,6 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FFXIVAPP.Common.Core.Memory;
+using FFXIVAPP.Plugin.Parse.ViewModels;
 
 namespace FFXIVAPP.Plugin.Parse.Delegates
 {
@@ -38,70 +39,24 @@ namespace FFXIVAPP.Plugin.Parse.Delegates
     {
         #region Collection Access & Modification
 
-        public static void AddNPCEntity(ActorEntity entity)
+        public static IDictionary<UInt32, ActorEntity> GetNPCEntities()
         {
-            lock (_npcEntities)
+            lock (XIVInfoViewModel.Instance.CurrentPCs)
             {
-                _npcEntities.Add(entity);
+                return new Dictionary<UInt32, ActorEntity>(XIVInfoViewModel.Instance.CurrentPCs);
             }
         }
 
         public static ActorEntity GetNPCEntityByName(string name)
         {
-            lock (_npcEntities)
-            {
-                return _npcEntities.FirstOrDefault(e => String.Equals(name, e.Name, Constants.InvariantComparer));
-            }
+            return GetNPCEntities().FirstOrDefault(entity => entity.Value.Name.Equals(name, Constants.InvariantComparer)).Value;
         }
 
-        public static void ReplaceNPCEntities(IEnumerable<ActorEntity> entities)
+
+        public static ActorEntity CurrentUser
         {
-            lock (_npcEntities)
-            {
-                _npcEntities = new List<ActorEntity>(entities);
-            }
+            get { return XIVInfoViewModel.Instance.CurrentUser; }
         }
-
-        public static IList<ActorEntity> GetNPCEntities()
-        {
-            lock (_npcEntities)
-            {
-                return new List<ActorEntity>(_npcEntities);
-            }
-        }
-
-        public static void AddUniqueNPCEntity(ActorEntity entity)
-        {
-            lock (_uniqueNPCEntities)
-            {
-                _uniqueNPCEntities.Add(entity);
-            }
-        }
-
-        public static void ReplaceUniqueNPCEntities(IEnumerable<ActorEntity> entities)
-        {
-            lock (_uniqueNPCEntities)
-            {
-                _uniqueNPCEntities = new List<ActorEntity>(entities);
-            }
-        }
-
-        public static IList<ActorEntity> GetUniqueNPCEntities()
-        {
-            lock (_uniqueNPCEntities)
-            {
-                return new List<ActorEntity>(_uniqueNPCEntities);
-            }
-        }
-
-        #endregion
-
-        #region Declarations
-
-        private static IList<ActorEntity> _npcEntities = new List<ActorEntity>();
-
-        private static IList<ActorEntity> _uniqueNPCEntities = new List<ActorEntity>();
-        public static ActorEntity CurrentUser { get; set; }
 
         #endregion
     }

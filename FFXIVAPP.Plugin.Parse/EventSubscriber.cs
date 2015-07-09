@@ -35,6 +35,7 @@ using FFXIVAPP.IPluginInterface.Events;
 using FFXIVAPP.Plugin.Parse.Delegates;
 using FFXIVAPP.Plugin.Parse.Models.Events;
 using FFXIVAPP.Plugin.Parse.Utilities;
+using FFXIVAPP.Plugin.Parse.ViewModels;
 
 namespace FFXIVAPP.Plugin.Parse
 {
@@ -122,32 +123,7 @@ namespace FFXIVAPP.Plugin.Parse
                 return;
             }
             var monsterEntities = actorEntitiesEvent.ActorEntities;
-            if (!monsterEntities.Any())
-            {
-                return;
-            }
-            MonsterWorkerDelegate.ReplaceNPCEntities(new List<ActorEntity>(monsterEntities));
-            Func<bool> saveToDictionary = delegate
-            {
-                try
-                {
-                    var enumerable = MonsterWorkerDelegate.GetUniqueNPCEntities();
-                    foreach (var actor in monsterEntities)
-                    {
-                        var exists = enumerable.FirstOrDefault(n => n.ID == actor.ID);
-                        if (exists != null)
-                        {
-                            continue;
-                        }
-                        MonsterWorkerDelegate.AddUniqueNPCEntity(actor);
-                    }
-                }
-                catch (Exception ex)
-                {
-                }
-                return true;
-            };
-            saveToDictionary.BeginInvoke(null, saveToDictionary);
+            XIVInfoViewModel.Instance.CurrentMonsters = monsterEntities;
         }
 
         private static void OnNewNPCEntries(object sender, ActorEntitiesEvent actorEntitiesEvent)
@@ -161,32 +137,7 @@ namespace FFXIVAPP.Plugin.Parse
                 return;
             }
             var npcEntities = actorEntitiesEvent.ActorEntities;
-            if (!npcEntities.Any())
-            {
-                return;
-            }
-            NPCWorkerDelegate.ReplaceNPCEntities(new List<ActorEntity>(npcEntities));
-            Func<bool> saveToDictionary = delegate
-            {
-                try
-                {
-                    var enumerable = NPCWorkerDelegate.GetUniqueNPCEntities();
-                    foreach (var actor in npcEntities)
-                    {
-                        var exists = enumerable.FirstOrDefault(n => n.NPCID2 == actor.NPCID2);
-                        if (exists != null)
-                        {
-                            continue;
-                        }
-                        NPCWorkerDelegate.AddUniqueNPCEntity(actor);
-                    }
-                }
-                catch (Exception ex)
-                {
-                }
-                return true;
-            };
-            saveToDictionary.BeginInvoke(null, saveToDictionary);
+            XIVInfoViewModel.Instance.CurrentNPCs = npcEntities;
         }
 
         private static void OnNewPCEntries(object sender, ActorEntitiesEvent actorEntitiesEvent)
@@ -199,33 +150,7 @@ namespace FFXIVAPP.Plugin.Parse
                 return;
             }
             var pcEntities = actorEntitiesEvent.ActorEntities;
-            if (!pcEntities.Any())
-            {
-                return;
-            }
-            PCWorkerDelegate.CurrentUser = pcEntities.First();
-            PCWorkerDelegate.ReplaceNPCEntities(new List<ActorEntity>(pcEntities));
-            Func<bool> saveToDictionary = delegate
-            {
-                try
-                {
-                    var enumerable = PCWorkerDelegate.GetUniqueNPCEntities();
-                    foreach (var actor in pcEntities)
-                    {
-                        var exists = enumerable.FirstOrDefault(n => String.Equals(n.Name, actor.Name, Constants.InvariantComparer));
-                        if (exists != null)
-                        {
-                            continue;
-                        }
-                        PCWorkerDelegate.AddUniqueNPCEntity(actor);
-                    }
-                }
-                catch (Exception ex)
-                {
-                }
-                return true;
-            };
-            saveToDictionary.BeginInvoke(null, saveToDictionary);
+            XIVInfoViewModel.Instance.CurrentPCs = pcEntities;
         }
 
         //private static void OnNewPlayerEntity(object sender, PlayerEntityEvent playerEntityEvent)
