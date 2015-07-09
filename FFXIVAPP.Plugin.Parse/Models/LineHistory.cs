@@ -31,7 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FFXIVAPP.Common.Core.Memory;
-using FFXIVAPP.Plugin.Parse.Delegates;
+using FFXIVAPP.Plugin.Parse.ViewModels;
 using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Models
@@ -53,11 +53,9 @@ namespace FFXIVAPP.Plugin.Parse.Models
             uint PlayerID = 0;
             try
             {
-                var monsterEntries = MonsterWorkerDelegate.GetNPCEntities()
-                                                          .Select(entity => entity.Value)
-                                                          .ToList();
-                var pcEntries = PCWorkerDelegate.GetNPCEntities()
-                                                .Select(entity => entity.Value)
+                var monsterEntries = XIVInfoViewModel.Instance.CurrentMonsters.Select(entity => entity.Value)
+                                                     .ToList();
+                var pcEntries = XIVInfoViewModel.Instance.CurrentPCs.Select(entity => entity.Value)
                                                 .ToList();
                 // process you => monster
                 foreach (var actorEntity in pcEntries)

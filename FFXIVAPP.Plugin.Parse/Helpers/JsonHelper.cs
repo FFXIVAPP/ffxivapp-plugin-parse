@@ -34,7 +34,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.RegularExpressions;
-using FFXIVAPP.Plugin.Parse.Delegates;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.History;
 using FFXIVAPP.Plugin.Parse.Models.StatGroups;
@@ -152,9 +151,9 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 var parseLength = end - start;
                 var parseTimeDetails = String.Format("{0} -> {1} [{2}]", start, end, parseLength);
                 var zone = "UNKNOWN";
-                if (PCWorkerDelegate.CurrentUser != null)
+                if (XIVInfoViewModel.Instance.CurrentUser != null)
                 {
-                    var mapIndex = PCWorkerDelegate.CurrentUser.MapIndex;
+                    var mapIndex = XIVInfoViewModel.Instance.CurrentUser.MapIndex;
                     zone = ZoneHelper.GetMapInfo(mapIndex)
                                      .English;
                     switch (Constants.GameLanguage)

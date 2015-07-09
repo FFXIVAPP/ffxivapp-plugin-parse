@@ -31,11 +31,11 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Core.Memory.Enums;
-using FFXIVAPP.Plugin.Parse.Delegates;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.Events;
+using FFXIVAPP.Plugin.Parse.ViewModels;
 
 namespace FFXIVAPP.Plugin.Parse.Utilities
 {
@@ -171,7 +171,8 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                     {
                         var cleanedName = Regex.Replace(line.Source, @"\[[\w]+\]", "")
                                                .Trim();
-                        var source = PCWorkerDelegate.GetNPCEntityByName(cleanedName);
+                        var source = XIVInfoViewModel.Instance.CurrentPCs.FirstOrDefault(kvp => kvp.Value.Name.Equals(cleanedName, Constants.InvariantComparer))
+                                                     .Value;
                         if (source != null)
                         {
                             multiplier = source.Job == Actor.Job.WHM ? 0.18m : multiplier;
@@ -184,7 +185,8 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                     {
                         var cleanedName = Regex.Replace(line.Target, @"\[[\w]+\]", "")
                                                .Trim();
-                        var target = PCWorkerDelegate.GetNPCEntityByName(cleanedName);
+                        var target = XIVInfoViewModel.Instance.CurrentPCs.FirstOrDefault(kvp => kvp.Value.Name.Equals(cleanedName, Constants.InvariantComparer))
+                                                     .Value;
                         if (target != null)
                         {
                             line.Amount = target.HPMax * multiplier;

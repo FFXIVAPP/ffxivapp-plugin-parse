@@ -28,11 +28,7 @@
 // POSSIBILITY OF SUCH DAMAGE. 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.IPluginInterface.Events;
-using FFXIVAPP.Plugin.Parse.Delegates;
 using FFXIVAPP.Plugin.Parse.Models.Events;
 using FFXIVAPP.Plugin.Parse.Utilities;
 using FFXIVAPP.Plugin.Parse.ViewModels;
