@@ -33,10 +33,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Core.Memory;
 using FFXIVAPP.Common.Helpers;
-using FFXIVAPP.Plugin.Parse.Delegates;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Properties;
+using FFXIVAPP.Plugin.Parse.ViewModels;
 
 namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 {
@@ -392,7 +392,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         // resolve player hp each tick to ensure they are not at max
                         try
                         {
-                            var players = PCWorkerDelegate.GetNPCEntities();
+                            var players = XIVInfoViewModel.Instance.CurrentPCs.Select(entity => entity.Value)
+                                                          .ToList();
                             if (!players.Any())
                             {
                                 return;

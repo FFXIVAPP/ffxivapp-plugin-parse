@@ -1083,7 +1083,7 @@ namespace FFXIVAPP.Plugin.Parse.Localization
             Dictionary.Add("parse_PlayerVisibilityThresholdHeader", "Порог Количества Видимых Игроком Записей");
             Dictionary.Add("parse_WidgetSettingsTabHeader", "Настройки Виджетов");
             Dictionary.Add("parse_AdvancedCHBLabel", "Дополнительно");
-			Dictionary.Add("parse_AboutParsingPetsLabel", "* Все опции включают записи по Петам.");
+            Dictionary.Add("parse_AboutParsingPetsLabel", "* Все опции включают записи по Петам.");
             Dictionary.Add("parse_AboutColorsParsingLabel", "* Цвета используют кодировку ARGB (Alpha, Red, Green, Blue) или именные цвета (SkyBlue)");
             Dictionary.Add("parse_ColorsJobsLabel", "ЦВЕТА:JOBS");
             Dictionary.Add("parse_DPSWidgetSettingsTabLabel", "НАСТРОЙКИ ВИДЖЕТА:УВС");

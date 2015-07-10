@@ -137,9 +137,6 @@
     <Compile Include="Converters\NameToAvatarConverter.cs" />
     <Compile Include="Converters\StringToBrushConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
-    <Compile Include="Delegates\MonsterWorkerDelegate.cs" />
-    <Compile Include="Delegates\NPCWorkerDelegate.cs" />
-    <Compile Include="Delegates\PCWorkerDelegate.cs" />
     <Compile Include="Enums\EventDirection.cs" />
     <Compile Include="Enums\EventSubject.cs" />
     <Compile Include="Enums\EventType.cs" />
@@ -277,6 +274,7 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\XIVInfoViewModel.cs" />
     <Compile Include="Widgets.cs" />
     <Compile Include="Windows\DPSWidget.xaml.cs">
       <DependentUpon>DPSWidget.xaml</DependentUpon>

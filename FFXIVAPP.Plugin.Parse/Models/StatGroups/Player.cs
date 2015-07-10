@@ -33,9 +33,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Timers;
 using FFXIVAPP.Common.Core.Memory;
-using FFXIVAPP.Plugin.Parse.Delegates;
 using FFXIVAPP.Plugin.Parse.Models.LinkedStats;
 using FFXIVAPP.Plugin.Parse.Models.Stats;
+using FFXIVAPP.Plugin.Parse.ViewModels;
 using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
@@ -118,8 +118,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 return;
             }
             StatusUpdateTimerProcessing = true;
-            var monsterEntries = MonsterWorkerDelegate.GetNPCEntities();
-            var pcEntries = PCWorkerDelegate.GetNPCEntities();
+            var monsterEntries = XIVInfoViewModel.Instance.CurrentMonsters.Select(entity => entity.Value)
+                                                 .ToList();
+            var pcEntries = XIVInfoViewModel.Instance.CurrentPCs.Select(entity => entity.Value)
+                                            .ToList();
             StatusEntriesSelf.Clear();
             StatusEntriesPlayers.Clear();
             StatusEntriesMonsters.Clear();
@@ -133,7 +135,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     var isPet = false;
                     try
                     {
-                        NPCEntry = isYou ? PCWorkerDelegate.CurrentUser : null;
+                        NPCEntry = isYou ? XIVInfoViewModel.Instance.CurrentUser : null;
                         if (!isYou)
                         {
                             try
