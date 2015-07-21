@@ -88,27 +88,22 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
             if (chatLogEntry.Code == "0038")
             {
                 var commandsRegEx = CommandBuilder.CommandsRegEx.Match(chatLogEntry.Line.Trim());
-                if (commandsRegEx.Success)
+                if (!commandsRegEx.Success)
                 {
-                    var plugin = commandsRegEx.Groups["plugin"].Success ? commandsRegEx.Groups["plugin"].Value : "";
-                    var command = commandsRegEx.Groups["command"].Success ? commandsRegEx.Groups["command"].Value : "";
-                    switch (plugin)
-                    {
-                        case "parse":
-                            switch (command)
-                            {
-                                case "on":
-                                    IsPaused = false;
-                                    break;
-                                case "off":
-                                    IsPaused = true;
-                                    break;
-                                case "reset":
-                                    ParseControl.Instance.Reset();
-                                    break;
-                            }
-                            break;
-                    }
+                    return;
+                }
+                var command = commandsRegEx.Groups["command"].Success ? commandsRegEx.Groups["command"].Value : "";
+                switch (command)
+                {
+                    case "on":
+                        IsPaused = false;
+                        break;
+                    case "off":
+                        IsPaused = true;
+                        break;
+                    case "reset":
+                        ParseControl.Instance.Reset();
+                        break;
                 }
             }
         }
