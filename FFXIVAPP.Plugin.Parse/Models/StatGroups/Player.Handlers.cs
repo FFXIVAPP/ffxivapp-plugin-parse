@@ -74,7 +74,12 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     {
                         continue;
                     }
-                    var amount = NPCEntry.Level / ((60 - NPCEntry.Level) * .025m);
+                    var difference = (60 - NPCEntry.Level);
+                    if (difference <= 0)
+                    {
+                        difference = 10;
+                    }
+                    var amount = NPCEntry.Level / (difference * .025m);
                     var key = statusKey;
                     XOverTimeAction actionData = null;
                     foreach (var damageOverTimeAction in DamageOverTimeHelper.PlayerActions.ToList()
