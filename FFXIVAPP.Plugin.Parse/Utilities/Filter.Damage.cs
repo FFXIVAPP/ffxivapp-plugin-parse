@@ -473,10 +473,10 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         line.Action = lastActionIsAttack ? String.Format("{0} [+]", exp.Attack) : line.Action;
                         break;
                 }
-                line.Amount = damage.Groups["amount"].Success ? Convert.ToDecimal(damage.Groups["amount"].Value) : 0m;
+                line.Amount = damage.Groups["amount"].Success ? Convert.ToDouble(damage.Groups["amount"].Value) : 0;
                 line.Block = damage.Groups["block"].Success;
                 line.Crit = damage.Groups["crit"].Success;
-                line.Modifier = damage.Groups["modifier"].Success ? Convert.ToDecimal(damage.Groups["modifier"].Value) / 100 : 0m;
+                line.Modifier = damage.Groups["modifier"].Success ? Convert.ToDouble(damage.Groups["modifier"].Value) / 100 : 0;
                 line.Parry = damage.Groups["parry"].Success;
                 if (line.IsEmpty())
                 {
@@ -550,10 +550,10 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         line.Action = _lastActionMonster;
                         break;
                 }
-                line.Amount = damage.Groups["amount"].Success ? Convert.ToDecimal(damage.Groups["amount"].Value) : 0m;
+                line.Amount = damage.Groups["amount"].Success ? Convert.ToDouble(damage.Groups["amount"].Value) : 0;
                 line.Block = damage.Groups["block"].Success;
                 line.Crit = damage.Groups["crit"].Success;
-                line.Modifier = damage.Groups["modifier"].Success ? Convert.ToDecimal(damage.Groups["modifier"].Value) / 100 : 0m;
+                line.Modifier = damage.Groups["modifier"].Success ? Convert.ToDouble(damage.Groups["modifier"].Value) / 100 : 0;
                 line.Parry = damage.Groups["parry"].Success;
                 switch (type)
                 {

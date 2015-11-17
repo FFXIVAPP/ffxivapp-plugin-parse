@@ -42,7 +42,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
         }
 
         public string Name { get; private set; }
-
         public T Value { get; set; }
 
         /// <summary>

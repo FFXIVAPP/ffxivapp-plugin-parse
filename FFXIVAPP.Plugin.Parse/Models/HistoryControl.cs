@@ -44,17 +44,6 @@ namespace FFXIVAPP.Plugin.Parse.Models
             Timeline = new HistoryTimeline();
         }
 
-        #region Implementation of INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
-        }
-
-        #endregion
-
         public static HistoryControl Instance
         {
             get { return _instance ?? (_instance = new HistoryControl()); }
@@ -70,5 +59,16 @@ namespace FFXIVAPP.Plugin.Parse.Models
         public string Name { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+
+        #region Implementation of INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        private void RaisePropertyChanged([CallerMemberName] string caller = "")
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(caller));
+        }
+
+        #endregion
     }
 }

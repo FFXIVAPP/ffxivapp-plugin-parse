@@ -41,27 +41,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
 {
     public class StatGroup : StatGroupTypeDescriptor, ICollection<StatGroup>, INotifyCollectionChanged, INotifyPropertyChanged
     {
-        #region Property Bindings
-
-        public string Name { get; set; }
-
-        public bool IncludeSelf { private get; set; }
-
-        #endregion Property Bindings
-
-        #region Declarations
-
-        private readonly ConcurrentDictionary<string, StatGroup> ChildContainer = new ConcurrentDictionary<string, StatGroup>();
-
-        public StatContainer Stats = new StatContainer();
-
-        public List<StatGroup> Children
-        {
-            get { return new List<StatGroup>(ChildContainer.Values); }
-        }
-
-        #endregion Declarations
-
         /// <summary>
         /// </summary>
         /// <param name="name"> </param>
@@ -166,6 +145,27 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
             }
             return Stats.GetStatValue(name);
         }
+
+        #region Property Bindings
+
+        public string Name { get; set; }
+
+        public bool IncludeSelf { private get; set; }
+
+        #endregion Property Bindings
+
+        #region Declarations
+
+        private readonly ConcurrentDictionary<string, StatGroup> ChildContainer = new ConcurrentDictionary<string, StatGroup>();
+
+        public StatContainer Stats = new StatContainer();
+
+        public List<StatGroup> Children
+        {
+            get { return new List<StatGroup>(ChildContainer.Values); }
+        }
+
+        #endregion Declarations
 
         #region Implementation of IEnumerable
 

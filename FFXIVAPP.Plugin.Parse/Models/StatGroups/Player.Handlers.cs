@@ -79,7 +79,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     {
                         difference = 10;
                     }
-                    var amount = NPCEntry.Level / (difference * .025m);
+                    var amount = NPCEntry.Level / (difference * .025);
                     var key = statusKey;
                     XOverTimeAction actionData = null;
                     foreach (var damageOverTimeAction in DamageOverTimeHelper.PlayerActions.ToList()
@@ -98,7 +98,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                                                                .ToList();
                     var resolvedPotency = 80;
                     var thunderDuration = 24;
-                    var originalThunderDamage = 0m;
+                    double originalThunderDamage = 0;
                     foreach (var lastDamageAmountByAction in lastDamageAmountByActions)
                     {
                         if (thunder)
@@ -168,8 +168,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     if (actionData.HasNoInitialResult && !zeroFoundInList)
                     {
                         var nonZeroActions = lastDamageAmountByActions.Where(d => !d.Key.Contains("•"));
-                        var keyValuePairs = nonZeroActions as IList<KeyValuePair<string, decimal>> ?? nonZeroActions.ToList();
-                        var damage = 0m;
+                        var keyValuePairs = nonZeroActions as IList<KeyValuePair<string, double>> ?? nonZeroActions.ToList();
+                        double damage = 0;
                         switch (bio)
                         {
                             case true:
@@ -212,7 +212,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         if (new Random().NextDouble() * 3 < currentCritPercent)
                         {
                             line.Crit = true;
-                            line.Amount = line.Amount * 1.5m;
+                            line.Amount = line.Amount * 1.5;
                         }
                         Controller.Timeline.GetSetPlayer(line.Source)
                                   .SetDamageOverTime(line);
@@ -262,7 +262,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     {
                         continue;
                     }
-                    var amount = NPCEntry.Level / ((60 - NPCEntry.Level) * .025m);
+                    var amount = NPCEntry.Level / ((60 - NPCEntry.Level) * .025);
                     var key = statusKey;
                     XOverTimeAction actionData = null;
                     foreach (var healingOverTimeAction in HealingOverTimeHelper.PlayerActions.ToList()
@@ -337,8 +337,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     if (actionData.HasNoInitialResult && !zeroFoundInList)
                     {
                         var nonZeroActions = healingHistoryList.Where(d => !d.Key.Contains("•"));
-                        var keyValuePairs = nonZeroActions as IList<KeyValuePair<string, decimal>> ?? nonZeroActions.ToList();
-                        var healing = 0m;
+                        var keyValuePairs = nonZeroActions as IList<KeyValuePair<string, double>> ?? nonZeroActions.ToList();
+                        double healing = 0;
                         switch (regen)
                         {
                             case true:
@@ -416,7 +416,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         if (new Random().NextDouble() * 3 < currentCritPercent)
                         {
                             line.Crit = true;
-                            line.Amount = line.Amount * 1.5m;
+                            line.Amount = line.Amount * 1.5;
                         }
                         Controller.Timeline.GetSetPlayer(line.Source)
                                   .SetHealingOverTime(line);

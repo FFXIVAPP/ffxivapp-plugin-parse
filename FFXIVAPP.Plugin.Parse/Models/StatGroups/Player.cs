@@ -55,11 +55,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         public readonly Timer IsActiveTimer = new Timer(1000);
         public readonly Timer StatusUpdateTimer = new Timer(1000);
-
+        private ActorEntity _npcEntry = null;
         public List<StatusEntry> StatusEntriesMonsters = new List<StatusEntry>();
         public List<StatusEntry> StatusEntriesPlayers = new List<StatusEntry>();
         public List<StatusEntry> StatusEntriesSelf = new List<StatusEntry>();
-        private ActorEntity _npcEntry = null;
 
         public Player(string name, ParseControl parseControl) : base(name)
         {
@@ -79,13 +78,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         }
 
         public DateTime LastActionTime { get; set; }
-
         public double TotalInActiveTime { get; set; }
-
         public bool StatusUpdateTimerProcessing { get; set; }
-
         private static ParseControl Controller { get; set; }
-
         public uint ID { get; set; }
 
         public ActorEntity NPCEntry
@@ -102,13 +97,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         }
 
         public List<LineHistory> LineHistory { get; set; }
-
         public List<LineHistory> Last20DamageActions { get; set; }
-
         public List<LineHistory> Last20DamageTakenActions { get; set; }
-
         public List<LineHistory> Last20HealingActions { get; set; }
-
         public List<LineHistory> Last20Items { get; set; }
 
         private void StatusUpdateTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
@@ -218,8 +209,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     return;
                 }
                 Stats.GetStat("TotalParserTime")
-                     .Value = Convert.ToDecimal(Controller.EndTime.Subtract(Controller.StartTime)
-                                                          .TotalSeconds);
+                     .Value = Controller.EndTime.Subtract(Controller.StartTime)
+                                        .TotalSeconds;
                 var parserTime = Stats.GetStat("TotalParserTime");
                 var activeTime = Stats.GetStat("TotalActiveTime");
                 var inactiveTime = DateTime.Now.Subtract(LastActionTime)
@@ -229,7 +220,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     TotalInActiveTime++;
                 }
                 TotalInActiveTime = TotalInActiveTime > (double) parserTime.Value ? (double) parserTime.Value : TotalInActiveTime;
-                activeTime.Value = parserTime.Value - (decimal) TotalInActiveTime;
+                activeTime.Value = parserTime.Value - (double) TotalInActiveTime;
             }
             catch (Exception ex)
             {
@@ -244,9 +235,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        private IEnumerable<Stat<decimal>> TotalStatList()
+        private IEnumerable<Stat<double>> TotalStatList()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalActiveTime", new TotalStat("TotalActiveTime"));
             stats.Add("TotalParserTime", new TotalStat("TotalParserTime"));
@@ -541,7 +532,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"> </param>
         /// <param name="useSub"></param>
         /// <returns> </returns>
-        private IEnumerable<Stat<decimal>> DamageStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> DamageStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.DamageStats();
 
@@ -570,7 +561,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"> </param>
         /// <param name="useSub"></param>
         /// <returns> </returns>
-        private IEnumerable<Stat<decimal>> DamageOverTimeStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> DamageOverTimeStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.DamageOverTimeStats();
 
@@ -599,7 +590,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> HealingStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> HealingStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.HealingStats();
 
@@ -628,7 +619,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> HealingOverHealingStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> HealingOverHealingStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.HealingOverHealingStats();
 
@@ -657,7 +648,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> HealingOverTimeStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> HealingOverTimeStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.HealingOverTimeStats();
 
@@ -686,7 +677,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> HealingMitigatedStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> HealingMitigatedStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.HealingMitigatedStats();
 
@@ -715,7 +706,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> DamageTakenStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> DamageTakenStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.DamageTakenStats();
 
@@ -744,7 +735,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> DamageTakenOverTimeStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> DamageTakenOverTimeStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.DamageTakenOverTimeStats();
 
@@ -773,7 +764,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> BuffStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> BuffStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.BuffStats();
 

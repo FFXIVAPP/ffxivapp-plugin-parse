@@ -54,22 +54,6 @@ namespace FFXIVAPP.Plugin.Parse.Models
 
         #endregion
 
-        #region Auto Properties
-
-        public bool FirstActionFound { get; set; }
-        public string Name { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-
-        #endregion
-
-        #region Declarations
-
-        private readonly Timer _parseEntityTimer = new Timer(100);
-        private ParseEntity LastParseEntity { get; set; }
-
-        #endregion
-
         public ParseControl()
         {
             Timeline = new Timeline(this);
@@ -108,36 +92,36 @@ namespace FFXIVAPP.Plugin.Parse.Models
                             {
                                 Name = player.Name,
                                 Job = Actor.Job.Unknown,
-                                CombinedDPS = (decimal) player.GetStatValue("CombinedDPS"),
-                                DPS = (decimal) player.GetStatValue("DPS"),
-                                DOTPS = (decimal) player.GetStatValue("DOTPS"),
-                                CombinedHPS = (decimal) player.GetStatValue("CombinedHPS"),
-                                HPS = (decimal) player.GetStatValue("HPS"),
-                                HOTPS = (decimal) player.GetStatValue("HOTPS"),
-                                HOHPS = (decimal) player.GetStatValue("HOHPS"),
-                                HMPS = (decimal) player.GetStatValue("HMPS"),
-                                CombinedDTPS = (decimal) player.GetStatValue("CombinedDTPS"),
-                                DTPS = (decimal) player.GetStatValue("DTPS"),
-                                DTOTPS = (decimal) player.GetStatValue("DTOTPS"),
-                                CombinedTotalOverallDamage = (decimal) player.GetStatValue("CombinedTotalOverallDamage"),
-                                TotalOverallDamage = (decimal) player.GetStatValue("TotalOverallDamage"),
-                                TotalOverallDamageOverTime = (decimal) player.GetStatValue("TotalOverallDamageOverTime"),
-                                CombinedTotalOverallHealing = (decimal) player.GetStatValue("CombinedTotalOverallHealing"),
-                                TotalOverallHealing = (decimal) player.GetStatValue("TotalOverallHealing"),
-                                TotalOverallHealingOverTime = (decimal) player.GetStatValue("TotalOverallHealingOverTime"),
-                                TotalOverallHealingOverHealing = (decimal) player.GetStatValue("TotalOverallHealingOverHealing"),
-                                TotalOverallHealingMitigated = (decimal) player.GetStatValue("TotalOverallHealingMitigated"),
-                                CombinedTotalOverallDamageTaken = (decimal) player.GetStatValue("CombinedTotalOverallDamageTaken"),
-                                TotalOverallDamageTaken = (decimal) player.GetStatValue("TotalOverallDamageTaken"),
-                                TotalOverallDamageTakenOverTime = (decimal) player.GetStatValue("TotalOverallDamageTakenOverTime"),
-                                PercentOfTotalOverallDamage = (decimal) player.GetStatValue("PercentOfTotalOverallDamage"),
-                                PercentOfTotalOverallDamageOverTime = (decimal) player.GetStatValue("PercentOfTotalOverallDamageOverTime"),
-                                PercentOfTotalOverallHealing = (decimal) player.GetStatValue("PercentOfTotalOverallHealing"),
-                                PercentOfTotalOverallHealingOverTime = (decimal) player.GetStatValue("PercentOfTotalOverallHealingOverTime"),
-                                PercentOfTotalOverallHealingOverHealing = (decimal) player.GetStatValue("PercentOfTotalOverallHealingOverHealing"),
-                                PercentOfTotalOverallHealingMitigated = (decimal) player.GetStatValue("PercentOfTotalOverallHealingMitigated"),
-                                PercentOfTotalOverallDamageTaken = (decimal) player.GetStatValue("PercentOfTotalOverallDamageTaken"),
-                                PercentOfTotalOverallDamageTakenOverTime = (decimal) player.GetStatValue("PercentOfTotalOverallDamageTakenOverTime")
+                                CombinedDPS = (double) player.GetStatValue("CombinedDPS"),
+                                DPS = (double) player.GetStatValue("DPS"),
+                                DOTPS = (double) player.GetStatValue("DOTPS"),
+                                CombinedHPS = (double) player.GetStatValue("CombinedHPS"),
+                                HPS = (double) player.GetStatValue("HPS"),
+                                HOTPS = (double) player.GetStatValue("HOTPS"),
+                                HOHPS = (double) player.GetStatValue("HOHPS"),
+                                HMPS = (double) player.GetStatValue("HMPS"),
+                                CombinedDTPS = (double) player.GetStatValue("CombinedDTPS"),
+                                DTPS = (double) player.GetStatValue("DTPS"),
+                                DTOTPS = (double) player.GetStatValue("DTOTPS"),
+                                CombinedTotalOverallDamage = (double) player.GetStatValue("CombinedTotalOverallDamage"),
+                                TotalOverallDamage = (double) player.GetStatValue("TotalOverallDamage"),
+                                TotalOverallDamageOverTime = (double) player.GetStatValue("TotalOverallDamageOverTime"),
+                                CombinedTotalOverallHealing = (double) player.GetStatValue("CombinedTotalOverallHealing"),
+                                TotalOverallHealing = (double) player.GetStatValue("TotalOverallHealing"),
+                                TotalOverallHealingOverTime = (double) player.GetStatValue("TotalOverallHealingOverTime"),
+                                TotalOverallHealingOverHealing = (double) player.GetStatValue("TotalOverallHealingOverHealing"),
+                                TotalOverallHealingMitigated = (double) player.GetStatValue("TotalOverallHealingMitigated"),
+                                CombinedTotalOverallDamageTaken = (double) player.GetStatValue("CombinedTotalOverallDamageTaken"),
+                                TotalOverallDamageTaken = (double) player.GetStatValue("TotalOverallDamageTaken"),
+                                TotalOverallDamageTakenOverTime = (double) player.GetStatValue("TotalOverallDamageTakenOverTime"),
+                                PercentOfTotalOverallDamage = (double) player.GetStatValue("PercentOfTotalOverallDamage"),
+                                PercentOfTotalOverallDamageOverTime = (double) player.GetStatValue("PercentOfTotalOverallDamageOverTime"),
+                                PercentOfTotalOverallHealing = (double) player.GetStatValue("PercentOfTotalOverallHealing"),
+                                PercentOfTotalOverallHealingOverTime = (double) player.GetStatValue("PercentOfTotalOverallHealingOverTime"),
+                                PercentOfTotalOverallHealingOverHealing = (double) player.GetStatValue("PercentOfTotalOverallHealingOverHealing"),
+                                PercentOfTotalOverallHealingMitigated = (double) player.GetStatValue("PercentOfTotalOverallHealingMitigated"),
+                                PercentOfTotalOverallDamageTaken = (double) player.GetStatValue("PercentOfTotalOverallDamageTaken"),
+                                PercentOfTotalOverallDamageTakenOverTime = (double) player.GetStatValue("PercentOfTotalOverallDamageTakenOverTime")
                             };
                             switch (type)
                             {
@@ -167,36 +151,36 @@ namespace FFXIVAPP.Plugin.Parse.Models
                         {
                         }
                     }
-                    parseEntity.CombinedDPS = (decimal) Timeline.Overall.GetStatValue("CombinedDPS");
-                    parseEntity.DPS = (decimal) Timeline.Overall.GetStatValue("DPS");
-                    parseEntity.DOTPS = (decimal) Timeline.Overall.GetStatValue("DOTPS");
-                    parseEntity.CombinedHPS = (decimal) Timeline.Overall.GetStatValue("CombinedHPS");
-                    parseEntity.HPS = (decimal) Timeline.Overall.GetStatValue("HPS");
-                    parseEntity.HOTPS = (decimal) Timeline.Overall.GetStatValue("HOTPS");
-                    parseEntity.HOHPS = (decimal) Timeline.Overall.GetStatValue("HOHPS");
-                    parseEntity.HMPS = (decimal) Timeline.Overall.GetStatValue("HMPS");
-                    parseEntity.CombinedDTPS = (decimal) Timeline.Overall.GetStatValue("CombinedDTPS");
-                    parseEntity.DTPS = (decimal) Timeline.Overall.GetStatValue("DTPS");
-                    parseEntity.DTOTPS = (decimal) Timeline.Overall.GetStatValue("DTOTPS");
-                    parseEntity.CombinedTotalOverallDamage = (decimal) Timeline.Overall.GetStatValue("CombinedTotalOverallDamage");
-                    parseEntity.TotalOverallDamage = (decimal) Timeline.Overall.GetStatValue("TotalOverallDamage");
-                    parseEntity.TotalOverallDamageOverTime = (decimal) Timeline.Overall.GetStatValue("TotalOverallDamageOverTime");
-                    parseEntity.CombinedTotalOverallHealing = (decimal) Timeline.Overall.GetStatValue("CombinedTotalOverallHealing");
-                    parseEntity.TotalOverallHealing = (decimal) Timeline.Overall.GetStatValue("TotalOverallHealing");
-                    parseEntity.TotalOverallHealingOverTime = (decimal) Timeline.Overall.GetStatValue("TotalOverallHealingOverTime");
-                    parseEntity.TotalOverallHealingOverHealing = (decimal) Timeline.Overall.GetStatValue("TotalOverallHealingOverHealing");
-                    parseEntity.TotalOverallHealingMitigated = (decimal) Timeline.Overall.GetStatValue("TotalOverallHealingMitigated");
-                    parseEntity.CombinedTotalOverallDamageTaken = (decimal) Timeline.Overall.GetStatValue("CombinedTotalOverallDamageTaken");
-                    parseEntity.TotalOverallDamageTaken = (decimal) Timeline.Overall.GetStatValue("TotalOverallDamageTaken");
-                    parseEntity.TotalOverallDamageTakenOverTime = (decimal) Timeline.Overall.GetStatValue("TotalOverallDamageTakenOverTime");
-                    parseEntity.PercentOfTotalOverallDamage = (decimal) Timeline.Overall.GetStatValue("PercentOfTotalOverallDamage");
-                    parseEntity.PercentOfTotalOverallDamageOverTime = (decimal) Timeline.Overall.GetStatValue("PercentOfTotalOverallDamageOverTime");
-                    parseEntity.PercentOfTotalOverallHealing = (decimal) Timeline.Overall.GetStatValue("PercentOfTotalOverallHealing");
-                    parseEntity.PercentOfTotalOverallHealingOverTime = (decimal) Timeline.Overall.GetStatValue("PercentOfTotalOverallHealingOverTime");
-                    parseEntity.PercentOfTotalOverallHealingOverHealing = (decimal) Timeline.Overall.GetStatValue("PercentOfTotalOverallHealingOverHealing");
-                    parseEntity.PercentOfTotalOverallHealingMitigated = (decimal) Timeline.Overall.GetStatValue("PercentOfTotalOverallHealingMitigated");
-                    parseEntity.PercentOfTotalOverallDamageTaken = (decimal) Timeline.Overall.GetStatValue("PercentOfTotalOverallDamageTaken");
-                    parseEntity.PercentOfTotalOverallDamageTakenOverTime = (decimal) Timeline.Overall.GetStatValue("PercentOfTotalOverallDamageTakenOverTime");
+                    parseEntity.CombinedDPS = (double) Timeline.Overall.GetStatValue("CombinedDPS");
+                    parseEntity.DPS = (double) Timeline.Overall.GetStatValue("DPS");
+                    parseEntity.DOTPS = (double) Timeline.Overall.GetStatValue("DOTPS");
+                    parseEntity.CombinedHPS = (double) Timeline.Overall.GetStatValue("CombinedHPS");
+                    parseEntity.HPS = (double) Timeline.Overall.GetStatValue("HPS");
+                    parseEntity.HOTPS = (double) Timeline.Overall.GetStatValue("HOTPS");
+                    parseEntity.HOHPS = (double) Timeline.Overall.GetStatValue("HOHPS");
+                    parseEntity.HMPS = (double) Timeline.Overall.GetStatValue("HMPS");
+                    parseEntity.CombinedDTPS = (double) Timeline.Overall.GetStatValue("CombinedDTPS");
+                    parseEntity.DTPS = (double) Timeline.Overall.GetStatValue("DTPS");
+                    parseEntity.DTOTPS = (double) Timeline.Overall.GetStatValue("DTOTPS");
+                    parseEntity.CombinedTotalOverallDamage = (double) Timeline.Overall.GetStatValue("CombinedTotalOverallDamage");
+                    parseEntity.TotalOverallDamage = (double) Timeline.Overall.GetStatValue("TotalOverallDamage");
+                    parseEntity.TotalOverallDamageOverTime = (double) Timeline.Overall.GetStatValue("TotalOverallDamageOverTime");
+                    parseEntity.CombinedTotalOverallHealing = (double) Timeline.Overall.GetStatValue("CombinedTotalOverallHealing");
+                    parseEntity.TotalOverallHealing = (double) Timeline.Overall.GetStatValue("TotalOverallHealing");
+                    parseEntity.TotalOverallHealingOverTime = (double) Timeline.Overall.GetStatValue("TotalOverallHealingOverTime");
+                    parseEntity.TotalOverallHealingOverHealing = (double) Timeline.Overall.GetStatValue("TotalOverallHealingOverHealing");
+                    parseEntity.TotalOverallHealingMitigated = (double) Timeline.Overall.GetStatValue("TotalOverallHealingMitigated");
+                    parseEntity.CombinedTotalOverallDamageTaken = (double) Timeline.Overall.GetStatValue("CombinedTotalOverallDamageTaken");
+                    parseEntity.TotalOverallDamageTaken = (double) Timeline.Overall.GetStatValue("TotalOverallDamageTaken");
+                    parseEntity.TotalOverallDamageTakenOverTime = (double) Timeline.Overall.GetStatValue("TotalOverallDamageTakenOverTime");
+                    parseEntity.PercentOfTotalOverallDamage = (double) Timeline.Overall.GetStatValue("PercentOfTotalOverallDamage");
+                    parseEntity.PercentOfTotalOverallDamageOverTime = (double) Timeline.Overall.GetStatValue("PercentOfTotalOverallDamageOverTime");
+                    parseEntity.PercentOfTotalOverallHealing = (double) Timeline.Overall.GetStatValue("PercentOfTotalOverallHealing");
+                    parseEntity.PercentOfTotalOverallHealingOverTime = (double) Timeline.Overall.GetStatValue("PercentOfTotalOverallHealingOverTime");
+                    parseEntity.PercentOfTotalOverallHealingOverHealing = (double) Timeline.Overall.GetStatValue("PercentOfTotalOverallHealingOverHealing");
+                    parseEntity.PercentOfTotalOverallHealingMitigated = (double) Timeline.Overall.GetStatValue("PercentOfTotalOverallHealingMitigated");
+                    parseEntity.PercentOfTotalOverallDamageTaken = (double) Timeline.Overall.GetStatValue("PercentOfTotalOverallDamageTaken");
+                    parseEntity.PercentOfTotalOverallDamageTakenOverTime = (double) Timeline.Overall.GetStatValue("PercentOfTotalOverallDamageTakenOverTime");
                     var notify = false;
                     if (LastParseEntity == null)
                     {
@@ -239,6 +223,22 @@ namespace FFXIVAPP.Plugin.Parse.Models
             };
             parseEntityProcessor.BeginInvoke(delegate { }, parseEntityProcessor);
         }
+
+        #region Auto Properties
+
+        public bool FirstActionFound { get; set; }
+        public string Name { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+
+        #endregion
+
+        #region Declarations
+
+        private readonly Timer _parseEntityTimer = new Timer(100);
+        private ParseEntity LastParseEntity { get; set; }
+
+        #endregion
 
         #region Implementation of IParsingControl
 

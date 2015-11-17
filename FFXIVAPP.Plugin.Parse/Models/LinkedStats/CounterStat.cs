@@ -31,11 +31,11 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
 {
     public class CounterStat : NumericStat
     {
-        public CounterStat(string name, decimal value) : base(name, 0m)
+        public CounterStat(string name, double value) : base(name, 0)
         {
         }
 
-        public CounterStat(string name) : base(name, 0m)
+        public CounterStat(string name) : base(name, 0)
         {
         }
 
@@ -43,7 +43,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
         /// </summary>
         /// <param name="amount"> </param>
         /// <returns> </returns>
-        private decimal Increment(decimal amount)
+        private double Increment(double amount)
         {
             Value += amount;
             return Value;

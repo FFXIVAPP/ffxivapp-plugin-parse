@@ -35,6 +35,10 @@ namespace FFXIVAPP.Plugin.Parse.Windows
 {
     internal sealed class DTPSWidgetViewModel : INotifyPropertyChanged
     {
+        public DTPSWidgetViewModel()
+        {
+        }
+
         #region Property Bindings
 
         private static DTPSWidgetViewModel _instance;
@@ -60,10 +64,6 @@ namespace FFXIVAPP.Plugin.Parse.Windows
         #region Declarations
 
         #endregion
-
-        public DTPSWidgetViewModel()
-        {
-        }
 
         #region Loading Functions
 

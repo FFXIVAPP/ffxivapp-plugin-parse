@@ -36,44 +36,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
 {
     public class EventMonitor : StatGroup
     {
-        #region Property Bindings
-
-        private UInt64 _filter;
-        private DateTime _lastEventReceived;
-        private ParseControl _parseControl;
-
-        private DateTime LastEventReceived
-        {
-            get { return _lastEventReceived; }
-            set
-            {
-                _lastEventReceived = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        protected internal UInt64 Filter
-        {
-            get { return _filter; }
-            set
-            {
-                _filter = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        protected ParseControl ParseControl
-        {
-            get { return _parseControl; }
-            private set
-            {
-                _parseControl = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
         /// <summary>
         /// </summary>
         /// <param name="name"> </param>
@@ -148,6 +110,44 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         {
             OnStatChanged(this, e);
         }
+
+        #region Property Bindings
+
+        private UInt64 _filter;
+        private DateTime _lastEventReceived;
+        private ParseControl _parseControl;
+
+        private DateTime LastEventReceived
+        {
+            get { return _lastEventReceived; }
+            set
+            {
+                _lastEventReceived = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        protected internal UInt64 Filter
+        {
+            get { return _filter; }
+            set
+            {
+                _filter = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        protected ParseControl ParseControl
+        {
+            get { return _parseControl; }
+            private set
+            {
+                _parseControl = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
         #region Implementation of INotifyPropertyChanged
 

@@ -33,15 +33,15 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
 {
     public class TotalStat : LinkedStat
     {
-        public TotalStat(string name, params Stat<decimal>[] dependencies) : base(name, 0m)
+        public TotalStat(string name, params Stat<double>[] dependencies) : base(name, 0)
         {
         }
 
-        public TotalStat(string name, decimal value) : base(name, 0m)
+        public TotalStat(string name, double value) : base(name, 0)
         {
         }
 
-        public TotalStat(string name) : base(name, 0m)
+        public TotalStat(string name) : base(name, 0)
         {
         }
 
@@ -52,7 +52,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
         /// <param name="newValue"> </param>
         public override void DoDependencyValueChanged(object sender, object previousValue, object newValue)
         {
-            Value += ((decimal) newValue - (decimal) previousValue);
+            Value += ((double) newValue - (double) previousValue);
         }
     }
 }

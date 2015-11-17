@@ -37,6 +37,31 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
 {
     public class Event : EventArgs, INotifyPropertyChanged
     {
+        public Event(EventCode eventCode = null, ChatLogEntry chatLogEntry = null)
+        {
+            Initialize(DateTime.Now, eventCode, chatLogEntry);
+        }
+
+        private void Initialize(DateTime timeStamp, EventCode eventCode, ChatLogEntry chatLogEntry)
+        {
+            Timestamp = timeStamp;
+            EventCode = eventCode;
+            ChatLogEntry = chatLogEntry;
+        }
+
+        #region Utility Functions
+
+        /// <summary>
+        /// </summary>
+        /// <param name="filter"> </param>
+        /// <returns> </returns>
+        public bool MatchesFilter(UInt64 filter, Event e)
+        {
+            return (((UInt64) Subject & filter) != 0 && ((UInt64) Type & filter) != 0 && ((UInt64) Direction & filter) != 0);
+        }
+
+        #endregion
+
         #region Property Bindings
 
         private ChatLogEntry _chatLogEntry;
@@ -96,31 +121,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         public bool IsUnknown
         {
             get { return (EventCode == null) || (EventCode.Flags == EventParser.UnknownEvent); }
-        }
-
-        #endregion
-
-        public Event(EventCode eventCode = null, ChatLogEntry chatLogEntry = null)
-        {
-            Initialize(DateTime.Now, eventCode, chatLogEntry);
-        }
-
-        private void Initialize(DateTime timeStamp, EventCode eventCode, ChatLogEntry chatLogEntry)
-        {
-            Timestamp = timeStamp;
-            EventCode = eventCode;
-            ChatLogEntry = chatLogEntry;
-        }
-
-        #region Utility Functions
-
-        /// <summary>
-        /// </summary>
-        /// <param name="filter"> </param>
-        /// <returns> </returns>
-        public bool MatchesFilter(UInt64 filter, Event e)
-        {
-            return (((UInt64) Subject & filter) != 0 && ((UInt64) Type & filter) != 0 && ((UInt64) Direction & filter) != 0);
         }
 
         #endregion

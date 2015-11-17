@@ -633,6 +633,52 @@ namespace FFXIVAPP.Plugin.Parse.Properties
             }
         }
 
+        #region Iterative Settings Saving
+
+        private void SaveSettingsNode()
+        {
+            if (Constants.XSettings == null)
+            {
+                return;
+            }
+            var xElements = Constants.XSettings.Descendants()
+                                     .Elements("Setting");
+            var enumerable = xElements as XElement[] ?? xElements.ToArray();
+            foreach (var setting in Constants.Settings)
+            {
+                var element = enumerable.FirstOrDefault(e => e.Attribute("Key")
+                                                              .Value == setting);
+                var xKey = setting;
+                if (Default[xKey] == null)
+                {
+                    continue;
+                }
+                if (element == null)
+                {
+                    var xValue = Default[xKey].ToString();
+                    var keyPairList = new List<XValuePair>
+                    {
+                        new XValuePair
+                        {
+                            Key = "Value",
+                            Value = xValue
+                        }
+                    };
+                    XmlHelper.SaveXmlNode(Constants.XSettings, "Settings", "Setting", xKey, keyPairList);
+                }
+                else
+                {
+                    var xElement = element.Element("Value");
+                    if (xElement != null)
+                    {
+                        xElement.Value = Default[setting].ToString();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #region Property Bindings (Settings)
 
         [UserScopedSetting]
@@ -7152,52 +7198,6 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         private void RaisePropertyChanged([CallerMemberName] string caller = "")
         {
             PropertyChanged(this, new PropertyChangedEventArgs(caller));
-        }
-
-        #endregion
-
-        #region Iterative Settings Saving
-
-        private void SaveSettingsNode()
-        {
-            if (Constants.XSettings == null)
-            {
-                return;
-            }
-            var xElements = Constants.XSettings.Descendants()
-                                     .Elements("Setting");
-            var enumerable = xElements as XElement[] ?? xElements.ToArray();
-            foreach (var setting in Constants.Settings)
-            {
-                var element = enumerable.FirstOrDefault(e => e.Attribute("Key")
-                                                              .Value == setting);
-                var xKey = setting;
-                if (Default[xKey] == null)
-                {
-                    continue;
-                }
-                if (element == null)
-                {
-                    var xValue = Default[xKey].ToString();
-                    var keyPairList = new List<XValuePair>
-                    {
-                        new XValuePair
-                        {
-                            Key = "Value",
-                            Value = xValue
-                        }
-                    };
-                    XmlHelper.SaveXmlNode(Constants.XSettings, "Settings", "Setting", xKey, keyPairList);
-                }
-                else
-                {
-                    var xElement = element.Element("Value");
-                    if (xElement != null)
-                    {
-                        xElement.Value = Default[setting].ToString();
-                    }
-                }
-            }
         }
 
         #endregion

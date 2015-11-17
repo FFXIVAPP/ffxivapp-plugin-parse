@@ -35,34 +35,19 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
 {
     public class HistoryContainer : IHistoryContainer
     {
-        private readonly ConcurrentDictionary<string, HistoryStat<decimal>> _statDict = new ConcurrentDictionary<string, HistoryStat<decimal>>();
-
-        #region Implementation of IEnumerable
-
-        public IEnumerator<HistoryStat<decimal>> GetEnumerator()
-        {
-            return _statDict.Values.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        #endregion
-
+        private readonly ConcurrentDictionary<string, HistoryStat<double>> _statDict = new ConcurrentDictionary<string, HistoryStat<double>>();
         public string Name { get; set; }
 
-        public HistoryStat<decimal> GetStat(string name)
+        public HistoryStat<double> GetStat(string name)
         {
-            HistoryStat<decimal> result;
+            HistoryStat<double> result;
             _statDict.TryGetValue(name, out result);
             return result;
         }
 
-        public HistoryStat<decimal> EnsureStatValue(string name, decimal value)
+        public HistoryStat<double> EnsureStatValue(string name, double value)
         {
-            HistoryStat<decimal> stat;
+            HistoryStat<double> stat;
             if (HasStat(name))
             {
                 stat = GetStat(name);
@@ -76,15 +61,34 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
             return stat;
         }
 
-        public decimal GetStatValue(string name)
+        public double GetStatValue(string name)
         {
             return HasStat(name) ? GetStat(name)
                 .Value : 0;
         }
 
-        #region Implementation of ICollection<Stat<decimal>>
+        public bool HasStat(string name)
+        {
+            return _statDict.ContainsKey(name);
+        }
 
-        public void Add(HistoryStat<decimal> stat)
+        #region Implementation of IEnumerable
+
+        public IEnumerator<HistoryStat<double>> GetEnumerator()
+        {
+            return _statDict.Values.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        #endregion
+
+        #region Implementation of ICollection<Stat<double>>
+
+        public void Add(HistoryStat<double> stat)
         {
             _statDict.TryAdd(stat.Name, stat);
         }
@@ -94,19 +98,19 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
             _statDict.Clear();
         }
 
-        public bool Contains(HistoryStat<decimal> stat)
+        public bool Contains(HistoryStat<double> stat)
         {
             return _statDict.ContainsKey(stat.Name);
         }
 
-        public void CopyTo(HistoryStat<decimal>[] array, int arrayIndex)
+        public void CopyTo(HistoryStat<double>[] array, int arrayIndex)
         {
             _statDict.Values.CopyTo(array, arrayIndex);
         }
 
-        public bool Remove(HistoryStat<decimal> stat)
+        public bool Remove(HistoryStat<double> stat)
         {
-            HistoryStat<decimal> removed;
+            HistoryStat<double> removed;
             if (_statDict.TryRemove(stat.Name, out removed))
             {
                 return true;
@@ -125,10 +129,5 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
         }
 
         #endregion
-
-        public bool HasStat(string name)
-        {
-            return _statDict.ContainsKey(name);
-        }
     }
 }

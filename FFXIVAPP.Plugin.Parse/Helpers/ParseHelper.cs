@@ -73,198 +73,81 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
             {
                 if (_healingActions == null)
                 {
-                    _healingActions = new List<string>();
-                    _healingActions.Add("内丹");
-                    _healingActions.Add("Second Wind");
-                    _healingActions.Add("Second souffle");
-                    _healingActions.Add("Chakra");
-                    _healingActions.Add("ケアル");
-                    _healingActions.Add("Cure");
-                    _healingActions.Add("Soin");
-                    _healingActions.Add("Vita");
-                    _healingActions.Add("メディカ");
-                    _healingActions.Add("Medica");
-                    _healingActions.Add("Médica");
-                    _healingActions.Add("Reseda");
-                    _healingActions.Add("ケアルガ");
-                    _healingActions.Add("Cure III");
-                    _healingActions.Add("Méga Soin");
-                    _healingActions.Add("Vitaga");
-                    _healingActions.Add("メディカラ");
-                    _healingActions.Add("Medica II");
-                    _healingActions.Add("Extra Médica");
-                    _healingActions.Add("Resedra");
-                    _healingActions.Add("ケアルラ");
-                    _healingActions.Add("Cure II");
-                    _healingActions.Add("Extra Soin");
-                    _healingActions.Add("Vitra");
-                    _healingActions.Add("鼓舞激励の策");
-                    _healingActions.Add("Adloquium");
-                    _healingActions.Add("Traité du réconfort");
-                    _healingActions.Add("Adloquium");
-                    _healingActions.Add("士気高揚の策");
-                    _healingActions.Add("Succor");
-                    _healingActions.Add("Traité du soulagement");
-                    _healingActions.Add("Kurieren");
-                    _healingActions.Add("フィジク");
-                    _healingActions.Add("Physick");
-                    _healingActions.Add("Médecine");
-                    _healingActions.Add("Physick");
-                    _healingActions.Add("光の癒し");
-                    _healingActions.Add("Embrace");
-                    _healingActions.Add("Embrassement");
-                    _healingActions.Add("Sanfte Umarmung");
-                    _healingActions.Add("光の囁き");
-                    _healingActions.Add("Whispering Dawn");
-                    _healingActions.Add("Murmure de l'aurore");
-                    _healingActions.Add("Erhebendes Flüstern");
-                    _healingActions.Add("光の癒し");
-                    _healingActions.Add("Embrace");
-                    _healingActions.Add("Embrassement");
-                    _healingActions.Add("Sanfte Umarmung");
-                    _healingActions.Add("生命活性法");
-                    _healingActions.Add("Lustrate");
-                    _healingActions.Add("Loi de revivification");
-                    _healingActions.Add("Revitalisierung");
-                    _healingActions.Add("チョコメディカ");
-                    _healingActions.Add("Choco Medica");
-                    _healingActions.Add("Choco-médica");
-                    _healingActions.Add("Chocobo-Reseda");
-                    _healingActions.Add("チョコケアル");
-                    _healingActions.Add("Choco Cure");
-                    _healingActions.Add("Choco-soin");
-                    _healingActions.Add("Chocobo-Vita");
+                    _healingActions = new List<string>
+                    {
+                        "内丹",
+                        "Second Wind",
+                        "Second souffle",
+                        "Chakra",
+                        "ケアル",
+                        "Cure",
+                        "Soin",
+                        "Vita",
+                        "メディカ",
+                        "Medica",
+                        "Médica",
+                        "Reseda",
+                        "ケアルガ",
+                        "Cure III",
+                        "Méga Soin",
+                        "Vitaga",
+                        "メディカラ",
+                        "Medica II",
+                        "Extra Médica",
+                        "Resedra",
+                        "ケアルラ",
+                        "Cure II",
+                        "Extra Soin",
+                        "Vitra",
+                        "鼓舞激励の策",
+                        "Adloquium",
+                        "Traité du réconfort",
+                        "Adloquium",
+                        "士気高揚の策",
+                        "Succor",
+                        "Traité du soulagement",
+                        "Kurieren",
+                        "フィジク",
+                        "Physick",
+                        "Médecine",
+                        "Physick",
+                        "光の癒し",
+                        "Embrace",
+                        "Embrassement",
+                        "Sanfte Umarmung",
+                        "光の囁き",
+                        "Whispering Dawn",
+                        "Murmure de l'aurore",
+                        "Erhebendes Flüstern",
+                        "光の癒し",
+                        "Embrace",
+                        "Embrassement",
+                        "Sanfte Umarmung",
+                        "生命活性法",
+                        "Lustrate",
+                        "Loi de revivification",
+                        "Revitalisierung",
+                        "チョコメディカ",
+                        "Choco Medica",
+                        "Choco-médica",
+                        "Chocobo-Reseda",
+                        "チョコケアル",
+                        "Choco Cure",
+                        "Choco-soin",
+                        "Chocobo-Vita"
+                    };
                 }
                 return _healingActions;
             }
             set { _healingActions = value; }
         }
 
-        #region LastAction Helper Dictionaries
-
-        public static class LastAmountByAction
-        {
-            private static Dictionary<string, List<Tuple<string, decimal>>> Monster = new Dictionary<string, List<Tuple<string, decimal>>>();
-
-            private static Dictionary<string, List<Tuple<string, decimal>>> Player = new Dictionary<string, List<Tuple<string, decimal>>>();
-
-            public static Dictionary<string, decimal> GetMonster(string name)
-            {
-                var results = new Dictionary<string, decimal>();
-                EnsureMonster(name);
-                lock (Monster)
-                {
-                    var actionList = new List<string>();
-                    var actionUpdateCount = new Dictionary<string, int>();
-                    foreach (var actionTuple in Monster[name])
-                    {
-                        if (!results.ContainsKey(actionTuple.Item1))
-                        {
-                            results.Add(actionTuple.Item1, 0);
-                        }
-                        //results[actionTuple.Item1] += actionTuple.Item2;
-                        results[actionTuple.Item1] = actionTuple.Item2;
-                        if (!actionList.Contains(actionTuple.Item1))
-                        {
-                            actionList.Add(actionTuple.Item1);
-                        }
-                        if (!actionUpdateCount.ContainsKey(actionTuple.Item1))
-                        {
-                            actionUpdateCount.Add(actionTuple.Item1, 0);
-                        }
-                        actionUpdateCount[actionTuple.Item1]++;
-                    }
-                    foreach (var action in actionList)
-                    {
-                        //results[action] = results[action] / actionUpdateCount[action];
-                    }
-                }
-                return results;
-            }
-
-            private static void EnsureMonster(string name)
-            {
-                lock (Monster)
-                {
-                    if (!Monster.ContainsKey(name))
-                    {
-                        Monster.Add(name, new List<Tuple<string, decimal>>());
-                    }
-                }
-            }
-
-            public static void EnsureMonsterAction(string name, string action, decimal amount)
-            {
-                EnsureMonster(name);
-                lock (Monster)
-                {
-                    Monster[name].Add(new Tuple<string, decimal>(action, amount));
-                }
-            }
-
-            public static Dictionary<string, decimal> GetPlayer(string name)
-            {
-                var results = new Dictionary<string, decimal>();
-                EnsurePlayer(name);
-                lock (Player)
-                {
-                    var actionList = new List<string>();
-                    var actionUpdateCount = new Dictionary<string, int>();
-                    foreach (var actionTuple in Player[name])
-                    {
-                        if (!results.ContainsKey(actionTuple.Item1))
-                        {
-                            results.Add(actionTuple.Item1, 0);
-                        }
-                        //results[actionTuple.Item1] += actionTuple.Item2;
-                        results[actionTuple.Item1] = actionTuple.Item2;
-                        if (!actionList.Contains(actionTuple.Item1))
-                        {
-                            actionList.Add(actionTuple.Item1);
-                        }
-                        if (!actionUpdateCount.ContainsKey(actionTuple.Item1))
-                        {
-                            actionUpdateCount.Add(actionTuple.Item1, 0);
-                        }
-                        actionUpdateCount[actionTuple.Item1]++;
-                    }
-                    foreach (var action in actionList)
-                    {
-                        //results[action] = results[action] / actionUpdateCount[action];
-                    }
-                }
-                return results;
-            }
-
-            private static void EnsurePlayer(string name)
-            {
-                lock (Player)
-                {
-                    if (!Player.ContainsKey(name))
-                    {
-                        Player.Add(name, new List<Tuple<string, decimal>>());
-                    }
-                }
-            }
-
-            public static void EnsurePlayerAction(string name, string action, decimal amount)
-            {
-                EnsurePlayer(name);
-                lock (Player)
-                {
-                    Player[name].Add(new Tuple<string, decimal>(action, amount));
-                }
-            }
-        }
-
-        #endregion
-
         /// <summary>
         /// </summary>
         /// <param name="amount"></param>
         /// <param name="modifier"></param>
         /// <returns></returns>
-        public static decimal GetBonusAmount(decimal amount, decimal modifier)
+        public static double GetBonusAmount(double amount, double modifier)
         {
             return Math.Abs((amount / (modifier + 1)) - amount);
         }
@@ -274,7 +157,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
         /// <param name="amount"></param>
         /// <param name="modifier"></param>
         /// <returns></returns>
-        public static decimal GetOriginalAmount(decimal amount, decimal modifier)
+        public static double GetOriginalAmount(double amount, double modifier)
         {
             return Math.Abs(amount - GetBonusAmount(amount, modifier));
         }
@@ -321,5 +204,123 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
             }
             return String.Format("[{0}] {1}", tag, name);
         }
+
+        #region LastAction Helper Dictionaries
+
+        public static class LastAmountByAction
+        {
+            private static Dictionary<string, List<Tuple<string, double>>> Monster = new Dictionary<string, List<Tuple<string, double>>>();
+            private static Dictionary<string, List<Tuple<string, double>>> Player = new Dictionary<string, List<Tuple<string, double>>>();
+
+            public static Dictionary<string, double> GetMonster(string name)
+            {
+                var results = new Dictionary<string, double>();
+                EnsureMonster(name);
+                lock (Monster)
+                {
+                    var actionList = new List<string>();
+                    var actionUpdateCount = new Dictionary<string, int>();
+                    foreach (var actionTuple in Monster[name])
+                    {
+                        if (!results.ContainsKey(actionTuple.Item1))
+                        {
+                            results.Add(actionTuple.Item1, 0);
+                        }
+                        //results[actionTuple.Item1] += actionTuple.Item2;
+                        results[actionTuple.Item1] = actionTuple.Item2;
+                        if (!actionList.Contains(actionTuple.Item1))
+                        {
+                            actionList.Add(actionTuple.Item1);
+                        }
+                        if (!actionUpdateCount.ContainsKey(actionTuple.Item1))
+                        {
+                            actionUpdateCount.Add(actionTuple.Item1, 0);
+                        }
+                        actionUpdateCount[actionTuple.Item1]++;
+                    }
+                    foreach (var action in actionList)
+                    {
+                        //results[action] = results[action] / actionUpdateCount[action];
+                    }
+                }
+                return results;
+            }
+
+            private static void EnsureMonster(string name)
+            {
+                lock (Monster)
+                {
+                    if (!Monster.ContainsKey(name))
+                    {
+                        Monster.Add(name, new List<Tuple<string, double>>());
+                    }
+                }
+            }
+
+            public static void EnsureMonsterAction(string name, string action, double amount)
+            {
+                EnsureMonster(name);
+                lock (Monster)
+                {
+                    Monster[name].Add(new Tuple<string, double>(action, amount));
+                }
+            }
+
+            public static Dictionary<string, double> GetPlayer(string name)
+            {
+                var results = new Dictionary<string, double>();
+                EnsurePlayer(name);
+                lock (Player)
+                {
+                    var actionList = new List<string>();
+                    var actionUpdateCount = new Dictionary<string, int>();
+                    foreach (var actionTuple in Player[name])
+                    {
+                        if (!results.ContainsKey(actionTuple.Item1))
+                        {
+                            results.Add(actionTuple.Item1, 0);
+                        }
+                        //results[actionTuple.Item1] += actionTuple.Item2;
+                        results[actionTuple.Item1] = actionTuple.Item2;
+                        if (!actionList.Contains(actionTuple.Item1))
+                        {
+                            actionList.Add(actionTuple.Item1);
+                        }
+                        if (!actionUpdateCount.ContainsKey(actionTuple.Item1))
+                        {
+                            actionUpdateCount.Add(actionTuple.Item1, 0);
+                        }
+                        actionUpdateCount[actionTuple.Item1]++;
+                    }
+                    foreach (var action in actionList)
+                    {
+                        //results[action] = results[action] / actionUpdateCount[action];
+                    }
+                }
+                return results;
+            }
+
+            private static void EnsurePlayer(string name)
+            {
+                lock (Player)
+                {
+                    if (!Player.ContainsKey(name))
+                    {
+                        Player.Add(name, new List<Tuple<string, double>>());
+                    }
+                }
+            }
+
+            public static void EnsurePlayerAction(string name, string action, double amount)
+            {
+                EnsurePlayer(name);
+                lock (Player)
+                {
+                    Player[name].Add(new Tuple<string, double>(action, amount));
+                }
+            }
+        }
+
+        #endregion
     }
 }

@@ -31,11 +31,11 @@ using System.Collections.Generic;
 
 namespace FFXIVAPP.Plugin.Parse.Models.History
 {
-    public interface IHistoryContainer : ICollection<HistoryStat<decimal>>
+    public interface IHistoryContainer : ICollection<HistoryStat<double>>
     {
         string Name { get; set; }
-        HistoryStat<decimal> GetStat(string name);
-        decimal GetStatValue(string name);
-        HistoryStat<decimal> EnsureStatValue(string name, decimal value);
+        HistoryStat<double> GetStat(string name);
+        double GetStatValue(string name);
+        HistoryStat<double> EnsureStatValue(string name, double value);
     }
 }

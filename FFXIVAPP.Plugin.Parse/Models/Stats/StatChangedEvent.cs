@@ -33,14 +33,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
 {
     public class StatChangedEvent : EventArgs
     {
-        #region Property Bindings
-
-        private Stat<decimal> SourceStat { get; set; }
-        public object PreviousValue { get; private set; }
-        public object NewValue { get; private set; }
-
-        #endregion
-
         /// <summary>
         /// </summary>
         /// <param name="sourceStat"> </param>
@@ -48,9 +40,17 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
         /// <param name="newValue"> </param>
         public StatChangedEvent(object sourceStat, object previousValue, object newValue)
         {
-            SourceStat = (Stat<decimal>) sourceStat;
+            SourceStat = (Stat<double>) sourceStat;
             PreviousValue = previousValue;
             NewValue = newValue;
         }
+
+        #region Property Bindings
+
+        private Stat<double> SourceStat { get; set; }
+        public object PreviousValue { get; private set; }
+        public object NewValue { get; private set; }
+
+        #endregion
     }
 }

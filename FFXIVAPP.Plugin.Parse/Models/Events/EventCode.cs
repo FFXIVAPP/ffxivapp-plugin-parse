@@ -36,6 +36,26 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
 {
     public class EventCode : INotifyPropertyChanged
     {
+        private UInt64 _code;
+        private string _description;
+        private EventGroup _group;
+
+        public EventCode()
+        {
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="description"> </param>
+        /// <param name="code"> </param>
+        /// <param name="group"> </param>
+        public EventCode(string description, UInt64 code, EventGroup group)
+        {
+            Description = description;
+            Code = code;
+            Group = group;
+        }
+
         #region Property Bindings
 
         private string Description
@@ -89,26 +109,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         }
 
         #endregion
-
-        private UInt64 _code;
-        private string _description;
-        private EventGroup _group;
-
-        public EventCode()
-        {
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="description"> </param>
-        /// <param name="code"> </param>
-        /// <param name="group"> </param>
-        public EventCode(string description, UInt64 code, EventGroup group)
-        {
-            Description = description;
-            Code = code;
-            Group = group;
-        }
 
         #region Implementation of INotifyPropertyChanged
 

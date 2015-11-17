@@ -56,6 +56,20 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 {
     internal sealed class MainViewModel : INotifyPropertyChanged
     {
+        public MainViewModel()
+        {
+            IsCurrent = true;
+            ShowLast20PlayerActionsCommand = new DelegateCommand<string>(ShowLast20PlayerActions);
+            ShowLast20MonsterActionsCommand = new DelegateCommand<string>(ShowLast20MonsterActions);
+            ShowLast20PlayerItemsUsedCommand = new DelegateCommand(ShowLast20PlayerItemsUsed);
+            RefreshSelectedCommand = new DelegateCommand(RefreshSelected);
+            ProcessSampleCommand = new DelegateCommand(ProcessSample);
+            SwitchInfoViewSourceCommand = new DelegateCommand(SwitchInfoViewSource);
+            SwitchInfoViewTypeCommand = new DelegateCommand(SwitchInfoViewType);
+            ResetStatsCommand = new DelegateCommand(ResetStats);
+            Convert2JsonCommand = new DelegateCommand(Convert2Json);
+        }
+
         #region Property Bindings
 
         private static MainViewModel _instance;
@@ -165,20 +179,6 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
         public ICommand Convert2JsonCommand { get; private set; }
 
         #endregion
-
-        public MainViewModel()
-        {
-            IsCurrent = true;
-            ShowLast20PlayerActionsCommand = new DelegateCommand<string>(ShowLast20PlayerActions);
-            ShowLast20MonsterActionsCommand = new DelegateCommand<string>(ShowLast20MonsterActions);
-            ShowLast20PlayerItemsUsedCommand = new DelegateCommand(ShowLast20PlayerItemsUsed);
-            RefreshSelectedCommand = new DelegateCommand(RefreshSelected);
-            ProcessSampleCommand = new DelegateCommand(ProcessSample);
-            SwitchInfoViewSourceCommand = new DelegateCommand(SwitchInfoViewSource);
-            SwitchInfoViewTypeCommand = new DelegateCommand(SwitchInfoViewType);
-            ResetStatsCommand = new DelegateCommand(ResetStats);
-            Convert2JsonCommand = new DelegateCommand(Convert2Json);
-        }
 
         #region Loading Functions
 

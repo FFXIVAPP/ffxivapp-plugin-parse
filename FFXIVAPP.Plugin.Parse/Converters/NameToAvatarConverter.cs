@@ -47,13 +47,14 @@ namespace FFXIVAPP.Plugin.Parse.Converters
 {
     public class NameToAvatarConverter : IMultiValueConverter
     {
+        private const string DefaultAvatar = Common.Constants.DefaultAvatar;
+
         #region Logger
 
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         #endregion
 
-        private const string DefaultAvatar = Common.Constants.DefaultAvatar;
         private readonly bool _cachingEnabled = true;
 
         /// <summary>

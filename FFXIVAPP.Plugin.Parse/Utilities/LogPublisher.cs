@@ -39,25 +39,6 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
 {
     public static class LogPublisher
     {
-        #region Property Bindings
-
-        private static List<string> _needGreedHistory;
-
-        public static List<string> NeedGreedHistory
-        {
-            get { return _needGreedHistory ?? (_needGreedHistory = new List<string>()); }
-            set
-            {
-                if (_needGreedHistory == null)
-                {
-                    _needGreedHistory = new List<string>();
-                }
-                _needGreedHistory = value;
-            }
-        }
-
-        #endregion
-
         public static bool IsPaused = false;
         public static bool Processing { get; set; }
 
@@ -107,5 +88,24 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 }
             }
         }
+
+        #region Property Bindings
+
+        private static List<string> _needGreedHistory;
+
+        public static List<string> NeedGreedHistory
+        {
+            get { return _needGreedHistory ?? (_needGreedHistory = new List<string>()); }
+            set
+            {
+                if (_needGreedHistory == null)
+                {
+                    _needGreedHistory = new List<string>();
+                }
+                _needGreedHistory = value;
+            }
+        }
+
+        #endregion
     }
 }

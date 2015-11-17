@@ -270,7 +270,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
 
                 foreach (var stat in overallStats)
                 {
-                    historyController.Timeline.Overall.Stats.EnsureStatValue(stat.Key, (decimal) stat.Value);
+                    historyController.Timeline.Overall.Stats.EnsureStatValue(stat.Key, (double) stat.Value);
                 }
                 var players = GetDictionary(timeline["Party"]);
                 foreach (var player in players)
@@ -284,7 +284,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     var stats = GetDictionary(player.Value["Stats"]);
                     foreach (var stat in stats)
                     {
-                        playerInstance.Stats.EnsureStatValue(stat.Key, (decimal) stat.Value);
+                        playerInstance.Stats.EnsureStatValue(stat.Key, (double) stat.Value);
                     }
                     RabbitHoleCopy(ref playerInstance, player);
                 }
@@ -300,7 +300,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     var stats = GetDictionary(monster.Value["Stats"]);
                     foreach (var stat in stats)
                     {
-                        monsterInstance.Stats.EnsureStatValue(stat.Key, (decimal) stat.Value);
+                        monsterInstance.Stats.EnsureStatValue(stat.Key, (double) stat.Value);
                     }
                     RabbitHoleCopy(ref monsterInstance, monster);
                 }
@@ -342,7 +342,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     foreach (var stat in stats)
                     {
-                        parent.Stats.EnsureStatValue(stat.Key, (decimal) stat.Value);
+                        parent.Stats.EnsureStatValue(stat.Key, (double) stat.Value);
                     }
                 }
                 var groups = GetDictionary(statGroup.Value);
@@ -358,7 +358,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                         var groupStats = GetDictionary(group.Value["Stats"]);
                         foreach (var stat in groupStats)
                         {
-                            newParent.Stats.EnsureStatValue(stat.Key, (decimal) stat.Value);
+                            newParent.Stats.EnsureStatValue(stat.Key, (double) stat.Value);
                         }
                     }
                     catch (Exception ex)

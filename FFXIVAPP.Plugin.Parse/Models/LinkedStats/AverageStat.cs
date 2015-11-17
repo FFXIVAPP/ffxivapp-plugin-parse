@@ -35,23 +35,23 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
     {
         private int _numUpdates;
 
-        public AverageStat(string name, params Stat<decimal>[] dependencies) : base(name, 0m)
+        public AverageStat(string name, params Stat<double>[] dependencies) : base(name, 0)
         {
             SetupDepends(dependencies[0]);
         }
 
-        public AverageStat(string name, decimal value) : base(name, 0m)
+        public AverageStat(string name, double value) : base(name, 0)
         {
         }
 
-        public AverageStat(string name) : base(name, 0m)
+        public AverageStat(string name) : base(name, 0)
         {
         }
 
         /// <summary>
         /// </summary>
         /// <param name="total"> </param>
-        private void SetupDepends(Stat<decimal> total)
+        private void SetupDepends(Stat<double> total)
         {
             AddDependency(total);
         }
@@ -63,7 +63,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
         /// <param name="newValue"> </param>
         public override void DoDependencyValueChanged(object sender, object previousValue, object newValue)
         {
-            var value = (decimal) newValue;
+            var value = (double) newValue;
             Value = value / ++_numUpdates;
         }
     }

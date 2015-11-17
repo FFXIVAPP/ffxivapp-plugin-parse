@@ -51,7 +51,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         };
 
         public readonly Timer StatusUpdateTimer = new Timer(1000);
-
         public List<StatusEntry> StatusEntriesMonsters = new List<StatusEntry>();
         public List<StatusEntry> StatusEntriesPlayers = new List<StatusEntry>();
         public List<StatusEntry> StatusEntriesSelf = new List<StatusEntry>();
@@ -75,19 +74,14 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         }
 
         private static ParseControl Controller { get; set; }
-
         public uint ID { get; set; }
-
         public ActorEntity NPCEntry { get; set; }
-
         public List<LineHistory> LineHistory { get; set; }
         public List<LineHistory> Last20DamageActions { get; set; }
         public List<LineHistory> Last20DamageTakenActions { get; set; }
         public List<LineHistory> Last20HealingActions { get; set; }
         public List<LineHistory> Last20Items { get; set; }
-
         private TotalStat TotalOverallDrops { get; set; }
-
         private CounterStat TotalKilled { get; set; }
 
         private void StatusUpdateTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
@@ -107,9 +101,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        private IEnumerable<Stat<decimal>> TotalStatList()
+        private IEnumerable<Stat<double>> TotalStatList()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             TotalOverallDrops = new TotalStat("TotalOverallDrops");
             TotalKilled = new CounterStat("TotalKilled");
@@ -399,7 +393,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"> </param>
         /// <param name="useSub"></param>
         /// <returns> </returns>
-        private IEnumerable<Stat<decimal>> DamageStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> DamageStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.DamageStats();
 
@@ -427,7 +421,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"> </param>
         /// <param name="useSub"></param>
         /// <returns> </returns>
-        private IEnumerable<Stat<decimal>> DamageOverTimeStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> DamageOverTimeStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.DamageOverTimeStats();
 
@@ -455,7 +449,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> HealingStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> HealingStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.HealingStats();
 
@@ -483,7 +477,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> HealingOverHealingStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> HealingOverHealingStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.HealingOverHealingStats();
 
@@ -511,7 +505,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> HealingOverTimeStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> HealingOverTimeStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.HealingOverTimeStats();
 
@@ -539,7 +533,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> HealingMitigatedStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> HealingMitigatedStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.HealingMitigatedStats();
 
@@ -567,7 +561,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> DamageTakenStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> DamageTakenStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.DamageTakenStats();
 
@@ -595,7 +589,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <param name="sub"></param>
         /// <param name="useSub"></param>
         /// <returns></returns>
-        private IEnumerable<Stat<decimal>> DamageTakenOverTimeStatList(StatGroup sub, bool useSub = false)
+        private IEnumerable<Stat<double>> DamageTakenOverTimeStatList(StatGroup sub, bool useSub = false)
         {
             var stats = StatGeneration.DamageTakenOverTimeStats();
 
@@ -621,9 +615,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        private IEnumerable<Stat<decimal>> DropStatList()
+        private IEnumerable<Stat<double>> DropStatList()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalDrops", new CounterStat("TotalDrops"));
             stats.Add("DropPercent", new PercentStat("DropPercent", stats["TotalDrops"], TotalKilled));

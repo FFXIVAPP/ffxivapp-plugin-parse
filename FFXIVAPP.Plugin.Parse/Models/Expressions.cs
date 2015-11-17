@@ -78,6 +78,173 @@ namespace FFXIVAPP.Plugin.Parse.Models
         public string YouString { get; private set; }
         public string Mitigated { get; private set; }
 
+        private void Initialize()
+        {
+            switch (Constants.GameLanguage)
+            {
+                case "French":
+                    pDamage = PlayerRegEx.DamageFr.Match(Cleaned);
+                    pDamageAuto = PlayerRegEx.DamageAutoFr.Match(Cleaned);
+                    pFailed = PlayerRegEx.FailedFr.Match(Cleaned);
+                    pFailedAuto = PlayerRegEx.FailedAutoFr.Match(Cleaned);
+                    pActions = PlayerRegEx.ActionsFr.Match(Cleaned);
+                    pItems = PlayerRegEx.ItemsFr.Match(Cleaned);
+                    pCure = PlayerRegEx.CureFr.Match(Cleaned);
+                    pBeneficialGain = PlayerRegEx.BeneficialGainFr.Match(Cleaned);
+                    pBeneficialLose = PlayerRegEx.BeneficialLoseFr.Match(Cleaned);
+                    pDetrimentalGain = PlayerRegEx.DetrimentalGainFr.Match(Cleaned);
+                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseFr.Match(Cleaned);
+                    mDamage = MonsterRegEx.DamageFr.Match(Cleaned);
+                    mDamageAuto = MonsterRegEx.DamageAutoFr.Match(Cleaned);
+                    mFailed = MonsterRegEx.FailedFr.Match(Cleaned);
+                    mFailedAuto = MonsterRegEx.FailedAutoFr.Match(Cleaned);
+                    mActions = MonsterRegEx.ActionsFr.Match(Cleaned);
+                    mItems = MonsterRegEx.ItemsFr.Match(Cleaned);
+                    mCure = MonsterRegEx.CureFr.Match(Cleaned);
+                    mBeneficialGain = MonsterRegEx.BeneficialGainFr.Match(Cleaned);
+                    mBeneficialLose = MonsterRegEx.BeneficialLoseFr.Match(Cleaned);
+                    mDetrimentalGain = MonsterRegEx.DetrimentalGainFr.Match(Cleaned);
+                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseFr.Match(Cleaned);
+                    Counter = "Contre";
+                    Added = "Effet Supplémentaire";
+                    HealingType = "PV";
+                    RAttack = "D'Attaque À Distance";
+                    Attack = "Attaque";
+                    You = @"^[Vv]ous$";
+                    YouString = "Vous";
+                    Mitigated = "Dommages Atténué (Bouclier Magique)";
+                    break;
+                case "Japanese":
+                    pDamage = PlayerRegEx.DamageJa.Match(Cleaned);
+                    pDamageAuto = PlayerRegEx.DamageAutoJa.Match(Cleaned);
+                    pFailed = PlayerRegEx.FailedJa.Match(Cleaned);
+                    pFailedAuto = PlayerRegEx.FailedAutoJa.Match(Cleaned);
+                    pActions = PlayerRegEx.ActionsJa.Match(Cleaned);
+                    pItems = PlayerRegEx.ItemsJa.Match(Cleaned);
+                    pCure = PlayerRegEx.CureJa.Match(Cleaned);
+                    pBeneficialGain = PlayerRegEx.BeneficialGainJa.Match(Cleaned);
+                    pBeneficialLose = PlayerRegEx.BeneficialLoseJa.Match(Cleaned);
+                    pDetrimentalGain = PlayerRegEx.DetrimentalGainJa.Match(Cleaned);
+                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseJa.Match(Cleaned);
+                    mDamage = MonsterRegEx.DamageJa.Match(Cleaned);
+                    mDamageAuto = MonsterRegEx.DamageAutoJa.Match(Cleaned);
+                    mFailed = MonsterRegEx.FailedJa.Match(Cleaned);
+                    mFailedAuto = MonsterRegEx.FailedAutoJa.Match(Cleaned);
+                    mActions = MonsterRegEx.ActionsJa.Match(Cleaned);
+                    mItems = MonsterRegEx.ItemsJa.Match(Cleaned);
+                    mCure = MonsterRegEx.CureJa.Match(Cleaned);
+                    mBeneficialGain = MonsterRegEx.BeneficialGainJa.Match(Cleaned);
+                    mBeneficialLose = MonsterRegEx.BeneficialLoseJa.Match(Cleaned);
+                    mDetrimentalGain = MonsterRegEx.DetrimentalGainJa.Match(Cleaned);
+                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseJa.Match(Cleaned);
+                    Counter = "カウンター";
+                    Added = "追加効果";
+                    HealingType = "ＨＰ";
+                    RAttack = "Ranged Attack";
+                    Attack = "Attack";
+                    You = @"^\.$";
+                    YouString = "君";
+                    Mitigated = "軽減ダメージ（魔法の盾）";
+                    break;
+                case "German":
+                    pDamage = PlayerRegEx.DamageDe.Match(Cleaned);
+                    pDamageAuto = PlayerRegEx.DamageAutoDe.Match(Cleaned);
+                    pFailed = PlayerRegEx.FailedDe.Match(Cleaned);
+                    pFailedAuto = PlayerRegEx.FailedAutoDe.Match(Cleaned);
+                    pActions = PlayerRegEx.ActionsDe.Match(Cleaned);
+                    pItems = PlayerRegEx.ItemsDe.Match(Cleaned);
+                    pCure = PlayerRegEx.CureDe.Match(Cleaned);
+                    pBeneficialGain = PlayerRegEx.BeneficialGainDe.Match(Cleaned);
+                    pBeneficialLose = PlayerRegEx.BeneficialLoseDe.Match(Cleaned);
+                    pDetrimentalGain = PlayerRegEx.DetrimentalGainDe.Match(Cleaned);
+                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseDe.Match(Cleaned);
+                    mDamage = MonsterRegEx.DamageDe.Match(Cleaned);
+                    mDamageAuto = MonsterRegEx.DamageAutoDe.Match(Cleaned);
+                    mFailed = MonsterRegEx.FailedDe.Match(Cleaned);
+                    mFailedAuto = MonsterRegEx.FailedAutoDe.Match(Cleaned);
+                    mActions = MonsterRegEx.ActionsDe.Match(Cleaned);
+                    mItems = MonsterRegEx.ItemsDe.Match(Cleaned);
+                    mCure = MonsterRegEx.CureDe.Match(Cleaned);
+                    mBeneficialGain = MonsterRegEx.BeneficialGainDe.Match(Cleaned);
+                    mBeneficialLose = MonsterRegEx.BeneficialLoseDe.Match(Cleaned);
+                    mDetrimentalGain = MonsterRegEx.DetrimentalGainDe.Match(Cleaned);
+                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseDe.Match(Cleaned);
+                    Counter = "Counter";
+                    Added = "Zusatzefeckt";
+                    HealingType = "LP";
+                    RAttack = "Ranged Attack";
+                    Attack = "Attack";
+                    You = @"^[Dd](ich|ie|u)$";
+                    YouString = "Du";
+                    Mitigated = "Schäden Gemildert (Zauberschild)";
+                    break;
+                case "Chinese":
+                    pDamage = PlayerRegEx.DamageZh.Match(Cleaned);
+                    pDamageAuto = PlayerRegEx.DamageAutoZh.Match(Cleaned);
+                    pFailed = PlayerRegEx.FailedZh.Match(Cleaned);
+                    pFailedAuto = PlayerRegEx.FailedAutoZh.Match(Cleaned);
+                    pActions = PlayerRegEx.ActionsZh.Match(Cleaned);
+                    pItems = PlayerRegEx.ItemsZh.Match(Cleaned);
+                    pCure = PlayerRegEx.CureZh.Match(Cleaned);
+                    pBeneficialGain = PlayerRegEx.BeneficialGainZh.Match(Cleaned);
+                    pBeneficialLose = PlayerRegEx.BeneficialLoseZh.Match(Cleaned);
+                    pDetrimentalGain = PlayerRegEx.DetrimentalGainZh.Match(Cleaned);
+                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseZh.Match(Cleaned);
+                    mDamage = MonsterRegEx.DamageZh.Match(Cleaned);
+                    mDamageAuto = MonsterRegEx.DamageAutoZh.Match(Cleaned);
+                    mFailed = MonsterRegEx.FailedZh.Match(Cleaned);
+                    mFailedAuto = MonsterRegEx.FailedAutoZh.Match(Cleaned);
+                    mActions = MonsterRegEx.ActionsZh.Match(Cleaned);
+                    mItems = MonsterRegEx.ItemsZh.Match(Cleaned);
+                    mCure = MonsterRegEx.CureZh.Match(Cleaned);
+                    mBeneficialGain = MonsterRegEx.BeneficialGainZh.Match(Cleaned);
+                    mBeneficialLose = MonsterRegEx.BeneficialLoseZh.Match(Cleaned);
+                    mDetrimentalGain = MonsterRegEx.DetrimentalGainZh.Match(Cleaned);
+                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseZh.Match(Cleaned);
+                    Counter = "Counter";
+                    Added = "附加效果";
+                    HealingType = "体力";
+                    RAttack = "Ranged Attack";
+                    Attack = "Attack";
+                    You = @"^[Yy]ou?$";
+                    YouString = "You";
+                    Mitigated = "Mitigated Damage (Magic Shield)";
+                    break;
+                default:
+                    pDamage = PlayerRegEx.DamageEn.Match(Cleaned);
+                    pDamageAuto = PlayerRegEx.DamageAutoEn.Match(Cleaned);
+                    pFailed = PlayerRegEx.FailedEn.Match(Cleaned);
+                    pFailedAuto = PlayerRegEx.FailedAutoEn.Match(Cleaned);
+                    pActions = PlayerRegEx.ActionsEn.Match(Cleaned);
+                    pItems = PlayerRegEx.ItemsEn.Match(Cleaned);
+                    pCure = PlayerRegEx.CureEn.Match(Cleaned);
+                    pBeneficialGain = PlayerRegEx.BeneficialGainEn.Match(Cleaned);
+                    pBeneficialLose = PlayerRegEx.BeneficialLoseEn.Match(Cleaned);
+                    pDetrimentalGain = PlayerRegEx.DetrimentalGainEn.Match(Cleaned);
+                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseEn.Match(Cleaned);
+                    mDamage = MonsterRegEx.DamageEn.Match(Cleaned);
+                    mDamageAuto = MonsterRegEx.DamageAutoEn.Match(Cleaned);
+                    mFailed = MonsterRegEx.FailedEn.Match(Cleaned);
+                    mFailedAuto = MonsterRegEx.FailedAutoEn.Match(Cleaned);
+                    mActions = MonsterRegEx.ActionsEn.Match(Cleaned);
+                    mItems = MonsterRegEx.ItemsEn.Match(Cleaned);
+                    mCure = MonsterRegEx.CureEn.Match(Cleaned);
+                    mBeneficialGain = MonsterRegEx.BeneficialGainEn.Match(Cleaned);
+                    mBeneficialLose = MonsterRegEx.BeneficialLoseEn.Match(Cleaned);
+                    mDetrimentalGain = MonsterRegEx.DetrimentalGainEn.Match(Cleaned);
+                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseEn.Match(Cleaned);
+                    Counter = "Counter";
+                    Added = "Additional Effect";
+                    HealingType = "HP";
+                    RAttack = "Ranged Attack";
+                    Attack = "Attack";
+                    You = @"^[Yy]ou?$";
+                    YouString = "You";
+                    Mitigated = "Mitigated Damage (Magic Shield)";
+                    break;
+            }
+        }
+
         #region Monster
 
         public Match mDamage
@@ -305,173 +472,6 @@ namespace FFXIVAPP.Plugin.Parse.Models
         }
 
         #endregion
-
-        private void Initialize()
-        {
-            switch (Constants.GameLanguage)
-            {
-                case "French":
-                    pDamage = PlayerRegEx.DamageFr.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoFr.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedFr.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoFr.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsFr.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsFr.Match(Cleaned);
-                    pCure = PlayerRegEx.CureFr.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainFr.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseFr.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainFr.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseFr.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageFr.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoFr.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedFr.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoFr.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsFr.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsFr.Match(Cleaned);
-                    mCure = MonsterRegEx.CureFr.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainFr.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseFr.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainFr.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseFr.Match(Cleaned);
-                    Counter = "Contre";
-                    Added = "Effet Supplémentaire";
-                    HealingType = "PV";
-                    RAttack = "D'Attaque À Distance";
-                    Attack = "Attaque";
-                    You = @"^[Vv]ous$";
-                    YouString = "Vous";
-                    Mitigated = "Dommages Atténué (Bouclier Magique)";
-                    break;
-                case "Japanese":
-                    pDamage = PlayerRegEx.DamageJa.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoJa.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedJa.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoJa.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsJa.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsJa.Match(Cleaned);
-                    pCure = PlayerRegEx.CureJa.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainJa.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseJa.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainJa.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseJa.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageJa.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoJa.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedJa.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoJa.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsJa.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsJa.Match(Cleaned);
-                    mCure = MonsterRegEx.CureJa.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainJa.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseJa.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainJa.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseJa.Match(Cleaned);
-                    Counter = "カウンター";
-                    Added = "追加効果";
-                    HealingType = "ＨＰ";
-                    RAttack = "Ranged Attack";
-                    Attack = "Attack";
-                    You = @"^\.$";
-                    YouString = "君";
-                    Mitigated = "軽減ダメージ（魔法の盾）";
-                    break;
-                case "German":
-                    pDamage = PlayerRegEx.DamageDe.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoDe.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedDe.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoDe.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsDe.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsDe.Match(Cleaned);
-                    pCure = PlayerRegEx.CureDe.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainDe.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseDe.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainDe.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseDe.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageDe.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoDe.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedDe.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoDe.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsDe.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsDe.Match(Cleaned);
-                    mCure = MonsterRegEx.CureDe.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainDe.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseDe.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainDe.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseDe.Match(Cleaned);
-                    Counter = "Counter";
-                    Added = "Zusatzefeckt";
-                    HealingType = "LP";
-                    RAttack = "Ranged Attack";
-                    Attack = "Attack";
-                    You = @"^[Dd](ich|ie|u)$";
-                    YouString = "Du";
-                    Mitigated = "Schäden Gemildert (Zauberschild)";
-                    break;
-                case "Chinese":
-                    pDamage = PlayerRegEx.DamageZh.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoZh.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedZh.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoZh.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsZh.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsZh.Match(Cleaned);
-                    pCure = PlayerRegEx.CureZh.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainZh.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseZh.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainZh.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseZh.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageZh.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoZh.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedZh.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoZh.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsZh.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsZh.Match(Cleaned);
-                    mCure = MonsterRegEx.CureZh.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainZh.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseZh.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainZh.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseZh.Match(Cleaned);
-                    Counter = "Counter";
-                    Added = "附加效果";
-                    HealingType = "体力";
-                    RAttack = "Ranged Attack";
-                    Attack = "Attack";
-                    You = @"^[Yy]ou?$";
-                    YouString = "You";
-                    Mitigated = "Mitigated Damage (Magic Shield)";
-                    break;
-                default:
-                    pDamage = PlayerRegEx.DamageEn.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoEn.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedEn.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoEn.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsEn.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsEn.Match(Cleaned);
-                    pCure = PlayerRegEx.CureEn.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainEn.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseEn.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainEn.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseEn.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageEn.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoEn.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedEn.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoEn.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsEn.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsEn.Match(Cleaned);
-                    mCure = MonsterRegEx.CureEn.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainEn.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseEn.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainEn.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseEn.Match(Cleaned);
-                    Counter = "Counter";
-                    Added = "Additional Effect";
-                    HealingType = "HP";
-                    RAttack = "Ranged Attack";
-                    Attack = "Attack";
-                    You = @"^[Yy]ou?$";
-                    YouString = "You";
-                    Mitigated = "Mitigated Damage (Magic Shield)";
-                    break;
-            }
-        }
 
         #region Implementation of INotifyPropertyChanged
 

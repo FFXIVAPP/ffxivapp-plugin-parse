@@ -45,7 +45,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
     {
         private static WinAPI.WinEventDelegate _delegate;
         private static IntPtr _mainHandleHook;
-
         private static WindowInteropHelper _dpsWidgetInteropHelper;
         private static WindowInteropHelper _dtpsWidgetInteropHelper;
         private static WindowInteropHelper _hpsWidgetInteropHelper;
@@ -64,7 +63,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
         {
             get { return _hpsWidgetInteropHelper ?? (_hpsWidgetInteropHelper = new WindowInteropHelper(Widgets.Instance.HPSWidget)); }
         }
-
 
         private static Timer SetWindowTimer { get; set; }
 

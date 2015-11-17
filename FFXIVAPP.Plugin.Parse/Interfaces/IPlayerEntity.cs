@@ -37,35 +37,35 @@ namespace FFXIVAPP.Plugin.Parse.Interfaces
         PlayerType Type { get; set; }
         string Name { get; set; }
         Actor.Job Job { get; set; }
-        decimal CombinedDPS { get; set; }
-        decimal DPS { get; set; }
-        decimal DOTPS { get; set; }
-        decimal CombinedHPS { get; set; }
-        decimal HPS { get; set; }
-        decimal HOTPS { get; set; }
-        decimal HOHPS { get; set; }
-        decimal HMPS { get; set; }
-        decimal CombinedDTPS { get; set; }
-        decimal DTPS { get; set; }
-        decimal DTOTPS { get; set; }
-        decimal CombinedTotalOverallDamage { get; set; }
-        decimal TotalOverallDamage { get; set; }
-        decimal TotalOverallDamageOverTime { get; set; }
-        decimal CombinedTotalOverallHealing { get; set; }
-        decimal TotalOverallHealing { get; set; }
-        decimal TotalOverallHealingOverTime { get; set; }
-        decimal TotalOverallHealingOverHealing { get; set; }
-        decimal TotalOverallHealingMitigated { get; set; }
-        decimal CombinedTotalOverallDamageTaken { get; set; }
-        decimal TotalOverallDamageTaken { get; set; }
-        decimal TotalOverallDamageTakenOverTime { get; set; }
-        decimal PercentOfTotalOverallDamage { get; set; }
-        decimal PercentOfTotalOverallDamageOverTime { get; set; }
-        decimal PercentOfTotalOverallHealing { get; set; }
-        decimal PercentOfTotalOverallHealingOverTime { get; set; }
-        decimal PercentOfTotalOverallHealingOverHealing { get; set; }
-        decimal PercentOfTotalOverallHealingMitigated { get; set; }
-        decimal PercentOfTotalOverallDamageTaken { get; set; }
-        decimal PercentOfTotalOverallDamageTakenOverTime { get; set; }
+        double CombinedDPS { get; set; }
+        double DPS { get; set; }
+        double DOTPS { get; set; }
+        double CombinedHPS { get; set; }
+        double HPS { get; set; }
+        double HOTPS { get; set; }
+        double HOHPS { get; set; }
+        double HMPS { get; set; }
+        double CombinedDTPS { get; set; }
+        double DTPS { get; set; }
+        double DTOTPS { get; set; }
+        double CombinedTotalOverallDamage { get; set; }
+        double TotalOverallDamage { get; set; }
+        double TotalOverallDamageOverTime { get; set; }
+        double CombinedTotalOverallHealing { get; set; }
+        double TotalOverallHealing { get; set; }
+        double TotalOverallHealingOverTime { get; set; }
+        double TotalOverallHealingOverHealing { get; set; }
+        double TotalOverallHealingMitigated { get; set; }
+        double CombinedTotalOverallDamageTaken { get; set; }
+        double TotalOverallDamageTaken { get; set; }
+        double TotalOverallDamageTakenOverTime { get; set; }
+        double PercentOfTotalOverallDamage { get; set; }
+        double PercentOfTotalOverallDamageOverTime { get; set; }
+        double PercentOfTotalOverallHealing { get; set; }
+        double PercentOfTotalOverallHealingOverTime { get; set; }
+        double PercentOfTotalOverallHealingOverHealing { get; set; }
+        double PercentOfTotalOverallHealingMitigated { get; set; }
+        double PercentOfTotalOverallDamageTaken { get; set; }
+        double PercentOfTotalOverallDamageTakenOverTime { get; set; }
     }
 }

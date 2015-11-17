@@ -189,7 +189,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                                      .Value;
                         if (target != null)
                         {
-                            line.Amount = target.HPMax * multiplier;
+                            line.Amount = (double) (target.HPMax * multiplier);
                             ParseControl.Instance.Timeline.GetSetPlayer(line.Source)
                                         .SetupHealingMitigated(line, "stoneskin");
                         }

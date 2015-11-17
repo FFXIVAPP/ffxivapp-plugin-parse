@@ -37,6 +37,41 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
 {
     public class EventGroup : INotifyPropertyChanged
     {
+        /// <summary>
+        /// </summary>
+        public EventGroup()
+        {
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="name"> </param>
+        /// <param name="parent"> </param>
+        public EventGroup(string name, EventGroup parent = null)
+        {
+            Init(name, parent);
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="name"> </param>
+        /// <param name="parent"> </param>
+        private void Init(string name, EventGroup parent)
+        {
+            Name = name;
+            Parent = parent;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="kid"> </param>
+        /// <returns> </returns>
+        public EventGroup AddChild(EventGroup kid)
+        {
+            kid.Parent = this;
+            return this;
+        }
+
         #region Property Bindings
 
         private List<EventCode> _codes;
@@ -157,41 +192,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         private EventGroup _parent;
 
         #endregion
-
-        /// <summary>
-        /// </summary>
-        public EventGroup()
-        {
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="name"> </param>
-        /// <param name="parent"> </param>
-        public EventGroup(string name, EventGroup parent = null)
-        {
-            Init(name, parent);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="name"> </param>
-        /// <param name="parent"> </param>
-        private void Init(string name, EventGroup parent)
-        {
-            Name = name;
-            Parent = parent;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="kid"> </param>
-        /// <returns> </returns>
-        public EventGroup AddChild(EventGroup kid)
-        {
-            kid.Parent = this;
-            return this;
-        }
 
         #region Implementation of INotifyPropertyChanged
 

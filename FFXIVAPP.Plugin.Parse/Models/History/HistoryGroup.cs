@@ -35,37 +35,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
 {
     public class HistoryGroup : HistoryGroupTypeDescriptor, ICollection<HistoryGroup>
     {
-        #region Property Bindings
-
-        public string Name { get; set; }
-
-        #endregion
-
-        #region Declarations
-
-        private ConcurrentDictionary<string, HistoryGroup> _childContainer;
-        private List<HistoryGroup> _children;
-        private HistoryContainer _stats;
-
-        private ConcurrentDictionary<string, HistoryGroup> ChildContainer
-        {
-            get { return _childContainer ?? (_childContainer = new ConcurrentDictionary<string, HistoryGroup>()); }
-            set { _childContainer = value; }
-        }
-
-        public List<HistoryGroup> Children
-        {
-            get { return _children ?? (_children = new List<HistoryGroup>(ChildContainer.Values)); }
-            set { _children = value; }
-        }
-
-        public HistoryContainer Stats
-        {
-            get { return _stats ?? (_stats = new HistoryContainer()); }
-        }
-
-        #endregion
-
         public HistoryGroup(string name)
         {
             HistoryGroup = this;
@@ -75,6 +44,12 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
             Last20HealingActions = new List<LineHistory>();
             Last20Items = new List<LineHistory>();
         }
+
+        #region Property Bindings
+
+        public string Name { get; set; }
+
+        #endregion
 
         public List<LineHistory> Last20DamageActions { get; set; }
         public List<LineHistory> Last20DamageTakenActions { get; set; }
@@ -128,6 +103,31 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
             }
             return Stats.GetStatValue(name);
         }
+
+        #region Declarations
+
+        private ConcurrentDictionary<string, HistoryGroup> _childContainer;
+        private List<HistoryGroup> _children;
+        private HistoryContainer _stats;
+
+        private ConcurrentDictionary<string, HistoryGroup> ChildContainer
+        {
+            get { return _childContainer ?? (_childContainer = new ConcurrentDictionary<string, HistoryGroup>()); }
+            set { _childContainer = value; }
+        }
+
+        public List<HistoryGroup> Children
+        {
+            get { return _children ?? (_children = new List<HistoryGroup>(ChildContainer.Values)); }
+            set { _children = value; }
+        }
+
+        public HistoryContainer Stats
+        {
+            get { return _stats ?? (_stats = new HistoryContainer()); }
+        }
+
+        #endregion
 
         #region Implementation of ICollection<HistoryGroup>
 

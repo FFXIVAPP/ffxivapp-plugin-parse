@@ -42,35 +42,35 @@ namespace FFXIVAPP.Plugin.Parse.Models
             set { _players = value; }
         }
 
-        public decimal CombinedDPS { get; set; }
-        public decimal DPS { get; set; }
-        public decimal DOTPS { get; set; }
-        public decimal CombinedHPS { get; set; }
-        public decimal HPS { get; set; }
-        public decimal HOTPS { get; set; }
-        public decimal HOHPS { get; set; }
-        public decimal HMPS { get; set; }
-        public decimal CombinedDTPS { get; set; }
-        public decimal DTPS { get; set; }
-        public decimal DTOTPS { get; set; }
-        public decimal CombinedTotalOverallDamage { get; set; }
-        public decimal TotalOverallDamage { get; set; }
-        public decimal TotalOverallDamageOverTime { get; set; }
-        public decimal CombinedTotalOverallHealing { get; set; }
-        public decimal TotalOverallHealing { get; set; }
-        public decimal TotalOverallHealingOverTime { get; set; }
-        public decimal TotalOverallHealingOverHealing { get; set; }
-        public decimal TotalOverallHealingMitigated { get; set; }
-        public decimal CombinedTotalOverallDamageTaken { get; set; }
-        public decimal TotalOverallDamageTaken { get; set; }
-        public decimal TotalOverallDamageTakenOverTime { get; set; }
-        public decimal PercentOfTotalOverallDamage { get; set; }
-        public decimal PercentOfTotalOverallDamageOverTime { get; set; }
-        public decimal PercentOfTotalOverallHealing { get; set; }
-        public decimal PercentOfTotalOverallHealingOverTime { get; set; }
-        public decimal PercentOfTotalOverallHealingOverHealing { get; set; }
-        public decimal PercentOfTotalOverallHealingMitigated { get; set; }
-        public decimal PercentOfTotalOverallDamageTaken { get; set; }
-        public decimal PercentOfTotalOverallDamageTakenOverTime { get; set; }
+        public double CombinedDPS { get; set; }
+        public double DPS { get; set; }
+        public double DOTPS { get; set; }
+        public double CombinedHPS { get; set; }
+        public double HPS { get; set; }
+        public double HOTPS { get; set; }
+        public double HOHPS { get; set; }
+        public double HMPS { get; set; }
+        public double CombinedDTPS { get; set; }
+        public double DTPS { get; set; }
+        public double DTOTPS { get; set; }
+        public double CombinedTotalOverallDamage { get; set; }
+        public double TotalOverallDamage { get; set; }
+        public double TotalOverallDamageOverTime { get; set; }
+        public double CombinedTotalOverallHealing { get; set; }
+        public double TotalOverallHealing { get; set; }
+        public double TotalOverallHealingOverTime { get; set; }
+        public double TotalOverallHealingOverHealing { get; set; }
+        public double TotalOverallHealingMitigated { get; set; }
+        public double CombinedTotalOverallDamageTaken { get; set; }
+        public double TotalOverallDamageTaken { get; set; }
+        public double TotalOverallDamageTakenOverTime { get; set; }
+        public double PercentOfTotalOverallDamage { get; set; }
+        public double PercentOfTotalOverallDamageOverTime { get; set; }
+        public double PercentOfTotalOverallHealing { get; set; }
+        public double PercentOfTotalOverallHealingOverTime { get; set; }
+        public double PercentOfTotalOverallHealingOverHealing { get; set; }
+        public double PercentOfTotalOverallHealingMitigated { get; set; }
+        public double PercentOfTotalOverallDamageTaken { get; set; }
+        public double PercentOfTotalOverallDamageTakenOverTime { get; set; }
     }
 }

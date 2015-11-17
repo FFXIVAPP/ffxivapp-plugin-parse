@@ -40,11 +40,11 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
 {
     public sealed class StatContainer : IStatContainer
     {
-        private readonly ConcurrentDictionary<string, Stat<decimal>> _statDict = new ConcurrentDictionary<string, Stat<decimal>>();
+        private readonly ConcurrentDictionary<string, Stat<double>> _statDict = new ConcurrentDictionary<string, Stat<double>>();
 
         #region Implementation of IEnumerable
 
-        public IEnumerator<Stat<decimal>> GetEnumerator()
+        public IEnumerator<Stat<double>> GetEnumerator()
         {
             return _statDict.Values.GetEnumerator();
         }
@@ -56,9 +56,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
 
         #endregion
 
-        #region Implementation of ICollection<Stat<decimal>>
+        #region Implementation of ICollection<Stat<double>>
 
-        public void Add(Stat<decimal> stat)
+        public void Add(Stat<double> stat)
         {
             if (!_statDict.TryAdd(stat.Name, stat))
             {
@@ -78,19 +78,19 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
             DoCollectionChanged(NotifyCollectionChangedAction.Reset, null);
         }
 
-        public bool Contains(Stat<decimal> stat)
+        public bool Contains(Stat<double> stat)
         {
             return _statDict.ContainsKey(stat.Name);
         }
 
-        public void CopyTo(Stat<decimal>[] array, int arrayIndex)
+        public void CopyTo(Stat<double>[] array, int arrayIndex)
         {
             _statDict.Values.CopyTo(array, arrayIndex);
         }
 
-        public bool Remove(Stat<decimal> stat)
+        public bool Remove(Stat<double> stat)
         {
-            Stat<decimal> removed;
+            Stat<double> removed;
             if (_statDict.TryRemove(stat.Name, out removed))
             {
                 removed.OnValueChanged -= HandleStatValueChanged;
@@ -112,7 +112,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
 
         private void HandleStatValueChanged(object sender, StatChangedEvent e)
         {
-            var stat = (Stat<decimal>) sender;
+            var stat = (Stat<double>) sender;
             RaisePropertyChanged(stat.Name);
         }
 
@@ -133,7 +133,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
 
         public event NotifyCollectionChangedEventHandler CollectionChanged = delegate { };
 
-        private void DoCollectionChanged(NotifyCollectionChangedAction action, Stat<decimal> whichStat)
+        private void DoCollectionChanged(NotifyCollectionChangedAction action, Stat<double> whichStat)
         {
             CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, whichStat));
         }
@@ -159,9 +159,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
             return _statDict.ContainsKey(name);
         }
 
-        public Stat<decimal> GetStat(string name)
+        public Stat<double> GetStat(string name)
         {
-            Stat<decimal> result;
+            Stat<double> result;
             _statDict.TryGetValue(name, out result);
             return result;
         }
@@ -177,9 +177,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
             return false;
         }
 
-        public Stat<decimal> EnsureStatValue(string name, decimal value)
+        public Stat<double> EnsureStatValue(string name, double value)
         {
-            Stat<decimal> stat;
+            Stat<double> stat;
             if (HasStat(name))
             {
                 stat = GetStat(name);
@@ -193,13 +193,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
             return stat;
         }
 
-        public decimal GetStatValue(string name)
+        public double GetStatValue(string name)
         {
             return HasStat(name) ? GetStat(name)
                 .Value : 0;
         }
 
-        public void IncrementStat(string name, decimal value = 1)
+        public void IncrementStat(string name, double value = 1)
         {
             if (!HasStat(name))
             {
@@ -209,7 +209,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
             result.Value += value;
         }
 
-        public void AddStats(IEnumerable<Stat<decimal>> stats)
+        public void AddStats(IEnumerable<Stat<double>> stats)
         {
             foreach (var stat in stats)
             {

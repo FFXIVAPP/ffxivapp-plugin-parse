@@ -47,13 +47,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 //LineHistory.Add(new LineHistory(line));
             }
 
-            var currentHealing = line.Crit ? line.Amount > 0 ? ParseHelper.GetOriginalAmount(line.Amount, (decimal) .5) : 0 : line.Amount;
+            var currentHealing = line.Crit ? line.Amount > 0 ? ParseHelper.GetOriginalAmount(line.Amount, (double) .5) : 0 : line.Amount;
             if (currentHealing > 0)
             {
                 ParseHelper.LastAmountByAction.EnsurePlayerAction(line.Source, line.Action, currentHealing);
             }
 
-            var unusedAmount = 0m;
+            var unusedAmount = 0;
             var originalAmount = line.Amount;
             // get curable of target
             try
@@ -63,7 +63,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 var curable = Controller.Timeline.TryGetPlayerCurable(cleanedName);
                 if (line.Amount > curable)
                 {
-                    unusedAmount = line.Amount - curable;
+                    unusedAmount = (int) (line.Amount - curable);
                     line.Amount = curable;
                 }
             }
@@ -146,7 +146,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
             #region OverHealing Handler
 
-            if (unusedAmount <= 0m)
+            if (unusedAmount <= 0)
             {
                 return;
             }

@@ -38,6 +38,16 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 {
     internal sealed class SettingsViewModel : INotifyPropertyChanged
     {
+        public SettingsViewModel()
+        {
+            ResetDPSWidgetCommand = new DelegateCommand(ResetDPSWidget);
+            OpenDPSWidgetCommand = new DelegateCommand(OpenDPSWidget);
+            ResetDTPSWidgetCommand = new DelegateCommand(ResetDTPSWidget);
+            OpenDTPSWidgetCommand = new DelegateCommand(OpenDTPSWidget);
+            ResetHPSWidgetCommand = new DelegateCommand(ResetHPSWidget);
+            OpenHPSWidgetCommand = new DelegateCommand(OpenHPSWidget);
+        }
+
         #region Property Bindings
 
         private static SettingsViewModel _instance;
@@ -63,16 +73,6 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
         #region Loading Functions
 
         #endregion
-
-        public SettingsViewModel()
-        {
-            ResetDPSWidgetCommand = new DelegateCommand(ResetDPSWidget);
-            OpenDPSWidgetCommand = new DelegateCommand(OpenDPSWidget);
-            ResetDTPSWidgetCommand = new DelegateCommand(ResetDTPSWidget);
-            OpenDTPSWidgetCommand = new DelegateCommand(OpenDTPSWidget);
-            ResetHPSWidgetCommand = new DelegateCommand(ResetHPSWidget);
-            OpenHPSWidgetCommand = new DelegateCommand(OpenHPSWidget);
-        }
 
         #region Utility Functions
 

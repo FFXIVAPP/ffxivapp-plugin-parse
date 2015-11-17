@@ -50,7 +50,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
 
         public override Type PropertyType
         {
-            get { return Name.ToLower() == "name" ? typeof (string) : typeof (decimal); }
+            get { return Name.ToLower() == "name" ? typeof (string) : typeof (double); }
         }
 
         public override bool CanResetValue(object component)
@@ -77,7 +77,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
         public override void SetValue(object component, object value)
         {
             var statGroup = (StatGroup) component;
-            statGroup.Stats.EnsureStatValue(Name, (decimal) value);
+            statGroup.Stats.EnsureStatValue(Name, (double) value);
         }
 
         public override bool ShouldSerializeValue(object component)

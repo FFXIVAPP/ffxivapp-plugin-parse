@@ -50,7 +50,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
 
         public override Type PropertyType
         {
-            get { return Name.ToLower() == "name" ? typeof (string) : typeof (decimal); }
+            get { return Name.ToLower() == "name" ? typeof (string) : typeof (double); }
         }
 
         public override bool CanResetValue(object component)
@@ -77,7 +77,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
         public override void SetValue(object component, object value)
         {
             var historyGroup = (HistoryGroup) component;
-            historyGroup.Stats.EnsureStatValue(Name, (decimal) value);
+            historyGroup.Stats.EnsureStatValue(Name, (double) value);
         }
 
         public override bool ShouldSerializeValue(object component)

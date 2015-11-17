@@ -31,14 +31,14 @@ using FFXIVAPP.Plugin.Parse.Models.Stats;
 
 namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
 {
-    public class NumericStat : Stat<decimal>
+    public class NumericStat : Stat<double>
     {
-        public NumericStat(string name, decimal value) : base(name, 0m)
+        public NumericStat(string name, double value) : base(name, 0)
         {
             Value = value;
         }
 
-        public NumericStat(string name) : base(name, 0m)
+        public NumericStat(string name) : base(name, 0)
         {
         }
     }

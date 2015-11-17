@@ -36,10 +36,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
     {
         event EventHandler<StatChangedEvent> OnDependencyValueChanged;
         void DoDependencyValueChanged(object sender, object previousValue, object newValue);
-        void AddDependency(Stat<decimal> dependency);
-        void RemoveDependency(Stat<decimal> dependency);
-        IEnumerable<Stat<decimal>> GetDependencies();
-        IEnumerable<Stat<decimal>> CloneDependentStats();
+        void AddDependency(Stat<double> dependency);
+        void RemoveDependency(Stat<double> dependency);
+        IEnumerable<Stat<double>> GetDependencies();
+        IEnumerable<Stat<double>> CloneDependentStats();
         void ClearDependencies();
     }
 }

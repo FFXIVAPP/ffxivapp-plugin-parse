@@ -172,9 +172,9 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         line.Action = _lastActionPetOtherHealingFrom;
                         break;
                 }
-                line.Amount = cure.Groups["amount"].Success ? Convert.ToDecimal(cure.Groups["amount"].Value) : 0m;
+                line.Amount = cure.Groups["amount"].Success ? Convert.ToDouble(cure.Groups["amount"].Value) : 0;
                 line.Crit = cure.Groups["crit"].Success;
-                line.Modifier = cure.Groups["modifier"].Success ? Convert.ToDecimal(cure.Groups["modifier"].Value) / 100 : 0m;
+                line.Modifier = cure.Groups["modifier"].Success ? Convert.ToDouble(cure.Groups["modifier"].Value) / 100 : 0;
                 switch (line.EventDirection)
                 {
                     case EventDirection.You:

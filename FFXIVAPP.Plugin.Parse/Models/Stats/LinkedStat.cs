@@ -33,15 +33,28 @@ using System.Linq;
 
 namespace FFXIVAPP.Plugin.Parse.Models.Stats
 {
-    public abstract class LinkedStat : Stat<decimal>, ILinkedStat
+    public abstract class LinkedStat : Stat<double>, ILinkedStat
     {
-        private List<Stat<decimal>> _dependencies;
+        private List<Stat<double>> _dependencies;
+
+        protected LinkedStat(string name, params Stat<double>[] dependencies) : base(name, 0)
+        {
+            SetupStats(dependencies);
+        }
+
+        protected LinkedStat(string name, double value) : base(name, 0)
+        {
+        }
+
+        protected LinkedStat(string name) : base(name, 0)
+        {
+        }
 
         #region Declarations
 
-        private List<Stat<decimal>> Dependencies
+        private List<Stat<double>> Dependencies
         {
-            get { return _dependencies ?? (_dependencies = new List<Stat<decimal>>()); }
+            get { return _dependencies ?? (_dependencies = new List<Stat<double>>()); }
             set { _dependencies = value; }
         }
 
@@ -53,23 +66,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
 
         #endregion
 
-        protected LinkedStat(string name, params Stat<decimal>[] dependencies) : base(name, 0m)
-        {
-            SetupStats(dependencies);
-        }
-
-        protected LinkedStat(string name, decimal value) : base(name, 0m)
-        {
-        }
-
-        protected LinkedStat(string name) : base(name, 0m)
-        {
-        }
-
         /// <summary>
         /// </summary>
         /// <param name="dependency"> </param>
-        public virtual void AddDependency(Stat<decimal> dependency)
+        public virtual void AddDependency(Stat<double> dependency)
         {
             dependency.OnValueChanged += DependencyValueChanged;
             Dependencies.Add(dependency);
@@ -78,7 +78,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        public IEnumerable<Stat<decimal>> GetDependencies()
+        public IEnumerable<Stat<double>> GetDependencies()
         {
             return Dependencies.AsReadOnly();
         }
@@ -90,7 +90,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
         /// <param name="newValue"> </param>
         public virtual void DoDependencyValueChanged(object sender, object previousValue, object newValue)
         {
-            Value = (decimal) newValue;
+            Value = (double) newValue;
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
         /// <summary>
         /// </summary>
         /// <param name="dependency"> </param>
-        public void RemoveDependency(Stat<decimal> dependency)
+        public void RemoveDependency(Stat<double> dependency)
         {
             if (!Dependencies.Any())
             {
@@ -123,7 +123,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        public IEnumerable<Stat<decimal>> CloneDependentStats()
+        public IEnumerable<Stat<double>> CloneDependentStats()
         {
             return GetDependencies();
         }
@@ -131,7 +131,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
         /// <summary>
         /// </summary>
         /// <param name="dependencies"> </param>
-        private void SetupStats(IEnumerable<Stat<decimal>> dependencies)
+        private void SetupStats(IEnumerable<Stat<double>> dependencies)
         {
             foreach (var dependency in dependencies)
             {

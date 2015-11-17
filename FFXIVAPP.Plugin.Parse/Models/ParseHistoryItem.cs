@@ -33,6 +33,15 @@ namespace FFXIVAPP.Plugin.Parse.Models
 {
     public class ParseHistoryItem
     {
+        /// <summary>
+        /// </summary>
+        /// <param name="name"></param>
+        public ParseHistoryItem(string name = "UnknownEvent")
+        {
+            Name = name;
+            HistoryControl = new HistoryControl();
+        }
+
         #region "Auto Properties"
 
         public string Name { get; set; }
@@ -42,14 +51,5 @@ namespace FFXIVAPP.Plugin.Parse.Models
         public TimeSpan ParseLength { get; set; }
 
         #endregion
-
-        /// <summary>
-        /// </summary>
-        /// <param name="name"></param>
-        public ParseHistoryItem(string name = "UnknownEvent")
-        {
-            Name = name;
-            HistoryControl = new HistoryControl();
-        }
     }
 }

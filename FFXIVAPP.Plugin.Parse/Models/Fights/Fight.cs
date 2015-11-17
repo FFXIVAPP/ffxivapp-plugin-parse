@@ -34,6 +34,11 @@ namespace FFXIVAPP.Plugin.Parse.Models.Fights
 {
     public sealed class Fight : INotifyPropertyChanged
     {
+        public Fight(string monsterName = "")
+        {
+            MonsterName = monsterName;
+        }
+
         #region Property Bindings
 
         private string _monsterName;
@@ -49,11 +54,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Fights
         }
 
         #endregion
-
-        public Fight(string monsterName = "")
-        {
-            MonsterName = monsterName;
-        }
 
         #region Implementation of INotifyPropertyChanged
 

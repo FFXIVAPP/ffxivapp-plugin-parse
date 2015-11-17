@@ -29,14 +29,14 @@
 
 namespace FFXIVAPP.Plugin.Parse.Models.History
 {
-    public class NumericHistoryStat : HistoryStat<decimal>
+    public class NumericHistoryStat : HistoryStat<double>
     {
-        public NumericHistoryStat(string name, decimal value) : base(name, 0m)
+        public NumericHistoryStat(string name, double value) : base(name, 0)
         {
             Value = value;
         }
 
-        public NumericHistoryStat(string name) : base(name, 0m)
+        public NumericHistoryStat(string name) : base(name, 0)
         {
         }
     }

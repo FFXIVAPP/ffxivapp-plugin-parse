@@ -41,10 +41,6 @@ namespace FFXIVAPP.Plugin.Parse
 {
     internal static class Initializer
     {
-        #region Declarations
-
-        #endregion
-
         /// <summary>
         /// </summary>
         public static void LoadSettings()
@@ -580,5 +576,9 @@ namespace FFXIVAPP.Plugin.Parse
         {
             WidgetTopMostHelper.HookWidgetTopMost();
         }
+
+        #region Declarations
+
+        #endregion
     }
 }

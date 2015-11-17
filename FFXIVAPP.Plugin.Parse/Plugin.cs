@@ -47,17 +47,6 @@ namespace FFXIVAPP.Plugin.Parse
     [Export(typeof (IPlugin))]
     public class Plugin : IPlugin, INotifyPropertyChanged
     {
-        #region Property Bindings
-
-        public static IPluginHost PHost { get; private set; }
-        public static string PName { get; private set; }
-
-        #endregion
-
-        #region Declarations
-
-        #endregion
-
         private IPluginHost _host;
         private Dictionary<string, string> _locale;
         private string _name;
@@ -118,15 +107,10 @@ namespace FFXIVAPP.Plugin.Parse
         }
 
         public string Icon { get; private set; }
-
         public string Description { get; private set; }
-
         public string Copyright { get; private set; }
-
         public string Version { get; private set; }
-
         public string Notice { get; private set; }
-
         public Exception Trace { get; private set; }
 
         public void Initialize(IPluginHost pluginHost)
@@ -140,7 +124,6 @@ namespace FFXIVAPP.Plugin.Parse
             Version = AssemblyHelper.Version.ToString();
             Notice = "";
         }
-
 
         public void Dispose(bool isUpdating = false)
         {
@@ -170,6 +153,17 @@ namespace FFXIVAPP.Plugin.Parse
             //content gives you access to the base xaml
             return tabItem;
         }
+
+        #region Property Bindings
+
+        public static IPluginHost PHost { get; private set; }
+        public static string PName { get; private set; }
+
+        #endregion
+
+        #region Declarations
+
+        #endregion
 
         #region Implementation of INotifyPropertyChanged
 

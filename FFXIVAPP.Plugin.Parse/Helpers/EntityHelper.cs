@@ -92,24 +92,24 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                             switch (parseType)
                             {
                                 case ParseType.DPS:
-                                    decimal dps;
-                                    decimal.TryParse(Settings.Default.DPSVisibility, out dps);
+                                    double dps;
+                                    double.TryParse(Settings.Default.DPSVisibility, out dps);
                                     if (playerEntity.CombinedDPS <= dps)
                                     {
                                         continue;
                                     }
                                     break;
                                 case ParseType.DTPS:
-                                    decimal dtps;
-                                    decimal.TryParse(Settings.Default.DTPSVisibility, out dtps);
+                                    double dtps;
+                                    double.TryParse(Settings.Default.DTPSVisibility, out dtps);
                                     if (playerEntity.CombinedDTPS <= dtps)
                                     {
                                         continue;
                                     }
                                     break;
                                 case ParseType.HPS:
-                                    decimal hps;
-                                    decimal.TryParse(Settings.Default.HPSVisibility, out hps);
+                                    double hps;
+                                    double.TryParse(Settings.Default.HPSVisibility, out hps);
                                     if (playerEntity.CombinedHPS <= hps)
                                     {
                                         continue;

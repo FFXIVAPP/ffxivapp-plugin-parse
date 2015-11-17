@@ -33,15 +33,15 @@ using System.ComponentModel;
 
 namespace FFXIVAPP.Plugin.Parse.Models.Stats
 {
-    public interface IStatContainer : ICollection<Stat<decimal>>, INotifyPropertyChanged, INotifyCollectionChanged
+    public interface IStatContainer : ICollection<Stat<double>>, INotifyPropertyChanged, INotifyCollectionChanged
     {
         string Name { get; set; }
         bool HasStat(string name);
-        Stat<decimal> GetStat(string name);
+        Stat<double> GetStat(string name);
         bool TryGetStat(string name, out object result);
-        Stat<decimal> EnsureStatValue(string name, decimal value);
-        decimal GetStatValue(string name);
-        void IncrementStat(string name, decimal value);
-        void AddStats(IEnumerable<Stat<decimal>> stats);
+        Stat<double> EnsureStatValue(string name, double value);
+        double GetStatValue(string name);
+        void IncrementStat(string name, double value);
+        void AddStats(IEnumerable<Stat<double>> stats);
     }
 }

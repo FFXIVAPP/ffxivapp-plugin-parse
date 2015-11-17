@@ -33,21 +33,21 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
 {
     public class PercentStat : LinkedStat
     {
-        private readonly Stat<decimal> _denominator;
-        private readonly Stat<decimal> _numerator;
+        private readonly Stat<double> _denominator;
+        private readonly Stat<double> _numerator;
 
-        public PercentStat(string name, params Stat<decimal>[] dependencies) : base(name, 0m)
+        public PercentStat(string name, params Stat<double>[] dependencies) : base(name, 0)
         {
             _numerator = dependencies[0];
             _denominator = dependencies[1];
             SetupDepends();
         }
 
-        public PercentStat(string name, decimal value) : base(name, 0m)
+        public PercentStat(string name, double value) : base(name, 0)
         {
         }
 
-        public PercentStat(string name) : base(name, 0m)
+        public PercentStat(string name) : base(name, 0)
         {
         }
 
@@ -69,7 +69,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
         {
             if (_numerator.Value == 0 || _denominator.Value == 0)
             {
-                Value = 0m;
+                Value = 0;
                 return;
             }
             Value = (_numerator.Value / _denominator.Value);

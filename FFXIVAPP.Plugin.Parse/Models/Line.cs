@@ -49,6 +49,30 @@ namespace FFXIVAPP.Plugin.Parse.Models
             }
         }
 
+        public bool XOverTime { get; set; }
+        public double Amount { get; set; }
+        public double Modifier { get; set; }
+        public string RecLossType { get; set; }
+        public bool Hit { get; set; }
+        public bool Miss { get; set; }
+        public bool Crit { get; set; }
+        public bool Counter { get; set; }
+        public bool Block { get; set; }
+        public bool Parry { get; set; }
+        public bool Resist { get; set; }
+        public bool Evade { get; set; }
+        public ChatLogEntry ChatLogEntry { get; set; }
+
+        public bool IsEmpty()
+        {
+            return String.IsNullOrWhiteSpace(Source) || String.IsNullOrWhiteSpace(Target) || String.IsNullOrWhiteSpace(Action);
+        }
+
+        private bool IsYou(string name)
+        {
+            return Regex.IsMatch(name, @"^(([Dd](ich|ie|u))|You|Vous)$") || String.Equals(name, Constants.CharacterName, Constants.InvariantComparer);
+        }
+
         #region NPC ActorEntity Information
 
         public ActorEntity SourceEntity { get; set; }
@@ -82,20 +106,6 @@ namespace FFXIVAPP.Plugin.Parse.Models
         public TimelineType TargetTimelineType { get; set; }
 
         #endregion
-
-        public bool XOverTime { get; set; }
-        public decimal Amount { get; set; }
-        public decimal Modifier { get; set; }
-        public string RecLossType { get; set; }
-        public bool Hit { get; set; }
-        public bool Miss { get; set; }
-        public bool Crit { get; set; }
-        public bool Counter { get; set; }
-        public bool Block { get; set; }
-        public bool Parry { get; set; }
-        public bool Resist { get; set; }
-        public bool Evade { get; set; }
-        public ChatLogEntry ChatLogEntry { get; set; }
 
         #region Property Backings
 
@@ -146,15 +156,5 @@ namespace FFXIVAPP.Plugin.Parse.Models
         }
 
         #endregion
-
-        public bool IsEmpty()
-        {
-            return String.IsNullOrWhiteSpace(Source) || String.IsNullOrWhiteSpace(Target) || String.IsNullOrWhiteSpace(Action);
-        }
-
-        private bool IsYou(string name)
-        {
-            return Regex.IsMatch(name, @"^(([Dd](ich|ie|u))|You|Vous)$") || String.Equals(name, Constants.CharacterName, Constants.InvariantComparer);
-        }
     }
 }

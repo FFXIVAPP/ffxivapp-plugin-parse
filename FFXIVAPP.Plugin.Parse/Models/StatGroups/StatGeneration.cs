@@ -39,9 +39,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         #region Damage
 
-        public static Dictionary<string, Stat<decimal>> DamageStats()
+        public static Dictionary<string, Stat<double>> DamageStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalOverallDamage", new TotalStat("TotalOverallDamage"));
             stats.Add("RegularDamage", new TotalStat("RegularDamage"));
@@ -88,9 +88,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             return stats;
         }
 
-        public static Dictionary<string, Stat<decimal>> DamageOverTimeStats()
+        public static Dictionary<string, Stat<double>> DamageOverTimeStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalOverallDamageOverTime", new TotalStat("TotalOverallDamageOverTime"));
             stats.Add("RegularDamageOverTime", new TotalStat("RegularDamageOverTime"));
@@ -120,9 +120,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         #region Healing
 
-        public static Dictionary<string, Stat<decimal>> HealingStats()
+        public static Dictionary<string, Stat<double>> HealingStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalOverallHealing", new TotalStat("TotalOverallHealing"));
             stats.Add("RegularHealing", new TotalStat("RegularHealing"));
@@ -146,9 +146,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             return stats;
         }
 
-        public static Dictionary<string, Stat<decimal>> HealingOverHealingStats()
+        public static Dictionary<string, Stat<double>> HealingOverHealingStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalOverallHealingOverHealing", new TotalStat("TotalOverallHealingOverHealing"));
             stats.Add("RegularHealingOverHealing", new TotalStat("RegularHealingOverHealing"));
@@ -172,9 +172,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             return stats;
         }
 
-        public static Dictionary<string, Stat<decimal>> HealingOverTimeStats()
+        public static Dictionary<string, Stat<double>> HealingOverTimeStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalOverallHealingOverTime", new TotalStat("TotalOverallHealingOverTime"));
             stats.Add("RegularHealingOverTime", new TotalStat("RegularHealingOverTime"));
@@ -198,9 +198,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             return stats;
         }
 
-        public static Dictionary<string, Stat<decimal>> HealingMitigatedStats()
+        public static Dictionary<string, Stat<double>> HealingMitigatedStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalOverallHealingMitigated", new TotalStat("TotalOverallHealingMitigated"));
             stats.Add("RegularHealingMitigated", new TotalStat("RegularHealingMitigated"));
@@ -228,9 +228,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         #region Damage Taken
 
-        public static Dictionary<string, Stat<decimal>> DamageTakenStats()
+        public static Dictionary<string, Stat<double>> DamageTakenStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalOverallDamageTaken", new TotalStat("TotalOverallDamageTaken"));
             stats.Add("RegularDamageTaken", new TotalStat("RegularDamageTaken"));
@@ -277,9 +277,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             return stats;
         }
 
-        public static Dictionary<string, Stat<decimal>> DamageTakenOverTimeStats()
+        public static Dictionary<string, Stat<double>> DamageTakenOverTimeStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalOverallDamageTakenOverTime", new TotalStat("TotalOverallDamageTakenOverTime"));
             stats.Add("RegularDamageTakenOverTime", new TotalStat("RegularDamageTakenOverTime"));
@@ -309,9 +309,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         #region Buff
 
-        public static Dictionary<string, Stat<decimal>> BuffStats()
+        public static Dictionary<string, Stat<double>> BuffStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("TotalBuffTime", new TotalStat("TotalBuffTime"));
             stats.Add("TotalBuffHours", new TotalStat("TotalBuffHours"));
@@ -325,9 +325,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         #region Combined
 
-        public static Dictionary<string, Stat<decimal>> CombinedStats()
+        public static Dictionary<string, Stat<double>> CombinedStats()
         {
-            var stats = new Dictionary<string, Stat<decimal>>();
+            var stats = new Dictionary<string, Stat<double>>();
 
             stats.Add("CombinedTotalOverallDamage", new TotalStat("CombinedTotalOverallDamage"));
             stats.Add("CombinedRegularDamage", new TotalStat("CombinedRegularDamage"));
