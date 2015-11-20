@@ -54,7 +54,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 Last20HealingActions.RemoveAt(0);
             }
 
-            var currentHealing = line.Crit ? line.Amount > 0 ? ParseHelper.GetOriginalAmount(line.Amount, (double) .5) : 0 : line.Amount;
+            var currentHealing = line.Crit ? line.Amount > 0 ? ParseHelper.GetOriginalAmount(line.Amount, .5) : 0 : line.Amount;
             if (currentHealing > 0)
             {
                 ParseHelper.LastAmountByAction.EnsurePlayerAction(line.Source, line.Action, currentHealing);

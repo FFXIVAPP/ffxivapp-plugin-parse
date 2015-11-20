@@ -70,7 +70,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
 
         private BitmapImage GetIcon(Actor.Job job)
         {
-            var path = new Uri(Path.Combine(BasePath, job.ToString() + ".png"));
+            var path = new Uri(Path.Combine(BasePath, job + ".png"));
             return new BitmapImage(path);
         }
     }

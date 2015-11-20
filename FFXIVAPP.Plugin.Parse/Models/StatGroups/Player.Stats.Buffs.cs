@@ -80,7 +80,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         private void AdjustBuffTime(StatGroup statGroup)
         {
-            var timeSpan = TimeSpan.FromSeconds((double) statGroup.Stats.GetStatValue("TotalBuffTime"));
+            var timeSpan = TimeSpan.FromSeconds(statGroup.Stats.GetStatValue("TotalBuffTime"));
             statGroup.Stats.GetStat("TotalBuffHours")
                      .Value = timeSpan.Hours;
             statGroup.Stats.GetStat("TotalBuffMinutes")

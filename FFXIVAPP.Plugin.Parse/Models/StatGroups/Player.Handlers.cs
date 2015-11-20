@@ -208,7 +208,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     DispatcherHelper.Invoke(delegate
                     {
                         line.Hit = true;
-                        var currentCritPercent = (double) Stats.GetStatValue("DamageCritPercent");
+                        var currentCritPercent = Stats.GetStatValue("DamageCritPercent");
                         if (new Random().NextDouble() * 3 < currentCritPercent)
                         {
                             line.Crit = true;
@@ -412,7 +412,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         catch (Exception ex)
                         {
                         }
-                        var currentCritPercent = (double) Stats.GetStatValue("HealingCritPercent");
+                        var currentCritPercent = Stats.GetStatValue("HealingCritPercent");
                         if (new Random().NextDouble() * 3 < currentCritPercent)
                         {
                             line.Crit = true;

@@ -39,7 +39,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
 {
     public static class LogPublisher
     {
-        public static bool IsPaused = false;
+        public static bool IsPaused;
         public static bool Processing { get; set; }
 
         public static void Process(ChatLogEntry chatLogEntry)

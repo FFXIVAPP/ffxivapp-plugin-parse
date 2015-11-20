@@ -43,7 +43,7 @@ namespace FFXIVAPP.Plugin.Parse
 
         public const string LibraryPack = "pack://application:,,,/FFXIVAPP.Plugin.Parse;component/";
 
-        public static readonly string[] Supported = new[]
+        public static readonly string[] Supported =
         {
             "en", "ja", "fr", "de", "ru"
         };

@@ -55,7 +55,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         public readonly Timer IsActiveTimer = new Timer(1000);
         public readonly Timer StatusUpdateTimer = new Timer(1000);
-        private ActorEntity _npcEntry = null;
+        private ActorEntity _npcEntry;
         public List<StatusEntry> StatusEntriesMonsters = new List<StatusEntry>();
         public List<StatusEntry> StatusEntriesPlayers = new List<StatusEntry>();
         public List<StatusEntry> StatusEntriesSelf = new List<StatusEntry>();
@@ -219,8 +219,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 {
                     TotalInActiveTime++;
                 }
-                TotalInActiveTime = TotalInActiveTime > (double) parserTime.Value ? (double) parserTime.Value : TotalInActiveTime;
-                activeTime.Value = parserTime.Value - (double) TotalInActiveTime;
+                TotalInActiveTime = TotalInActiveTime > parserTime.Value ? parserTime.Value : TotalInActiveTime;
+                activeTime.Value = parserTime.Value - TotalInActiveTime;
             }
             catch (Exception ex)
             {

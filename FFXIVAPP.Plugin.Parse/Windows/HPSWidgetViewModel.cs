@@ -35,10 +35,6 @@ namespace FFXIVAPP.Plugin.Parse.Windows
 {
     internal sealed class HPSWidgetViewModel : INotifyPropertyChanged
     {
-        public HPSWidgetViewModel()
-        {
-        }
-
         #region Property Bindings
 
         private static HPSWidgetViewModel _instance;

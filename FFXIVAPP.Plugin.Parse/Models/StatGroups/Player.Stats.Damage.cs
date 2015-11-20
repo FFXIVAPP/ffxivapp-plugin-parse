@@ -61,7 +61,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             var fields = line.GetType()
                              .GetProperties();
 
-            var currentDamage = line.Crit ? line.Amount > 0 ? ParseHelper.GetOriginalAmount(line.Amount, (double) .5) : 0 : line.Amount;
+            var currentDamage = line.Crit ? line.Amount > 0 ? ParseHelper.GetOriginalAmount(line.Amount, .5) : 0 : line.Amount;
             if (currentDamage > 0)
             {
                 ParseHelper.LastAmountByAction.EnsurePlayerAction(line.Source, line.Action, currentDamage);
