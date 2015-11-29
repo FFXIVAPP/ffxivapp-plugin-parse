@@ -27,7 +27,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 // POSSIBILITY OF SUCH DAMAGE. 
 
-using FFXIVAPP.Common.Core.Memory.Enums;
+using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 
 namespace FFXIVAPP.Plugin.Parse.Interfaces

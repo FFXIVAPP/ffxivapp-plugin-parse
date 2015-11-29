@@ -30,8 +30,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using FFXIVAPP.Common.Core.Memory;
-using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Memory.Core;
+using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models.Events;

@@ -31,7 +31,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using FFXIVAPP.Common.Core.Memory.Enums;
+using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Properties;
 
 namespace FFXIVAPP.Plugin.Parse.Converters

@@ -29,8 +29,8 @@
 
 using System;
 using System.Text.RegularExpressions;
-using FFXIVAPP.Common.Core.Memory.Enums;
-using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Memory.Core.Enums;
+using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Interfaces;
 

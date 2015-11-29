@@ -34,6 +34,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Utilities;
+using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.Events;

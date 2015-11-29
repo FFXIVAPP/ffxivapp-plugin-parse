@@ -30,7 +30,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using FFXIVAPP.Common.Core.Memory;
+using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.Enums;
 
 namespace FFXIVAPP.Plugin.Parse.Models.Events

@@ -30,7 +30,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;

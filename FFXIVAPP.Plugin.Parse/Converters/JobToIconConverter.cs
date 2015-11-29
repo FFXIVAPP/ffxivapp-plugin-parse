@@ -32,7 +32,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using FFXIVAPP.Common.Core.Memory.Enums;
+using FFXIVAPP.Memory.Core.Enums;
 using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Converters
