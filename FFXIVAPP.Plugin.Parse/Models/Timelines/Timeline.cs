@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Timeline.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -142,8 +142,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
                 {
                     case TimelineEventType.PartyJoin:
                     case TimelineEventType.PartyDisband:
-                    case TimelineEventType.PartyLeave:
-                        break;
+                    case TimelineEventType.PartyLeave: break;
                     case TimelineEventType.PartyMonsterFighting:
                     case TimelineEventType.AllianceMonsterFighting:
                     case TimelineEventType.OtherMonsterFighting:

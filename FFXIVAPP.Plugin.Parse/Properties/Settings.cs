@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Settings.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -587,8 +587,9 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         {
             try
             {
-                var type = Default[key].GetType()
-                                       .Name;
+                var type = Default[key]
+                    .GetType()
+                    .Name;
                 switch (type)
                 {
                     case "Boolean":
@@ -643,7 +644,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
                 }
                 if (element == null)
                 {
-                    var xValue = Default[xKey].ToString();
+                    var xValue = Default[xKey]
+                        .ToString();
                     var keyPairList = new List<XValuePair>
                     {
                         new XValuePair
@@ -659,7 +661,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
                     var xElement = element.Element("Value");
                     if (xElement != null)
                     {
-                        xElement.Value = Default[setting].ToString();
+                        xElement.Value = Default[setting]
+                            .ToString();
                     }
                 }
             }

@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Filter.Beneficial.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
@@ -130,13 +129,16 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
             {
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
-                    line.Source = Convert.ToString(beneficial.Groups["source"].Value);
+                    line.Source = Convert.ToString(beneficial.Groups["source"]
+                                                             .Value);
                 }
                 if (String.IsNullOrWhiteSpace(line.Target))
                 {
-                    line.Target = Convert.ToString(beneficial.Groups["target"].Value);
+                    line.Target = Convert.ToString(beneficial.Groups["target"]
+                                                             .Value);
                 }
-                line.Action = Convert.ToString(beneficial.Groups["status"].Value);
+                line.Action = Convert.ToString(beneficial.Groups["status"]
+                                                         .Value);
                 var isStoneSkin = false;
                 foreach (var stoneSkin in MagicBarrierHelper.StoneSkin.Where(stoneSkin => String.Equals(stoneSkin, line.Action, Constants.InvariantComparer)))
                 {
@@ -163,7 +165,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                                      .Value;
                         if (source != null)
                         {
-                            multiplier = source.Job == Actor.Job.WHM ? 0.18m : multiplier;
+                            multiplier = source.Job == "WHM" ? 0.18m : multiplier;
                         }
                     }
                     catch (Exception ex)

@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ StatMonitor.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -179,25 +179,25 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                 if (XIVInfoViewModel.Instance.CurrentUser != null)
                 {
                     var mapIndex = XIVInfoViewModel.Instance.CurrentUser.MapIndex;
-                    zone = ZoneHelper.GetMapInfo(mapIndex)
-                                     .English;
+                    zone = ZoneHelper.MapInfo(mapIndex)
+                                     .Name.English;
                     switch (Constants.GameLanguage)
                     {
                         case "French":
-                            zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .French;
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.French;
                             break;
                         case "Japanese":
-                            zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .Japanese;
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.Japanese;
                             break;
                         case "German":
-                            zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .German;
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.German;
                             break;
                         case "Chinese":
-                            zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .Chinese;
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.Chinese;
                             break;
                     }
                 }

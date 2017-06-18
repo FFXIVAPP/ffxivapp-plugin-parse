@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Player.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -138,11 +138,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             StatusEntriesSelf = NPCEntry.StatusEntries;
                             try
                             {
-                                foreach (var statusEntry in
-                                    monsterEntries.ToList()
-                                                  .Where(p => p.HPCurrent > 0)
-                                                  .SelectMany(monster => monster.StatusEntries)
-                                                  .Where(statusEntry => statusEntry.CasterID == ID))
+                                foreach (var statusEntry in monsterEntries.ToList()
+                                                                          .Where(p => p.HPCurrent > 0)
+                                                                          .SelectMany(monster => monster.StatusEntries)
+                                                                          .Where(statusEntry => statusEntry.CasterID == ID))
                                 {
                                     StatusEntriesMonsters.Add(statusEntry);
                                 }
@@ -152,11 +151,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             }
                             try
                             {
-                                foreach (var statusEntry in
-                                    pcEntries.ToList()
-                                             .Where(p => p.HPCurrent > 0)
-                                             .SelectMany(pc => pc.StatusEntries)
-                                             .Where(statusEntry => statusEntry.CasterID == ID))
+                                foreach (var statusEntry in pcEntries.ToList()
+                                                                     .Where(p => p.HPCurrent > 0)
+                                                                     .SelectMany(pc => pc.StatusEntries)
+                                                                     .Where(statusEntry => statusEntry.CasterID == ID))
                                 {
                                     StatusEntriesPlayers.Add(statusEntry);
                                 }
@@ -759,11 +757,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             //setup per damage taken "percent of" stats
             switch (useSub)
             {
-                case true:
-                    break;
+                case true: break;
 
-                case false:
-                    break;
+                case false: break;
             }
 
             return stats.Select(s => s.Value)

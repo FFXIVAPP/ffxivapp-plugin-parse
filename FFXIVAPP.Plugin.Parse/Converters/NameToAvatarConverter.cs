@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ NameToAvatarConverter.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -125,7 +125,8 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                                                     .OuterHtml;
                                 var src = new Regex(@"<img src=""(?<image>.+)"" width=""50"" height=""50"" alt="""">", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.IgnoreCase);
                                 var imageUrl = src.Match(htmlSource)
-                                                  .Groups["image"].Value;
+                                                  .Groups["image"]
+                                                  .Value;
                                 imageUrl = imageUrl.Substring(0, imageUrl.IndexOf("?", Constants.InvariantComparer))
                                                    .Replace("50x50", "96x96");
                                 image.Dispatcher.Invoke(DispatcherPriority.Background, (ThreadStart) delegate

@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ HistoryGroupPropertyDescriptor.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
 
         public override Type PropertyType
         {
-            get { return Name.ToLower() == "name" ? typeof (string) : typeof (HistoryGroup); }
+            get { return Name.ToLower() == "name" ? typeof(string) : typeof(HistoryGroup); }
         }
 
         public override object GetValue(object component)

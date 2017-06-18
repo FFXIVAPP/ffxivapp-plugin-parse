@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Player.Handlers.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             {
                 try
                 {
-                    var statusInfo = StatusEffectHelper.StatusInfo(statusEntry.StatusID);
+                    var statusInfo = StatusEffectHelper.StatusInfo((uint) statusEntry.StatusID);
                     var statusKey = statusInfo.Name.English;
                     switch (Constants.GameLanguage)
                     {
@@ -95,24 +95,32 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             var found = false;
                             var thunderActions = DamageOverTimeHelper.ThunderActions;
                             var action = lastDamageAmountByAction;
-                            if (thunderActions["III"].Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
+                            if (thunderActions["III"]
+                                .Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
                             {
                                 found = true;
-                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder iii"].Duration;
+                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder iii"]
+                                                                      .Duration;
                                 originalThunderDamage = action.Value;
-                                amount = (action.Value / DamageOverTimeHelper.PlayerActions["thunder iii"].ActionPotency) * 30;
+                                amount = (action.Value / DamageOverTimeHelper.PlayerActions["thunder iii"]
+                                                                             .ActionPotency) * 30;
                             }
-                            if (thunderActions["II"].Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
+                            if (thunderActions["II"]
+                                .Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
                             {
                                 found = true;
-                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder ii"].Duration;
+                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder ii"]
+                                                                      .Duration;
                                 originalThunderDamage = action.Value;
-                                amount = (action.Value / DamageOverTimeHelper.PlayerActions["thunder ii"].ActionPotency) * 30;
+                                amount = (action.Value / DamageOverTimeHelper.PlayerActions["thunder ii"]
+                                                                             .ActionPotency) * 30;
                             }
-                            if (thunderActions["I"].Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
+                            if (thunderActions["I"]
+                                .Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
                             {
                                 found = true;
-                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder"].Duration;
+                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder"]
+                                                                      .Duration;
                                 originalThunderDamage = action.Value;
                                 amount = action.Value;
                             }
@@ -126,12 +134,14 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             var found = false;
                             var ruinActions = DamageOverTimeHelper.RuinActions;
                             var action = lastDamageAmountByAction;
-                            if (ruinActions["II"].Any(ruinAction => String.Equals(action.Key, ruinAction, Constants.InvariantComparer)))
+                            if (ruinActions["II"]
+                                .Any(ruinAction => String.Equals(action.Key, ruinAction, Constants.InvariantComparer)))
                             {
                                 found = zeroFoundInList = true;
                                 amount = action.Value;
                             }
-                            if (ruinActions["I"].Any(ruinAction => String.Equals(action.Key, ruinAction, Constants.InvariantComparer)))
+                            if (ruinActions["I"]
+                                .Any(ruinAction => String.Equals(action.Key, ruinAction, Constants.InvariantComparer)))
                             {
                                 found = zeroFoundInList = true;
                                 amount = action.Value;
@@ -230,7 +240,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             {
                 try
                 {
-                    var statusInfo = StatusEffectHelper.StatusInfo(statusEntry.StatusID);
+                    var statusInfo = StatusEffectHelper.StatusInfo((uint) statusEntry.StatusID);
                     var statusKey = statusInfo.Name.English;
                     switch (Constants.GameLanguage)
                     {
@@ -276,27 +286,32 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             var cureActions = HealingOverTimeHelper.CureActions;
                             var medicaActions = HealingOverTimeHelper.MedicaActions;
                             var action = healingAction;
-                            if (cureActions["III"].Any(cureAction => String.Equals(action.Key, cureAction, Constants.InvariantComparer)))
+                            if (cureActions["III"]
+                                .Any(cureAction => String.Equals(action.Key, cureAction, Constants.InvariantComparer)))
                             {
                                 found = zeroFoundInList = true;
                                 resolvedPotency = 550;
                             }
-                            if (cureActions["II"].Any(cureAction => String.Equals(action.Key, cureAction, Constants.InvariantComparer)))
+                            if (cureActions["II"]
+                                .Any(cureAction => String.Equals(action.Key, cureAction, Constants.InvariantComparer)))
                             {
                                 found = zeroFoundInList = true;
                                 resolvedPotency = 650;
                             }
-                            if (cureActions["I"].Any(cureAction => String.Equals(action.Key, cureAction, Constants.InvariantComparer)))
+                            if (cureActions["I"]
+                                .Any(cureAction => String.Equals(action.Key, cureAction, Constants.InvariantComparer)))
                             {
                                 found = zeroFoundInList = true;
                                 resolvedPotency = 400;
                             }
-                            if (medicaActions["II"].Any(medicaAction => String.Equals(action.Key, medicaAction, Constants.InvariantComparer)))
+                            if (medicaActions["II"]
+                                .Any(medicaAction => String.Equals(action.Key, medicaAction, Constants.InvariantComparer)))
                             {
                                 found = zeroFoundInList = true;
                                 resolvedPotency = 200;
                             }
-                            if (medicaActions["I"].Any(medicaAction => String.Equals(action.Key, medicaAction, Constants.InvariantComparer)))
+                            if (medicaActions["I"]
+                                .Any(medicaAction => String.Equals(action.Key, medicaAction, Constants.InvariantComparer)))
                             {
                                 found = zeroFoundInList = true;
                                 resolvedPotency = 300;
@@ -434,7 +449,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             {
                 try
                 {
-                    var statusInfo = StatusEffectHelper.StatusInfo(statusEntry.StatusID);
+                    var statusInfo = StatusEffectHelper.StatusInfo((uint) statusEntry.StatusID);
                     var statusKey = statusInfo.Name.English;
                     switch (Constants.GameLanguage)
                     {

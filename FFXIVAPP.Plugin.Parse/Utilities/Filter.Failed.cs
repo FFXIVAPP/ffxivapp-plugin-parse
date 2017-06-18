@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Filter.Failed.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -394,13 +394,16 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 line.Miss = true;
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
-                    line.Source = Convert.ToString(failed.Groups["source"].Value);
+                    line.Source = Convert.ToString(failed.Groups["source"]
+                                                         .Value);
                 }
                 if (String.IsNullOrWhiteSpace(line.Target))
                 {
-                    line.Target = Convert.ToString(failed.Groups["target"].Value);
+                    line.Target = Convert.ToString(failed.Groups["target"]
+                                                         .Value);
                 }
-                switch (failed.Groups["source"].Success)
+                switch (failed.Groups["source"]
+                              .Success)
                 {
                     case true:
                         line.Action = exp.Attack;
@@ -488,13 +491,16 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 line.Miss = true;
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
-                    line.Source = Convert.ToString(failed.Groups["source"].Value);
+                    line.Source = Convert.ToString(failed.Groups["source"]
+                                                         .Value);
                 }
                 if (String.IsNullOrWhiteSpace(line.Target))
                 {
-                    line.Target = Convert.ToString(failed.Groups["target"].Value);
+                    line.Target = Convert.ToString(failed.Groups["target"]
+                                                         .Value);
                 }
-                switch (failed.Groups["source"].Success)
+                switch (failed.Groups["source"]
+                              .Success)
                 {
                     case true:
                         line.Action = exp.Attack;

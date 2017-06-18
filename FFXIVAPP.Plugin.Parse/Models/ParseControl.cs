@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ ParseControl.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Timers;
 using FFXIVAPP.Common.RegularExpressions;
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models.StatGroups;
@@ -75,11 +74,12 @@ namespace FFXIVAPP.Plugin.Parse.Models
                         try
                         {
                             var type = Regex.Match(player.Name, @"\[(?<type>.+)\]", SharedRegEx.DefaultOptions)
-                                            .Groups["type"].Value;
+                                            .Groups["type"]
+                                            .Value;
                             var playerEntity = new PlayerEntity
                             {
                                 Name = player.Name,
-                                Job = Actor.Job.Unknown,
+                                Job = "Unknown",
                                 CombinedDPS = (double) player.GetStatValue("CombinedDPS"),
                                 DPS = (double) player.GetStatValue("DPS"),
                                 DOTPS = (double) player.GetStatValue("DOTPS"),

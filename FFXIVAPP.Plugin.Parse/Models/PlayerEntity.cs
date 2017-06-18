@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ PlayerEntity.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
 
 using System;
 using System.Text.RegularExpressions;
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Interfaces;
@@ -90,7 +89,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
             }
         }
 
-        public Actor.Job Job { get; set; }
+        public string Job { get; set; }
         public double CombinedDPS { get; set; }
         public double DPS { get; set; }
         public double DOTPS { get; set; }

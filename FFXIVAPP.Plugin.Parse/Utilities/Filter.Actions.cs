@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Filter.Actions.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -158,8 +158,10 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             actions = exp.mActions;
                             if (actions.Success)
                             {
-                                _lastNameMonster = StringHelper.TitleCase(Convert.ToString(actions.Groups["source"].Value));
-                                _lastActionMonster = StringHelper.TitleCase(Convert.ToString(actions.Groups["action"].Value));
+                                _lastNameMonster = StringHelper.TitleCase(Convert.ToString(actions.Groups["source"]
+                                                                                                  .Value));
+                                _lastActionMonster = StringHelper.TitleCase(Convert.ToString(actions.Groups["action"]
+                                                                                                    .Value));
                                 UpdateActionsMonster(actions, line, exp, FilterType.MonsterParty);
                             }
                             break;
@@ -186,11 +188,13 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
             {
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
-                    line.Source = Convert.ToString(actions.Groups["source"].Value);
+                    line.Source = Convert.ToString(actions.Groups["source"]
+                                                          .Value);
                 }
                 var isHealingSkill = false;
                 var player = ParseControl.Instance.Timeline.GetSetPlayer(line.Source);
-                var action = StringHelper.TitleCase(Convert.ToString(actions.Groups["action"].Value));
+                var action = StringHelper.TitleCase(Convert.ToString(actions.Groups["action"]
+                                                                            .Value));
                 foreach (var healingAction in ParseHelper.HealingActions.Where(healingAction => String.Equals(healingAction, action, Constants.InvariantComparer)))
                 {
                     isHealingSkill = true;

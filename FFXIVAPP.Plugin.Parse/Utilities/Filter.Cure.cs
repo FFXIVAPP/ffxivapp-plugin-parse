@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Filter.Cure.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -127,11 +127,13 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
             {
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
-                    line.Source = Convert.ToString(cure.Groups["source"].Value);
+                    line.Source = Convert.ToString(cure.Groups["source"]
+                                                       .Value);
                 }
                 if (String.IsNullOrWhiteSpace(line.Target))
                 {
-                    line.Target = Convert.ToString(cure.Groups["target"].Value);
+                    line.Target = Convert.ToString(cure.Groups["target"]
+                                                       .Value);
                 }
                 switch (type)
                 {
@@ -160,16 +162,22 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         line.Action = _lastActionPetOtherHealingFrom;
                         break;
                 }
-                line.Amount = cure.Groups["amount"].Success ? Convert.ToDouble(cure.Groups["amount"].Value) : 0;
-                line.Crit = cure.Groups["crit"].Success;
-                line.Modifier = cure.Groups["modifier"].Success ? Convert.ToDouble(cure.Groups["modifier"].Value) / 100 : 0;
+                line.Amount = cure.Groups["amount"]
+                                  .Success ? Convert.ToDouble(cure.Groups["amount"]
+                                                                  .Value) : 0;
+                line.Crit = cure.Groups["crit"]
+                                .Success;
+                line.Modifier = cure.Groups["modifier"]
+                                    .Success ? Convert.ToDouble(cure.Groups["modifier"]
+                                                                    .Value) / 100 : 0;
                 switch (line.EventDirection)
                 {
                     case EventDirection.You:
                         line.Target = You;
                         break;
                 }
-                line.RecLossType = Convert.ToString(cure.Groups["type"].Value.ToUpperInvariant());
+                line.RecLossType = Convert.ToString(cure.Groups["type"]
+                                                        .Value.ToUpperInvariant());
                 if (line.IsEmpty())
                 {
                     return;

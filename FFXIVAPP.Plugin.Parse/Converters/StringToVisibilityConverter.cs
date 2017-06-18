@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ StringToVisibilityConverter.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,10 +40,8 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                         displayProperty = Settings.Default.DPSWidgetDisplayProperty;
                         switch (displayProperty)
                         {
-                            case "Individual":
-                                return tag.Contains("Combined") ? Visibility.Collapsed : Visibility.Visible;
-                            case "Combined":
-                                return tag.Contains("Combined") ? Visibility.Visible : Visibility.Collapsed;
+                            case "Individual": return tag.Contains("Combined") ? Visibility.Collapsed : Visibility.Visible;
+                            case "Combined": return tag.Contains("Combined") ? Visibility.Visible : Visibility.Collapsed;
                         }
                         break;
                     case "HPS":
@@ -53,10 +51,8 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                         displayProperty = Settings.Default.HPSWidgetDisplayProperty;
                         switch (displayProperty)
                         {
-                            case "Individual":
-                                return tag.Contains("Combined") ? Visibility.Collapsed : Visibility.Visible;
-                            case "Combined":
-                                return tag.Contains("Combined") ? Visibility.Visible : Visibility.Collapsed;
+                            case "Individual": return tag.Contains("Combined") ? Visibility.Collapsed : Visibility.Visible;
+                            case "Combined": return tag.Contains("Combined") ? Visibility.Visible : Visibility.Collapsed;
                         }
                         break;
                     case "DTPS":
@@ -66,10 +62,8 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                         displayProperty = Settings.Default.DTPSWidgetDisplayProperty;
                         switch (displayProperty)
                         {
-                            case "Individual":
-                                return tag.Contains("Combined") ? Visibility.Collapsed : Visibility.Visible;
-                            case "Combined":
-                                return tag.Contains("Combined") ? Visibility.Visible : Visibility.Collapsed;
+                            case "Individual": return tag.Contains("Combined") ? Visibility.Collapsed : Visibility.Visible;
+                            case "Combined": return tag.Contains("Combined") ? Visibility.Visible : Visibility.Collapsed;
                         }
                         break;
                 }

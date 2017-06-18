@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ MainViewModel.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -503,9 +503,12 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
                         IsHistory = false;
                         break;
                     default:
-                        PlayerInfoSource = ParseHistory[index].HistoryControl.Timeline.Party;
-                        MonsterInfoSource = ParseHistory[index].HistoryControl.Timeline.Monster;
-                        OverallInfoSource = ParseHistory[index].HistoryControl.Timeline.Overall;
+                        PlayerInfoSource = ParseHistory[index]
+                            .HistoryControl.Timeline.Party;
+                        MonsterInfoSource = ParseHistory[index]
+                            .HistoryControl.Timeline.Monster;
+                        OverallInfoSource = ParseHistory[index]
+                            .HistoryControl.Timeline.Overall;
                         IsCurrent = false;
                         IsHistory = true;
                         break;

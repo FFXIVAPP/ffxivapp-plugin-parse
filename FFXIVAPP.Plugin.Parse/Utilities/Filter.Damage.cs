@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Filter.Damage.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -410,13 +410,16 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 line.Hit = true;
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
-                    line.Source = Convert.ToString(damage.Groups["source"].Value);
+                    line.Source = Convert.ToString(damage.Groups["source"]
+                                                         .Value);
                 }
                 if (String.IsNullOrWhiteSpace(line.Target))
                 {
-                    line.Target = Convert.ToString(damage.Groups["target"].Value);
+                    line.Target = Convert.ToString(damage.Groups["target"]
+                                                         .Value);
                 }
-                switch (damage.Groups["source"].Success)
+                switch (damage.Groups["source"]
+                              .Success)
                 {
                     case true:
                         line.Action = exp.Attack;
@@ -461,11 +464,18 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         line.Action = lastActionIsAttack ? String.Format("{0} [+]", exp.Attack) : line.Action;
                         break;
                 }
-                line.Amount = damage.Groups["amount"].Success ? Convert.ToDouble(damage.Groups["amount"].Value) : 0;
-                line.Block = damage.Groups["block"].Success;
-                line.Crit = damage.Groups["crit"].Success;
-                line.Modifier = damage.Groups["modifier"].Success ? Convert.ToDouble(damage.Groups["modifier"].Value) / 100 : 0;
-                line.Parry = damage.Groups["parry"].Success;
+                line.Amount = damage.Groups["amount"]
+                                    .Success ? Convert.ToDouble(damage.Groups["amount"]
+                                                                      .Value) : 0;
+                line.Block = damage.Groups["block"]
+                                   .Success;
+                line.Crit = damage.Groups["crit"]
+                                  .Success;
+                line.Modifier = damage.Groups["modifier"]
+                                      .Success ? Convert.ToDouble(damage.Groups["modifier"]
+                                                                        .Value) / 100 : 0;
+                line.Parry = damage.Groups["parry"]
+                                   .Success;
                 if (line.IsEmpty())
                 {
                     return;
@@ -495,13 +505,16 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 line.Hit = true;
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
-                    line.Source = Convert.ToString(damage.Groups["source"].Value);
+                    line.Source = Convert.ToString(damage.Groups["source"]
+                                                         .Value);
                 }
                 if (String.IsNullOrWhiteSpace(line.Target))
                 {
-                    line.Target = Convert.ToString(damage.Groups["target"].Value);
+                    line.Target = Convert.ToString(damage.Groups["target"]
+                                                         .Value);
                 }
-                switch (damage.Groups["source"].Success)
+                switch (damage.Groups["source"]
+                              .Success)
                 {
                     case true:
                         var lastActionIsAttack = false;
@@ -538,11 +551,18 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         line.Action = _lastActionMonster;
                         break;
                 }
-                line.Amount = damage.Groups["amount"].Success ? Convert.ToDouble(damage.Groups["amount"].Value) : 0;
-                line.Block = damage.Groups["block"].Success;
-                line.Crit = damage.Groups["crit"].Success;
-                line.Modifier = damage.Groups["modifier"].Success ? Convert.ToDouble(damage.Groups["modifier"].Value) / 100 : 0;
-                line.Parry = damage.Groups["parry"].Success;
+                line.Amount = damage.Groups["amount"]
+                                    .Success ? Convert.ToDouble(damage.Groups["amount"]
+                                                                      .Value) : 0;
+                line.Block = damage.Groups["block"]
+                                   .Success;
+                line.Crit = damage.Groups["crit"]
+                                  .Success;
+                line.Modifier = damage.Groups["modifier"]
+                                      .Success ? Convert.ToDouble(damage.Groups["modifier"]
+                                                                        .Value) / 100 : 0;
+                line.Parry = damage.Groups["parry"]
+                                   .Success;
                 switch (type)
                 {
                     case FilterType.Pet:

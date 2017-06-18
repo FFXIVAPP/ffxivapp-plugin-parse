@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ JobToIconConverter.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,6 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using FFXIVAPP.Memory.Core.Enums;
 using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Converters
@@ -42,12 +41,12 @@ namespace FFXIVAPP.Plugin.Parse.Converters
         {
             try
             {
-                return GetIcon((Actor.Job) value);
+                return GetIcon(value.ToString());
             }
             catch (InvalidCastException ex)
             {
                 Logger.Error("Failed to convert job to job icon", ex);
-                return GetIcon(Actor.Job.Unknown);
+                return GetIcon("Unknown");
             }
         }
 
@@ -56,7 +55,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
             throw new NotImplementedException();
         }
 
-        private BitmapImage GetIcon(Actor.Job job)
+        private BitmapImage GetIcon(string job)
         {
             var path = new Uri(Path.Combine(BasePath, job + ".png"));
             return new BitmapImage(path);

@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ JsonHelper.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -143,25 +143,25 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 if (XIVInfoViewModel.Instance.CurrentUser != null)
                 {
                     var mapIndex = XIVInfoViewModel.Instance.CurrentUser.MapIndex;
-                    zone = ZoneHelper.GetMapInfo(mapIndex)
-                                     .English;
+                    zone = ZoneHelper.MapInfo(mapIndex)
+                                     .Name.English;
                     switch (Constants.GameLanguage)
                     {
                         case "French":
-                            zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .French;
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.French;
                             break;
                         case "Japanese":
-                            zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .Japanese;
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.Japanese;
                             break;
                         case "German":
-                            zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .German;
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.German;
                             break;
                         case "Chinese":
-                            zone = ZoneHelper.GetMapInfo(mapIndex)
-                                             .Chinese;
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.Chinese;
                             break;
                     }
                 }
@@ -266,10 +266,14 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     var children = GetDictionary(player.Value);
                     var playerInstance = historyController.Timeline.GetSetPlayer(player.Key);
-                    playerInstance.Last20DamageActions = children["Last20DamageActions"].ToObject<List<LineHistory>>();
-                    playerInstance.Last20DamageTakenActions = children["Last20DamageTakenActions"].ToObject<List<LineHistory>>();
-                    playerInstance.Last20HealingActions = children["Last20HealingActions"].ToObject<List<LineHistory>>();
-                    playerInstance.Last20Items = children["Last20Items"].ToObject<List<LineHistory>>();
+                    playerInstance.Last20DamageActions = children["Last20DamageActions"]
+                        .ToObject<List<LineHistory>>();
+                    playerInstance.Last20DamageTakenActions = children["Last20DamageTakenActions"]
+                        .ToObject<List<LineHistory>>();
+                    playerInstance.Last20HealingActions = children["Last20HealingActions"]
+                        .ToObject<List<LineHistory>>();
+                    playerInstance.Last20Items = children["Last20Items"]
+                        .ToObject<List<LineHistory>>();
                     var stats = GetDictionary(player.Value["Stats"]);
                     foreach (var stat in stats)
                     {
@@ -282,10 +286,14 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     var children = GetDictionary(monster.Value);
                     var monsterInstance = historyController.Timeline.GetSetMonster(monster.Key);
-                    monsterInstance.Last20DamageActions = children["Last20DamageActions"].ToObject<List<LineHistory>>();
-                    monsterInstance.Last20DamageTakenActions = children["Last20DamageTakenActions"].ToObject<List<LineHistory>>();
-                    monsterInstance.Last20HealingActions = children["Last20HealingActions"].ToObject<List<LineHistory>>();
-                    monsterInstance.Last20Items = children["Last20Items"].ToObject<List<LineHistory>>();
+                    monsterInstance.Last20DamageActions = children["Last20DamageActions"]
+                        .ToObject<List<LineHistory>>();
+                    monsterInstance.Last20DamageTakenActions = children["Last20DamageTakenActions"]
+                        .ToObject<List<LineHistory>>();
+                    monsterInstance.Last20HealingActions = children["Last20HealingActions"]
+                        .ToObject<List<LineHistory>>();
+                    monsterInstance.Last20Items = children["Last20Items"]
+                        .ToObject<List<LineHistory>>();
                     var stats = GetDictionary(monster.Value["Stats"]);
                     foreach (var stat in stats)
                     {
@@ -302,18 +310,22 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 var monsterName = "NULL";
                 try
                 {
-                    historyItem.Start = DateTime.Parse(fileNameParts.Groups["startTime"].ToString()
-                                                                                        .Replace("_", ":"));
-                    historyItem.End = DateTime.Parse(fileNameParts.Groups["endTime"].ToString()
-                                                                                    .Replace("_", ":"));
+                    historyItem.Start = DateTime.Parse(fileNameParts.Groups["startTime"]
+                                                                    .ToString()
+                                                                    .Replace("_", ":"));
+                    historyItem.End = DateTime.Parse(fileNameParts.Groups["endTime"]
+                                                                  .ToString()
+                                                                  .Replace("_", ":"));
                 }
                 catch (Exception ex)
                 {
                 }
                 try
                 {
-                    zone = fileNameParts.Groups["zone"].ToString();
-                    monsterName = fileNameParts.Groups["monsterName"].ToString();
+                    zone = fileNameParts.Groups["zone"]
+                                        .ToString();
+                    monsterName = fileNameParts.Groups["monsterName"]
+                                               .ToString();
                 }
                 catch (Exception ex)
                 {

@@ -1,6 +1,6 @@
 ﻿// FFXIVAPP.Plugin.Parse ~ Filter.Items.cs
 // 
-// Copyright © 2007 - 2016 Ryan Wilson - All Rights Reserved
+// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -51,7 +51,8 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             if (items.Success)
                             {
                                 line.Source = You;
-                                _lastActionYou = StringHelper.TitleCase(Convert.ToString(items.Groups["item"].Value));
+                                _lastActionYou = StringHelper.TitleCase(Convert.ToString(items.Groups["item"]
+                                                                                              .Value));
                                 UpdateItems(items, line, exp, FilterType.You);
                             }
                             break;
@@ -64,9 +65,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             items = exp.pItems;
                             if (items.Success)
                             {
-                                line.Source = Convert.ToString(items.Groups["source"].Value);
+                                line.Source = Convert.ToString(items.Groups["source"]
+                                                                    .Value);
                                 _lastNamePet = line.Source;
-                                _lastActionPet = StringHelper.TitleCase(Convert.ToString(items.Groups["item"].Value));
+                                _lastActionPet = StringHelper.TitleCase(Convert.ToString(items.Groups["item"]
+                                                                                              .Value));
                             }
                             break;
                     }
@@ -78,9 +81,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             items = exp.pItems;
                             if (items.Success)
                             {
-                                line.Source = Convert.ToString(items.Groups["source"].Value);
+                                line.Source = Convert.ToString(items.Groups["source"]
+                                                                    .Value);
                                 _lastNamePartyFrom = line.Source;
-                                _lastActionPartyFrom = StringHelper.TitleCase(Convert.ToString(items.Groups["item"].Value));
+                                _lastActionPartyFrom = StringHelper.TitleCase(Convert.ToString(items.Groups["item"]
+                                                                                                    .Value));
                                 UpdateItems(items, line, exp, FilterType.Party);
                             }
                             break;
@@ -93,9 +98,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             items = exp.pItems;
                             if (items.Success)
                             {
-                                line.Source = Convert.ToString(items.Groups["source"].Value);
+                                line.Source = Convert.ToString(items.Groups["source"]
+                                                                    .Value);
                                 _lastNamePetPartyFrom = line.Source;
-                                _lastActionPet = StringHelper.TitleCase(Convert.ToString(items.Groups["item"].Value));
+                                _lastActionPet = StringHelper.TitleCase(Convert.ToString(items.Groups["item"]
+                                                                                              .Value));
                             }
                             break;
                     }
@@ -107,9 +114,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             items = exp.pItems;
                             if (items.Success)
                             {
-                                line.Source = Convert.ToString(items.Groups["source"].Value);
+                                line.Source = Convert.ToString(items.Groups["source"]
+                                                                    .Value);
                                 _lastNameAllianceFrom = line.Source;
-                                _lastActionAllianceFrom = StringHelper.TitleCase(Convert.ToString(items.Groups["item"].Value));
+                                _lastActionAllianceFrom = StringHelper.TitleCase(Convert.ToString(items.Groups["item"]
+                                                                                                       .Value));
                                 UpdateItems(items, line, exp, FilterType.Alliance);
                             }
                             break;
@@ -122,9 +131,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             items = exp.pItems;
                             if (items.Success)
                             {
-                                line.Source = Convert.ToString(items.Groups["source"].Value);
+                                line.Source = Convert.ToString(items.Groups["source"]
+                                                                    .Value);
                                 _lastNamePetAllianceFrom = line.Source;
-                                _lastActionPet = StringHelper.TitleCase(Convert.ToString(items.Groups["item"].Value));
+                                _lastActionPet = StringHelper.TitleCase(Convert.ToString(items.Groups["item"]
+                                                                                              .Value));
                             }
                             break;
                     }
@@ -136,9 +147,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             items = exp.pItems;
                             if (items.Success)
                             {
-                                line.Source = Convert.ToString(items.Groups["source"].Value);
+                                line.Source = Convert.ToString(items.Groups["source"]
+                                                                    .Value);
                                 _lastNameOtherFrom = line.Source;
-                                _lastActionOtherFrom = StringHelper.TitleCase(Convert.ToString(items.Groups["item"].Value));
+                                _lastActionOtherFrom = StringHelper.TitleCase(Convert.ToString(items.Groups["item"]
+                                                                                                    .Value));
                                 UpdateItems(items, line, exp, FilterType.Other);
                             }
                             break;
@@ -151,16 +164,17 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                             items = exp.pItems;
                             if (items.Success)
                             {
-                                line.Source = Convert.ToString(items.Groups["source"].Value);
+                                line.Source = Convert.ToString(items.Groups["source"]
+                                                                    .Value);
                                 _lastNamePetOtherFrom = line.Source;
-                                _lastActionPet = StringHelper.TitleCase(Convert.ToString(items.Groups["item"].Value));
+                                _lastActionPet = StringHelper.TitleCase(Convert.ToString(items.Groups["item"]
+                                                                                              .Value));
                             }
                             break;
                     }
                     break;
                 case EventSubject.Engaged:
-                case EventSubject.UnEngaged:
-                    break;
+                case EventSubject.UnEngaged: break;
             }
             if (items.Success)
             {
