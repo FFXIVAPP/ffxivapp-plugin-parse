@@ -17,6 +17,7 @@
 
 using System;
 using System.Text.RegularExpressions;
+using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Interfaces;
@@ -89,7 +90,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
             }
         }
 
-        public string Job { get; set; }
+        public Actor.Job Job { get; set; }
         public double CombinedDPS { get; set; }
         public double DPS { get; set; }
         public double DOTPS { get; set; }

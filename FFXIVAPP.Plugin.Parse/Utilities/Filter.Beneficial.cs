@@ -18,6 +18,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
@@ -165,7 +166,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                                      .Value;
                         if (source != null)
                         {
-                            multiplier = source.Job == "WHM" ? 0.18m : multiplier;
+                            multiplier = source.Job == Actor.Job.WHM ? 0.18m : multiplier;
                         }
                     }
                     catch (Exception ex)

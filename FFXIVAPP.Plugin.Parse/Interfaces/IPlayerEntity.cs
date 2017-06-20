@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 
 namespace FFXIVAPP.Plugin.Parse.Interfaces
@@ -23,7 +24,7 @@ namespace FFXIVAPP.Plugin.Parse.Interfaces
     {
         PlayerType Type { get; set; }
         string Name { get; set; }
-        string Job { get; set; }
+        Actor.Job Job { get; set; }
         double CombinedDPS { get; set; }
         double DPS { get; set; }
         double DOTPS { get; set; }

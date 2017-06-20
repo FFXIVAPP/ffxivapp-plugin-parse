@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Timers;
 using FFXIVAPP.Common.RegularExpressions;
+using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models.StatGroups;
@@ -79,7 +80,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                             var playerEntity = new PlayerEntity
                             {
                                 Name = player.Name,
-                                Job = "Unknown",
+                                Job = Actor.Job.Unknown,
                                 CombinedDPS = (double) player.GetStatValue("CombinedDPS"),
                                 DPS = (double) player.GetStatValue("DPS"),
                                 DOTPS = (double) player.GetStatValue("DOTPS"),
