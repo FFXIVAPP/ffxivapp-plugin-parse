@@ -511,7 +511,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 line.Hit = true;
                 line.DirectHit = damage.Groups["direct"]
                                        .Success;
-                
+
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
                     line.Source = Convert.ToString(damage.Groups["source"]

@@ -28,5 +28,5 @@ namespace FFXIVAPP.Plugin.Parse.Enums
         AllianceMonsterKilled,
         OtherMonsterFighting,
         OtherMonsterKilled
-    };
+    }
 }
