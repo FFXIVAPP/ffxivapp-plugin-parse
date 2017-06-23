@@ -408,6 +408,9 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
             try
             {
                 line.Hit = true;
+                line.DirectHit = damage.Groups["direct"]
+                                       .Success;
+
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
                     line.Source = Convert.ToString(damage.Groups["source"]
@@ -418,6 +421,9 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                     line.Target = Convert.ToString(damage.Groups["target"]
                                                          .Value);
                 }
+
+                var lastActionIsAttack = false;
+
                 switch (damage.Groups["source"]
                               .Success)
                 {
@@ -425,7 +431,6 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         line.Action = exp.Attack;
                         break;
                     case false:
-                        var lastActionIsAttack = false;
                         switch (type)
                         {
                             case FilterType.You:
@@ -461,9 +466,10 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                 line.Action = _lastActionPetOtherFrom;
                                 break;
                         }
-                        line.Action = lastActionIsAttack ? String.Format("{0} [+]", exp.Attack) : line.Action;
                         break;
                 }
+                line.Action = lastActionIsAttack ? $"{exp.Attack} [+]" : line.Action;
+                line.Action = line.DirectHit ? $"{line.Action} [→]" : line.Action;
                 line.Amount = damage.Groups["amount"]
                                     .Success ? Convert.ToDouble(damage.Groups["amount"]
                                                                       .Value) : 0;
@@ -503,6 +509,9 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
             try
             {
                 line.Hit = true;
+                line.DirectHit = damage.Groups["direct"]
+                                       .Success;
+                
                 if (String.IsNullOrWhiteSpace(line.Source))
                 {
                     line.Source = Convert.ToString(damage.Groups["source"]
@@ -513,11 +522,13 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                     line.Target = Convert.ToString(damage.Groups["target"]
                                                          .Value);
                 }
+
+                var lastActionIsAttack = false;
+
                 switch (damage.Groups["source"]
                               .Success)
                 {
                     case true:
-                        var lastActionIsAttack = false;
                         switch (type)
                         {
                             case FilterType.You:
@@ -545,12 +556,15 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                 lastActionIsAttack = _lastActionPetOtherIsAttack;
                                 break;
                         }
-                        line.Action = lastActionIsAttack ? String.Format("{0} [+]", exp.Attack) : exp.Attack;
                         break;
                     case false:
                         line.Action = _lastActionMonster;
                         break;
                 }
+
+                line.Action = lastActionIsAttack ? $"{exp.Attack} [+]" : exp.Attack;
+                line.Action = line.DirectHit ? $"{line.Action} [→]" : line.Action;
+
                 line.Amount = damage.Groups["amount"]
                                     .Success ? Convert.ToDouble(damage.Groups["amount"]
                                                                       .Value) : 0;

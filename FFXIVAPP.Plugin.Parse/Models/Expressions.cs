@@ -60,6 +60,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
         public string Counter { get; private set; }
         public string Added { get; private set; }
         public string HealingType { get; private set; }
+        public string DAttack { get; private set; }
         public string RAttack { get; private set; }
         public string Attack { get; private set; }
         public string You { get; private set; }
@@ -97,6 +98,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                     Added = "Effet Supplémentaire";
                     HealingType = "PV";
                     RAttack = "D'Attaque À Distance";
+                    DAttack = "Direct Attack";
                     Attack = "Attaque";
                     You = @"^[Vv]ous$";
                     YouString = "Vous";
@@ -130,6 +132,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                     HealingType = "ＨＰ";
                     RAttack = "Ranged Attack";
                     Attack = "Attack";
+                    DAttack = "Direct Attack";
                     You = @"^\.$";
                     YouString = "君";
                     Mitigated = "軽減ダメージ（魔法の盾）";
@@ -162,6 +165,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                     HealingType = "LP";
                     RAttack = "Ranged Attack";
                     Attack = "Attack";
+                    DAttack = "Direct Attack";
                     You = @"^[Dd](ich|ie|u)$";
                     YouString = "Du";
                     Mitigated = "Schäden Gemildert (Zauberschild)";
@@ -194,6 +198,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                     HealingType = "体力";
                     RAttack = "Ranged Attack";
                     Attack = "Attack";
+                    DAttack = "Direct Attack";
                     You = @"^[Yy]ou?$";
                     YouString = "You";
                     Mitigated = "Mitigated Damage (Magic Shield)";
@@ -226,6 +231,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                     HealingType = "HP";
                     RAttack = "Ranged Attack";
                     Attack = "Attack";
+                    DAttack = "Direct Attack";
                     You = @"^[Yy]ou?$";
                     YouString = "You";
                     Mitigated = "Mitigated Damage (Magic Shield)";

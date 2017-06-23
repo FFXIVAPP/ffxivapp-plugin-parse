@@ -42,6 +42,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
         public double Modifier { get; set; }
         public string RecLossType { get; set; }
         public bool Hit { get; set; }
+        public bool DirectHit { get; set; }
         public bool Miss { get; set; }
         public bool Crit { get; set; }
         public bool Counter { get; set; }
