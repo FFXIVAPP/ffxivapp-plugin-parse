@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Timers;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.Models.LinkedStats;
 using FFXIVAPP.Plugin.Parse.Models.Stats;
@@ -108,7 +110,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             {
                 try
                 {
-                    var cleanedName = Regex.Replace(Name, @"\[[\w]+\]", "")
+                    var cleanedName = Regex.Replace(Name, @"\[[\w]+\]", string.Empty)
                                            .Trim();
                     var isYou = Regex.IsMatch(cleanedName, @"^(([Dd](ich|ie|u))|You|Vous)$") || String.Equals(cleanedName, Constants.CharacterName, Constants.InvariantComparer);
                     var isPet = false;
@@ -121,13 +123,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             {
                                 NPCEntry = pcEntries.First(p => String.Equals(p.Name, cleanedName, Constants.InvariantComparer));
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
                                 isPet = true;
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                     }
                     if (NPCEntry != null)
@@ -148,6 +150,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             }
                             catch (Exception ex)
                             {
+                                Logging.Log(Logger, new LogItem(ex, true));
                             }
                             try
                             {
@@ -161,12 +164,14 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             }
                             catch (Exception ex)
                             {
+                                Logging.Log(Logger, new LogItem(ex, true));
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
             }
             if (!StatusEntriesMonsters.Any() && !StatusEntriesPlayers.Any())
@@ -210,6 +215,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
@@ -333,39 +339,39 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             #region Global Percent Of Total Stats
 
             // damage
-            stats.Add("PercentOfTotalOverallDamage", new PercentStat("PercentOfTotalOverallDamage", stats["TotalOverallDamage"], ((TotalStat) oStats["TotalOverallDamage"])));
-            stats.Add("PercentOfRegularDamage", new PercentStat("PercentOfRegularDamage", stats["RegularDamage"], ((TotalStat) oStats["RegularDamage"])));
-            stats.Add("PercentOfCriticalDamage", new PercentStat("PercentOfCriticalDamage", stats["CriticalDamage"], ((TotalStat) oStats["CriticalDamage"])));
+            stats.Add("PercentOfTotalOverallDamage", new PercentStat("PercentOfTotalOverallDamage", stats["TotalOverallDamage"], (TotalStat) oStats["TotalOverallDamage"]));
+            stats.Add("PercentOfRegularDamage", new PercentStat("PercentOfRegularDamage", stats["RegularDamage"], (TotalStat) oStats["RegularDamage"]));
+            stats.Add("PercentOfCriticalDamage", new PercentStat("PercentOfCriticalDamage", stats["CriticalDamage"], (TotalStat) oStats["CriticalDamage"]));
 
-            stats.Add("PercentOfTotalOverallDamageOverTime", new PercentStat("PercentOfTotalOverallDamageOverTime", stats["TotalOverallDamageOverTime"], ((TotalStat) oStats["TotalOverallDamageOverTime"])));
-            stats.Add("PercentOfRegularDamageOverTime", new PercentStat("PercentOfRegularDamageOverTime", stats["RegularDamageOverTime"], ((TotalStat) oStats["RegularDamageOverTime"])));
-            stats.Add("PercentOfCriticalDamageOverTime", new PercentStat("PercentOfCriticalDamageOverTime", stats["CriticalDamageOverTime"], ((TotalStat) oStats["CriticalDamageOverTime"])));
+            stats.Add("PercentOfTotalOverallDamageOverTime", new PercentStat("PercentOfTotalOverallDamageOverTime", stats["TotalOverallDamageOverTime"], (TotalStat) oStats["TotalOverallDamageOverTime"]));
+            stats.Add("PercentOfRegularDamageOverTime", new PercentStat("PercentOfRegularDamageOverTime", stats["RegularDamageOverTime"], (TotalStat) oStats["RegularDamageOverTime"]));
+            stats.Add("PercentOfCriticalDamageOverTime", new PercentStat("PercentOfCriticalDamageOverTime", stats["CriticalDamageOverTime"], (TotalStat) oStats["CriticalDamageOverTime"]));
 
             // healing
-            stats.Add("PercentOfTotalOverallHealing", new PercentStat("PercentOfTotalOverallHealing", stats["TotalOverallHealing"], ((TotalStat) oStats["TotalOverallHealing"])));
-            stats.Add("PercentOfRegularHealing", new PercentStat("PercentOfRegularHealing", stats["RegularHealing"], ((TotalStat) oStats["RegularHealing"])));
-            stats.Add("PercentOfCriticalHealing", new PercentStat("PercentOfCriticalHealing", stats["CriticalHealing"], ((TotalStat) oStats["CriticalHealing"])));
+            stats.Add("PercentOfTotalOverallHealing", new PercentStat("PercentOfTotalOverallHealing", stats["TotalOverallHealing"], (TotalStat) oStats["TotalOverallHealing"]));
+            stats.Add("PercentOfRegularHealing", new PercentStat("PercentOfRegularHealing", stats["RegularHealing"], (TotalStat) oStats["RegularHealing"]));
+            stats.Add("PercentOfCriticalHealing", new PercentStat("PercentOfCriticalHealing", stats["CriticalHealing"], (TotalStat) oStats["CriticalHealing"]));
 
-            stats.Add("PercentOfTotalOverallHealingOverHealing", new PercentStat("PercentOfTotalOverallHealingOverHealing", stats["TotalOverallHealingOverHealing"], ((TotalStat) oStats["TotalOverallHealingOverHealing"])));
-            stats.Add("PercentOfRegularHealingOverHealing", new PercentStat("PercentOfRegularHealingOverHealing", stats["RegularHealingOverHealing"], ((TotalStat) oStats["RegularHealingOverHealing"])));
-            stats.Add("PercentOfCriticalHealingOverHealing", new PercentStat("PercentOfCriticalHealingOverHealing", stats["CriticalHealingOverHealing"], ((TotalStat) oStats["CriticalHealingOverHealing"])));
+            stats.Add("PercentOfTotalOverallHealingOverHealing", new PercentStat("PercentOfTotalOverallHealingOverHealing", stats["TotalOverallHealingOverHealing"], (TotalStat) oStats["TotalOverallHealingOverHealing"]));
+            stats.Add("PercentOfRegularHealingOverHealing", new PercentStat("PercentOfRegularHealingOverHealing", stats["RegularHealingOverHealing"], (TotalStat) oStats["RegularHealingOverHealing"]));
+            stats.Add("PercentOfCriticalHealingOverHealing", new PercentStat("PercentOfCriticalHealingOverHealing", stats["CriticalHealingOverHealing"], (TotalStat) oStats["CriticalHealingOverHealing"]));
 
-            stats.Add("PercentOfTotalOverallHealingOverTime", new PercentStat("PercentOfTotalOverallHealingOverTime", stats["TotalOverallHealingOverTime"], ((TotalStat) oStats["TotalOverallHealingOverTime"])));
-            stats.Add("PercentOfRegularHealingOverTime", new PercentStat("PercentOfRegularHealingOverTime", stats["RegularHealingOverTime"], ((TotalStat) oStats["RegularHealingOverTime"])));
-            stats.Add("PercentOfCriticalHealingOverTime", new PercentStat("PercentOfCriticalHealingOverTime", stats["CriticalHealingOverTime"], ((TotalStat) oStats["CriticalHealingOverTime"])));
+            stats.Add("PercentOfTotalOverallHealingOverTime", new PercentStat("PercentOfTotalOverallHealingOverTime", stats["TotalOverallHealingOverTime"], (TotalStat) oStats["TotalOverallHealingOverTime"]));
+            stats.Add("PercentOfRegularHealingOverTime", new PercentStat("PercentOfRegularHealingOverTime", stats["RegularHealingOverTime"], (TotalStat) oStats["RegularHealingOverTime"]));
+            stats.Add("PercentOfCriticalHealingOverTime", new PercentStat("PercentOfCriticalHealingOverTime", stats["CriticalHealingOverTime"], (TotalStat) oStats["CriticalHealingOverTime"]));
 
-            stats.Add("PercentOfTotalOverallHealingMitigated", new PercentStat("PercentOfTotalOverallHealingMitigated", stats["TotalOverallHealingMitigated"], ((TotalStat) oStats["TotalOverallHealingMitigated"])));
-            stats.Add("PercentOfRegularHealingMitigated", new PercentStat("PercentOfRegularHealingMitigated", stats["RegularHealingMitigated"], ((TotalStat) oStats["RegularHealingMitigated"])));
-            stats.Add("PercentOfCriticalHealingMitigated", new PercentStat("PercentOfCriticalHealingMitigated", stats["CriticalHealingMitigated"], ((TotalStat) oStats["CriticalHealingMitigated"])));
+            stats.Add("PercentOfTotalOverallHealingMitigated", new PercentStat("PercentOfTotalOverallHealingMitigated", stats["TotalOverallHealingMitigated"], (TotalStat) oStats["TotalOverallHealingMitigated"]));
+            stats.Add("PercentOfRegularHealingMitigated", new PercentStat("PercentOfRegularHealingMitigated", stats["RegularHealingMitigated"], (TotalStat) oStats["RegularHealingMitigated"]));
+            stats.Add("PercentOfCriticalHealingMitigated", new PercentStat("PercentOfCriticalHealingMitigated", stats["CriticalHealingMitigated"], (TotalStat) oStats["CriticalHealingMitigated"]));
 
             // damage taken
-            stats.Add("PercentOfTotalOverallDamageTaken", new PercentStat("PercentOfTotalOverallDamageTaken", stats["TotalOverallDamageTaken"], ((TotalStat) oStats["TotalOverallDamageTaken"])));
-            stats.Add("PercentOfRegularDamageTaken", new PercentStat("PercentOfRegularDamageTaken", stats["RegularDamageTaken"], ((TotalStat) oStats["RegularDamageTaken"])));
-            stats.Add("PercentOfCriticalDamageTaken", new PercentStat("PercentOfCriticalDamageTaken", stats["CriticalDamageTaken"], ((TotalStat) oStats["CriticalDamageTaken"])));
+            stats.Add("PercentOfTotalOverallDamageTaken", new PercentStat("PercentOfTotalOverallDamageTaken", stats["TotalOverallDamageTaken"], (TotalStat) oStats["TotalOverallDamageTaken"]));
+            stats.Add("PercentOfRegularDamageTaken", new PercentStat("PercentOfRegularDamageTaken", stats["RegularDamageTaken"], (TotalStat) oStats["RegularDamageTaken"]));
+            stats.Add("PercentOfCriticalDamageTaken", new PercentStat("PercentOfCriticalDamageTaken", stats["CriticalDamageTaken"], (TotalStat) oStats["CriticalDamageTaken"]));
 
-            stats.Add("PercentOfTotalOverallDamageTakenOverTime", new PercentStat("PercentOfTotalOverallDamageTakenOverTime", stats["TotalOverallDamageTakenOverTime"], ((TotalStat) oStats["TotalOverallDamageTakenOverTime"])));
-            stats.Add("PercentOfRegularDamageTakenOverTime", new PercentStat("PercentOfRegularDamageTakenOverTime", stats["RegularDamageTakenOverTime"], ((TotalStat) oStats["RegularDamageTakenOverTime"])));
-            stats.Add("PercentOfCriticalDamageTakenOverTime", new PercentStat("PercentOfCriticalDamageTakenOverTime", stats["CriticalDamageTakenOverTime"], ((TotalStat) oStats["CriticalDamageTakenOverTime"])));
+            stats.Add("PercentOfTotalOverallDamageTakenOverTime", new PercentStat("PercentOfTotalOverallDamageTakenOverTime", stats["TotalOverallDamageTakenOverTime"], (TotalStat) oStats["TotalOverallDamageTakenOverTime"]));
+            stats.Add("PercentOfRegularDamageTakenOverTime", new PercentStat("PercentOfRegularDamageTakenOverTime", stats["RegularDamageTakenOverTime"], (TotalStat) oStats["RegularDamageTakenOverTime"]));
+            stats.Add("PercentOfCriticalDamageTakenOverTime", new PercentStat("PercentOfCriticalDamageTakenOverTime", stats["CriticalDamageTakenOverTime"], (TotalStat) oStats["CriticalDamageTakenOverTime"]));
 
             #endregion Global Percent Of Total Stats
 

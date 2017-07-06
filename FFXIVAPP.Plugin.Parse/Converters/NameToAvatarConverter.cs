@@ -27,6 +27,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
 using HtmlAgilityPack;
 using NLog;
@@ -90,9 +91,9 @@ namespace FFXIVAPP.Plugin.Parse.Converters
             {
                 return source;
             }
-            name = Regex.Replace(name, @"\[[\w]+\]", "")
+            name = Regex.Replace(name, @"\[[\w]+\]", string.Empty)
                         .Trim();
-            var fileName = String.Format("{0}.{1}.{2}", Constants.ServerName, name.Replace(" ", ""), "png");
+            var fileName = $"{Constants.ServerName}.{name.Replace(" ", string.Empty)}.{"png"}";
             var cachePath = Path.Combine(AvatarCache, fileName);
             if (_cachingEnabled && File.Exists(cachePath))
             {
@@ -123,7 +124,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                                 doc.Load(stream);
                                 var htmlSource = doc.DocumentNode.SelectSingleNode("//html")
                                                     .OuterHtml;
-                                var src = new Regex(@"<img src=""(?<image>.+)"" width=""50"" height=""50"" alt="""">", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.IgnoreCase);
+                                var src = new Regex(@"<img src=string.Empty(?<image>.+)string.Empty width=string.Empty50string.Empty height=string.Empty50string.Empty alt=string.Emptystring.Empty>", RegexOptions.ExplicitCapture | RegexOptions.Multiline | RegexOptions.IgnoreCase);
                                 var imageUrl = src.Match(htmlSource)
                                                   .Groups["image"]
                                                   .Value;
@@ -144,6 +145,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
                 IsProcessing = false;
                 return true;
@@ -196,6 +198,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
             return DefaultAvatar;
         }

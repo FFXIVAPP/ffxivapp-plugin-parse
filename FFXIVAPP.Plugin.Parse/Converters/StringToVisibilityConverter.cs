@@ -19,18 +19,27 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Properties;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Converters
 {
     public class StringToVisibilityConverter : IValueConverter
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
                 var tag = value.ToString();
-                var displayProperty = "";
+                var displayProperty = string.Empty;
                 switch (tag)
                 {
                     case "DPS":
@@ -70,6 +79,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
             return Visibility.Collapsed;
         }

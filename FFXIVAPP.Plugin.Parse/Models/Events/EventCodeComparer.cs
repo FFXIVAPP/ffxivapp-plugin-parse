@@ -28,7 +28,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         /// <returns> </returns>
         public bool Equals(EventCode eventCode1, EventCode eventCode2)
         {
-            return (eventCode1.Code == eventCode2.Code);
+            return eventCode1.Code == eventCode2.Code;
         }
 
         /// <summary>

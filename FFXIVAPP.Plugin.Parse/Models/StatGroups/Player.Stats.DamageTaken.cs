@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Linq;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models.Stats;
@@ -128,7 +127,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             foreach (var stat in fields.Where(stat => LD.Contains(stat.Name))
                                        .Where(stat => Equals(stat.GetValue(line), true)))
             {
-                var regStat = String.Format("DamageTaken{0}", stat.Name);
+                var regStat = $"DamageTaken{stat.Name}";
                 Stats.IncrementStat(regStat);
                 subAbilityGroup.Stats.IncrementStat(regStat);
                 subMonsterGroup.Stats.IncrementStat(regStat);
@@ -138,7 +137,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     continue;
                 }
                 var mod = ParseHelper.GetBonusAmount(line.Amount, line.Modifier);
-                var modStat = String.Format("DamageTaken{0}Mod", stat.Name);
+                var modStat = $"DamageTaken{stat.Name}Mod";
                 Stats.IncrementStat(modStat, mod);
                 subAbilityGroup.Stats.IncrementStat(modStat, mod);
                 subMonsterGroup.Stats.IncrementStat(modStat, mod);

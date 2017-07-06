@@ -60,7 +60,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
                 Value = 0;
                 return;
             }
-            Value = (_numerator.Value / _denominator.Value);
+            Value = _numerator.Value / _denominator.Value;
         }
 
         /// <summary>

@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models.Stats;
@@ -122,8 +121,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         public void SetupHealingMitigated(Line line, string type = "")
         {
-            var cleanedAction = Regex.Replace(line.Action, @" \[.+\]", "");
-            line.Action = String.Format("{0} [☯]", cleanedAction);
+            var cleanedAction = Regex.Replace(line.Action, @" \[.+\]", string.Empty);
+            line.Action = $"{cleanedAction} [☯]";
             switch (type)
             {
                 case "adloquium":

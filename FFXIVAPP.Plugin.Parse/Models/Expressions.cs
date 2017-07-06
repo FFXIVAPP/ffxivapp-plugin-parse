@@ -51,7 +51,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
         public Expressions(Event e)
         {
             Event = e;
-            Cleaned = e.ChatLogEntry == null ? "" : e.ChatLogEntry.Line;
+            Cleaned = e.ChatLogEntry == null ? string.Empty : e.ChatLogEntry.Line;
             Initialize();
         }
 

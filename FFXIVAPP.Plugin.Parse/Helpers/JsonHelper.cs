@@ -21,7 +21,9 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.History;
@@ -30,11 +32,18 @@ using FFXIVAPP.Plugin.Parse.Models.Stats;
 using FFXIVAPP.Plugin.Parse.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Helpers
 {
     public static class JsonHelper
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public class JsonParse
         {
             public string Name { get; set; }
@@ -42,7 +51,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
 
             public bool IsValid
             {
-                get { return (!String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(Parse)); }
+                get { return !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(Parse); }
             }
         }
 
@@ -138,7 +147,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 var start = ParseControl.Instance.StartTime;
                 var end = DateTime.Now;
                 var parseLength = end - start;
-                var parseTimeDetails = String.Format("{0} -> {1} [{2}]", start, end, parseLength);
+                var parseTimeDetails = $"{start} -> {end} [{parseLength}]";
                 var zone = "UNKNOWN";
                 if (XIVInfoViewModel.Instance.CurrentUser != null)
                 {
@@ -190,13 +199,14 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
 
                 #endregion
 
                 return new JsonParse
                 {
-                    Name = String.Format("{0} [{1}] {2}", zone, monsterName, parseTimeDetails),
+                    Name = $"{zone} [{monsterName}] {parseTimeDetails}",
                     Parse = JsonConvert.SerializeObject(historyItem, new JsonSerializerSettings
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -319,6 +329,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
                 try
                 {
@@ -329,10 +340,11 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
                 historyItem.ParseLength = historyItem.End - historyItem.Start;
-                var parseTimeDetails = String.Format("{0} -> {1} [{2}]", historyItem.Start, historyItem.End, historyItem.ParseLength);
-                historyItem.Name = String.Format("{0} [{1}] {2}", zone, monsterName, parseTimeDetails);
+                var parseTimeDetails = $"{historyItem.Start} -> {historyItem.End} [{historyItem.ParseLength}]";
+                historyItem.Name = $"{zone} [{monsterName}] {parseTimeDetails}";
                 DispatcherHelper.Invoke(() => MainViewModel.Instance.ParseHistory.Insert(1, historyItem));
             }
 
@@ -364,6 +376,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                     RabbitHoleCopy(ref newParent, group);
                 }

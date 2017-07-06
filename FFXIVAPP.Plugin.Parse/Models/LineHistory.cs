@@ -18,6 +18,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.ViewModels;
 using NLog;
@@ -102,6 +104,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 

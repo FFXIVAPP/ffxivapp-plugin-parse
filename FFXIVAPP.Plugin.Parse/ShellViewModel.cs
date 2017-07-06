@@ -75,7 +75,7 @@ namespace FFXIVAPP.Plugin.Parse
                         Settings.Default.DPSWidgetWidth = (int) (250 * Double.Parse(Settings.Default.DPSWidgetUIScale));
                         Settings.Default.DPSWidgetHeight = (int) (450 * Double.Parse(Settings.Default.DPSWidgetUIScale));
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         Settings.Default.DPSWidgetWidth = 250;
                         Settings.Default.DPSWidgetHeight = 450;
@@ -87,7 +87,7 @@ namespace FFXIVAPP.Plugin.Parse
                         Settings.Default.HPSWidgetWidth = (int) (250 * Double.Parse(Settings.Default.HPSWidgetUIScale));
                         Settings.Default.HPSWidgetHeight = (int) (450 * Double.Parse(Settings.Default.HPSWidgetUIScale));
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         Settings.Default.HPSWidgetWidth = 250;
                         Settings.Default.HPSWidgetHeight = 450;
@@ -99,7 +99,7 @@ namespace FFXIVAPP.Plugin.Parse
                         Settings.Default.DTPSWidgetWidth = (int) (250 * Double.Parse(Settings.Default.DTPSWidgetUIScale));
                         Settings.Default.DTPSWidgetHeight = (int) (450 * Double.Parse(Settings.Default.DTPSWidgetUIScale));
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         Settings.Default.DTPSWidgetWidth = 250;
                         Settings.Default.DTPSWidgetHeight = 450;
@@ -114,7 +114,7 @@ namespace FFXIVAPP.Plugin.Parse
                         DPSWidget.View.Party.Items.SortDescriptions.Clear();
                         DPSWidget.View.Party.Items.SortDescriptions.Add(sortDescription);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         DPSWidget.View.Party.Items.SortDescriptions.Clear();
                         DPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("DPS", ListSortDirection.Descending));
@@ -130,7 +130,7 @@ namespace FFXIVAPP.Plugin.Parse
                         HPSWidget.View.Party.Items.SortDescriptions.Clear();
                         HPSWidget.View.Party.Items.SortDescriptions.Add(sortDescription);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         HPSWidget.View.Party.Items.SortDescriptions.Clear();
                         HPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("HPS", ListSortDirection.Descending));
@@ -146,7 +146,7 @@ namespace FFXIVAPP.Plugin.Parse
                         DTPSWidget.View.Party.Items.SortDescriptions.Clear();
                         DTPSWidget.View.Party.Items.SortDescriptions.Add(sortDescription);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         DTPSWidget.View.Party.Items.SortDescriptions.Clear();
                         DTPSWidget.View.Party.Items.SortDescriptions.Add(new SortDescription("DTPS", ListSortDirection.Descending));

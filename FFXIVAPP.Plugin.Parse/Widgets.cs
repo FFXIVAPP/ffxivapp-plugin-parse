@@ -16,12 +16,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Windows;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse
 {
     public class Widgets
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         private static Widgets _instance;
         private DPSWidget _dpsWidget;
         private DTPSWidget _dtpsWidget;
@@ -56,6 +65,7 @@ namespace FFXIVAPP.Plugin.Parse
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
@@ -67,6 +77,7 @@ namespace FFXIVAPP.Plugin.Parse
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
@@ -78,6 +89,7 @@ namespace FFXIVAPP.Plugin.Parse
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
     }

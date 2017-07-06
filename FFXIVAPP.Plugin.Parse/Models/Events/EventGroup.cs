@@ -96,7 +96,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
                 UInt64 combinedFlags = 0x0;
                 if ((_flags & EventParser.DirectionMask) != 0)
                 {
-                    combinedFlags |= (_flags & EventParser.DirectionMask);
+                    combinedFlags |= _flags & EventParser.DirectionMask;
                 }
                 else
                 {
@@ -104,7 +104,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
                 }
                 if ((_flags & EventParser.SubjectMask) != 0)
                 {
-                    combinedFlags |= (_flags & EventParser.SubjectMask);
+                    combinedFlags |= _flags & EventParser.SubjectMask;
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
                 }
                 if ((_flags & EventParser.TypeMask) != 0)
                 {
-                    combinedFlags |= (_flags & EventParser.TypeMask);
+                    combinedFlags |= _flags & EventParser.TypeMask;
                 }
                 else
                 {
@@ -127,7 +127,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
             get { return (EventDirection) (Flags & EventParser.DirectionMask); }
             set
             {
-                _flags = ((_flags & ~EventParser.DirectionMask) | (UInt64) value);
+                _flags = (_flags & ~EventParser.DirectionMask) | (UInt64) value;
                 RaisePropertyChanged();
             }
         }
@@ -137,7 +137,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
             get { return (EventSubject) (Flags & EventParser.SubjectMask); }
             set
             {
-                _flags = ((_flags & ~EventParser.SubjectMask) | (UInt64) value);
+                _flags = (_flags & ~EventParser.SubjectMask) | (UInt64) value;
                 RaisePropertyChanged();
             }
         }
@@ -147,7 +147,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
             get { return (EventType) (Flags & EventParser.TypeMask); }
             set
             {
-                _flags = ((_flags & ~EventParser.TypeMask) | (UInt32) value);
+                _flags = (_flags & ~EventParser.TypeMask) | (UInt32) value;
                 RaisePropertyChanged();
             }
         }
@@ -157,7 +157,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
             get { return _parent; }
             set
             {
-                if ((_parent != null) && (value != null))
+                if (_parent != null && value != null)
                 {
                     _parent._children.Remove(this);
                 }

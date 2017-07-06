@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Models.Fights;
 
@@ -30,12 +29,12 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
         {
             if (fight.MonsterName != Name)
             {
-                Logging.Log(Logger, String.Format("KillEvent : Got request to add kill stats for {0}, but my name is {1}!", fight.MonsterName, Name));
+                Logging.Log(Logger, $"KillEvent : Got request to add kill stats for {fight.MonsterName}, but my name is {Name}!");
                 return;
             }
-            if (fight.MonsterName == "")
+            if (fight.MonsterName == string.Empty)
             {
-                Logging.Log(Logger, String.Format("KillEvent : Got request to add kill stats for {0}, but no name!", fight.MonsterName));
+                Logging.Log(Logger, $"KillEvent : Got request to add kill stats for {fight.MonsterName}, but no name!");
                 return;
             }
             Stats.IncrementStat("TotalKilled");

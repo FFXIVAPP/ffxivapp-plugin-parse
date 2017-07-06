@@ -108,7 +108,7 @@ namespace FFXIVAPP.Plugin.Parse
                         _xSettings = found ? XDocument.Load(legacyFile) : ResourceHelper.XDocResource(LibraryPack + "/Defaults/Settings.xml");
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     _xSettings = ResourceHelper.XDocResource(LibraryPack + "/Defaults/Settings.xml");
                 }
@@ -131,7 +131,7 @@ namespace FFXIVAPP.Plugin.Parse
                     var found = File.Exists(file);
                     _xRegEx = found ? XDocument.Load(file) : ResourceHelper.XDocResource(LibraryPack + "/Defaults/RegularExpressions.xml");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     _xRegEx = ResourceHelper.XDocResource(LibraryPack + "/Defaults/RegularExpressions.xml");
                 }

@@ -41,7 +41,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
         /// <param name="parseControl"> </param>
         public TimelineMonitor(ParseControl parseControl) : base("Timeline", parseControl)
         {
-            Filter = (EventParser.SubjectMask | EventParser.DirectionMask | (UInt64) EventType.Loot | (UInt64) EventType.Defeats);
+            Filter = EventParser.SubjectMask | EventParser.DirectionMask | (UInt64) EventType.Loot | (UInt64) EventType.Defeats;
         }
 
         private Expressions Expressions { get; set; }
@@ -102,7 +102,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
             }
             if (!matches.Success)
             {
-                ParseControl.Timeline.PublishTimelineEvent(TimelineEventType.PartyMonsterKilled, "");
+                ParseControl.Timeline.PublishTimelineEvent(TimelineEventType.PartyMonsterKilled, string.Empty);
                 ParsingLogHelper.Log(Logger, "Defeat", e);
                 return;
             }
@@ -170,14 +170,14 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
         /// <param name="e"></param>
         private void AttachDropToPartyMonster(string thing, Event e)
         {
-            var monsterName = ParseControl.Timeline.FightingRightNow ? ParseControl.Timeline.LastEngaged : "";
+            var monsterName = ParseControl.Timeline.FightingRightNow ? ParseControl.Timeline.LastEngaged : string.Empty;
             if (ParseControl.Instance.Timeline.FightingRightNow)
             {
                 Fight fight;
                 if (ParseControl.Timeline.Fights.TryGet(ParseControl.Timeline.LastEngaged, out fight))
                 {
                     monsterName = fight.MonsterName;
-                    if (monsterName.Replace(" ", "") != "")
+                    if (monsterName.Replace(" ", string.Empty) != string.Empty)
                     {
                         var monsterGroup = ParseControl.Timeline.GetSetMonster(monsterName);
                         monsterGroup.SetDrop(thing);

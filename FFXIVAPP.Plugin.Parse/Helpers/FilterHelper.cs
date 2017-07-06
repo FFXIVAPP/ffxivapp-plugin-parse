@@ -37,14 +37,14 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
             {
                 return filters;
             }
-            return (filters | filter);
+            return filters | filter;
         }
 
         public static UInt64 Disable(UInt64 filters, UInt64 filter)
         {
             if (IsEnabled(filters, filter))
             {
-                return (filters & (~filter));
+                return filters & ~filter;
             }
             return filters;
         }

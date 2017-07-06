@@ -18,14 +18,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Properties;
 using FFXIVAPP.Plugin.Parse.Windows;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Helpers
 {
     public static class EntityHelper
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public static class Parse
         {
             public enum ParseType
@@ -144,6 +153,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                         }
                         catch (Exception ex)
                         {
+                            Logging.Log(Logger, new LogItem(ex, true));
                         }
                     }
                     // sort entity based on settings
@@ -336,6 +346,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
             }
         }

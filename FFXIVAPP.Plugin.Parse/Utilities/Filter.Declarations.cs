@@ -24,88 +24,88 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
         // setup you
         private static Event _lastEventYou;
 
-        private static string _lastActionYou = "";
+        private static string _lastActionYou = string.Empty;
 
         private static bool _lastActionYouIsAttack;
 
         // setup you pet
         private static Event _lastEventPet;
 
-        private static string _lastNamePet = "";
-        private static string _lastActionPet = "";
+        private static string _lastNamePet = string.Empty;
+        private static string _lastActionPet = string.Empty;
 
         private static bool _lastActionPetIsAttack;
 
         // setup party info
         private static Event _lastEventParty;
 
-        private static string _lastNamePartyFrom = "";
-        private static string _lastActionPartyFrom = "";
-        private static string _lastNamePartyHealingFrom = "";
-        private static string _lastActionPartyHealingFrom = "";
-        private static string _lastNamePartyTo = "";
+        private static string _lastNamePartyFrom = string.Empty;
+        private static string _lastActionPartyFrom = string.Empty;
+        private static string _lastNamePartyHealingFrom = string.Empty;
+        private static string _lastActionPartyHealingFrom = string.Empty;
+        private static string _lastNamePartyTo = string.Empty;
 
         private static bool _lastActionPartyIsAttack;
 
         // setup party pet info
         private static Event _lastEventPetParty;
 
-        private static string _lastNamePetPartyFrom = "";
-        private static string _lastActionPetPartyFrom = "";
-        private static string _lastNamePetPartyHealingFrom = "";
-        private static string _lastActionPetPartyHealingFrom = "";
-        private static string _lastNamePetPartyTo = "";
+        private static string _lastNamePetPartyFrom = string.Empty;
+        private static string _lastActionPetPartyFrom = string.Empty;
+        private static string _lastNamePetPartyHealingFrom = string.Empty;
+        private static string _lastActionPetPartyHealingFrom = string.Empty;
+        private static string _lastNamePetPartyTo = string.Empty;
 
         private static bool _lastActionPetPartyIsAttack;
 
         // setup alliance info
         private static Event _lastEventAlliance;
 
-        private static string _lastNameAllianceFrom = "";
-        private static string _lastActionAllianceFrom = "";
-        private static string _lastNameAllianceHealingFrom = "";
-        private static string _lastActionAllianceHealingFrom = "";
-        private static string _lastNameAllianceTo = "";
+        private static string _lastNameAllianceFrom = string.Empty;
+        private static string _lastActionAllianceFrom = string.Empty;
+        private static string _lastNameAllianceHealingFrom = string.Empty;
+        private static string _lastActionAllianceHealingFrom = string.Empty;
+        private static string _lastNameAllianceTo = string.Empty;
 
         private static bool _lastActionAllianceIsAttack;
 
         // setup alliancepet  info
         private static Event _lastEventPetAlliance;
 
-        private static string _lastNamePetAllianceFrom = "";
-        private static string _lastActionPetAllianceFrom = "";
-        private static string _lastNamePetAllianceHealingFrom = "";
-        private static string _lastActionPetAllianceHealingFrom = "";
-        private static string _lastNamePetAllianceTo = "";
+        private static string _lastNamePetAllianceFrom = string.Empty;
+        private static string _lastActionPetAllianceFrom = string.Empty;
+        private static string _lastNamePetAllianceHealingFrom = string.Empty;
+        private static string _lastActionPetAllianceHealingFrom = string.Empty;
+        private static string _lastNamePetAllianceTo = string.Empty;
 
         private static bool _lastActionPetAllianceIsAttack;
 
         // setup other info
         private static Event _lastEventOther;
 
-        private static string _lastNameOtherFrom = "";
-        private static string _lastActionOtherFrom = "";
-        private static string _lastNameOtherHealingFrom = "";
-        private static string _lastActionOtherHealingFrom = "";
-        private static string _lastNameOtherTo = "";
+        private static string _lastNameOtherFrom = string.Empty;
+        private static string _lastActionOtherFrom = string.Empty;
+        private static string _lastNameOtherHealingFrom = string.Empty;
+        private static string _lastActionOtherHealingFrom = string.Empty;
+        private static string _lastNameOtherTo = string.Empty;
 
         private static bool _lastActionOtherIsAttack;
 
         // setup otherpet  info
         private static Event _lastEventPetOther;
 
-        private static string _lastNamePetOtherFrom = "";
-        private static string _lastActionPetOtherFrom = "";
-        private static string _lastNamePetOtherHealingFrom = "";
-        private static string _lastActionPetOtherHealingFrom = "";
-        private static string _lastNamePetOtherTo = "";
+        private static string _lastNamePetOtherFrom = string.Empty;
+        private static string _lastActionPetOtherFrom = string.Empty;
+        private static string _lastNamePetOtherHealingFrom = string.Empty;
+        private static string _lastActionPetOtherHealingFrom = string.Empty;
+        private static string _lastNamePetOtherTo = string.Empty;
 
         private static bool _lastActionPetOtherIsAttack;
 
         // setup monster info
-        private static string _lastNameMonster = "";
+        private static string _lastNameMonster = string.Empty;
 
-        private static string _lastActionMonster = "";
+        private static string _lastActionMonster = string.Empty;
         private static bool _lastActionMonsterIsAttack;
     }
 }

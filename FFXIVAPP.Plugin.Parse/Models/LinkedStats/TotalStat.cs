@@ -40,7 +40,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
         /// <param name="newValue"> </param>
         public override void DoDependencyValueChanged(object sender, object previousValue, object newValue)
         {
-            Value += ((double) newValue - (double) previousValue);
+            Value += (double) newValue - (double) previousValue;
         }
     }
 }

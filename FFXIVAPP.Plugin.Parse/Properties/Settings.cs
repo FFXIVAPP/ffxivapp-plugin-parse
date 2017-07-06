@@ -39,11 +39,17 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 {
     internal class Settings : ApplicationSettingsBase, INotifyPropertyChanged
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         private static Settings _default;
 
         public static Settings Default
         {
-            get { return _default ?? (_default = ((Settings) (Synchronized(new Settings())))); }
+            get { return _default ?? (_default = (Settings) Synchronized(new Settings())); }
         }
 
         public override void Save()
@@ -618,7 +624,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
             }
             catch (Exception ex)
             {
-                Logging.Log(LogManager.GetCurrentClassLogger(), "", ex);
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
@@ -677,7 +683,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("100")]
         public Double Zoom
         {
-            get { return ((Double) (this["Zoom"])); }
+            get { return (Double) this["Zoom"]; }
             set
             {
                 this["Zoom"] = value;
@@ -690,7 +696,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Damage Only")]
         public string StoreHistoryEvent
         {
-            get { return ((string) (this["StoreHistoryEvent"])); }
+            get { return (string) this["StoreHistoryEvent"]; }
             set
             {
                 this["StoreHistoryEvent"] = value;
@@ -703,7 +709,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." + "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" + "tring>Damage Only</string>\r\n  <string>Any</string>\r\n</ArrayOfString>")]
         public StringCollection StoreHistoryEventList
         {
-            get { return ((StringCollection) (this["StoreHistoryEventList"])); }
+            get { return (StringCollection) this["StoreHistoryEventList"]; }
         }
 
         [UserScopedSetting]
@@ -711,7 +717,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("10000")]
         public string StoreHistoryInterval
         {
-            get { return ((string) (this["StoreHistoryInterval"])); }
+            get { return (string) this["StoreHistoryInterval"]; }
             set
             {
                 this["StoreHistoryInterval"] = value;
@@ -724,7 +730,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool EnableStoreHistoryReset
         {
-            get { return ((bool) (this["EnableStoreHistoryReset"])); }
+            get { return (bool) this["EnableStoreHistoryReset"]; }
             set
             {
                 this["EnableStoreHistoryReset"] = value;
@@ -737,7 +743,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ParseAdvanced
         {
-            get { return ((bool) (this["ParseAdvanced"])); }
+            get { return (bool) this["ParseAdvanced"]; }
             set
             {
                 this["ParseAdvanced"] = value;
@@ -750,7 +756,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool IgnoreLimitBreaks
         {
-            get { return ((bool) (this["IgnoreLimitBreaks"])); }
+            get { return (bool) this["IgnoreLimitBreaks"]; }
             set
             {
                 this["IgnoreLimitBreaks"] = value;
@@ -763,7 +769,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool TrackXPSFromParseStartEvent
         {
-            get { return ((bool) (this["TrackXPSFromParseStartEvent"])); }
+            get { return (bool) this["TrackXPSFromParseStartEvent"]; }
             set
             {
                 this["TrackXPSFromParseStartEvent"] = value;
@@ -776,7 +782,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ParseYou
         {
-            get { return ((bool) (this["ParseYou"])); }
+            get { return (bool) this["ParseYou"]; }
             set
             {
                 this["ParseYou"] = value;
@@ -789,7 +795,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ParseParty
         {
-            get { return ((bool) (this["ParseParty"])); }
+            get { return (bool) this["ParseParty"]; }
             set
             {
                 this["ParseParty"] = value;
@@ -802,7 +808,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ParseAlliance
         {
-            get { return ((bool) (this["ParseAlliance"])); }
+            get { return (bool) this["ParseAlliance"]; }
             set
             {
                 this["ParseAlliance"] = value;
@@ -815,7 +821,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ParseOther
         {
-            get { return ((bool) (this["ParseOther"])); }
+            get { return (bool) this["ParseOther"]; }
             set
             {
                 this["ParseOther"] = value;
@@ -828,7 +834,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("0.7")]
         public string WidgetOpacity
         {
-            get { return ((string) (this["WidgetOpacity"])); }
+            get { return (string) this["WidgetOpacity"]; }
             set
             {
                 this["WidgetOpacity"] = value;
@@ -838,8 +844,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0.5</string>
   <string>0.6</string>
   <string>0.7</string>
@@ -849,7 +855,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection WidgetOpacityList
         {
-            get { return ((StringCollection) (this["WidgetOpacityList"])); }
+            get { return (StringCollection) this["WidgetOpacityList"]; }
             set
             {
                 this["WidgetOpacityList"] = value;
@@ -862,7 +868,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool WidgetClickThroughEnabled
         {
-            get { return ((bool) (this["WidgetClickThroughEnabled"])); }
+            get { return (bool) this["WidgetClickThroughEnabled"]; }
             set
             {
                 this["WidgetClickThroughEnabled"] = value;
@@ -875,7 +881,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowTitlesOnWidgets
         {
-            get { return ((bool) (this["ShowTitlesOnWidgets"])); }
+            get { return (bool) this["ShowTitlesOnWidgets"]; }
             set
             {
                 this["ShowTitlesOnWidgets"] = value;
@@ -888,7 +894,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowJobNameInWidgets
         {
-            get { return ((bool) (this["ShowJobNameInWidgets"])); }
+            get { return (bool) this["ShowJobNameInWidgets"]; }
             set
             {
                 this["ShowJobNameInWidgets"] = value;
@@ -903,7 +909,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("FF00FF00")]
         public string DefaultProgressBarForeground
         {
-            get { return ((string) (this["DefaultProgressBarForeground"])); }
+            get { return (string) this["DefaultProgressBarForeground"]; }
             set
             {
                 this["DefaultProgressBarForeground"] = value;
@@ -916,7 +922,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("SkyBlue")]
         public string PLDProgressBarForeground
         {
-            get { return ((string) (this["PLDProgressBarForeground"])); }
+            get { return (string) this["PLDProgressBarForeground"]; }
             set
             {
                 this["PLDProgressBarForeground"] = value;
@@ -929,7 +935,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("DarkSlateBlue")]
         public string DRGProgressBarForeground
         {
-            get { return ((string) (this["DRGProgressBarForeground"])); }
+            get { return (string) this["DRGProgressBarForeground"]; }
             set
             {
                 this["DRGProgressBarForeground"] = value;
@@ -942,7 +948,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Purple")]
         public string BLMProgressBarForeground
         {
-            get { return ((string) (this["BLMProgressBarForeground"])); }
+            get { return (string) this["BLMProgressBarForeground"]; }
             set
             {
                 this["BLMProgressBarForeground"] = value;
@@ -955,7 +961,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Red")]
         public string WARProgressBarForeground
         {
-            get { return ((string) (this["WARProgressBarForeground"])); }
+            get { return (string) this["WARProgressBarForeground"]; }
             set
             {
                 this["WARProgressBarForeground"] = value;
@@ -968,7 +974,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("White")]
         public string WHMProgressBarForeground
         {
-            get { return ((string) (this["WHMProgressBarForeground"])); }
+            get { return (string) this["WHMProgressBarForeground"]; }
             set
             {
                 this["WHMProgressBarForeground"] = value;
@@ -981,7 +987,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("MediumPurple")]
         public string SCHProgressBarForeground
         {
-            get { return ((string) (this["SCHProgressBarForeground"])); }
+            get { return (string) this["SCHProgressBarForeground"]; }
             set
             {
                 this["SCHProgressBarForeground"] = value;
@@ -994,7 +1000,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("GoldenRod")]
         public string MNKProgressBarForeground
         {
-            get { return ((string) (this["MNKProgressBarForeground"])); }
+            get { return (string) this["MNKProgressBarForeground"]; }
             set
             {
                 this["MNKProgressBarForeground"] = value;
@@ -1007,7 +1013,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("GreenYellow")]
         public string BRDProgressBarForeground
         {
-            get { return ((string) (this["BRDProgressBarForeground"])); }
+            get { return (string) this["BRDProgressBarForeground"]; }
             set
             {
                 this["BRDProgressBarForeground"] = value;
@@ -1020,7 +1026,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("LimeGreen")]
         public string SMNProgressBarForeground
         {
-            get { return ((string) (this["SMNProgressBarForeground"])); }
+            get { return (string) this["SMNProgressBarForeground"]; }
             set
             {
                 this["SMNProgressBarForeground"] = value;
@@ -1037,7 +1043,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("250")]
         public int DPSWidgetWidth
         {
-            get { return ((int) (this["DPSWidgetWidth"])); }
+            get { return (int) this["DPSWidgetWidth"]; }
             set
             {
                 this["DPSWidgetWidth"] = value;
@@ -1050,7 +1056,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("450")]
         public int DPSWidgetHeight
         {
-            get { return ((int) (this["DPSWidgetHeight"])); }
+            get { return (int) this["DPSWidgetHeight"]; }
             set
             {
                 this["DPSWidgetHeight"] = value;
@@ -1063,7 +1069,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Descending")]
         public string DPSWidgetSortDirection
         {
-            get { return ((string) (this["DPSWidgetSortDirection"])); }
+            get { return (string) this["DPSWidgetSortDirection"]; }
             set
             {
                 this["DPSWidgetSortDirection"] = value;
@@ -1073,14 +1079,14 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Ascending</string>
   <string>Descending</string>
 </ArrayOfString>")]
         public StringCollection DPSWidgetSortDirectionList
         {
-            get { return ((StringCollection) (this["DPSWidgetSortDirectionList"])); }
+            get { return (StringCollection) this["DPSWidgetSortDirectionList"]; }
         }
 
         [UserScopedSetting]
@@ -1088,7 +1094,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("CombinedDPS")]
         public string DPSWidgetSortProperty
         {
-            get { return ((string) (this["DPSWidgetSortProperty"])); }
+            get { return (string) this["DPSWidgetSortProperty"]; }
             set
             {
                 this["DPSWidgetSortProperty"] = value;
@@ -1098,8 +1104,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Name</string>
   <string>Job</string>
   <string>DPS</string>
@@ -1110,7 +1116,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection DPSWidgetSortPropertyList
         {
-            get { return ((StringCollection) (this["DPSWidgetSortPropertyList"])); }
+            get { return (StringCollection) this["DPSWidgetSortPropertyList"]; }
         }
 
         [UserScopedSetting]
@@ -1118,7 +1124,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Combined")]
         public string DPSWidgetDisplayProperty
         {
-            get { return ((string) (this["DPSWidgetDisplayProperty"])); }
+            get { return (string) this["DPSWidgetDisplayProperty"]; }
             set
             {
                 this["DPSWidgetDisplayProperty"] = value;
@@ -1128,14 +1134,14 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Combined</string>
   <string>Individual</string>
 </ArrayOfString>")]
         public StringCollection DPSWidgetDisplayPropertyList
         {
-            get { return ((StringCollection) (this["DPSWidgetDisplayPropertyList"])); }
+            get { return (StringCollection) this["DPSWidgetDisplayPropertyList"]; }
         }
 
         [UserScopedSetting]
@@ -1143,7 +1149,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowDPSWidgetOnLoad
         {
-            get { return ((bool) (this["ShowDPSWidgetOnLoad"])); }
+            get { return (bool) this["ShowDPSWidgetOnLoad"]; }
             set
             {
                 this["ShowDPSWidgetOnLoad"] = value;
@@ -1156,7 +1162,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("100")]
         public int DPSWidgetTop
         {
-            get { return ((int) (this["DPSWidgetTop"])); }
+            get { return (int) this["DPSWidgetTop"]; }
             set
             {
                 this["DPSWidgetTop"] = value;
@@ -1169,7 +1175,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("100")]
         public int DPSWidgetLeft
         {
-            get { return ((int) (this["DPSWidgetLeft"])); }
+            get { return (int) this["DPSWidgetLeft"]; }
             set
             {
                 this["DPSWidgetLeft"] = value;
@@ -1182,7 +1188,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("0")]
         public string DPSVisibility
         {
-            get { return ((string) (this["DPSVisibility"])); }
+            get { return (string) this["DPSVisibility"]; }
             set
             {
                 this["DPSVisibility"] = value;
@@ -1192,8 +1198,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0</string>
   <string>50</string>
   <string>100</string>
@@ -1204,7 +1210,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection DPSVisibilityList
         {
-            get { return ((StringCollection) (this["DPSVisibilityList"])); }
+            get { return (StringCollection) this["DPSVisibilityList"]; }
             set
             {
                 this["DPSVisibilityList"] = value;
@@ -1217,7 +1223,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("1.0")]
         public string DPSWidgetUIScale
         {
-            get { return ((string) (this["DPSWidgetUIScale"])); }
+            get { return (string) this["DPSWidgetUIScale"]; }
             set
             {
                 this["DPSWidgetUIScale"] = value;
@@ -1227,8 +1233,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0.8</string>
   <string>0.9</string>
   <string>1.0</string>
@@ -1240,7 +1246,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection DPSWidgetUIScaleList
         {
-            get { return ((StringCollection) (this["DPSWidgetUIScaleList"])); }
+            get { return (StringCollection) this["DPSWidgetUIScaleList"]; }
         }
 
         #endregion
@@ -1252,7 +1258,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("250")]
         public int HPSWidgetWidth
         {
-            get { return ((int) (this["HPSWidgetWidth"])); }
+            get { return (int) this["HPSWidgetWidth"]; }
             set
             {
                 this["HPSWidgetWidth"] = value;
@@ -1265,7 +1271,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("450")]
         public int HPSWidgetHeight
         {
-            get { return ((int) (this["HPSWidgetHeight"])); }
+            get { return (int) this["HPSWidgetHeight"]; }
             set
             {
                 this["HPSWidgetHeight"] = value;
@@ -1278,7 +1284,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Descending")]
         public string HPSWidgetSortDirection
         {
-            get { return ((string) (this["HPSWidgetSortDirection"])); }
+            get { return (string) this["HPSWidgetSortDirection"]; }
             set
             {
                 this["HPSWidgetSortDirection"] = value;
@@ -1288,14 +1294,14 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Ascending</string>
   <string>Descending</string>
 </ArrayOfString>")]
         public StringCollection HPSWidgetSortDirectionList
         {
-            get { return ((StringCollection) (this["HPSWidgetSortDirectionList"])); }
+            get { return (StringCollection) this["HPSWidgetSortDirectionList"]; }
         }
 
         [UserScopedSetting]
@@ -1303,7 +1309,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("CombinedHPS")]
         public string HPSWidgetSortProperty
         {
-            get { return ((string) (this["HPSWidgetSortProperty"])); }
+            get { return (string) this["HPSWidgetSortProperty"]; }
             set
             {
                 this["HPSWidgetSortProperty"] = value;
@@ -1313,8 +1319,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Name</string>
   <string>Job</string>
   <string>HPS</string>
@@ -1325,7 +1331,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection HPSWidgetSortPropertyList
         {
-            get { return ((StringCollection) (this["HPSWidgetSortPropertyList"])); }
+            get { return (StringCollection) this["HPSWidgetSortPropertyList"]; }
         }
 
         [UserScopedSetting]
@@ -1333,7 +1339,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Combined")]
         public string HPSWidgetDisplayProperty
         {
-            get { return ((string) (this["HPSWidgetDisplayProperty"])); }
+            get { return (string) this["HPSWidgetDisplayProperty"]; }
             set
             {
                 this["HPSWidgetDisplayProperty"] = value;
@@ -1343,14 +1349,14 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Combined</string>
   <string>Individual</string>
 </ArrayOfString>")]
         public StringCollection HPSWidgetDisplayPropertyList
         {
-            get { return ((StringCollection) (this["HPSWidgetDisplayPropertyList"])); }
+            get { return (StringCollection) this["HPSWidgetDisplayPropertyList"]; }
         }
 
         [UserScopedSetting]
@@ -1358,7 +1364,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("1.0")]
         public string HPSWidgetUIScale
         {
-            get { return ((string) (this["HPSWidgetUIScale"])); }
+            get { return (string) this["HPSWidgetUIScale"]; }
             set
             {
                 this["HPSWidgetUIScale"] = value;
@@ -1368,8 +1374,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0.8</string>
   <string>0.9</string>
   <string>1.0</string>
@@ -1381,7 +1387,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection HPSWidgetUIScaleList
         {
-            get { return ((StringCollection) (this["HPSWidgetUIScaleList"])); }
+            get { return (StringCollection) this["HPSWidgetUIScaleList"]; }
         }
 
         [UserScopedSetting]
@@ -1389,7 +1395,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowHPSWidgetOnLoad
         {
-            get { return ((bool) (this["ShowHPSWidgetOnLoad"])); }
+            get { return (bool) this["ShowHPSWidgetOnLoad"]; }
             set
             {
                 this["ShowHPSWidgetOnLoad"] = value;
@@ -1402,7 +1408,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("300")]
         public int HPSWidgetTop
         {
-            get { return ((int) (this["HPSWidgetTop"])); }
+            get { return (int) this["HPSWidgetTop"]; }
             set
             {
                 this["HPSWidgetTop"] = value;
@@ -1415,7 +1421,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("100")]
         public int HPSWidgetLeft
         {
-            get { return ((int) (this["HPSWidgetLeft"])); }
+            get { return (int) this["HPSWidgetLeft"]; }
             set
             {
                 this["HPSWidgetLeft"] = value;
@@ -1428,7 +1434,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("0")]
         public string HPSVisibility
         {
-            get { return ((string) (this["HPSVisibility"])); }
+            get { return (string) this["HPSVisibility"]; }
             set
             {
                 this["HPSVisibility"] = value;
@@ -1438,8 +1444,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0</string>
   <string>50</string>
   <string>100</string>
@@ -1450,7 +1456,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection HPSVisibilityList
         {
-            get { return ((StringCollection) (this["HPSVisibilityList"])); }
+            get { return (StringCollection) this["HPSVisibilityList"]; }
             set
             {
                 this["HPSVisibilityList"] = value;
@@ -1467,7 +1473,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("250")]
         public int DTPSWidgetWidth
         {
-            get { return ((int) (this["DTPSWidgetWidth"])); }
+            get { return (int) this["DTPSWidgetWidth"]; }
             set
             {
                 this["DTPSWidgetWidth"] = value;
@@ -1480,7 +1486,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("450")]
         public int DTPSWidgetHeight
         {
-            get { return ((int) (this["DTPSWidgetHeight"])); }
+            get { return (int) this["DTPSWidgetHeight"]; }
             set
             {
                 this["DTPSWidgetHeight"] = value;
@@ -1493,7 +1499,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Descending")]
         public string DTPSWidgetSortDirection
         {
-            get { return ((string) (this["DTPSWidgetSortDirection"])); }
+            get { return (string) this["DTPSWidgetSortDirection"]; }
             set
             {
                 this["DTPSWidgetSortDirection"] = value;
@@ -1503,14 +1509,14 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Ascending</string>
   <string>Descending</string>
 </ArrayOfString>")]
         public StringCollection DTPSWidgetSortDirectionList
         {
-            get { return ((StringCollection) (this["DTPSWidgetSortDirectionList"])); }
+            get { return (StringCollection) this["DTPSWidgetSortDirectionList"]; }
         }
 
         [UserScopedSetting]
@@ -1518,7 +1524,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("CombinedDTPS")]
         public string DTPSWidgetSortProperty
         {
-            get { return ((string) (this["DTPSWidgetSortProperty"])); }
+            get { return (string) this["DTPSWidgetSortProperty"]; }
             set
             {
                 this["DTPSWidgetSortProperty"] = value;
@@ -1528,8 +1534,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Name</string>
   <string>Job</string>
   <string>DTPS</string>
@@ -1540,7 +1546,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection DTPSWidgetSortPropertyList
         {
-            get { return ((StringCollection) (this["DTPSWidgetSortPropertyList"])); }
+            get { return (StringCollection) this["DTPSWidgetSortPropertyList"]; }
         }
 
         [UserScopedSetting]
@@ -1548,7 +1554,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("Combined")]
         public string DTPSWidgetDisplayProperty
         {
-            get { return ((string) (this["DTPSWidgetDisplayProperty"])); }
+            get { return (string) this["DTPSWidgetDisplayProperty"]; }
             set
             {
                 this["DTPSWidgetDisplayProperty"] = value;
@@ -1558,14 +1564,14 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>Combined</string>
   <string>Individual</string>
 </ArrayOfString>")]
         public StringCollection DTPSWidgetDisplayPropertyList
         {
-            get { return ((StringCollection) (this["DTPSWidgetDisplayPropertyList"])); }
+            get { return (StringCollection) this["DTPSWidgetDisplayPropertyList"]; }
         }
 
         [UserScopedSetting]
@@ -1573,7 +1579,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("1.0")]
         public string DTPSWidgetUIScale
         {
-            get { return ((string) (this["DTPSWidgetUIScale"])); }
+            get { return (string) this["DTPSWidgetUIScale"]; }
             set
             {
                 this["DTPSWidgetUIScale"] = value;
@@ -1583,8 +1589,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0.8</string>
   <string>0.9</string>
   <string>1.0</string>
@@ -1596,7 +1602,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection DTPSWidgetUIScaleList
         {
-            get { return ((StringCollection) (this["DTPSWidgetUIScaleList"])); }
+            get { return (StringCollection) this["DTPSWidgetUIScaleList"]; }
         }
 
         [UserScopedSetting]
@@ -1604,7 +1610,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowDTPSWidgetOnLoad
         {
-            get { return ((bool) (this["ShowDTPSWidgetOnLoad"])); }
+            get { return (bool) this["ShowDTPSWidgetOnLoad"]; }
             set
             {
                 this["ShowDTPSWidgetOnLoad"] = value;
@@ -1617,7 +1623,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("200")]
         public int DTPSWidgetTop
         {
-            get { return ((int) (this["DTPSWidgetTop"])); }
+            get { return (int) this["DTPSWidgetTop"]; }
             set
             {
                 this["DTPSWidgetTop"] = value;
@@ -1630,7 +1636,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("100")]
         public int DTPSWidgetLeft
         {
-            get { return ((int) (this["DTPSWidgetLeft"])); }
+            get { return (int) this["DTPSWidgetLeft"]; }
             set
             {
                 this["DTPSWidgetLeft"] = value;
@@ -1643,7 +1649,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("0")]
         public string DTPSVisibility
         {
-            get { return ((string) (this["DTPSVisibility"])); }
+            get { return (string) this["DTPSVisibility"]; }
             set
             {
                 this["DTPSVisibility"] = value;
@@ -1653,8 +1659,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 
         [ApplicationScopedSetting]
         [DebuggerNonUserCode]
-        [DefaultSettingValue(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+        [DefaultSettingValue(@"<?xml version=string.Empty1.0string.Empty encoding=string.Emptyutf-16string.Empty?>
+<ArrayOfString xmlns:xsi=string.Emptyhttp://www.w3.org/2001/XMLSchema-instancestring.Empty xmlns:xsd=string.Emptyhttp://www.w3.org/2001/XMLSchemastring.Empty>
   <string>0</string>
   <string>50</string>
   <string>100</string>
@@ -1665,7 +1671,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
 </ArrayOfString>")]
         public StringCollection DTPSVisibilityList
         {
-            get { return ((StringCollection) (this["DTPSVisibilityList"])); }
+            get { return (StringCollection) this["DTPSVisibilityList"]; }
             set
             {
                 this["DTPSVisibilityList"] = value;
@@ -1682,7 +1688,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalOverallDamage
         {
-            get { return ((bool) (this["ShowBasicTotalOverallDamage"])); }
+            get { return (bool) this["ShowBasicTotalOverallDamage"]; }
             set
             {
                 this["ShowBasicTotalOverallDamage"] = value;
@@ -1695,7 +1701,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicRegularDamage
         {
-            get { return ((bool) (this["ShowBasicRegularDamage"])); }
+            get { return (bool) this["ShowBasicRegularDamage"]; }
             set
             {
                 this["ShowBasicRegularDamage"] = value;
@@ -1708,7 +1714,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCriticalDamage
         {
-            get { return ((bool) (this["ShowBasicCriticalDamage"])); }
+            get { return (bool) this["ShowBasicCriticalDamage"]; }
             set
             {
                 this["ShowBasicCriticalDamage"] = value;
@@ -1721,7 +1727,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalDamageActionsUsed
         {
-            get { return ((bool) (this["ShowBasicTotalDamageActionsUsed"])); }
+            get { return (bool) this["ShowBasicTotalDamageActionsUsed"]; }
             set
             {
                 this["ShowBasicTotalDamageActionsUsed"] = value;
@@ -1734,7 +1740,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDPS
         {
-            get { return ((bool) (this["ShowBasicDPS"])); }
+            get { return (bool) this["ShowBasicDPS"]; }
             set
             {
                 this["ShowBasicDPS"] = value;
@@ -1747,7 +1753,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageRegHit
         {
-            get { return ((bool) (this["ShowBasicDamageRegHit"])); }
+            get { return (bool) this["ShowBasicDamageRegHit"]; }
             set
             {
                 this["ShowBasicDamageRegHit"] = value;
@@ -1760,7 +1766,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageRegMiss
         {
-            get { return ((bool) (this["ShowBasicDamageRegMiss"])); }
+            get { return (bool) this["ShowBasicDamageRegMiss"]; }
             set
             {
                 this["ShowBasicDamageRegMiss"] = value;
@@ -1773,7 +1779,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowBasicDamageRegAccuracy
         {
-            get { return ((bool) (this["ShowBasicDamageRegAccuracy"])); }
+            get { return (bool) this["ShowBasicDamageRegAccuracy"]; }
             set
             {
                 this["ShowBasicDamageRegAccuracy"] = value;
@@ -1786,7 +1792,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageRegLow
         {
-            get { return ((bool) (this["ShowBasicDamageRegLow"])); }
+            get { return (bool) this["ShowBasicDamageRegLow"]; }
             set
             {
                 this["ShowBasicDamageRegLow"] = value;
@@ -1799,7 +1805,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageRegHigh
         {
-            get { return ((bool) (this["ShowBasicDamageRegHigh"])); }
+            get { return (bool) this["ShowBasicDamageRegHigh"]; }
             set
             {
                 this["ShowBasicDamageRegHigh"] = value;
@@ -1812,7 +1818,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageRegAverage
         {
-            get { return ((bool) (this["ShowBasicDamageRegAverage"])); }
+            get { return (bool) this["ShowBasicDamageRegAverage"]; }
             set
             {
                 this["ShowBasicDamageRegAverage"] = value;
@@ -1825,7 +1831,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageRegMod
         {
-            get { return ((bool) (this["ShowBasicDamageRegMod"])); }
+            get { return (bool) this["ShowBasicDamageRegMod"]; }
             set
             {
                 this["ShowBasicDamageRegMod"] = value;
@@ -1838,7 +1844,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageRegModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageRegModAverage"])); }
+            get { return (bool) this["ShowBasicDamageRegModAverage"]; }
             set
             {
                 this["ShowBasicDamageRegModAverage"] = value;
@@ -1851,7 +1857,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCritHit
         {
-            get { return ((bool) (this["ShowBasicDamageCritHit"])); }
+            get { return (bool) this["ShowBasicDamageCritHit"]; }
             set
             {
                 this["ShowBasicDamageCritHit"] = value;
@@ -1864,7 +1870,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowBasicDamageCritPercent
         {
-            get { return ((bool) (this["ShowBasicDamageCritPercent"])); }
+            get { return (bool) this["ShowBasicDamageCritPercent"]; }
             set
             {
                 this["ShowBasicDamageCritPercent"] = value;
@@ -1877,7 +1883,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCritLow
         {
-            get { return ((bool) (this["ShowBasicDamageCritLow"])); }
+            get { return (bool) this["ShowBasicDamageCritLow"]; }
             set
             {
                 this["ShowBasicDamageCritLow"] = value;
@@ -1890,7 +1896,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCritHigh
         {
-            get { return ((bool) (this["ShowBasicDamageCritHigh"])); }
+            get { return (bool) this["ShowBasicDamageCritHigh"]; }
             set
             {
                 this["ShowBasicDamageCritHigh"] = value;
@@ -1903,7 +1909,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCritAverage
         {
-            get { return ((bool) (this["ShowBasicDamageCritAverage"])); }
+            get { return (bool) this["ShowBasicDamageCritAverage"]; }
             set
             {
                 this["ShowBasicDamageCritAverage"] = value;
@@ -1916,7 +1922,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCritMod
         {
-            get { return ((bool) (this["ShowBasicDamageCritMod"])); }
+            get { return (bool) this["ShowBasicDamageCritMod"]; }
             set
             {
                 this["ShowBasicDamageCritMod"] = value;
@@ -1929,7 +1935,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCritModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageCritModAverage"])); }
+            get { return (bool) this["ShowBasicDamageCritModAverage"]; }
             set
             {
                 this["ShowBasicDamageCritModAverage"] = value;
@@ -1942,7 +1948,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCounter
         {
-            get { return ((bool) (this["ShowBasicDamageCounter"])); }
+            get { return (bool) this["ShowBasicDamageCounter"]; }
             set
             {
                 this["ShowBasicDamageCounter"] = value;
@@ -1955,7 +1961,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCounterPercent
         {
-            get { return ((bool) (this["ShowBasicDamageCounterPercent"])); }
+            get { return (bool) this["ShowBasicDamageCounterPercent"]; }
             set
             {
                 this["ShowBasicDamageCounterPercent"] = value;
@@ -1968,7 +1974,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCounterMod
         {
-            get { return ((bool) (this["ShowBasicDamageCounterMod"])); }
+            get { return (bool) this["ShowBasicDamageCounterMod"]; }
             set
             {
                 this["ShowBasicDamageCounterMod"] = value;
@@ -1981,7 +1987,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageCounterModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageCounterModAverage"])); }
+            get { return (bool) this["ShowBasicDamageCounterModAverage"]; }
             set
             {
                 this["ShowBasicDamageCounterModAverage"] = value;
@@ -1994,7 +2000,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageBlock
         {
-            get { return ((bool) (this["ShowBasicDamageBlock"])); }
+            get { return (bool) this["ShowBasicDamageBlock"]; }
             set
             {
                 this["ShowBasicDamageBlock"] = value;
@@ -2007,7 +2013,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageBlockPercent
         {
-            get { return ((bool) (this["ShowBasicDamageBlockPercent"])); }
+            get { return (bool) this["ShowBasicDamageBlockPercent"]; }
             set
             {
                 this["ShowBasicDamageBlockPercent"] = value;
@@ -2020,7 +2026,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageBlockMod
         {
-            get { return ((bool) (this["ShowBasicDamageBlockMod"])); }
+            get { return (bool) this["ShowBasicDamageBlockMod"]; }
             set
             {
                 this["ShowBasicDamageBlockMod"] = value;
@@ -2033,7 +2039,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageBlockModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageBlockModAverage"])); }
+            get { return (bool) this["ShowBasicDamageBlockModAverage"]; }
             set
             {
                 this["ShowBasicDamageBlockModAverage"] = value;
@@ -2046,7 +2052,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageParry
         {
-            get { return ((bool) (this["ShowBasicDamageParry"])); }
+            get { return (bool) this["ShowBasicDamageParry"]; }
             set
             {
                 this["ShowBasicDamageParry"] = value;
@@ -2059,7 +2065,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageParryPercent
         {
-            get { return ((bool) (this["ShowBasicDamageParryPercent"])); }
+            get { return (bool) this["ShowBasicDamageParryPercent"]; }
             set
             {
                 this["ShowBasicDamageParryPercent"] = value;
@@ -2072,7 +2078,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageParryMod
         {
-            get { return ((bool) (this["ShowBasicDamageParryMod"])); }
+            get { return (bool) this["ShowBasicDamageParryMod"]; }
             set
             {
                 this["ShowBasicDamageParryMod"] = value;
@@ -2085,7 +2091,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageParryModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageParryModAverage"])); }
+            get { return (bool) this["ShowBasicDamageParryModAverage"]; }
             set
             {
                 this["ShowBasicDamageParryModAverage"] = value;
@@ -2098,7 +2104,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageResist
         {
-            get { return ((bool) (this["ShowBasicDamageResist"])); }
+            get { return (bool) this["ShowBasicDamageResist"]; }
             set
             {
                 this["ShowBasicDamageResist"] = value;
@@ -2111,7 +2117,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageResistPercent
         {
-            get { return ((bool) (this["ShowBasicDamageResistPercent"])); }
+            get { return (bool) this["ShowBasicDamageResistPercent"]; }
             set
             {
                 this["ShowBasicDamageResistPercent"] = value;
@@ -2124,7 +2130,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageResistMod
         {
-            get { return ((bool) (this["ShowBasicDamageResistMod"])); }
+            get { return (bool) this["ShowBasicDamageResistMod"]; }
             set
             {
                 this["ShowBasicDamageResistMod"] = value;
@@ -2137,7 +2143,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageResistModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageResistModAverage"])); }
+            get { return (bool) this["ShowBasicDamageResistModAverage"]; }
             set
             {
                 this["ShowBasicDamageResistModAverage"] = value;
@@ -2150,7 +2156,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageEvade
         {
-            get { return ((bool) (this["ShowBasicDamageEvade"])); }
+            get { return (bool) this["ShowBasicDamageEvade"]; }
             set
             {
                 this["ShowBasicDamageEvade"] = value;
@@ -2163,7 +2169,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageEvadePercent
         {
-            get { return ((bool) (this["ShowBasicDamageEvadePercent"])); }
+            get { return (bool) this["ShowBasicDamageEvadePercent"]; }
             set
             {
                 this["ShowBasicDamageEvadePercent"] = value;
@@ -2176,7 +2182,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageEvadeMod
         {
-            get { return ((bool) (this["ShowBasicDamageEvadeMod"])); }
+            get { return (bool) this["ShowBasicDamageEvadeMod"]; }
             set
             {
                 this["ShowBasicDamageEvadeMod"] = value;
@@ -2189,7 +2195,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageEvadeModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageEvadeModAverage"])); }
+            get { return (bool) this["ShowBasicDamageEvadeModAverage"]; }
             set
             {
                 this["ShowBasicDamageEvadeModAverage"] = value;
@@ -2202,7 +2208,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfTotalOverallDamage
         {
-            get { return ((bool) (this["ShowBasicPercentOfTotalOverallDamage"])); }
+            get { return (bool) this["ShowBasicPercentOfTotalOverallDamage"]; }
             set
             {
                 this["ShowBasicPercentOfTotalOverallDamage"] = value;
@@ -2215,7 +2221,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfRegularDamage
         {
-            get { return ((bool) (this["ShowBasicPercentOfRegularDamage"])); }
+            get { return (bool) this["ShowBasicPercentOfRegularDamage"]; }
             set
             {
                 this["ShowBasicPercentOfRegularDamage"] = value;
@@ -2228,7 +2234,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfCriticalDamage
         {
-            get { return ((bool) (this["ShowBasicPercentOfCriticalDamage"])); }
+            get { return (bool) this["ShowBasicPercentOfCriticalDamage"]; }
             set
             {
                 this["ShowBasicPercentOfCriticalDamage"] = value;
@@ -2241,7 +2247,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalOverallHealing
         {
-            get { return ((bool) (this["ShowBasicTotalOverallHealing"])); }
+            get { return (bool) this["ShowBasicTotalOverallHealing"]; }
             set
             {
                 this["ShowBasicTotalOverallHealing"] = value;
@@ -2254,7 +2260,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicRegularHealing
         {
-            get { return ((bool) (this["ShowBasicRegularHealing"])); }
+            get { return (bool) this["ShowBasicRegularHealing"]; }
             set
             {
                 this["ShowBasicRegularHealing"] = value;
@@ -2267,7 +2273,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCriticalHealing
         {
-            get { return ((bool) (this["ShowBasicCriticalHealing"])); }
+            get { return (bool) this["ShowBasicCriticalHealing"]; }
             set
             {
                 this["ShowBasicCriticalHealing"] = value;
@@ -2280,7 +2286,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalHealingActionsUsed
         {
-            get { return ((bool) (this["ShowBasicTotalHealingActionsUsed"])); }
+            get { return (bool) this["ShowBasicTotalHealingActionsUsed"]; }
             set
             {
                 this["ShowBasicTotalHealingActionsUsed"] = value;
@@ -2293,7 +2299,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHPS
         {
-            get { return ((bool) (this["ShowBasicHPS"])); }
+            get { return (bool) this["ShowBasicHPS"]; }
             set
             {
                 this["ShowBasicHPS"] = value;
@@ -2306,7 +2312,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingRegHit
         {
-            get { return ((bool) (this["ShowBasicHealingRegHit"])); }
+            get { return (bool) this["ShowBasicHealingRegHit"]; }
             set
             {
                 this["ShowBasicHealingRegHit"] = value;
@@ -2319,7 +2325,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingRegLow
         {
-            get { return ((bool) (this["ShowBasicHealingRegLow"])); }
+            get { return (bool) this["ShowBasicHealingRegLow"]; }
             set
             {
                 this["ShowBasicHealingRegLow"] = value;
@@ -2332,7 +2338,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingRegHigh
         {
-            get { return ((bool) (this["ShowBasicHealingRegHigh"])); }
+            get { return (bool) this["ShowBasicHealingRegHigh"]; }
             set
             {
                 this["ShowBasicHealingRegHigh"] = value;
@@ -2345,7 +2351,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingRegAverage
         {
-            get { return ((bool) (this["ShowBasicHealingRegAverage"])); }
+            get { return (bool) this["ShowBasicHealingRegAverage"]; }
             set
             {
                 this["ShowBasicHealingRegAverage"] = value;
@@ -2358,7 +2364,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingRegMod
         {
-            get { return ((bool) (this["ShowBasicHealingRegMod"])); }
+            get { return (bool) this["ShowBasicHealingRegMod"]; }
             set
             {
                 this["ShowBasicHealingRegMod"] = value;
@@ -2371,7 +2377,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingRegModAverage
         {
-            get { return ((bool) (this["ShowBasicHealingRegModAverage"])); }
+            get { return (bool) this["ShowBasicHealingRegModAverage"]; }
             set
             {
                 this["ShowBasicHealingRegModAverage"] = value;
@@ -2384,7 +2390,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingCritHit
         {
-            get { return ((bool) (this["ShowBasicHealingCritHit"])); }
+            get { return (bool) this["ShowBasicHealingCritHit"]; }
             set
             {
                 this["ShowBasicHealingCritHit"] = value;
@@ -2397,7 +2403,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingCritPercent
         {
-            get { return ((bool) (this["ShowBasicHealingCritPercent"])); }
+            get { return (bool) this["ShowBasicHealingCritPercent"]; }
             set
             {
                 this["ShowBasicHealingCritPercent"] = value;
@@ -2410,7 +2416,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingCritLow
         {
-            get { return ((bool) (this["ShowBasicHealingCritLow"])); }
+            get { return (bool) this["ShowBasicHealingCritLow"]; }
             set
             {
                 this["ShowBasicHealingCritLow"] = value;
@@ -2423,7 +2429,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingCritHigh
         {
-            get { return ((bool) (this["ShowBasicHealingCritHigh"])); }
+            get { return (bool) this["ShowBasicHealingCritHigh"]; }
             set
             {
                 this["ShowBasicHealingCritHigh"] = value;
@@ -2436,7 +2442,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingCritAverage
         {
-            get { return ((bool) (this["ShowBasicHealingCritAverage"])); }
+            get { return (bool) this["ShowBasicHealingCritAverage"]; }
             set
             {
                 this["ShowBasicHealingCritAverage"] = value;
@@ -2449,7 +2455,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingCritMod
         {
-            get { return ((bool) (this["ShowBasicHealingCritMod"])); }
+            get { return (bool) this["ShowBasicHealingCritMod"]; }
             set
             {
                 this["ShowBasicHealingCritMod"] = value;
@@ -2462,7 +2468,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingCritModAverage
         {
-            get { return ((bool) (this["ShowBasicHealingCritModAverage"])); }
+            get { return (bool) this["ShowBasicHealingCritModAverage"]; }
             set
             {
                 this["ShowBasicHealingCritModAverage"] = value;
@@ -2475,7 +2481,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfTotalOverallHealing
         {
-            get { return ((bool) (this["ShowBasicPercentOfTotalOverallHealing"])); }
+            get { return (bool) this["ShowBasicPercentOfTotalOverallHealing"]; }
             set
             {
                 this["ShowBasicPercentOfTotalOverallHealing"] = value;
@@ -2488,7 +2494,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfRegularHealing
         {
-            get { return ((bool) (this["ShowBasicPercentOfRegularHealing"])); }
+            get { return (bool) this["ShowBasicPercentOfRegularHealing"]; }
             set
             {
                 this["ShowBasicPercentOfRegularHealing"] = value;
@@ -2501,7 +2507,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfCriticalHealing
         {
-            get { return ((bool) (this["ShowBasicPercentOfCriticalHealing"])); }
+            get { return (bool) this["ShowBasicPercentOfCriticalHealing"]; }
             set
             {
                 this["ShowBasicPercentOfCriticalHealing"] = value;
@@ -2514,7 +2520,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalOverallDamageTaken
         {
-            get { return ((bool) (this["ShowBasicTotalOverallDamageTaken"])); }
+            get { return (bool) this["ShowBasicTotalOverallDamageTaken"]; }
             set
             {
                 this["ShowBasicTotalOverallDamageTaken"] = value;
@@ -2527,7 +2533,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicRegularDamageTaken
         {
-            get { return ((bool) (this["ShowBasicRegularDamageTaken"])); }
+            get { return (bool) this["ShowBasicRegularDamageTaken"]; }
             set
             {
                 this["ShowBasicRegularDamageTaken"] = value;
@@ -2540,7 +2546,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCriticalDamageTaken
         {
-            get { return ((bool) (this["ShowBasicCriticalDamageTaken"])); }
+            get { return (bool) this["ShowBasicCriticalDamageTaken"]; }
             set
             {
                 this["ShowBasicCriticalDamageTaken"] = value;
@@ -2553,7 +2559,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalDamageTakenActionsUsed
         {
-            get { return ((bool) (this["ShowBasicTotalDamageTakenActionsUsed"])); }
+            get { return (bool) this["ShowBasicTotalDamageTakenActionsUsed"]; }
             set
             {
                 this["ShowBasicTotalDamageTakenActionsUsed"] = value;
@@ -2566,7 +2572,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDTPS
         {
-            get { return ((bool) (this["ShowBasicDTPS"])); }
+            get { return (bool) this["ShowBasicDTPS"]; }
             set
             {
                 this["ShowBasicDTPS"] = value;
@@ -2579,7 +2585,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenRegHit
         {
-            get { return ((bool) (this["ShowBasicDamageTakenRegHit"])); }
+            get { return (bool) this["ShowBasicDamageTakenRegHit"]; }
             set
             {
                 this["ShowBasicDamageTakenRegHit"] = value;
@@ -2592,7 +2598,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenRegMiss
         {
-            get { return ((bool) (this["ShowBasicDamageTakenRegMiss"])); }
+            get { return (bool) this["ShowBasicDamageTakenRegMiss"]; }
             set
             {
                 this["ShowBasicDamageTakenRegMiss"] = value;
@@ -2605,7 +2611,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenRegAccuracy
         {
-            get { return ((bool) (this["ShowBasicDamageTakenRegAccuracy"])); }
+            get { return (bool) this["ShowBasicDamageTakenRegAccuracy"]; }
             set
             {
                 this["ShowBasicDamageTakenRegAccuracy"] = value;
@@ -2618,7 +2624,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenRegLow
         {
-            get { return ((bool) (this["ShowBasicDamageTakenRegLow"])); }
+            get { return (bool) this["ShowBasicDamageTakenRegLow"]; }
             set
             {
                 this["ShowBasicDamageTakenRegLow"] = value;
@@ -2631,7 +2637,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenRegHigh
         {
-            get { return ((bool) (this["ShowBasicDamageTakenRegHigh"])); }
+            get { return (bool) this["ShowBasicDamageTakenRegHigh"]; }
             set
             {
                 this["ShowBasicDamageTakenRegHigh"] = value;
@@ -2644,7 +2650,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenRegAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenRegAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenRegAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenRegAverage"] = value;
@@ -2657,7 +2663,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenRegMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenRegMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenRegMod"]; }
             set
             {
                 this["ShowBasicDamageTakenRegMod"] = value;
@@ -2670,7 +2676,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenRegModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenRegModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenRegModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenRegModAverage"] = value;
@@ -2683,7 +2689,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCritHit
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCritHit"])); }
+            get { return (bool) this["ShowBasicDamageTakenCritHit"]; }
             set
             {
                 this["ShowBasicDamageTakenCritHit"] = value;
@@ -2696,7 +2702,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCritPercent
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCritPercent"])); }
+            get { return (bool) this["ShowBasicDamageTakenCritPercent"]; }
             set
             {
                 this["ShowBasicDamageTakenCritPercent"] = value;
@@ -2709,7 +2715,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCritLow
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCritLow"])); }
+            get { return (bool) this["ShowBasicDamageTakenCritLow"]; }
             set
             {
                 this["ShowBasicDamageTakenCritLow"] = value;
@@ -2722,7 +2728,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCritHigh
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCritHigh"])); }
+            get { return (bool) this["ShowBasicDamageTakenCritHigh"]; }
             set
             {
                 this["ShowBasicDamageTakenCritHigh"] = value;
@@ -2735,7 +2741,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCritAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCritAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenCritAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenCritAverage"] = value;
@@ -2748,7 +2754,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCritMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCritMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenCritMod"]; }
             set
             {
                 this["ShowBasicDamageTakenCritMod"] = value;
@@ -2761,7 +2767,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCritModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCritModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenCritModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenCritModAverage"] = value;
@@ -2774,7 +2780,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCounter
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCounter"])); }
+            get { return (bool) this["ShowBasicDamageTakenCounter"]; }
             set
             {
                 this["ShowBasicDamageTakenCounter"] = value;
@@ -2787,7 +2793,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCounterPercent
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCounterPercent"])); }
+            get { return (bool) this["ShowBasicDamageTakenCounterPercent"]; }
             set
             {
                 this["ShowBasicDamageTakenCounterPercent"] = value;
@@ -2800,7 +2806,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCounterMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCounterMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenCounterMod"]; }
             set
             {
                 this["ShowBasicDamageTakenCounterMod"] = value;
@@ -2813,7 +2819,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenCounterModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenCounterModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenCounterModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenCounterModAverage"] = value;
@@ -2826,7 +2832,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenBlock
         {
-            get { return ((bool) (this["ShowBasicDamageTakenBlock"])); }
+            get { return (bool) this["ShowBasicDamageTakenBlock"]; }
             set
             {
                 this["ShowBasicDamageTakenBlock"] = value;
@@ -2839,7 +2845,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenBlockPercent
         {
-            get { return ((bool) (this["ShowBasicDamageTakenBlockPercent"])); }
+            get { return (bool) this["ShowBasicDamageTakenBlockPercent"]; }
             set
             {
                 this["ShowBasicDamageTakenBlockPercent"] = value;
@@ -2852,7 +2858,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenBlockMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenBlockMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenBlockMod"]; }
             set
             {
                 this["ShowBasicDamageTakenBlockMod"] = value;
@@ -2865,7 +2871,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenBlockModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenBlockModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenBlockModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenBlockModAverage"] = value;
@@ -2878,7 +2884,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenParry
         {
-            get { return ((bool) (this["ShowBasicDamageTakenParry"])); }
+            get { return (bool) this["ShowBasicDamageTakenParry"]; }
             set
             {
                 this["ShowBasicDamageTakenParry"] = value;
@@ -2891,7 +2897,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenParryPercent
         {
-            get { return ((bool) (this["ShowBasicDamageTakenParryPercent"])); }
+            get { return (bool) this["ShowBasicDamageTakenParryPercent"]; }
             set
             {
                 this["ShowBasicDamageTakenParryPercent"] = value;
@@ -2904,7 +2910,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenParryMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenParryMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenParryMod"]; }
             set
             {
                 this["ShowBasicDamageTakenParryMod"] = value;
@@ -2917,7 +2923,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenParryModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenParryModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenParryModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenParryModAverage"] = value;
@@ -2930,7 +2936,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenResist
         {
-            get { return ((bool) (this["ShowBasicDamageTakenResist"])); }
+            get { return (bool) this["ShowBasicDamageTakenResist"]; }
             set
             {
                 this["ShowBasicDamageTakenResist"] = value;
@@ -2943,7 +2949,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenResistPercent
         {
-            get { return ((bool) (this["ShowBasicDamageTakenResistPercent"])); }
+            get { return (bool) this["ShowBasicDamageTakenResistPercent"]; }
             set
             {
                 this["ShowBasicDamageTakenResistPercent"] = value;
@@ -2956,7 +2962,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenResistMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenResistMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenResistMod"]; }
             set
             {
                 this["ShowBasicDamageTakenResistMod"] = value;
@@ -2969,7 +2975,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenResistModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenResistModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenResistModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenResistModAverage"] = value;
@@ -2982,7 +2988,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenEvade
         {
-            get { return ((bool) (this["ShowBasicDamageTakenEvade"])); }
+            get { return (bool) this["ShowBasicDamageTakenEvade"]; }
             set
             {
                 this["ShowBasicDamageTakenEvade"] = value;
@@ -2995,7 +3001,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenEvadePercent
         {
-            get { return ((bool) (this["ShowBasicDamageTakenEvadePercent"])); }
+            get { return (bool) this["ShowBasicDamageTakenEvadePercent"]; }
             set
             {
                 this["ShowBasicDamageTakenEvadePercent"] = value;
@@ -3008,7 +3014,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenEvadeMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenEvadeMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenEvadeMod"]; }
             set
             {
                 this["ShowBasicDamageTakenEvadeMod"] = value;
@@ -3021,7 +3027,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenEvadeModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenEvadeModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenEvadeModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenEvadeModAverage"] = value;
@@ -3034,7 +3040,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfTotalOverallDamageTaken
         {
-            get { return ((bool) (this["ShowBasicPercentOfTotalOverallDamageTaken"])); }
+            get { return (bool) this["ShowBasicPercentOfTotalOverallDamageTaken"]; }
             set
             {
                 this["ShowBasicPercentOfTotalOverallDamageTaken"] = value;
@@ -3047,7 +3053,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfRegularDamageTaken
         {
-            get { return ((bool) (this["ShowBasicPercentOfRegularDamageTaken"])); }
+            get { return (bool) this["ShowBasicPercentOfRegularDamageTaken"]; }
             set
             {
                 this["ShowBasicPercentOfRegularDamageTaken"] = value;
@@ -3060,7 +3066,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfCriticalDamageTaken
         {
-            get { return ((bool) (this["ShowBasicPercentOfCriticalDamageTaken"])); }
+            get { return (bool) this["ShowBasicPercentOfCriticalDamageTaken"]; }
             set
             {
                 this["ShowBasicPercentOfCriticalDamageTaken"] = value;
@@ -3075,7 +3081,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalOverallDamageTakenOverTime
         {
-            get { return ((bool) (this["ShowBasicTotalOverallDamageTakenOverTime"])); }
+            get { return (bool) this["ShowBasicTotalOverallDamageTakenOverTime"]; }
             set
             {
                 this["ShowBasicTotalOverallDamageTakenOverTime"] = value;
@@ -3088,7 +3094,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicRegularDamageTakenOverTime
         {
-            get { return ((bool) (this["ShowBasicRegularDamageTakenOverTime"])); }
+            get { return (bool) this["ShowBasicRegularDamageTakenOverTime"]; }
             set
             {
                 this["ShowBasicRegularDamageTakenOverTime"] = value;
@@ -3101,7 +3107,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCriticalDamageTakenOverTime
         {
-            get { return ((bool) (this["ShowBasicCriticalDamageTakenOverTime"])); }
+            get { return (bool) this["ShowBasicCriticalDamageTakenOverTime"]; }
             set
             {
                 this["ShowBasicCriticalDamageTakenOverTime"] = value;
@@ -3114,7 +3120,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalDamageTakenOverTimeActionsUsed
         {
-            get { return ((bool) (this["ShowBasicTotalDamageTakenOverTimeActionsUsed"])); }
+            get { return (bool) this["ShowBasicTotalDamageTakenOverTimeActionsUsed"]; }
             set
             {
                 this["ShowBasicTotalDamageTakenOverTimeActionsUsed"] = value;
@@ -3127,7 +3133,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDTOTPS
         {
-            get { return ((bool) (this["ShowBasicDTOTPS"])); }
+            get { return (bool) this["ShowBasicDTOTPS"]; }
             set
             {
                 this["ShowBasicDTOTPS"] = value;
@@ -3140,7 +3146,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeRegHit
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeRegHit"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeRegHit"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeRegHit"] = value;
@@ -3153,7 +3159,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeRegMiss
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeRegMiss"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeRegMiss"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeRegMiss"] = value;
@@ -3166,7 +3172,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeRegAccuracy
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeRegAccuracy"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeRegAccuracy"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeRegAccuracy"] = value;
@@ -3179,7 +3185,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeRegLow
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeRegLow"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeRegLow"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeRegLow"] = value;
@@ -3192,7 +3198,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeRegHigh
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeRegHigh"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeRegHigh"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeRegHigh"] = value;
@@ -3205,7 +3211,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeRegAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeRegAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeRegAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeRegAverage"] = value;
@@ -3218,7 +3224,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeRegMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeRegMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeRegMod"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeRegMod"] = value;
@@ -3231,7 +3237,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeRegModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeRegModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeRegModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeRegModAverage"] = value;
@@ -3244,7 +3250,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeCritHit
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeCritHit"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeCritHit"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeCritHit"] = value;
@@ -3257,7 +3263,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeCritPercent
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeCritPercent"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeCritPercent"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeCritPercent"] = value;
@@ -3270,7 +3276,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeCritLow
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeCritLow"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeCritLow"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeCritLow"] = value;
@@ -3283,7 +3289,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeCritHigh
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeCritHigh"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeCritHigh"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeCritHigh"] = value;
@@ -3296,7 +3302,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeCritAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeCritAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeCritAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeCritAverage"] = value;
@@ -3309,7 +3315,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeCritMod
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeCritMod"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeCritMod"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeCritMod"] = value;
@@ -3322,7 +3328,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageTakenOverTimeCritModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageTakenOverTimeCritModAverage"])); }
+            get { return (bool) this["ShowBasicDamageTakenOverTimeCritModAverage"]; }
             set
             {
                 this["ShowBasicDamageTakenOverTimeCritModAverage"] = value;
@@ -3335,7 +3341,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfTotalOverallDamageTakenOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfTotalOverallDamageTakenOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfTotalOverallDamageTakenOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfTotalOverallDamageTakenOverTime"] = value;
@@ -3348,7 +3354,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfRegularDamageTakenOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfRegularDamageTakenOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfRegularDamageTakenOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfRegularDamageTakenOverTime"] = value;
@@ -3361,7 +3367,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfCriticalDamageTakenOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfCriticalDamageTakenOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfCriticalDamageTakenOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfCriticalDamageTakenOverTime"] = value;
@@ -3378,7 +3384,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalOverallHealingOverTime
         {
-            get { return ((bool) (this["ShowBasicTotalOverallHealingOverTime"])); }
+            get { return (bool) this["ShowBasicTotalOverallHealingOverTime"]; }
             set
             {
                 this["ShowBasicTotalOverallHealingOverTime"] = value;
@@ -3391,7 +3397,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicRegularHealingOverTime
         {
-            get { return ((bool) (this["ShowBasicRegularHealingOverTime"])); }
+            get { return (bool) this["ShowBasicRegularHealingOverTime"]; }
             set
             {
                 this["ShowBasicRegularHealingOverTime"] = value;
@@ -3404,7 +3410,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCriticalHealingOverTime
         {
-            get { return ((bool) (this["ShowBasicCriticalHealingOverTime"])); }
+            get { return (bool) this["ShowBasicCriticalHealingOverTime"]; }
             set
             {
                 this["ShowBasicCriticalHealingOverTime"] = value;
@@ -3417,7 +3423,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalHealingOverTimeActionsUsed
         {
-            get { return ((bool) (this["ShowBasicTotalHealingOverTimeActionsUsed"])); }
+            get { return (bool) this["ShowBasicTotalHealingOverTimeActionsUsed"]; }
             set
             {
                 this["ShowBasicTotalHealingOverTimeActionsUsed"] = value;
@@ -3430,7 +3436,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHOTPS
         {
-            get { return ((bool) (this["ShowBasicHOTPS"])); }
+            get { return (bool) this["ShowBasicHOTPS"]; }
             set
             {
                 this["ShowBasicHOTPS"] = value;
@@ -3443,7 +3449,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeRegHit
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeRegHit"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeRegHit"]; }
             set
             {
                 this["ShowBasicHealingOverTimeRegHit"] = value;
@@ -3456,7 +3462,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeRegLow
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeRegLow"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeRegLow"]; }
             set
             {
                 this["ShowBasicHealingOverTimeRegLow"] = value;
@@ -3469,7 +3475,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeRegHigh
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeRegHigh"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeRegHigh"]; }
             set
             {
                 this["ShowBasicHealingOverTimeRegHigh"] = value;
@@ -3482,7 +3488,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeRegAverage
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeRegAverage"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeRegAverage"]; }
             set
             {
                 this["ShowBasicHealingOverTimeRegAverage"] = value;
@@ -3495,7 +3501,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeRegMod
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeRegMod"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeRegMod"]; }
             set
             {
                 this["ShowBasicHealingOverTimeRegMod"] = value;
@@ -3508,7 +3514,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeRegModAverage
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeRegModAverage"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeRegModAverage"]; }
             set
             {
                 this["ShowBasicHealingOverTimeRegModAverage"] = value;
@@ -3521,7 +3527,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeCritHit
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeCritHit"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeCritHit"]; }
             set
             {
                 this["ShowBasicHealingOverTimeCritHit"] = value;
@@ -3534,7 +3540,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeCritPercent
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeCritPercent"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeCritPercent"]; }
             set
             {
                 this["ShowBasicHealingOverTimeCritPercent"] = value;
@@ -3547,7 +3553,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeCritLow
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeCritLow"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeCritLow"]; }
             set
             {
                 this["ShowBasicHealingOverTimeCritLow"] = value;
@@ -3560,7 +3566,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeCritHigh
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeCritHigh"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeCritHigh"]; }
             set
             {
                 this["ShowBasicHealingOverTimeCritHigh"] = value;
@@ -3573,7 +3579,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeCritAverage
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeCritAverage"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeCritAverage"]; }
             set
             {
                 this["ShowBasicHealingOverTimeCritAverage"] = value;
@@ -3586,7 +3592,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeCritMod
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeCritMod"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeCritMod"]; }
             set
             {
                 this["ShowBasicHealingOverTimeCritMod"] = value;
@@ -3599,7 +3605,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverTimeCritModAverage
         {
-            get { return ((bool) (this["ShowBasicHealingOverTimeCritModAverage"])); }
+            get { return (bool) this["ShowBasicHealingOverTimeCritModAverage"]; }
             set
             {
                 this["ShowBasicHealingOverTimeCritModAverage"] = value;
@@ -3612,7 +3618,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfTotalOverallHealingOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfTotalOverallHealingOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfTotalOverallHealingOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfTotalOverallHealingOverTime"] = value;
@@ -3625,7 +3631,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfRegularHealingOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfRegularHealingOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfRegularHealingOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfRegularHealingOverTime"] = value;
@@ -3638,7 +3644,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfCriticalHealingOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfCriticalHealingOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfCriticalHealingOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfCriticalHealingOverTime"] = value;
@@ -3655,7 +3661,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalOverallHealingOverHealing
         {
-            get { return ((bool) (this["ShowBasicTotalOverallHealingOverHealing"])); }
+            get { return (bool) this["ShowBasicTotalOverallHealingOverHealing"]; }
             set
             {
                 this["ShowBasicTotalOverallHealingOverHealing"] = value;
@@ -3668,7 +3674,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicRegularHealingOverHealing
         {
-            get { return ((bool) (this["ShowBasicRegularHealingOverHealing"])); }
+            get { return (bool) this["ShowBasicRegularHealingOverHealing"]; }
             set
             {
                 this["ShowBasicRegularHealingOverHealing"] = value;
@@ -3681,7 +3687,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCriticalHealingOverHealing
         {
-            get { return ((bool) (this["ShowBasicCriticalHealingOverHealing"])); }
+            get { return (bool) this["ShowBasicCriticalHealingOverHealing"]; }
             set
             {
                 this["ShowBasicCriticalHealingOverHealing"] = value;
@@ -3694,7 +3700,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalHealingOverHealingActionsUsed
         {
-            get { return ((bool) (this["ShowBasicTotalHealingOverHealingActionsUsed"])); }
+            get { return (bool) this["ShowBasicTotalHealingOverHealingActionsUsed"]; }
             set
             {
                 this["ShowBasicTotalHealingOverHealingActionsUsed"] = value;
@@ -3707,7 +3713,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHOHPS
         {
-            get { return ((bool) (this["ShowBasicHOHPS"])); }
+            get { return (bool) this["ShowBasicHOHPS"]; }
             set
             {
                 this["ShowBasicHOHPS"] = value;
@@ -3720,7 +3726,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingRegHit
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingRegHit"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingRegHit"]; }
             set
             {
                 this["ShowBasicHealingOverHealingRegHit"] = value;
@@ -3733,7 +3739,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingRegLow
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingRegLow"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingRegLow"]; }
             set
             {
                 this["ShowBasicHealingOverHealingRegLow"] = value;
@@ -3746,7 +3752,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingRegHigh
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingRegHigh"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingRegHigh"]; }
             set
             {
                 this["ShowBasicHealingOverHealingRegHigh"] = value;
@@ -3759,7 +3765,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingRegAverage
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingRegAverage"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingRegAverage"]; }
             set
             {
                 this["ShowBasicHealingOverHealingRegAverage"] = value;
@@ -3772,7 +3778,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingRegMod
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingRegMod"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingRegMod"]; }
             set
             {
                 this["ShowBasicHealingOverHealingRegMod"] = value;
@@ -3785,7 +3791,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingRegModAverage
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingRegModAverage"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingRegModAverage"]; }
             set
             {
                 this["ShowBasicHealingOverHealingRegModAverage"] = value;
@@ -3798,7 +3804,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingCritHit
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingCritHit"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingCritHit"]; }
             set
             {
                 this["ShowBasicHealingOverHealingCritHit"] = value;
@@ -3811,7 +3817,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingCritPercent
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingCritPercent"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingCritPercent"]; }
             set
             {
                 this["ShowBasicHealingOverHealingCritPercent"] = value;
@@ -3824,7 +3830,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingCritLow
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingCritLow"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingCritLow"]; }
             set
             {
                 this["ShowBasicHealingOverHealingCritLow"] = value;
@@ -3837,7 +3843,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingCritHigh
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingCritHigh"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingCritHigh"]; }
             set
             {
                 this["ShowBasicHealingOverHealingCritHigh"] = value;
@@ -3850,7 +3856,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingCritAverage
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingCritAverage"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingCritAverage"]; }
             set
             {
                 this["ShowBasicHealingOverHealingCritAverage"] = value;
@@ -3863,7 +3869,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingCritMod
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingCritMod"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingCritMod"]; }
             set
             {
                 this["ShowBasicHealingOverHealingCritMod"] = value;
@@ -3876,7 +3882,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingOverHealingCritModAverage
         {
-            get { return ((bool) (this["ShowBasicHealingOverHealingCritModAverage"])); }
+            get { return (bool) this["ShowBasicHealingOverHealingCritModAverage"]; }
             set
             {
                 this["ShowBasicHealingOverHealingCritModAverage"] = value;
@@ -3889,7 +3895,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfTotalOverallHealingOverHealing
         {
-            get { return ((bool) (this["ShowBasicPercentOfTotalOverallHealingOverHealing"])); }
+            get { return (bool) this["ShowBasicPercentOfTotalOverallHealingOverHealing"]; }
             set
             {
                 this["ShowBasicPercentOfTotalOverallHealingOverHealing"] = value;
@@ -3902,7 +3908,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfRegularHealingOverHealing
         {
-            get { return ((bool) (this["ShowBasicPercentOfRegularHealingOverHealing"])); }
+            get { return (bool) this["ShowBasicPercentOfRegularHealingOverHealing"]; }
             set
             {
                 this["ShowBasicPercentOfRegularHealingOverHealing"] = value;
@@ -3915,7 +3921,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfCriticalHealingOverHealing
         {
-            get { return ((bool) (this["ShowBasicPercentOfCriticalHealingOverHealing"])); }
+            get { return (bool) this["ShowBasicPercentOfCriticalHealingOverHealing"]; }
             set
             {
                 this["ShowBasicPercentOfCriticalHealingOverHealing"] = value;
@@ -3932,7 +3938,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalOverallHealingMitigated
         {
-            get { return ((bool) (this["ShowBasicTotalOverallHealingMitigated"])); }
+            get { return (bool) this["ShowBasicTotalOverallHealingMitigated"]; }
             set
             {
                 this["ShowBasicTotalOverallHealingMitigated"] = value;
@@ -3945,7 +3951,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicRegularHealingMitigated
         {
-            get { return ((bool) (this["ShowBasicRegularHealingMitigated"])); }
+            get { return (bool) this["ShowBasicRegularHealingMitigated"]; }
             set
             {
                 this["ShowBasicRegularHealingMitigated"] = value;
@@ -3958,7 +3964,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCriticalHealingMitigated
         {
-            get { return ((bool) (this["ShowBasicCriticalHealingMitigated"])); }
+            get { return (bool) this["ShowBasicCriticalHealingMitigated"]; }
             set
             {
                 this["ShowBasicCriticalHealingMitigated"] = value;
@@ -3971,7 +3977,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalHealingMitigatedActionsUsed
         {
-            get { return ((bool) (this["ShowBasicTotalHealingMitigatedActionsUsed"])); }
+            get { return (bool) this["ShowBasicTotalHealingMitigatedActionsUsed"]; }
             set
             {
                 this["ShowBasicTotalHealingMitigatedActionsUsed"] = value;
@@ -3984,7 +3990,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHMPS
         {
-            get { return ((bool) (this["ShowBasicHMPS"])); }
+            get { return (bool) this["ShowBasicHMPS"]; }
             set
             {
                 this["ShowBasicHMPS"] = value;
@@ -3997,7 +4003,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedRegHit
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedRegHit"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedRegHit"]; }
             set
             {
                 this["ShowBasicHealingMitigatedRegHit"] = value;
@@ -4010,7 +4016,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedRegLow
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedRegLow"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedRegLow"]; }
             set
             {
                 this["ShowBasicHealingMitigatedRegLow"] = value;
@@ -4023,7 +4029,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedRegHigh
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedRegHigh"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedRegHigh"]; }
             set
             {
                 this["ShowBasicHealingMitigatedRegHigh"] = value;
@@ -4036,7 +4042,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedRegAverage
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedRegAverage"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedRegAverage"]; }
             set
             {
                 this["ShowBasicHealingMitigatedRegAverage"] = value;
@@ -4049,7 +4055,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedRegMod
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedRegMod"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedRegMod"]; }
             set
             {
                 this["ShowBasicHealingMitigatedRegMod"] = value;
@@ -4062,7 +4068,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedRegModAverage
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedRegModAverage"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedRegModAverage"]; }
             set
             {
                 this["ShowBasicHealingMitigatedRegModAverage"] = value;
@@ -4075,7 +4081,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedCritHit
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedCritHit"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedCritHit"]; }
             set
             {
                 this["ShowBasicHealingMitigatedCritHit"] = value;
@@ -4088,7 +4094,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedCritPercent
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedCritPercent"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedCritPercent"]; }
             set
             {
                 this["ShowBasicHealingMitigatedCritPercent"] = value;
@@ -4101,7 +4107,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedCritLow
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedCritLow"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedCritLow"]; }
             set
             {
                 this["ShowBasicHealingMitigatedCritLow"] = value;
@@ -4114,7 +4120,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedCritHigh
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedCritHigh"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedCritHigh"]; }
             set
             {
                 this["ShowBasicHealingMitigatedCritHigh"] = value;
@@ -4127,7 +4133,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedCritAverage
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedCritAverage"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedCritAverage"]; }
             set
             {
                 this["ShowBasicHealingMitigatedCritAverage"] = value;
@@ -4140,7 +4146,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedCritMod
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedCritMod"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedCritMod"]; }
             set
             {
                 this["ShowBasicHealingMitigatedCritMod"] = value;
@@ -4153,7 +4159,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicHealingMitigatedCritModAverage
         {
-            get { return ((bool) (this["ShowBasicHealingMitigatedCritModAverage"])); }
+            get { return (bool) this["ShowBasicHealingMitigatedCritModAverage"]; }
             set
             {
                 this["ShowBasicHealingMitigatedCritModAverage"] = value;
@@ -4166,7 +4172,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfTotalOverallHealingMitigated
         {
-            get { return ((bool) (this["ShowBasicPercentOfTotalOverallHealingMitigated"])); }
+            get { return (bool) this["ShowBasicPercentOfTotalOverallHealingMitigated"]; }
             set
             {
                 this["ShowBasicPercentOfTotalOverallHealingMitigated"] = value;
@@ -4179,7 +4185,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfRegularHealingMitigated
         {
-            get { return ((bool) (this["ShowBasicPercentOfRegularHealingMitigated"])); }
+            get { return (bool) this["ShowBasicPercentOfRegularHealingMitigated"]; }
             set
             {
                 this["ShowBasicPercentOfRegularHealingMitigated"] = value;
@@ -4192,7 +4198,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfCriticalHealingMitigated
         {
-            get { return ((bool) (this["ShowBasicPercentOfCriticalHealingMitigated"])); }
+            get { return (bool) this["ShowBasicPercentOfCriticalHealingMitigated"]; }
             set
             {
                 this["ShowBasicPercentOfCriticalHealingMitigated"] = value;
@@ -4209,7 +4215,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalOverallDamageOverTime
         {
-            get { return ((bool) (this["ShowBasicTotalOverallDamageOverTime"])); }
+            get { return (bool) this["ShowBasicTotalOverallDamageOverTime"]; }
             set
             {
                 this["ShowBasicTotalOverallDamageOverTime"] = value;
@@ -4222,7 +4228,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicRegularDamageOverTime
         {
-            get { return ((bool) (this["ShowBasicRegularDamageOverTime"])); }
+            get { return (bool) this["ShowBasicRegularDamageOverTime"]; }
             set
             {
                 this["ShowBasicRegularDamageOverTime"] = value;
@@ -4235,7 +4241,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCriticalDamageOverTime
         {
-            get { return ((bool) (this["ShowBasicCriticalDamageOverTime"])); }
+            get { return (bool) this["ShowBasicCriticalDamageOverTime"]; }
             set
             {
                 this["ShowBasicCriticalDamageOverTime"] = value;
@@ -4248,7 +4254,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicTotalDamageOverTimeActionsUsed
         {
-            get { return ((bool) (this["ShowBasicTotalDamageOverTimeActionsUsed"])); }
+            get { return (bool) this["ShowBasicTotalDamageOverTimeActionsUsed"]; }
             set
             {
                 this["ShowBasicTotalDamageOverTimeActionsUsed"] = value;
@@ -4261,7 +4267,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDOTPS
         {
-            get { return ((bool) (this["ShowBasicDOTPS"])); }
+            get { return (bool) this["ShowBasicDOTPS"]; }
             set
             {
                 this["ShowBasicDOTPS"] = value;
@@ -4274,7 +4280,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeRegHit
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeRegHit"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeRegHit"]; }
             set
             {
                 this["ShowBasicDamageOverTimeRegHit"] = value;
@@ -4287,7 +4293,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeRegMiss
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeRegMiss"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeRegMiss"]; }
             set
             {
                 this["ShowBasicDamageOverTimeRegMiss"] = value;
@@ -4300,7 +4306,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeRegAccuracy
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeRegAccuracy"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeRegAccuracy"]; }
             set
             {
                 this["ShowBasicDamageOverTimeRegAccuracy"] = value;
@@ -4313,7 +4319,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeRegLow
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeRegLow"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeRegLow"]; }
             set
             {
                 this["ShowBasicDamageOverTimeRegLow"] = value;
@@ -4326,7 +4332,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeRegHigh
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeRegHigh"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeRegHigh"]; }
             set
             {
                 this["ShowBasicDamageOverTimeRegHigh"] = value;
@@ -4339,7 +4345,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeRegAverage
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeRegAverage"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeRegAverage"]; }
             set
             {
                 this["ShowBasicDamageOverTimeRegAverage"] = value;
@@ -4352,7 +4358,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeRegMod
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeRegMod"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeRegMod"]; }
             set
             {
                 this["ShowBasicDamageOverTimeRegMod"] = value;
@@ -4365,7 +4371,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeRegModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeRegModAverage"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeRegModAverage"]; }
             set
             {
                 this["ShowBasicDamageOverTimeRegModAverage"] = value;
@@ -4378,7 +4384,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeCritHit
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeCritHit"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeCritHit"]; }
             set
             {
                 this["ShowBasicDamageOverTimeCritHit"] = value;
@@ -4391,7 +4397,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeCritPercent
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeCritPercent"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeCritPercent"]; }
             set
             {
                 this["ShowBasicDamageOverTimeCritPercent"] = value;
@@ -4404,7 +4410,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeCritLow
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeCritLow"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeCritLow"]; }
             set
             {
                 this["ShowBasicDamageOverTimeCritLow"] = value;
@@ -4417,7 +4423,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeCritHigh
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeCritHigh"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeCritHigh"]; }
             set
             {
                 this["ShowBasicDamageOverTimeCritHigh"] = value;
@@ -4430,7 +4436,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeCritAverage
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeCritAverage"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeCritAverage"]; }
             set
             {
                 this["ShowBasicDamageOverTimeCritAverage"] = value;
@@ -4443,7 +4449,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeCritMod
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeCritMod"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeCritMod"]; }
             set
             {
                 this["ShowBasicDamageOverTimeCritMod"] = value;
@@ -4456,7 +4462,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicDamageOverTimeCritModAverage
         {
-            get { return ((bool) (this["ShowBasicDamageOverTimeCritModAverage"])); }
+            get { return (bool) this["ShowBasicDamageOverTimeCritModAverage"]; }
             set
             {
                 this["ShowBasicDamageOverTimeCritModAverage"] = value;
@@ -4469,7 +4475,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfTotalOverallDamageOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfTotalOverallDamageOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfTotalOverallDamageOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfTotalOverallDamageOverTime"] = value;
@@ -4482,7 +4488,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfRegularDamageOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfRegularDamageOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfRegularDamageOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfRegularDamageOverTime"] = value;
@@ -4495,7 +4501,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicPercentOfCriticalDamageOverTime
         {
-            get { return ((bool) (this["ShowBasicPercentOfCriticalDamageOverTime"])); }
+            get { return (bool) this["ShowBasicPercentOfCriticalDamageOverTime"]; }
             set
             {
                 this["ShowBasicPercentOfCriticalDamageOverTime"] = value;
@@ -4514,7 +4520,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowBasicCombinedTotalOverallDamage
         {
-            get { return ((bool) (this["ShowBasicCombinedTotalOverallDamage"])); }
+            get { return (bool) this["ShowBasicCombinedTotalOverallDamage"]; }
             set
             {
                 this["ShowBasicCombinedTotalOverallDamage"] = value;
@@ -4527,7 +4533,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedRegularDamage
         {
-            get { return ((bool) (this["ShowBasicCombinedRegularDamage"])); }
+            get { return (bool) this["ShowBasicCombinedRegularDamage"]; }
             set
             {
                 this["ShowBasicCombinedRegularDamage"] = value;
@@ -4540,7 +4546,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedCriticalDamage
         {
-            get { return ((bool) (this["ShowBasicCombinedCriticalDamage"])); }
+            get { return (bool) this["ShowBasicCombinedCriticalDamage"]; }
             set
             {
                 this["ShowBasicCombinedCriticalDamage"] = value;
@@ -4553,7 +4559,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedTotalDamageActionsUsed
         {
-            get { return ((bool) (this["ShowBasicCombinedTotalDamageActionsUsed"])); }
+            get { return (bool) this["ShowBasicCombinedTotalDamageActionsUsed"]; }
             set
             {
                 this["ShowBasicCombinedTotalDamageActionsUsed"] = value;
@@ -4566,7 +4572,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowBasicCombinedDPS
         {
-            get { return ((bool) (this["ShowBasicCombinedDPS"])); }
+            get { return (bool) this["ShowBasicCombinedDPS"]; }
             set
             {
                 this["ShowBasicCombinedDPS"] = value;
@@ -4579,7 +4585,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageRegHit
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageRegHit"])); }
+            get { return (bool) this["ShowBasicCombinedDamageRegHit"]; }
             set
             {
                 this["ShowBasicCombinedDamageRegHit"] = value;
@@ -4592,7 +4598,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageRegMiss
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageRegMiss"])); }
+            get { return (bool) this["ShowBasicCombinedDamageRegMiss"]; }
             set
             {
                 this["ShowBasicCombinedDamageRegMiss"] = value;
@@ -4605,7 +4611,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageRegAccuracy
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageRegAccuracy"])); }
+            get { return (bool) this["ShowBasicCombinedDamageRegAccuracy"]; }
             set
             {
                 this["ShowBasicCombinedDamageRegAccuracy"] = value;
@@ -4618,7 +4624,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageRegLow
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageRegLow"])); }
+            get { return (bool) this["ShowBasicCombinedDamageRegLow"]; }
             set
             {
                 this["ShowBasicCombinedDamageRegLow"] = value;
@@ -4631,7 +4637,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageRegHigh
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageRegHigh"])); }
+            get { return (bool) this["ShowBasicCombinedDamageRegHigh"]; }
             set
             {
                 this["ShowBasicCombinedDamageRegHigh"] = value;
@@ -4644,7 +4650,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageRegAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageRegAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageRegAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageRegAverage"] = value;
@@ -4657,7 +4663,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageRegMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageRegMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageRegMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageRegMod"] = value;
@@ -4670,7 +4676,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageRegModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageRegModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageRegModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageRegModAverage"] = value;
@@ -4683,7 +4689,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCritHit
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCritHit"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCritHit"]; }
             set
             {
                 this["ShowBasicCombinedDamageCritHit"] = value;
@@ -4696,7 +4702,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCritPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCritPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCritPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageCritPercent"] = value;
@@ -4709,7 +4715,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCritLow
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCritLow"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCritLow"]; }
             set
             {
                 this["ShowBasicCombinedDamageCritLow"] = value;
@@ -4722,7 +4728,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCritHigh
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCritHigh"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCritHigh"]; }
             set
             {
                 this["ShowBasicCombinedDamageCritHigh"] = value;
@@ -4735,7 +4741,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCritAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCritAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCritAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageCritAverage"] = value;
@@ -4748,7 +4754,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCritMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCritMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCritMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageCritMod"] = value;
@@ -4761,7 +4767,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCritModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCritModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCritModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageCritModAverage"] = value;
@@ -4774,7 +4780,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCounter
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCounter"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCounter"]; }
             set
             {
                 this["ShowBasicCombinedDamageCounter"] = value;
@@ -4787,7 +4793,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCounterPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCounterPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCounterPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageCounterPercent"] = value;
@@ -4800,7 +4806,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCounterMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCounterMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCounterMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageCounterMod"] = value;
@@ -4813,7 +4819,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageCounterModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageCounterModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageCounterModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageCounterModAverage"] = value;
@@ -4826,7 +4832,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageBlock
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageBlock"])); }
+            get { return (bool) this["ShowBasicCombinedDamageBlock"]; }
             set
             {
                 this["ShowBasicCombinedDamageBlock"] = value;
@@ -4839,7 +4845,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageBlockPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageBlockPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageBlockPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageBlockPercent"] = value;
@@ -4852,7 +4858,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageBlockMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageBlockMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageBlockMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageBlockMod"] = value;
@@ -4865,7 +4871,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageBlockModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageBlockModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageBlockModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageBlockModAverage"] = value;
@@ -4878,7 +4884,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageParry
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageParry"])); }
+            get { return (bool) this["ShowBasicCombinedDamageParry"]; }
             set
             {
                 this["ShowBasicCombinedDamageParry"] = value;
@@ -4891,7 +4897,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageParryPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageParryPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageParryPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageParryPercent"] = value;
@@ -4904,7 +4910,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageParryMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageParryMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageParryMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageParryMod"] = value;
@@ -4917,7 +4923,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageParryModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageParryModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageParryModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageParryModAverage"] = value;
@@ -4930,7 +4936,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageResist
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageResist"])); }
+            get { return (bool) this["ShowBasicCombinedDamageResist"]; }
             set
             {
                 this["ShowBasicCombinedDamageResist"] = value;
@@ -4943,7 +4949,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageResistPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageResistPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageResistPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageResistPercent"] = value;
@@ -4956,7 +4962,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageResistMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageResistMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageResistMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageResistMod"] = value;
@@ -4969,7 +4975,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageResistModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageResistModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageResistModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageResistModAverage"] = value;
@@ -4982,7 +4988,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageEvade
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageEvade"])); }
+            get { return (bool) this["ShowBasicCombinedDamageEvade"]; }
             set
             {
                 this["ShowBasicCombinedDamageEvade"] = value;
@@ -4995,7 +5001,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageEvadePercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageEvadePercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageEvadePercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageEvadePercent"] = value;
@@ -5008,7 +5014,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageEvadeMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageEvadeMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageEvadeMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageEvadeMod"] = value;
@@ -5021,7 +5027,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageEvadeModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageEvadeModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageEvadeModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageEvadeModAverage"] = value;
@@ -5034,7 +5040,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedTotalOverallHealing
         {
-            get { return ((bool) (this["ShowBasicCombinedTotalOverallHealing"])); }
+            get { return (bool) this["ShowBasicCombinedTotalOverallHealing"]; }
             set
             {
                 this["ShowBasicCombinedTotalOverallHealing"] = value;
@@ -5047,7 +5053,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedRegularHealing
         {
-            get { return ((bool) (this["ShowBasicCombinedRegularHealing"])); }
+            get { return (bool) this["ShowBasicCombinedRegularHealing"]; }
             set
             {
                 this["ShowBasicCombinedRegularHealing"] = value;
@@ -5060,7 +5066,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedCriticalHealing
         {
-            get { return ((bool) (this["ShowBasicCombinedCriticalHealing"])); }
+            get { return (bool) this["ShowBasicCombinedCriticalHealing"]; }
             set
             {
                 this["ShowBasicCombinedCriticalHealing"] = value;
@@ -5073,7 +5079,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedTotalHealingActionsUsed
         {
-            get { return ((bool) (this["ShowBasicCombinedTotalHealingActionsUsed"])); }
+            get { return (bool) this["ShowBasicCombinedTotalHealingActionsUsed"]; }
             set
             {
                 this["ShowBasicCombinedTotalHealingActionsUsed"] = value;
@@ -5086,7 +5092,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHPS
         {
-            get { return ((bool) (this["ShowBasicCombinedHPS"])); }
+            get { return (bool) this["ShowBasicCombinedHPS"]; }
             set
             {
                 this["ShowBasicCombinedHPS"] = value;
@@ -5099,7 +5105,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingRegHit
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingRegHit"])); }
+            get { return (bool) this["ShowBasicCombinedHealingRegHit"]; }
             set
             {
                 this["ShowBasicCombinedHealingRegHit"] = value;
@@ -5112,7 +5118,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingRegLow
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingRegLow"])); }
+            get { return (bool) this["ShowBasicCombinedHealingRegLow"]; }
             set
             {
                 this["ShowBasicCombinedHealingRegLow"] = value;
@@ -5125,7 +5131,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingRegHigh
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingRegHigh"])); }
+            get { return (bool) this["ShowBasicCombinedHealingRegHigh"]; }
             set
             {
                 this["ShowBasicCombinedHealingRegHigh"] = value;
@@ -5138,7 +5144,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingRegAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingRegAverage"])); }
+            get { return (bool) this["ShowBasicCombinedHealingRegAverage"]; }
             set
             {
                 this["ShowBasicCombinedHealingRegAverage"] = value;
@@ -5151,7 +5157,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingRegMod
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingRegMod"])); }
+            get { return (bool) this["ShowBasicCombinedHealingRegMod"]; }
             set
             {
                 this["ShowBasicCombinedHealingRegMod"] = value;
@@ -5164,7 +5170,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingRegModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingRegModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedHealingRegModAverage"]; }
             set
             {
                 this["ShowBasicCombinedHealingRegModAverage"] = value;
@@ -5177,7 +5183,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingCritHit
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingCritHit"])); }
+            get { return (bool) this["ShowBasicCombinedHealingCritHit"]; }
             set
             {
                 this["ShowBasicCombinedHealingCritHit"] = value;
@@ -5190,7 +5196,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingCritPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingCritPercent"])); }
+            get { return (bool) this["ShowBasicCombinedHealingCritPercent"]; }
             set
             {
                 this["ShowBasicCombinedHealingCritPercent"] = value;
@@ -5203,7 +5209,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingCritLow
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingCritLow"])); }
+            get { return (bool) this["ShowBasicCombinedHealingCritLow"]; }
             set
             {
                 this["ShowBasicCombinedHealingCritLow"] = value;
@@ -5216,7 +5222,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingCritHigh
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingCritHigh"])); }
+            get { return (bool) this["ShowBasicCombinedHealingCritHigh"]; }
             set
             {
                 this["ShowBasicCombinedHealingCritHigh"] = value;
@@ -5229,7 +5235,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingCritAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingCritAverage"])); }
+            get { return (bool) this["ShowBasicCombinedHealingCritAverage"]; }
             set
             {
                 this["ShowBasicCombinedHealingCritAverage"] = value;
@@ -5242,7 +5248,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingCritMod
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingCritMod"])); }
+            get { return (bool) this["ShowBasicCombinedHealingCritMod"]; }
             set
             {
                 this["ShowBasicCombinedHealingCritMod"] = value;
@@ -5255,7 +5261,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedHealingCritModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedHealingCritModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedHealingCritModAverage"]; }
             set
             {
                 this["ShowBasicCombinedHealingCritModAverage"] = value;
@@ -5268,7 +5274,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedTotalOverallDamageTaken
         {
-            get { return ((bool) (this["ShowBasicCombinedTotalOverallDamageTaken"])); }
+            get { return (bool) this["ShowBasicCombinedTotalOverallDamageTaken"]; }
             set
             {
                 this["ShowBasicCombinedTotalOverallDamageTaken"] = value;
@@ -5281,7 +5287,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedRegularDamageTaken
         {
-            get { return ((bool) (this["ShowBasicCombinedRegularDamageTaken"])); }
+            get { return (bool) this["ShowBasicCombinedRegularDamageTaken"]; }
             set
             {
                 this["ShowBasicCombinedRegularDamageTaken"] = value;
@@ -5294,7 +5300,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedCriticalDamageTaken
         {
-            get { return ((bool) (this["ShowBasicCombinedCriticalDamageTaken"])); }
+            get { return (bool) this["ShowBasicCombinedCriticalDamageTaken"]; }
             set
             {
                 this["ShowBasicCombinedCriticalDamageTaken"] = value;
@@ -5307,7 +5313,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedTotalDamageTakenActionsUsed
         {
-            get { return ((bool) (this["ShowBasicCombinedTotalDamageTakenActionsUsed"])); }
+            get { return (bool) this["ShowBasicCombinedTotalDamageTakenActionsUsed"]; }
             set
             {
                 this["ShowBasicCombinedTotalDamageTakenActionsUsed"] = value;
@@ -5320,7 +5326,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDTPS
         {
-            get { return ((bool) (this["ShowBasicCombinedDTPS"])); }
+            get { return (bool) this["ShowBasicCombinedDTPS"]; }
             set
             {
                 this["ShowBasicCombinedDTPS"] = value;
@@ -5333,7 +5339,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenRegHit
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenRegHit"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenRegHit"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenRegHit"] = value;
@@ -5346,7 +5352,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenRegMiss
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenRegMiss"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenRegMiss"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenRegMiss"] = value;
@@ -5359,7 +5365,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenRegAccuracy
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenRegAccuracy"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenRegAccuracy"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenRegAccuracy"] = value;
@@ -5372,7 +5378,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenRegLow
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenRegLow"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenRegLow"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenRegLow"] = value;
@@ -5385,7 +5391,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenRegHigh
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenRegHigh"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenRegHigh"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenRegHigh"] = value;
@@ -5398,7 +5404,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenRegAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenRegAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenRegAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenRegAverage"] = value;
@@ -5411,7 +5417,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenRegMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenRegMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenRegMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenRegMod"] = value;
@@ -5424,7 +5430,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenRegModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenRegModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenRegModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenRegModAverage"] = value;
@@ -5437,7 +5443,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCritHit
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCritHit"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCritHit"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCritHit"] = value;
@@ -5450,7 +5456,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCritPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCritPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCritPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCritPercent"] = value;
@@ -5463,7 +5469,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCritLow
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCritLow"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCritLow"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCritLow"] = value;
@@ -5476,7 +5482,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCritHigh
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCritHigh"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCritHigh"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCritHigh"] = value;
@@ -5489,7 +5495,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCritAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCritAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCritAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCritAverage"] = value;
@@ -5502,7 +5508,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCritMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCritMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCritMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCritMod"] = value;
@@ -5515,7 +5521,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCritModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCritModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCritModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCritModAverage"] = value;
@@ -5528,7 +5534,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCounter
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCounter"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCounter"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCounter"] = value;
@@ -5541,7 +5547,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCounterPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCounterPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCounterPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCounterPercent"] = value;
@@ -5554,7 +5560,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCounterMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCounterMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCounterMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCounterMod"] = value;
@@ -5567,7 +5573,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenCounterModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenCounterModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenCounterModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenCounterModAverage"] = value;
@@ -5580,7 +5586,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenBlock
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenBlock"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenBlock"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenBlock"] = value;
@@ -5593,7 +5599,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenBlockPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenBlockPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenBlockPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenBlockPercent"] = value;
@@ -5606,7 +5612,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenBlockMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenBlockMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenBlockMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenBlockMod"] = value;
@@ -5619,7 +5625,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenBlockModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenBlockModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenBlockModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenBlockModAverage"] = value;
@@ -5632,7 +5638,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenParry
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenParry"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenParry"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenParry"] = value;
@@ -5645,7 +5651,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenParryPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenParryPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenParryPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenParryPercent"] = value;
@@ -5658,7 +5664,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenParryMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenParryMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenParryMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenParryMod"] = value;
@@ -5671,7 +5677,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenParryModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenParryModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenParryModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenParryModAverage"] = value;
@@ -5684,7 +5690,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenResist
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenResist"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenResist"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenResist"] = value;
@@ -5697,7 +5703,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenResistPercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenResistPercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenResistPercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenResistPercent"] = value;
@@ -5710,7 +5716,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenResistMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenResistMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenResistMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenResistMod"] = value;
@@ -5723,7 +5729,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenResistModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenResistModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenResistModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenResistModAverage"] = value;
@@ -5736,7 +5742,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenEvade
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenEvade"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenEvade"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenEvade"] = value;
@@ -5749,7 +5755,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenEvadePercent
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenEvadePercent"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenEvadePercent"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenEvadePercent"] = value;
@@ -5762,7 +5768,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenEvadeMod
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenEvadeMod"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenEvadeMod"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenEvadeMod"] = value;
@@ -5775,7 +5781,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("False")]
         public bool ShowBasicCombinedDamageTakenEvadeModAverage
         {
-            get { return ((bool) (this["ShowBasicCombinedDamageTakenEvadeModAverage"])); }
+            get { return (bool) this["ShowBasicCombinedDamageTakenEvadeModAverage"]; }
             set
             {
                 this["ShowBasicCombinedDamageTakenEvadeModAverage"] = value;
@@ -5792,7 +5798,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnTotalOverallDamage
         {
-            get { return ((bool) (this["ShowColumnTotalOverallDamage"])); }
+            get { return (bool) this["ShowColumnTotalOverallDamage"]; }
             set
             {
                 this["ShowColumnTotalOverallDamage"] = value;
@@ -5805,7 +5811,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnRegularDamage
         {
-            get { return ((bool) (this["ShowColumnRegularDamage"])); }
+            get { return (bool) this["ShowColumnRegularDamage"]; }
             set
             {
                 this["ShowColumnRegularDamage"] = value;
@@ -5818,7 +5824,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnCriticalDamage
         {
-            get { return ((bool) (this["ShowColumnCriticalDamage"])); }
+            get { return (bool) this["ShowColumnCriticalDamage"]; }
             set
             {
                 this["ShowColumnCriticalDamage"] = value;
@@ -5831,7 +5837,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnTotalDamageActionsUsed
         {
-            get { return ((bool) (this["ShowColumnTotalDamageActionsUsed"])); }
+            get { return (bool) this["ShowColumnTotalDamageActionsUsed"]; }
             set
             {
                 this["ShowColumnTotalDamageActionsUsed"] = value;
@@ -5844,7 +5850,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDPS
         {
-            get { return ((bool) (this["ShowColumnDPS"])); }
+            get { return (bool) this["ShowColumnDPS"]; }
             set
             {
                 this["ShowColumnDPS"] = value;
@@ -5857,7 +5863,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageRegHit
         {
-            get { return ((bool) (this["ShowColumnDamageRegHit"])); }
+            get { return (bool) this["ShowColumnDamageRegHit"]; }
             set
             {
                 this["ShowColumnDamageRegHit"] = value;
@@ -5870,7 +5876,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageRegMiss
         {
-            get { return ((bool) (this["ShowColumnDamageRegMiss"])); }
+            get { return (bool) this["ShowColumnDamageRegMiss"]; }
             set
             {
                 this["ShowColumnDamageRegMiss"] = value;
@@ -5883,7 +5889,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageRegAccuracy
         {
-            get { return ((bool) (this["ShowColumnDamageRegAccuracy"])); }
+            get { return (bool) this["ShowColumnDamageRegAccuracy"]; }
             set
             {
                 this["ShowColumnDamageRegAccuracy"] = value;
@@ -5896,7 +5902,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageRegLow
         {
-            get { return ((bool) (this["ShowColumnDamageRegLow"])); }
+            get { return (bool) this["ShowColumnDamageRegLow"]; }
             set
             {
                 this["ShowColumnDamageRegLow"] = value;
@@ -5909,7 +5915,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageRegHigh
         {
-            get { return ((bool) (this["ShowColumnDamageRegHigh"])); }
+            get { return (bool) this["ShowColumnDamageRegHigh"]; }
             set
             {
                 this["ShowColumnDamageRegHigh"] = value;
@@ -5922,7 +5928,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageRegAverage
         {
-            get { return ((bool) (this["ShowColumnDamageRegAverage"])); }
+            get { return (bool) this["ShowColumnDamageRegAverage"]; }
             set
             {
                 this["ShowColumnDamageRegAverage"] = value;
@@ -5935,7 +5941,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageRegMod
         {
-            get { return ((bool) (this["ShowColumnDamageRegMod"])); }
+            get { return (bool) this["ShowColumnDamageRegMod"]; }
             set
             {
                 this["ShowColumnDamageRegMod"] = value;
@@ -5948,7 +5954,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageRegModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageRegModAverage"])); }
+            get { return (bool) this["ShowColumnDamageRegModAverage"]; }
             set
             {
                 this["ShowColumnDamageRegModAverage"] = value;
@@ -5961,7 +5967,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCritHit
         {
-            get { return ((bool) (this["ShowColumnDamageCritHit"])); }
+            get { return (bool) this["ShowColumnDamageCritHit"]; }
             set
             {
                 this["ShowColumnDamageCritHit"] = value;
@@ -5974,7 +5980,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCritPercent
         {
-            get { return ((bool) (this["ShowColumnDamageCritPercent"])); }
+            get { return (bool) this["ShowColumnDamageCritPercent"]; }
             set
             {
                 this["ShowColumnDamageCritPercent"] = value;
@@ -5987,7 +5993,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCritLow
         {
-            get { return ((bool) (this["ShowColumnDamageCritLow"])); }
+            get { return (bool) this["ShowColumnDamageCritLow"]; }
             set
             {
                 this["ShowColumnDamageCritLow"] = value;
@@ -6000,7 +6006,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCritHigh
         {
-            get { return ((bool) (this["ShowColumnDamageCritHigh"])); }
+            get { return (bool) this["ShowColumnDamageCritHigh"]; }
             set
             {
                 this["ShowColumnDamageCritHigh"] = value;
@@ -6013,7 +6019,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCritAverage
         {
-            get { return ((bool) (this["ShowColumnDamageCritAverage"])); }
+            get { return (bool) this["ShowColumnDamageCritAverage"]; }
             set
             {
                 this["ShowColumnDamageCritAverage"] = value;
@@ -6026,7 +6032,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCritMod
         {
-            get { return ((bool) (this["ShowColumnDamageCritMod"])); }
+            get { return (bool) this["ShowColumnDamageCritMod"]; }
             set
             {
                 this["ShowColumnDamageCritMod"] = value;
@@ -6039,7 +6045,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCritModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageCritModAverage"])); }
+            get { return (bool) this["ShowColumnDamageCritModAverage"]; }
             set
             {
                 this["ShowColumnDamageCritModAverage"] = value;
@@ -6052,7 +6058,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCounter
         {
-            get { return ((bool) (this["ShowColumnDamageCounter"])); }
+            get { return (bool) this["ShowColumnDamageCounter"]; }
             set
             {
                 this["ShowColumnDamageCounter"] = value;
@@ -6065,7 +6071,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCounterPercent
         {
-            get { return ((bool) (this["ShowColumnDamageCounterPercent"])); }
+            get { return (bool) this["ShowColumnDamageCounterPercent"]; }
             set
             {
                 this["ShowColumnDamageCounterPercent"] = value;
@@ -6078,7 +6084,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCounterMod
         {
-            get { return ((bool) (this["ShowColumnDamageCounterMod"])); }
+            get { return (bool) this["ShowColumnDamageCounterMod"]; }
             set
             {
                 this["ShowColumnDamageCounterMod"] = value;
@@ -6091,7 +6097,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageCounterModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageCounterModAverage"])); }
+            get { return (bool) this["ShowColumnDamageCounterModAverage"]; }
             set
             {
                 this["ShowColumnDamageCounterModAverage"] = value;
@@ -6104,7 +6110,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageBlock
         {
-            get { return ((bool) (this["ShowColumnDamageBlock"])); }
+            get { return (bool) this["ShowColumnDamageBlock"]; }
             set
             {
                 this["ShowColumnDamageBlock"] = value;
@@ -6117,7 +6123,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageBlockPercent
         {
-            get { return ((bool) (this["ShowColumnDamageBlockPercent"])); }
+            get { return (bool) this["ShowColumnDamageBlockPercent"]; }
             set
             {
                 this["ShowColumnDamageBlockPercent"] = value;
@@ -6130,7 +6136,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageBlockMod
         {
-            get { return ((bool) (this["ShowColumnDamageBlockMod"])); }
+            get { return (bool) this["ShowColumnDamageBlockMod"]; }
             set
             {
                 this["ShowColumnDamageBlockMod"] = value;
@@ -6143,7 +6149,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageBlockModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageBlockModAverage"])); }
+            get { return (bool) this["ShowColumnDamageBlockModAverage"]; }
             set
             {
                 this["ShowColumnDamageBlockModAverage"] = value;
@@ -6156,7 +6162,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageParry
         {
-            get { return ((bool) (this["ShowColumnDamageParry"])); }
+            get { return (bool) this["ShowColumnDamageParry"]; }
             set
             {
                 this["ShowColumnDamageParry"] = value;
@@ -6169,7 +6175,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageParryPercent
         {
-            get { return ((bool) (this["ShowColumnDamageParryPercent"])); }
+            get { return (bool) this["ShowColumnDamageParryPercent"]; }
             set
             {
                 this["ShowColumnDamageParryPercent"] = value;
@@ -6182,7 +6188,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageParryMod
         {
-            get { return ((bool) (this["ShowColumnDamageParryMod"])); }
+            get { return (bool) this["ShowColumnDamageParryMod"]; }
             set
             {
                 this["ShowColumnDamageParryMod"] = value;
@@ -6195,7 +6201,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageParryModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageParryModAverage"])); }
+            get { return (bool) this["ShowColumnDamageParryModAverage"]; }
             set
             {
                 this["ShowColumnDamageParryModAverage"] = value;
@@ -6208,7 +6214,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageResist
         {
-            get { return ((bool) (this["ShowColumnDamageResist"])); }
+            get { return (bool) this["ShowColumnDamageResist"]; }
             set
             {
                 this["ShowColumnDamageResist"] = value;
@@ -6221,7 +6227,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageResistPercent
         {
-            get { return ((bool) (this["ShowColumnDamageResistPercent"])); }
+            get { return (bool) this["ShowColumnDamageResistPercent"]; }
             set
             {
                 this["ShowColumnDamageResistPercent"] = value;
@@ -6234,7 +6240,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageResistMod
         {
-            get { return ((bool) (this["ShowColumnDamageResistMod"])); }
+            get { return (bool) this["ShowColumnDamageResistMod"]; }
             set
             {
                 this["ShowColumnDamageResistMod"] = value;
@@ -6247,7 +6253,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageResistModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageResistModAverage"])); }
+            get { return (bool) this["ShowColumnDamageResistModAverage"]; }
             set
             {
                 this["ShowColumnDamageResistModAverage"] = value;
@@ -6260,7 +6266,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageEvade
         {
-            get { return ((bool) (this["ShowColumnDamageEvade"])); }
+            get { return (bool) this["ShowColumnDamageEvade"]; }
             set
             {
                 this["ShowColumnDamageEvade"] = value;
@@ -6273,7 +6279,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageEvadePercent
         {
-            get { return ((bool) (this["ShowColumnDamageEvadePercent"])); }
+            get { return (bool) this["ShowColumnDamageEvadePercent"]; }
             set
             {
                 this["ShowColumnDamageEvadePercent"] = value;
@@ -6286,7 +6292,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageEvadeMod
         {
-            get { return ((bool) (this["ShowColumnDamageEvadeMod"])); }
+            get { return (bool) this["ShowColumnDamageEvadeMod"]; }
             set
             {
                 this["ShowColumnDamageEvadeMod"] = value;
@@ -6299,7 +6305,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageEvadeModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageEvadeModAverage"])); }
+            get { return (bool) this["ShowColumnDamageEvadeModAverage"]; }
             set
             {
                 this["ShowColumnDamageEvadeModAverage"] = value;
@@ -6312,7 +6318,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfTotalOverallDamage
         {
-            get { return ((bool) (this["ShowColumnPercentOfTotalOverallDamage"])); }
+            get { return (bool) this["ShowColumnPercentOfTotalOverallDamage"]; }
             set
             {
                 this["ShowColumnPercentOfTotalOverallDamage"] = value;
@@ -6325,7 +6331,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfRegularDamage
         {
-            get { return ((bool) (this["ShowColumnPercentOfRegularDamage"])); }
+            get { return (bool) this["ShowColumnPercentOfRegularDamage"]; }
             set
             {
                 this["ShowColumnPercentOfRegularDamage"] = value;
@@ -6338,7 +6344,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfCriticalDamage
         {
-            get { return ((bool) (this["ShowColumnPercentOfCriticalDamage"])); }
+            get { return (bool) this["ShowColumnPercentOfCriticalDamage"]; }
             set
             {
                 this["ShowColumnPercentOfCriticalDamage"] = value;
@@ -6351,7 +6357,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnTotalOverallHealing
         {
-            get { return ((bool) (this["ShowColumnTotalOverallHealing"])); }
+            get { return (bool) this["ShowColumnTotalOverallHealing"]; }
             set
             {
                 this["ShowColumnTotalOverallHealing"] = value;
@@ -6364,7 +6370,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnRegularHealing
         {
-            get { return ((bool) (this["ShowColumnRegularHealing"])); }
+            get { return (bool) this["ShowColumnRegularHealing"]; }
             set
             {
                 this["ShowColumnRegularHealing"] = value;
@@ -6377,7 +6383,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnCriticalHealing
         {
-            get { return ((bool) (this["ShowColumnCriticalHealing"])); }
+            get { return (bool) this["ShowColumnCriticalHealing"]; }
             set
             {
                 this["ShowColumnCriticalHealing"] = value;
@@ -6390,7 +6396,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnTotalHealingActionsUsed
         {
-            get { return ((bool) (this["ShowColumnTotalHealingActionsUsed"])); }
+            get { return (bool) this["ShowColumnTotalHealingActionsUsed"]; }
             set
             {
                 this["ShowColumnTotalHealingActionsUsed"] = value;
@@ -6403,7 +6409,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHPS
         {
-            get { return ((bool) (this["ShowColumnHPS"])); }
+            get { return (bool) this["ShowColumnHPS"]; }
             set
             {
                 this["ShowColumnHPS"] = value;
@@ -6416,7 +6422,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingRegHit
         {
-            get { return ((bool) (this["ShowColumnHealingRegHit"])); }
+            get { return (bool) this["ShowColumnHealingRegHit"]; }
             set
             {
                 this["ShowColumnHealingRegHit"] = value;
@@ -6429,7 +6435,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingRegLow
         {
-            get { return ((bool) (this["ShowColumnHealingRegLow"])); }
+            get { return (bool) this["ShowColumnHealingRegLow"]; }
             set
             {
                 this["ShowColumnHealingRegLow"] = value;
@@ -6442,7 +6448,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingRegHigh
         {
-            get { return ((bool) (this["ShowColumnHealingRegHigh"])); }
+            get { return (bool) this["ShowColumnHealingRegHigh"]; }
             set
             {
                 this["ShowColumnHealingRegHigh"] = value;
@@ -6455,7 +6461,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingRegAverage
         {
-            get { return ((bool) (this["ShowColumnHealingRegAverage"])); }
+            get { return (bool) this["ShowColumnHealingRegAverage"]; }
             set
             {
                 this["ShowColumnHealingRegAverage"] = value;
@@ -6468,7 +6474,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingRegMod
         {
-            get { return ((bool) (this["ShowColumnHealingRegMod"])); }
+            get { return (bool) this["ShowColumnHealingRegMod"]; }
             set
             {
                 this["ShowColumnHealingRegMod"] = value;
@@ -6481,7 +6487,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingRegModAverage
         {
-            get { return ((bool) (this["ShowColumnHealingRegModAverage"])); }
+            get { return (bool) this["ShowColumnHealingRegModAverage"]; }
             set
             {
                 this["ShowColumnHealingRegModAverage"] = value;
@@ -6494,7 +6500,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingCritHit
         {
-            get { return ((bool) (this["ShowColumnHealingCritHit"])); }
+            get { return (bool) this["ShowColumnHealingCritHit"]; }
             set
             {
                 this["ShowColumnHealingCritHit"] = value;
@@ -6507,7 +6513,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingCritPercent
         {
-            get { return ((bool) (this["ShowColumnHealingCritPercent"])); }
+            get { return (bool) this["ShowColumnHealingCritPercent"]; }
             set
             {
                 this["ShowColumnHealingCritPercent"] = value;
@@ -6520,7 +6526,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingCritLow
         {
-            get { return ((bool) (this["ShowColumnHealingCritLow"])); }
+            get { return (bool) this["ShowColumnHealingCritLow"]; }
             set
             {
                 this["ShowColumnHealingCritLow"] = value;
@@ -6533,7 +6539,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingCritHigh
         {
-            get { return ((bool) (this["ShowColumnHealingCritHigh"])); }
+            get { return (bool) this["ShowColumnHealingCritHigh"]; }
             set
             {
                 this["ShowColumnHealingCritHigh"] = value;
@@ -6546,7 +6552,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingCritAverage
         {
-            get { return ((bool) (this["ShowColumnHealingCritAverage"])); }
+            get { return (bool) this["ShowColumnHealingCritAverage"]; }
             set
             {
                 this["ShowColumnHealingCritAverage"] = value;
@@ -6559,7 +6565,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingCritMod
         {
-            get { return ((bool) (this["ShowColumnHealingCritMod"])); }
+            get { return (bool) this["ShowColumnHealingCritMod"]; }
             set
             {
                 this["ShowColumnHealingCritMod"] = value;
@@ -6572,7 +6578,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnHealingCritModAverage
         {
-            get { return ((bool) (this["ShowColumnHealingCritModAverage"])); }
+            get { return (bool) this["ShowColumnHealingCritModAverage"]; }
             set
             {
                 this["ShowColumnHealingCritModAverage"] = value;
@@ -6585,7 +6591,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfTotalOverallHealing
         {
-            get { return ((bool) (this["ShowColumnPercentOfTotalOverallHealing"])); }
+            get { return (bool) this["ShowColumnPercentOfTotalOverallHealing"]; }
             set
             {
                 this["ShowColumnPercentOfTotalOverallHealing"] = value;
@@ -6598,7 +6604,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfRegularHealing
         {
-            get { return ((bool) (this["ShowColumnPercentOfRegularHealing"])); }
+            get { return (bool) this["ShowColumnPercentOfRegularHealing"]; }
             set
             {
                 this["ShowColumnPercentOfRegularHealing"] = value;
@@ -6611,7 +6617,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfCriticalHealing
         {
-            get { return ((bool) (this["ShowColumnPercentOfCriticalHealing"])); }
+            get { return (bool) this["ShowColumnPercentOfCriticalHealing"]; }
             set
             {
                 this["ShowColumnPercentOfCriticalHealing"] = value;
@@ -6624,7 +6630,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnTotalOverallDamageTaken
         {
-            get { return ((bool) (this["ShowColumnTotalOverallDamageTaken"])); }
+            get { return (bool) this["ShowColumnTotalOverallDamageTaken"]; }
             set
             {
                 this["ShowColumnTotalOverallDamageTaken"] = value;
@@ -6637,7 +6643,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnRegularDamageTaken
         {
-            get { return ((bool) (this["ShowColumnRegularDamageTaken"])); }
+            get { return (bool) this["ShowColumnRegularDamageTaken"]; }
             set
             {
                 this["ShowColumnRegularDamageTaken"] = value;
@@ -6650,7 +6656,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnCriticalDamageTaken
         {
-            get { return ((bool) (this["ShowColumnCriticalDamageTaken"])); }
+            get { return (bool) this["ShowColumnCriticalDamageTaken"]; }
             set
             {
                 this["ShowColumnCriticalDamageTaken"] = value;
@@ -6663,7 +6669,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnTotalDamageTakenActionsUsed
         {
-            get { return ((bool) (this["ShowColumnTotalDamageTakenActionsUsed"])); }
+            get { return (bool) this["ShowColumnTotalDamageTakenActionsUsed"]; }
             set
             {
                 this["ShowColumnTotalDamageTakenActionsUsed"] = value;
@@ -6676,7 +6682,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDTPS
         {
-            get { return ((bool) (this["ShowColumnDTPS"])); }
+            get { return (bool) this["ShowColumnDTPS"]; }
             set
             {
                 this["ShowColumnDTPS"] = value;
@@ -6689,7 +6695,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenRegHit
         {
-            get { return ((bool) (this["ShowColumnDamageTakenRegHit"])); }
+            get { return (bool) this["ShowColumnDamageTakenRegHit"]; }
             set
             {
                 this["ShowColumnDamageTakenRegHit"] = value;
@@ -6702,7 +6708,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenRegMiss
         {
-            get { return ((bool) (this["ShowColumnDamageTakenRegMiss"])); }
+            get { return (bool) this["ShowColumnDamageTakenRegMiss"]; }
             set
             {
                 this["ShowColumnDamageTakenRegMiss"] = value;
@@ -6715,7 +6721,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenRegAccuracy
         {
-            get { return ((bool) (this["ShowColumnDamageTakenRegAccuracy"])); }
+            get { return (bool) this["ShowColumnDamageTakenRegAccuracy"]; }
             set
             {
                 this["ShowColumnDamageTakenRegAccuracy"] = value;
@@ -6728,7 +6734,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenRegLow
         {
-            get { return ((bool) (this["ShowColumnDamageTakenRegLow"])); }
+            get { return (bool) this["ShowColumnDamageTakenRegLow"]; }
             set
             {
                 this["ShowColumnDamageTakenRegLow"] = value;
@@ -6741,7 +6747,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenRegHigh
         {
-            get { return ((bool) (this["ShowColumnDamageTakenRegHigh"])); }
+            get { return (bool) this["ShowColumnDamageTakenRegHigh"]; }
             set
             {
                 this["ShowColumnDamageTakenRegHigh"] = value;
@@ -6754,7 +6760,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenRegAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenRegAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenRegAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenRegAverage"] = value;
@@ -6767,7 +6773,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenRegMod
         {
-            get { return ((bool) (this["ShowColumnDamageTakenRegMod"])); }
+            get { return (bool) this["ShowColumnDamageTakenRegMod"]; }
             set
             {
                 this["ShowColumnDamageTakenRegMod"] = value;
@@ -6780,7 +6786,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenRegModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenRegModAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenRegModAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenRegModAverage"] = value;
@@ -6793,7 +6799,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCritHit
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCritHit"])); }
+            get { return (bool) this["ShowColumnDamageTakenCritHit"]; }
             set
             {
                 this["ShowColumnDamageTakenCritHit"] = value;
@@ -6806,7 +6812,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCritPercent
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCritPercent"])); }
+            get { return (bool) this["ShowColumnDamageTakenCritPercent"]; }
             set
             {
                 this["ShowColumnDamageTakenCritPercent"] = value;
@@ -6819,7 +6825,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCritLow
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCritLow"])); }
+            get { return (bool) this["ShowColumnDamageTakenCritLow"]; }
             set
             {
                 this["ShowColumnDamageTakenCritLow"] = value;
@@ -6832,7 +6838,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCritHigh
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCritHigh"])); }
+            get { return (bool) this["ShowColumnDamageTakenCritHigh"]; }
             set
             {
                 this["ShowColumnDamageTakenCritHigh"] = value;
@@ -6845,7 +6851,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCritAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCritAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenCritAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenCritAverage"] = value;
@@ -6858,7 +6864,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCritMod
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCritMod"])); }
+            get { return (bool) this["ShowColumnDamageTakenCritMod"]; }
             set
             {
                 this["ShowColumnDamageTakenCritMod"] = value;
@@ -6871,7 +6877,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCritModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCritModAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenCritModAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenCritModAverage"] = value;
@@ -6884,7 +6890,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCounter
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCounter"])); }
+            get { return (bool) this["ShowColumnDamageTakenCounter"]; }
             set
             {
                 this["ShowColumnDamageTakenCounter"] = value;
@@ -6897,7 +6903,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCounterPercent
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCounterPercent"])); }
+            get { return (bool) this["ShowColumnDamageTakenCounterPercent"]; }
             set
             {
                 this["ShowColumnDamageTakenCounterPercent"] = value;
@@ -6910,7 +6916,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCounterMod
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCounterMod"])); }
+            get { return (bool) this["ShowColumnDamageTakenCounterMod"]; }
             set
             {
                 this["ShowColumnDamageTakenCounterMod"] = value;
@@ -6923,7 +6929,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenCounterModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenCounterModAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenCounterModAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenCounterModAverage"] = value;
@@ -6936,7 +6942,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenBlock
         {
-            get { return ((bool) (this["ShowColumnDamageTakenBlock"])); }
+            get { return (bool) this["ShowColumnDamageTakenBlock"]; }
             set
             {
                 this["ShowColumnDamageTakenBlock"] = value;
@@ -6949,7 +6955,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenBlockPercent
         {
-            get { return ((bool) (this["ShowColumnDamageTakenBlockPercent"])); }
+            get { return (bool) this["ShowColumnDamageTakenBlockPercent"]; }
             set
             {
                 this["ShowColumnDamageTakenBlockPercent"] = value;
@@ -6962,7 +6968,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenBlockMod
         {
-            get { return ((bool) (this["ShowColumnDamageTakenBlockMod"])); }
+            get { return (bool) this["ShowColumnDamageTakenBlockMod"]; }
             set
             {
                 this["ShowColumnDamageTakenBlockMod"] = value;
@@ -6975,7 +6981,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenBlockModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenBlockModAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenBlockModAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenBlockModAverage"] = value;
@@ -6988,7 +6994,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenParry
         {
-            get { return ((bool) (this["ShowColumnDamageTakenParry"])); }
+            get { return (bool) this["ShowColumnDamageTakenParry"]; }
             set
             {
                 this["ShowColumnDamageTakenParry"] = value;
@@ -7001,7 +7007,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenParryPercent
         {
-            get { return ((bool) (this["ShowColumnDamageTakenParryPercent"])); }
+            get { return (bool) this["ShowColumnDamageTakenParryPercent"]; }
             set
             {
                 this["ShowColumnDamageTakenParryPercent"] = value;
@@ -7014,7 +7020,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenParryMod
         {
-            get { return ((bool) (this["ShowColumnDamageTakenParryMod"])); }
+            get { return (bool) this["ShowColumnDamageTakenParryMod"]; }
             set
             {
                 this["ShowColumnDamageTakenParryMod"] = value;
@@ -7027,7 +7033,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenParryModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenParryModAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenParryModAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenParryModAverage"] = value;
@@ -7040,7 +7046,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenResist
         {
-            get { return ((bool) (this["ShowColumnDamageTakenResist"])); }
+            get { return (bool) this["ShowColumnDamageTakenResist"]; }
             set
             {
                 this["ShowColumnDamageTakenResist"] = value;
@@ -7053,7 +7059,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenResistPercent
         {
-            get { return ((bool) (this["ShowColumnDamageTakenResistPercent"])); }
+            get { return (bool) this["ShowColumnDamageTakenResistPercent"]; }
             set
             {
                 this["ShowColumnDamageTakenResistPercent"] = value;
@@ -7066,7 +7072,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenResistMod
         {
-            get { return ((bool) (this["ShowColumnDamageTakenResistMod"])); }
+            get { return (bool) this["ShowColumnDamageTakenResistMod"]; }
             set
             {
                 this["ShowColumnDamageTakenResistMod"] = value;
@@ -7079,7 +7085,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenResistModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenResistModAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenResistModAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenResistModAverage"] = value;
@@ -7092,7 +7098,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenEvade
         {
-            get { return ((bool) (this["ShowColumnDamageTakenEvade"])); }
+            get { return (bool) this["ShowColumnDamageTakenEvade"]; }
             set
             {
                 this["ShowColumnDamageTakenEvade"] = value;
@@ -7105,7 +7111,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenEvadePercent
         {
-            get { return ((bool) (this["ShowColumnDamageTakenEvadePercent"])); }
+            get { return (bool) this["ShowColumnDamageTakenEvadePercent"]; }
             set
             {
                 this["ShowColumnDamageTakenEvadePercent"] = value;
@@ -7118,7 +7124,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenEvadeMod
         {
-            get { return ((bool) (this["ShowColumnDamageTakenEvadeMod"])); }
+            get { return (bool) this["ShowColumnDamageTakenEvadeMod"]; }
             set
             {
                 this["ShowColumnDamageTakenEvadeMod"] = value;
@@ -7131,7 +7137,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnDamageTakenEvadeModAverage
         {
-            get { return ((bool) (this["ShowColumnDamageTakenEvadeModAverage"])); }
+            get { return (bool) this["ShowColumnDamageTakenEvadeModAverage"]; }
             set
             {
                 this["ShowColumnDamageTakenEvadeModAverage"] = value;
@@ -7144,7 +7150,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfTotalOverallDamageTaken
         {
-            get { return ((bool) (this["ShowColumnPercentOfTotalOverallDamageTaken"])); }
+            get { return (bool) this["ShowColumnPercentOfTotalOverallDamageTaken"]; }
             set
             {
                 this["ShowColumnPercentOfTotalOverallDamageTaken"] = value;
@@ -7157,7 +7163,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfRegularDamageTaken
         {
-            get { return ((bool) (this["ShowColumnPercentOfRegularDamageTaken"])); }
+            get { return (bool) this["ShowColumnPercentOfRegularDamageTaken"]; }
             set
             {
                 this["ShowColumnPercentOfRegularDamageTaken"] = value;
@@ -7170,7 +7176,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties
         [DefaultSettingValue("True")]
         public bool ShowColumnPercentOfCriticalDamageTaken
         {
-            get { return ((bool) (this["ShowColumnPercentOfCriticalDamageTaken"])); }
+            get { return (bool) this["ShowColumnPercentOfCriticalDamageTaken"]; }
             set
             {
                 this["ShowColumnPercentOfCriticalDamageTaken"] = value;

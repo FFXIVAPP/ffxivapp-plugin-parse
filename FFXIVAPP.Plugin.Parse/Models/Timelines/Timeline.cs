@@ -21,6 +21,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Timers;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Models.Fights;
@@ -81,6 +82,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
@@ -105,7 +107,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
         {
             if (!Monster.HasGroup(monsterName))
             {
-                Logging.Log(Logger, String.Format("StatEvent : Adding new stat group for monster : {0}", monsterName));
+                Logging.Log(Logger, $"StatEvent : Adding new stat group for monster : {monsterName}");
                 Monster.AddGroup(new Monster(monsterName, Controller));
             }
             var monster = (Monster) Monster.GetGroup(monsterName);
@@ -120,7 +122,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
         {
             if (!Party.HasGroup(playerName))
             {
-                Logging.Log(Logger, String.Format("StatEvent : Adding new stat group for player : {0}", playerName));
+                Logging.Log(Logger, $"StatEvent : Adding new stat group for player : {playerName}");
                 Party.AddGroup(new Player(playerName, Controller));
             }
             var player = (Player) Party.GetGroup(playerName);
@@ -133,8 +135,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
         /// <param name="eventArgs"> </param>
         public void PublishTimelineEvent(TimelineEventType eventType, params object[] eventArgs)
         {
-            var args = (eventArgs != null && eventArgs.Any()) ? eventArgs[0] : "(no args)";
-            Logging.Log(Logger, String.Format("TimelineEvent : {0} {1}", eventType, args));
+            var args = eventArgs != null && eventArgs.Any() ? eventArgs[0] : "(no args)";
+            Logging.Log(Logger, $"TimelineEvent : {eventType} {args}");
             if (eventArgs != null)
             {
                 var monsterName = eventArgs.First() as String;
@@ -148,7 +150,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
                     case TimelineEventType.OtherMonsterFighting:
                         DeathFound = false;
                         if (monsterName != null && (monsterName.ToLower()
-                                                               .Contains("target") || monsterName == ""))
+                                                               .Contains("target") || monsterName == string.Empty))
                         {
                             break;
                         }
@@ -165,7 +167,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
                     case TimelineEventType.OtherMonsterKilled:
                         DeathFound = true;
                         if (monsterName != null && (monsterName.ToLower()
-                                                               .Contains("target") || monsterName == ""))
+                                                               .Contains("target") || monsterName == string.Empty))
                         {
                             break;
                         }

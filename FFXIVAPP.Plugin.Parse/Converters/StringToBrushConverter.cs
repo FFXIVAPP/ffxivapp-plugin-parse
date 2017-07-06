@@ -19,12 +19,21 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Properties;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Converters
 {
     public class StringToBrushConverter : IValueConverter
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var param = "DEFAULT";
@@ -35,6 +44,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
             var brush = ColorStringToBrush(Settings.Default.DefaultProgressBarForeground);
             switch (param)
@@ -77,13 +87,14 @@ namespace FFXIVAPP.Plugin.Parse.Converters
 
         private static SolidColorBrush ColorStringToBrush(string color)
         {
-            color = color.Replace("#", "");
+            color = color.Replace("#", string.Empty);
             try
             {
-                return (SolidColorBrush) (new BrushConverter().ConvertFrom(color));
+                return (SolidColorBrush) new BrushConverter().ConvertFrom(color);
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
             try
             {
@@ -94,7 +105,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                     default: return Brushes.Green;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Brushes.Green;
             }

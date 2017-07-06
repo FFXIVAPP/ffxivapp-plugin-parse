@@ -30,6 +30,7 @@ using System.Windows.Input;
 using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Common.ViewModelBase;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
@@ -39,11 +40,18 @@ using FFXIVAPP.Plugin.Parse.Models.Stats;
 using FFXIVAPP.Plugin.Parse.Views;
 using FFXIVAPP.Plugin.Parse.Windows;
 using Microsoft.Win32;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.ViewModels
 {
     internal sealed class MainViewModel : INotifyPropertyChanged
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public MainViewModel()
         {
             IsCurrent = true;
@@ -104,7 +112,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 
         public dynamic PlayerInfoSource
         {
-            get { return _playerInfoSource ?? (ParseControl.Instance.Timeline.Party); }
+            get { return _playerInfoSource ?? ParseControl.Instance.Timeline.Party; }
             set
             {
                 _playerInfoSource = value;
@@ -114,7 +122,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 
         public dynamic MonsterInfoSource
         {
-            get { return _monsterInfoSource ?? (ParseControl.Instance.Timeline.Monster); }
+            get { return _monsterInfoSource ?? ParseControl.Instance.Timeline.Monster; }
             set
             {
                 _monsterInfoSource = value;
@@ -124,7 +132,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 
         public dynamic OverallInfoSource
         {
-            get { return _overallInfoSource ?? (ParseControl.Instance.Timeline.Overall); }
+            get { return _overallInfoSource ?? ParseControl.Instance.Timeline.Overall; }
             set
             {
                 _overallInfoSource = value;
@@ -445,8 +453,9 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
                     MainView.View.PlayerInfoListView.SelectedIndex = -1;
                     MainView.View.PlayerInfoListView.SelectedIndex = index;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
                 try
                 {
@@ -456,6 +465,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
             });
         }
@@ -516,6 +526,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
@@ -556,6 +567,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 

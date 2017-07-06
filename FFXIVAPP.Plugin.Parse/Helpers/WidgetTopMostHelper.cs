@@ -23,14 +23,23 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Interop;
 using FFXIVAPP.Plugin.Parse.Properties;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Helpers
 {
     public static class WidgetTopMostHelper
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         private static WinAPI.WinEventDelegate _delegate;
         private static IntPtr _mainHandleHook;
         private static WindowInteropHelper _dpsWidgetInteropHelper;
@@ -61,8 +70,9 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 _delegate = BringWidgetsIntoFocus;
                 _mainHandleHook = WinAPI.SetWinEventHook(WinAPI.EVENT_SYSTEM_FOREGROUND, WinAPI.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, _delegate, 0, 0, WinAPI.WINEVENT_OUTOFCONTEXT);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
             SetWindowTimer = new Timer(1000);
             SetWindowTimer.Elapsed += SetWindowTimerOnElapsed;
@@ -117,6 +127,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 

@@ -21,7 +21,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Timers;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
@@ -138,6 +140,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                         }
                         catch (Exception ex)
                         {
+                            Logging.Log(Logger, new LogItem(ex, true));
                         }
                     }
                     parseEntity.CombinedDPS = (double) Timeline.Overall.GetStatValue("CombinedDPS");
@@ -206,6 +209,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
                 ParseEntityTimerProcessing = false;
                 return true;

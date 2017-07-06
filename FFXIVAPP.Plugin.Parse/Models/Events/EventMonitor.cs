@@ -141,7 +141,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
 
         public new event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
+        private new void RaisePropertyChanged([CallerMemberName] string caller = "")
         {
             PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }

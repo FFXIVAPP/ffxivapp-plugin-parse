@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
@@ -117,15 +116,15 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 
         private void SetupHealingOverHealing(Line line, HealingType healingType)
         {
-            var cleanedAction = Regex.Replace(line.Action, @" \[.+\]", "");
+            var cleanedAction = Regex.Replace(line.Action, @" \[.+\]", string.Empty);
             switch (healingType)
             {
                 case HealingType.Normal:
-                    line.Action = String.Format("{0} [∞]", cleanedAction);
+                    line.Action = $"{cleanedAction} [∞]";
                     SetHealingOverHealing(line);
                     break;
                 case HealingType.HealingOverTime:
-                    line.Action = String.Format("{0} [•][∞]", cleanedAction);
+                    line.Action = $"{cleanedAction} [•][∞]";
                     SetHealingOverHealing(line);
                     break;
             }

@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
@@ -63,7 +65,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     {
                         continue;
                     }
-                    var difference = (60 - NPCEntry.Level);
+                    var difference = 60 - NPCEntry.Level;
                     if (difference <= 0)
                     {
                         difference = 10;
@@ -102,8 +104,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                                 thunderDuration = DamageOverTimeHelper.PlayerActions["thunder iii"]
                                                                       .Duration;
                                 originalThunderDamage = action.Value;
-                                amount = (action.Value / DamageOverTimeHelper.PlayerActions["thunder iii"]
-                                                                             .ActionPotency) * 30;
+                                amount = action.Value / DamageOverTimeHelper.PlayerActions["thunder iii"]
+                                                                            .ActionPotency * 30;
                             }
                             if (thunderActions["II"]
                                 .Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
@@ -112,8 +114,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                                 thunderDuration = DamageOverTimeHelper.PlayerActions["thunder ii"]
                                                                       .Duration;
                                 originalThunderDamage = action.Value;
-                                amount = (action.Value / DamageOverTimeHelper.PlayerActions["thunder ii"]
-                                                                             .ActionPotency) * 30;
+                                amount = action.Value / DamageOverTimeHelper.PlayerActions["thunder ii"]
+                                                                            .ActionPotency * 30;
                             }
                             if (thunderActions["I"]
                                 .Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
@@ -157,13 +159,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             break;
                         }
                     }
-                    statusKey = String.Format("{0} [•]", statusKey);
+                    statusKey = $"{statusKey} [•]";
                     if (amount == 0)
                     {
                         amount = 75;
                     }
                     resolvedPotency = zeroFoundInList ? resolvedPotency : bio ? resolvedPotency : actionData.ActionPotency;
-                    var tickDamage = Math.Ceiling(((amount / resolvedPotency) * actionData.ActionOverTimePotency) / 3);
+                    var tickDamage = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
                     if (actionData.HasNoInitialResult && !zeroFoundInList)
                     {
                         var nonZeroActions = lastDamageAmountByActions.Where(d => !d.Key.Contains("•"));
@@ -172,7 +174,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         switch (bio)
                         {
                             case true:
-                                damage = Math.Ceiling(((amount / resolvedPotency) * actionData.ActionOverTimePotency) / 3);
+                                damage = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
                                 break;
                             case false:
                                 if (keyValuePairs.Any())
@@ -180,7 +182,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                                     amount = keyValuePairs.Sum(action => action.Value);
                                     amount = amount / keyValuePairs.Count();
                                 }
-                                damage = Math.Ceiling(((amount / resolvedPotency) * actionData.ActionOverTimePotency) / 3);
+                                damage = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
                                 break;
                         }
                         tickDamage = damage > 0 ? damage : tickDamage;
@@ -221,6 +223,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
             }
             Controller.Timeline.FightingTimer.Start();
@@ -331,13 +334,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             break;
                         }
                     }
-                    statusKey = String.Format("{0} [•]", statusKey);
+                    statusKey = $"{statusKey} [•]";
                     if (amount == 0)
                     {
                         amount = 75;
                     }
                     resolvedPotency = zeroFoundInList ? resolvedPotency : regen ? resolvedPotency : actionData.ActionPotency;
-                    var tickHealing = Math.Ceiling(((amount / resolvedPotency) * actionData.ActionOverTimePotency) / 3);
+                    var tickHealing = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
                     if (actionData.HasNoInitialResult && !zeroFoundInList)
                     {
                         var nonZeroActions = healingHistoryList.Where(d => !d.Key.Contains("•"));
@@ -346,7 +349,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         switch (regen)
                         {
                             case true:
-                                healing = Math.Ceiling(((amount / resolvedPotency) * actionData.ActionOverTimePotency) / 3);
+                                healing = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
                                 break;
                             case false:
                                 if (keyValuePairs.Any())
@@ -354,7 +357,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                                     amount = keyValuePairs.Sum(action => action.Value);
                                     amount = amount / keyValuePairs.Count();
                                 }
-                                healing = Math.Ceiling(((amount / resolvedPotency) * actionData.ActionOverTimePotency) / 3);
+                                healing = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
                                 break;
                         }
                         tickHealing = healing > 0 ? healing : tickHealing;
@@ -382,10 +385,11 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                     if (String.IsNullOrWhiteSpace(line.Target))
                     {
-                        line.Target = String.Format("[???] {0}", statusEntry.TargetName);
+                        line.Target = $"[???] {statusEntry.TargetName}";
                     }
                     Controller.Timeline.FightingRightNow = true;
                     Controller.Timeline.FightingTimer.Stop();
@@ -415,6 +419,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         }
                         catch (Exception ex)
                         {
+                            Logging.Log(Logger, new LogItem(ex, true));
                         }
                         var currentCritPercent = Stats.GetStatValue("HealingCritPercent");
                         if (new Random().NextDouble() * 3 < currentCritPercent)
@@ -428,6 +433,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
             }
             Controller.Timeline.FightingTimer.Start();
@@ -492,16 +498,18 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                     if (String.IsNullOrWhiteSpace(line.Target))
                     {
-                        line.Target = String.Format("[???] {0}", statusEntry.TargetName);
+                        line.Target = $"[???] {statusEntry.TargetName}";
                     }
                     DispatcherHelper.Invoke(() => Controller.Timeline.GetSetPlayer(line.Source)
                                                             .SetBuff(line));
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
             }
         }

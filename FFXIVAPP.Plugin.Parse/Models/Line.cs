@@ -108,7 +108,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
 
         public string Source
         {
-            get { return _source ?? ""; }
+            get { return _source ?? string.Empty; }
             set
             {
                 var name = StringHelper.TitleCase(value);
@@ -118,7 +118,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
 
         public string Target
         {
-            get { return _target ?? ""; }
+            get { return _target ?? string.Empty; }
             set
             {
                 var name = StringHelper.TitleCase(value);
@@ -128,19 +128,19 @@ namespace FFXIVAPP.Plugin.Parse.Models
 
         public string Action
         {
-            get { return _action ?? ""; }
+            get { return _action ?? string.Empty; }
             set { _action = StringHelper.TitleCase(value); }
         }
 
         public string Direction
         {
-            get { return _direction ?? ""; }
+            get { return _direction ?? string.Empty; }
             set { _direction = StringHelper.TitleCase(value); }
         }
 
         public string Part
         {
-            get { return _part ?? ""; }
+            get { return _part ?? string.Empty; }
             set { _part = StringHelper.TitleCase(value); }
         }
 

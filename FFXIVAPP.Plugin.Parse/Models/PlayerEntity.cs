@@ -36,7 +36,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                 {
                     return Name.Split(' ')[0];
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Name;
                 }
@@ -51,9 +51,9 @@ namespace FFXIVAPP.Plugin.Parse.Models
                 {
                     return Name.Split(' ')[1];
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    return "";
+                    return string.Empty;
                 }
             }
         }
@@ -67,11 +67,11 @@ namespace FFXIVAPP.Plugin.Parse.Models
                 {
                     if (missingLastName)
                     {
-                        return String.Format("{0}.", FirstName.Substring(0, 1));
+                        return $"{FirstName.Substring(0, 1)}.";
                     }
-                    return String.Format("{0}.{1}.", FirstName.Substring(0, 1), LastName.Substring(0, 1));
+                    return $"{FirstName.Substring(0, 1)}.{LastName.Substring(0, 1)}.";
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Name;
                 }
@@ -85,7 +85,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
             get { return _name; }
             set
             {
-                _name = StringHelper.TitleCase(Regex.Replace(value, @"\[[\w]+\]", "")
+                _name = StringHelper.TitleCase(Regex.Replace(value, @"\[[\w]+\]", string.Empty)
                                                     .Trim());
             }
         }

@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Helpers;
@@ -49,7 +50,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
         public StatMonitor(ParseControl parseControl) : base("StatMonitor", parseControl)
         {
             IncludeSelf = false;
-            Filter = (EventParser.TypeMask | EventParser.Self | EventParser.Engaged | EventParser.UnEngaged);
+            Filter = EventParser.TypeMask | EventParser.Self | EventParser.Engaged | EventParser.UnEngaged;
             if (Settings.Default.ParseYou)
             {
                 Filter = FilterHelper.Enable(Filter, EventParser.You);
@@ -81,7 +82,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
         /// </summary>
         public override void Clear()
         {
-            Logging.Log(Logger, String.Format("ClearEvent : Clearing {0} Party Member Totals.", Count));
+            Logging.Log(Logger, $"ClearEvent : Clearing {Count} Party Member Totals.");
             foreach (var player in ParseControl.Timeline.Party)
             {
                 var playerInstance = ParseControl.Timeline.GetSetPlayer(player.Name);
@@ -109,11 +110,13 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                 }
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
 
             // move parse to history
@@ -174,7 +177,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                 historyItem.Start = ParseControl.StartTime;
                 historyItem.End = DateTime.Now;
                 historyItem.ParseLength = historyItem.End - historyItem.Start;
-                var parseTimeDetails = String.Format("{0} -> {1} [{2}]", historyItem.Start, historyItem.End, historyItem.ParseLength);
+                var parseTimeDetails = $"{historyItem.Start} -> {historyItem.End} [{historyItem.ParseLength}]";
                 var zone = "Unknown";
                 if (XIVInfoViewModel.Instance.CurrentUser != null)
                 {
@@ -226,12 +229,13 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
                 foreach (var oStat in currentOverallStats)
                 {
                     historyController.Timeline.Overall.Stats.EnsureStatValue(oStat.Name, oStat.Value);
                 }
-                historyItem.Name = String.Format("{0} [{1}] {2}", zone, monsterName, parseTimeDetails);
+                historyItem.Name = $"{zone} [{monsterName}] {parseTimeDetails}";
                 DispatcherHelper.Invoke(() => MainViewModel.Instance.ParseHistory.Insert(1, historyItem));
             }
         }

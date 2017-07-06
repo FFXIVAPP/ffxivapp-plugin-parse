@@ -137,7 +137,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
         /// <returns></returns>
         public static double GetBonusAmount(double amount, double modifier)
         {
-            return Math.Abs((amount / (modifier + 1)) - amount);
+            return Math.Abs(amount / (modifier + 1) - amount);
         }
 
         /// <summary>
@@ -166,9 +166,9 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
             name = name.Trim();
             if (String.IsNullOrWhiteSpace(name))
             {
-                return "";
+                return string.Empty;
             }
-            name = Regex.Replace(name, @"\[[\w]+\]", "")
+            name = Regex.Replace(name, @"\[[\w]+\]", string.Empty)
                         .Trim();
             var petFound = false;
             foreach (var pet in _pets.Where(pet => String.Equals(pet, name, Constants.InvariantComparer)))
@@ -190,7 +190,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     tag = "O";
                     break;
             }
-            return String.Format("[{0}] {1}", tag, name);
+            return $"[{tag}] {name}";
         }
 
         #region LastAction Helper Dictionaries

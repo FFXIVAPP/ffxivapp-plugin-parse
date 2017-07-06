@@ -48,7 +48,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
             var ovalue = (double) previousValue;
             var nvalue = (double) newValue;
             var delta = Math.Max(ovalue, nvalue) - Math.Min(ovalue, nvalue);
-            if ((delta >= Value) && GotValue)
+            if (delta >= Value && GotValue)
             {
                 return;
             }

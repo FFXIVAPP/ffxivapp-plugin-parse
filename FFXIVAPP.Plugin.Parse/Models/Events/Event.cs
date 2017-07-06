@@ -45,7 +45,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         /// <returns> </returns>
         public bool MatchesFilter(UInt64 filter, Event e)
         {
-            return (((UInt64) Subject & filter) != 0 && ((UInt64) Type & filter) != 0 && ((UInt64) Direction & filter) != 0);
+            return ((UInt64) Subject & filter) != 0 && ((UInt64) Type & filter) != 0 && ((UInt64) Direction & filter) != 0;
         }
 
         #endregion
@@ -103,12 +103,12 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
 
         public ulong Code
         {
-            get { return (EventCode != null ? EventCode.Code : 0x0); }
+            get { return EventCode != null ? EventCode.Code : 0x0; }
         }
 
         public bool IsUnknown
         {
-            get { return (EventCode == null) || (EventCode.Flags == EventParser.UnknownEvent); }
+            get { return EventCode == null || EventCode.Flags == EventParser.UnknownEvent; }
         }
 
         #endregion
@@ -122,7 +122,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         /// <returns> </returns>
         public static bool operator ==(Event event1, Event event2)
         {
-            return event2 != null && (event1 != null && ((event1.Timestamp == event2.Timestamp) && new EventCodeComparer().Equals(event1.EventCode, event2.EventCode)));
+            return event2 != null && event1 != null && event1.Timestamp == event2.Timestamp && new EventCodeComparer().Equals(event1.EventCode, event2.EventCode);
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         /// <returns> </returns>
         public override int GetHashCode()
         {
-            return (Timestamp.GetHashCode() ^ Subject.GetHashCode() ^ Type.GetHashCode() ^ Direction.GetHashCode());
+            return Timestamp.GetHashCode() ^ Subject.GetHashCode() ^ Type.GetHashCode() ^ Direction.GetHashCode();
         }
 
         #endregion

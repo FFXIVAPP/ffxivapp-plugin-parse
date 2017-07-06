@@ -18,6 +18,8 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
@@ -160,7 +162,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                     var multiplier = 0.1m;
                     try
                     {
-                        var cleanedName = Regex.Replace(line.Source, @"\[[\w]+\]", "")
+                        var cleanedName = Regex.Replace(line.Source, @"\[[\w]+\]", string.Empty)
                                                .Trim();
                         var source = XIVInfoViewModel.Instance.CurrentPCs.FirstOrDefault(kvp => kvp.Value.Name.Equals(cleanedName, Constants.InvariantComparer))
                                                      .Value;
@@ -171,10 +173,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                     try
                     {
-                        var cleanedName = Regex.Replace(line.Target, @"\[[\w]+\]", "")
+                        var cleanedName = Regex.Replace(line.Target, @"\[[\w]+\]", string.Empty)
                                                .Trim();
                         var target = XIVInfoViewModel.Instance.CurrentPCs.FirstOrDefault(kvp => kvp.Value.Name.Equals(cleanedName, Constants.InvariantComparer))
                                                      .Value;
@@ -187,6 +190,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                     }
                     catch (Exception ex)
                     {
+                        Logging.Log(Logger, new LogItem(ex, true));
                     }
                 }
             }

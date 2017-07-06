@@ -18,6 +18,8 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
@@ -298,6 +300,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 }
                 catch (Exception ex)
                 {
+                    Logging.Log(Logger, new LogItem(ex, true));
                 }
             }
             catch (Exception ex)

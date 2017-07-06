@@ -18,6 +18,8 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models.Stats;
@@ -53,7 +55,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             // get curable of target
             try
             {
-                var cleanedName = Regex.Replace(line.Target, @"\[[\w]+\]", "")
+                var cleanedName = Regex.Replace(line.Target, @"\[[\w]+\]", string.Empty)
                                        .Trim();
                 var curable = Controller.Timeline.TryGetPlayerCurable(cleanedName);
                 if (line.Amount > curable)
@@ -64,6 +66,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
 
             var abilityGroup = GetGroup("HealingByAction");

@@ -19,14 +19,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FFXIVAPP.Common.Helpers;
+using FFXIVAPP.Common.Models;
+using FFXIVAPP.Common.Utilities;
 using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.Events;
+using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Utilities
 {
     public static class LogPublisher
     {
+        #region Logger
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
         public static bool IsPaused;
         public static bool Processing { get; set; }
 
@@ -48,6 +57,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
             }
             catch (Exception ex)
             {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
@@ -63,7 +73,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                 }
                 var command = commandsRegEx.Groups["command"]
                                            .Success ? commandsRegEx.Groups["command"]
-                                                                   .Value : "";
+                                                                   .Value : string.Empty;
                 switch (command)
                 {
                     case "on":

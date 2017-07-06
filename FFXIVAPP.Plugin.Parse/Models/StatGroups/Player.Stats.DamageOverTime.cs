@@ -33,7 +33,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                 //LineHistory.Add(new LineHistory(line));
             }
 
-            if ((LimitBreaks.IsLimit(line.Action)) && Settings.Default.IgnoreLimitBreaks)
+            if (LimitBreaks.IsLimit(line.Action) && Settings.Default.IgnoreLimitBreaks)
             {
                 return;
             }
