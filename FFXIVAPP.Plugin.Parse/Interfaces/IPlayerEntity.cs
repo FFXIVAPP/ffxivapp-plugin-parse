@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
+using Sharlayan.Core.Enums;
 
 namespace FFXIVAPP.Plugin.Parse.Interfaces
 {

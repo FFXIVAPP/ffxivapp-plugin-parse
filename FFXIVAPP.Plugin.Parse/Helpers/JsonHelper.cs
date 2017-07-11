@@ -24,7 +24,6 @@ using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.History;
 using FFXIVAPP.Plugin.Parse.Models.StatGroups;
@@ -33,6 +32,7 @@ using FFXIVAPP.Plugin.Parse.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
+using Sharlayan.Helpers;
 
 namespace FFXIVAPP.Plugin.Parse.Helpers
 {

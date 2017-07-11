@@ -23,7 +23,6 @@ using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.Events;
@@ -33,6 +32,7 @@ using FFXIVAPP.Plugin.Parse.Models.Stats;
 using FFXIVAPP.Plugin.Parse.Properties;
 using FFXIVAPP.Plugin.Parse.ViewModels;
 using NLog;
+using Sharlayan.Helpers;
 
 namespace FFXIVAPP.Plugin.Parse.Monitors
 {

@@ -22,12 +22,12 @@ using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Core;
-using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Properties;
 using FFXIVAPP.Plugin.Parse.ViewModels;
+using Sharlayan.Core;
+using Sharlayan.Helpers;
 
 namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 {

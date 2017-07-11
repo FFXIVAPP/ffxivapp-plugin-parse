@@ -20,12 +20,12 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.Events;
 using FFXIVAPP.Plugin.Parse.ViewModels;
+using Sharlayan.Helpers;
 
 namespace FFXIVAPP.Plugin.Parse.Utilities
 {

@@ -20,9 +20,9 @@ using System.Collections.Generic;
 using System.Linq;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.ViewModels;
 using NLog;
+using Sharlayan.Core;
 
 namespace FFXIVAPP.Plugin.Parse.Models
 {

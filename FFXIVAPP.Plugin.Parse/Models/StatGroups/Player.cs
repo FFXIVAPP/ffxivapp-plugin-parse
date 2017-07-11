@@ -22,11 +22,11 @@ using System.Text.RegularExpressions;
 using System.Timers;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.Models.LinkedStats;
 using FFXIVAPP.Plugin.Parse.Models.Stats;
 using FFXIVAPP.Plugin.Parse.ViewModels;
 using NLog;
+using Sharlayan.Core;
 
 namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 {

@@ -21,10 +21,10 @@ using System.Linq;
 using FFXIVAPP.Common.Helpers;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.Models;
 using FFXIVAPP.Plugin.Parse.Models.Events;
 using NLog;
+using Sharlayan.Core;
 
 namespace FFXIVAPP.Plugin.Parse.Utilities
 {

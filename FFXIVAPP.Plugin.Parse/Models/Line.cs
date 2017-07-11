@@ -18,11 +18,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using FFXIVAPP.Memory.Core;
-using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models.Events;
+using Sharlayan.Core;
+using Sharlayan.Helpers;
 
 namespace FFXIVAPP.Plugin.Parse.Models
 {

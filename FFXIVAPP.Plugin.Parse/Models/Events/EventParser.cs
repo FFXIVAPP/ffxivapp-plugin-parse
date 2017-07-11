@@ -18,8 +18,8 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.Enums;
+using Sharlayan.Core;
 
 namespace FFXIVAPP.Plugin.Parse.Models.Events
 {

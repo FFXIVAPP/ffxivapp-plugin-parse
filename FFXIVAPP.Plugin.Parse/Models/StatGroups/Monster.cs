@@ -18,10 +18,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
-using FFXIVAPP.Memory.Core;
 using FFXIVAPP.Plugin.Parse.Models.LinkedStats;
 using FFXIVAPP.Plugin.Parse.Models.Stats;
 using NLog;
+using Sharlayan.Core;
 
 namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 {

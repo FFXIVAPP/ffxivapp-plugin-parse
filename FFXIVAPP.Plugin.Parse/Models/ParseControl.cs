@@ -24,7 +24,6 @@ using System.Timers;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.RegularExpressions;
 using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Memory.Core.Enums;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Helpers;
 using FFXIVAPP.Plugin.Parse.Models.StatGroups;
@@ -33,6 +32,7 @@ using FFXIVAPP.Plugin.Parse.Monitors;
 using FFXIVAPP.Plugin.Parse.Properties;
 using Newtonsoft.Json;
 using NLog;
+using Sharlayan.Core.Enums;
 
 namespace FFXIVAPP.Plugin.Parse.Models
 {

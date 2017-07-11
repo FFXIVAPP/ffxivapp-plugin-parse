@@ -17,10 +17,10 @@
 
 using System;
 using System.Text.RegularExpressions;
-using FFXIVAPP.Memory.Core.Enums;
-using FFXIVAPP.Memory.Helpers;
 using FFXIVAPP.Plugin.Parse.Enums;
 using FFXIVAPP.Plugin.Parse.Interfaces;
+using Sharlayan.Core.Enums;
+using Sharlayan.Helpers;
 
 namespace FFXIVAPP.Plugin.Parse.Models
 {
