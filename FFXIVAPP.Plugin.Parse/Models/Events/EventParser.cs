@@ -67,7 +67,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         public const UInt64 TypeMask = 0x3FFFE000000;
         public const UInt64 AllEvents = 0xFFFFFFFFFFF;
         public const UInt64 UnknownEvent = 0x0;
-        private static EventParser _instance;
+        private static Lazy<EventParser> _instance = new Lazy<EventParser>(() => new EventParser(Constants.ChatCodesXml));
         private readonly SortedDictionary<UInt64, EventCode> _eventCodes = new SortedDictionary<UInt64, EventCode>();
 
         private string LastKnownChatCodesXml = string.Empty;
@@ -88,7 +88,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         /// </summary>
         public static EventParser Instance
         {
-            get { return _instance ?? (_instance = new EventParser(Constants.ChatCodesXml)); }
+            get { return _instance.Value; }
         }
 
         public void Initialize(string xml)

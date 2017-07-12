@@ -68,7 +68,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 
         #region Property Bindings
 
-        private static MainViewModel _instance;
+        private static Lazy<MainViewModel> _instance = new Lazy<MainViewModel>(() => new MainViewModel());
         private bool _isCurrent;
         private bool _isHistory;
         private dynamic _monsterInfoSource;
@@ -78,7 +78,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 
         public static MainViewModel Instance
         {
-            get { return _instance ?? (_instance = new MainViewModel()); }
+            get { return _instance.Value; }
         }
 
         public ObservableCollection<ParseHistoryItem> ParseHistory

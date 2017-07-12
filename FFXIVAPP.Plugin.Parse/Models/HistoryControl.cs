@@ -24,7 +24,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
 {
     public class HistoryControl : INotifyPropertyChanged
     {
-        private static HistoryControl _instance;
+        private static Lazy<HistoryControl> _instance = new Lazy<HistoryControl>(() => new HistoryControl());
         private HistoryTimeline _timeline;
 
         public HistoryControl()
@@ -34,8 +34,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
 
         public static HistoryControl Instance
         {
-            get { return _instance ?? (_instance = new HistoryControl()); }
-            set { _instance = value; }
+            get { return _instance.Value; }
         }
 
         public HistoryTimeline Timeline

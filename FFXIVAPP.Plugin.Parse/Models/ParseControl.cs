@@ -235,15 +235,14 @@ namespace FFXIVAPP.Plugin.Parse.Models
 
         #region Implementation of IParsingControl
 
-        private static ParseControl _instance;
+        private static Lazy<ParseControl> _instance = new Lazy<ParseControl>(() => new ParseControl());
         private StatMonitor _statMonitor;
         private Timeline _timeline;
         private TimelineMonitor _timelineMonitor;
 
         public static ParseControl Instance
         {
-            get { return _instance ?? (_instance = new ParseControl()); }
-            set { _instance = value; }
+            get { return _instance.Value; }
         }
 
         IParsingControl IParsingControl.Instance

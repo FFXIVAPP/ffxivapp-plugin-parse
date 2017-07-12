@@ -31,15 +31,14 @@ namespace FFXIVAPP.Plugin.Parse
 
         #endregion
 
-        private static Widgets _instance;
+        private static Lazy<Widgets> _instance = new Lazy<Widgets>(() => new Widgets());
         private DPSWidget _dpsWidget;
         private DTPSWidget _dtpsWidget;
         private HPSWidget _hpsWidget;
 
         public static Widgets Instance
         {
-            get { return _instance ?? (_instance = new Widgets()); }
-            set { _instance = value; }
+            get { return _instance.Value; }
         }
 
         public DPSWidget DPSWidget

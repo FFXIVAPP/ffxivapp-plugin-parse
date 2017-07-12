@@ -38,11 +38,11 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
 
         #region Property Bindings
 
-        private static SettingsViewModel _instance;
+        private static Lazy<SettingsViewModel> _instance = new Lazy<SettingsViewModel>(() => new SettingsViewModel());
 
         public static SettingsViewModel Instance
         {
-            get { return _instance ?? (_instance = new SettingsViewModel()); }
+            get { return _instance.Value; }
         }
 
         #endregion

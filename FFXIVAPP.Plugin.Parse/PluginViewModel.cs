@@ -37,14 +37,14 @@ namespace FFXIVAPP.Plugin.Parse
 
         #region Property Bindings
 
-        private static PluginViewModel _instance;
+        private static Lazy<PluginViewModel> _instance = new Lazy<PluginViewModel>(() => new PluginViewModel());
         private bool _enableHelpLabels;
         private Dictionary<string, string> _locale;
         private string _uiScale;
 
         public static PluginViewModel Instance
         {
-            get { return _instance ?? (_instance = new PluginViewModel()); }
+            get { return _instance.Value; }
         }
 
         public Dictionary<string, string> Locale

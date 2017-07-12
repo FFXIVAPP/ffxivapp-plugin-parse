@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using FFXIVAPP.Plugin.Parse.Models;
@@ -25,12 +26,12 @@ namespace FFXIVAPP.Plugin.Parse.Windows
     {
         #region Property Bindings
 
-        private static HPSWidgetViewModel _instance;
+        private static Lazy<HPSWidgetViewModel> _instance = new Lazy<HPSWidgetViewModel>(() => new HPSWidgetViewModel());
         private ParseEntity _parseEntity;
 
         public static HPSWidgetViewModel Instance
         {
-            get { return _instance ?? (_instance = new HPSWidgetViewModel()); }
+            get { return _instance.Value; }
         }
 
         public ParseEntity ParseEntity

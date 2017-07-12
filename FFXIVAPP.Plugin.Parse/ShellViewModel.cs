@@ -158,11 +158,11 @@ namespace FFXIVAPP.Plugin.Parse
 
         #region Property Bindings
 
-        private static ShellViewModel _instance;
+        private static Lazy<ShellViewModel> _instance = new Lazy<ShellViewModel>(() => new ShellViewModel());
 
         public static ShellViewModel Instance
         {
-            get { return _instance ?? (_instance = new ShellViewModel()); }
+            get { return _instance.Value; }
         }
 
         #endregion
