@@ -172,6 +172,10 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                             zone = ZoneHelper.MapInfo(mapIndex)
                                              .Name.Chinese;
                             break;
+                        case "Korean":
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.Korean;
+                            break;
                     }
                 }
                 var monsterName = "NULL";

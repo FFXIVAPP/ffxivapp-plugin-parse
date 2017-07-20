@@ -167,7 +167,7 @@ namespace FFXIVAPP.Plugin.Parse
             set { _chatCodes = value; }
         }
 
-        public static string ChatCodesXml { get; set; }
+        public static string ChatCodesXML { get; set; }
 
         public static Dictionary<string, string[]> Colors
         {

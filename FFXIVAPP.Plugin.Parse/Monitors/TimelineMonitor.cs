@@ -65,9 +65,6 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                 case EventType.Loot:
                     ProcessLoot(e);
                     break;
-                default:
-                    //ProcessParty(e);
-                    break;
             }
         }
 
@@ -188,61 +185,6 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
             {
                 ParsingLogHelper.Log(Logger, "Loot.NoKillInLastThreeSeconds", e);
             }
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="line"> </param>
-        private void Processparty(string line)
-        {
-            //var join = Regex.Match("ph", @"^\.$");
-            //var disband = Regex.Match("ph", @"^\.$");
-            //var left = Regex.Match("ph", @"^\.$");
-            //switch (Common.Constants.Client.GameLanguage)
-            //{
-            //    case "French":
-            //        join = PlayerRegEx.JoinFr.Match(line);
-            //        disband = PlayerRegEx.DisbandFr.Match(line);
-            //        left = PlayerRegEx.LeftFr.Match(line);
-            //        break;
-            //    case "Japanese":
-            //        join = PlayerRegEx.JoinJa.Match(line);
-            //        disband = PlayerRegEx.DisbandJa.Match(line);
-            //        left = PlayerRegEx.LeftJa.Match(line);
-            //        break;
-            //    case "German":
-            //        join = PlayerRegEx.JoinDe.Match(line);
-            //        disband = PlayerRegEx.DisbandDe.Match(line);
-            //        left = PlayerRegEx.LeftDe.Match(line);
-            //    case "Chinese":
-            //        join = PlayerRegEx.JoinZh.Match(line);
-            //        disband = PlayerRegEx.DisbandZh.Match(line);
-            //        left = PlayerRegEx.LeftZh.Match(line);
-            //        break;
-            //    default:
-            //        join = PlayerRegEx.JoinEn.Match(line);
-            //        disband = PlayerRegEx.DisbandEn.Match(line);
-            //        left = PlayerRegEx.LeftEn.Match(line);
-            //        break;
-            //}
-            //string who;
-            //if (join.Success)
-            //{
-            //    who = @join.Groups["who"].Value;
-            //    ParseControl.Timeline.PublishTimelineEvent(TimelineEventType.PartyJoin, who);
-            //    return;
-            //}
-            //if (disband.Success)
-            //{
-            //    ParseControl.Timeline.PublishTimelineEvent(TimelineEventType.PartyDisband, String.Empty);
-            //    return;
-            //}
-            //if (!left.Success)
-            //{
-            //    return;
-            //}
-            //who = left.Groups["who"].Value;
-            //ParseControl.Timeline.PublishTimelineEvent(TimelineEventType.PartyLeave, who);
         }
     }
 }

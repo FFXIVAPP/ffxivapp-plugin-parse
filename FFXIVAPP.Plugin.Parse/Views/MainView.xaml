@@ -8,6 +8,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:grids="clr-namespace:FFXIVAPP.Plugin.Parse.Controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:parse="clr-namespace:FFXIVAPP.Plugin.Parse"
              xmlns:utilities="clr-namespace:FFXIVAPP.Common.Utilities;assembly=FFXIVAPP.Common"
@@ -18,31 +19,25 @@
 
     <UserControl.Resources>
         <Custom:ToUpperConverter x:Key="ToUpperConverter" />
-        <x:Static x:Key="MainViewModel"
-                  Member="Parse:MainViewModel.Instance" />
-        <x:Static x:Key="PluginViewModel"
-                  Member="parse:PluginViewModel.Instance" />
-        <x:Static x:Key="Settings"
-                  Member="PluginProperties:Settings.Default" />
+        <x:Static x:Key="MainViewModel" Member="Parse:MainViewModel.Instance" />
+        <x:Static x:Key="PluginViewModel" Member="parse:PluginViewModel.Instance" />
+        <x:Static x:Key="Settings" Member="PluginProperties:Settings.Default" />
         <Converters:VisibilityConverter x:Key="VisibilityConverter" />
         <Style x:Key="StatLabelStyle">
             <Setter Property="Control.Padding" Value="0" />
             <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
         </Style>
-        <Style x:Key="CommaNumberStyle"
-               BasedOn="{StaticResource StatLabelStyle}">
+        <Style x:Key="CommaNumberStyle" BasedOn="{StaticResource StatLabelStyle}">
             <Setter Property="ContentControl.ContentStringFormat" Value="{}{0:N0}" />
         </Style>
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot"
-          DataContext="{StaticResource MainViewModel}">
+    <Grid x:Name="LayoutRoot" DataContext="{StaticResource MainViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="33" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <TabControl x:Name="MainViewTC"
-                    Grid.Row="0">
+        <TabControl x:Name="MainViewTC" Grid.Row="0">
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Visibility" Value="Collapsed" />
@@ -53,14 +48,13 @@
                     <Grid.ColumnDefinitions>
                         <wpf:ColumnDefinitionExtended MinWidth="200"
                                                       MaxWidth="200"
-                                                      Visible="{Binding ParseAdvanced,
-                                                                        Source={StaticResource Settings}}" />
+                                                      Visible="{Binding ParseAdvanced, Source={StaticResource Settings}}" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0"
+                            Padding="0,0,15,0"
                             BorderBrush="{DynamicResource AccentColorBrush}"
-                            BorderThickness="0 0 1 0"
-                            Padding="0 0 15 0">
+                            BorderThickness="0,0,1,0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -69,111 +63,80 @@
                             <StackPanel Grid.Row="0">
                                 <TextBlock Margin="5"
                                            HorizontalAlignment="Center"
-                                           Text="{Binding Locale[parse_ViewSourceLabel],
-                                                          Source={StaticResource PluginViewModel},
-                                                          Converter={StaticResource ToUpperConverter}}" />
+                                           Text="{Binding Locale[parse_ViewSourceLabel], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                 <ComboBox x:Name="InfoViewSource"
+                                          utilities:SelectionBehavior.SelectionChanged="{Binding SwitchInfoViewSourceCommand, Source={StaticResource MainViewModel}}"
                                           DisplayMemberPath="Name"
-                                          ItemsSource="{Binding ParseHistory,
-                                                                Source={StaticResource MainViewModel}}"
-                                          SelectedIndex="0"
-                                          utilities:SelectionBehavior.SelectionChanged="{Binding SwitchInfoViewSourceCommand,
-                                                                                                 Source={StaticResource MainViewModel}}" />
+                                          ItemsSource="{Binding ParseHistory, Source={StaticResource MainViewModel}}"
+                                          SelectedIndex="0" />
                                 <TextBlock Margin="5"
                                            HorizontalAlignment="Center"
-                                           Text="{Binding Locale[parse_ViewTypeLabel],
-                                                          Source={StaticResource PluginViewModel},
-                                                          Converter={StaticResource ToUpperConverter}}" />
-                                <ComboBox x:Name="InfoViewType"
-                                          utilities:SelectionBehavior.SelectionChanged="{Binding SwitchInfoViewTypeCommand,
-                                                                                                 Source={StaticResource MainViewModel}}">
-                                    <ComboBoxItem Content="{Binding Locale[parse_ScoreCardsComboBoxItemText],
-                                                                    Source={StaticResource PluginViewModel}}"
-                                                  IsSelected="True" />
-                                    <ComboBoxItem Content="{Binding Locale[parse_PartyComboBoxItemText],
-                                                                    Source={StaticResource PluginViewModel}}" />
-                                    <ComboBoxItem Content="{Binding Locale[parse_PartyAllComboBoxItemText],
-                                                                    Source={StaticResource PluginViewModel}}" />
-                                    <ComboBoxItem Content="{Binding Locale[parse_MonsterComboBoxItemText],
-                                                                    Source={StaticResource PluginViewModel}}" />
-                                    <ComboBoxItem Content="{Binding Locale[parse_MonsterAllComboBoxItemText],
-                                                                    Source={StaticResource PluginViewModel}}" />
+                                           Text="{Binding Locale[parse_ViewTypeLabel], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
+                                <ComboBox x:Name="InfoViewType" utilities:SelectionBehavior.SelectionChanged="{Binding SwitchInfoViewTypeCommand, Source={StaticResource MainViewModel}}">
+                                    <ComboBoxItem Content="{Binding Locale[parse_ScoreCardsComboBoxItemText], Source={StaticResource PluginViewModel}}" IsSelected="True" />
+                                    <ComboBoxItem Content="{Binding Locale[parse_PartyComboBoxItemText], Source={StaticResource PluginViewModel}}" />
+                                    <ComboBoxItem Content="{Binding Locale[parse_PartyAllComboBoxItemText], Source={StaticResource PluginViewModel}}" />
+                                    <ComboBoxItem Content="{Binding Locale[parse_MonsterComboBoxItemText], Source={StaticResource PluginViewModel}}" />
+                                    <ComboBoxItem Content="{Binding Locale[parse_MonsterAllComboBoxItemText], Source={StaticResource PluginViewModel}}" />
                                 </ComboBox>
                                 <Button x:Name="RefreshSelectedButton"
                                         MinHeight="28"
-                                        Margin="0 5"
+                                        Margin="0,5"
                                         Command="{Binding RefreshSelectedCommand}"
-                                        ToolTip="{Binding Locale[parse_RefreshSelectedButtonText],
-                                                          Source={StaticResource PluginViewModel}}"
+                                        ToolTip="{Binding Locale[parse_RefreshSelectedButtonText], Source={StaticResource PluginViewModel}}"
                                         Visibility="Collapsed">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Width="16"
                                                Height="16"
                                                RenderOptions.BitmapScalingMode="HighQuality"
                                                Source="/FFXIVAPP.Plugin.Parse;component/Media/Images/Refresh.png" />
-                                        <TextBlock Padding="3 0"
-                                                   Text="{Binding Locale[parse_RefreshSelectedButtonText],
-                                                                  Source={StaticResource PluginViewModel},
-                                                                  Converter={StaticResource ToUpperConverter}}" />
+                                        <TextBlock Padding="3,0" Text="{Binding Locale[parse_RefreshSelectedButtonText], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
                             <TextBlock x:Name="SelectedPlayerName"
                                        Grid.Row="1"
-                                       DataContext="{Binding SelectedItem,
-                                                             ElementName=PlayerInfoListView,
-                                                             NotifyOnTargetUpdated=True,
-                                                             NotifyOnSourceUpdated=True}"
+                                       DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                        Text="{Binding Path=Name}"
                                        Visibility="Collapsed" />
                             <ListView x:Name="PlayerInfoListView"
                                       Grid.Row="1"
                                       BorderThickness="0"
-                                      ItemsSource="{Binding PlayerInfoSource,
-                                                            Source={StaticResource MainViewModel}}"
+                                      ItemsSource="{Binding PlayerInfoSource, Source={StaticResource MainViewModel}}"
                                       SelectionMode="Single"
                                       VirtualizingStackPanel.VirtualizationMode="Recycling"
                                       Visibility="Collapsed">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderBrush="{DynamicResource AccentColorBrush}"
-                                                BorderThickness="1">
-                                            <TextBlock Padding="5"
-                                                       Text="{Binding Name}" />
+                                        <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+                                            <TextBlock Padding="5" Text="{Binding Name}" />
                                         </Border>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                             <TextBlock x:Name="SelectedMonsterName"
                                        Grid.Row="1"
-                                       DataContext="{Binding SelectedItem,
-                                                             ElementName=MonsterInfoListView,
-                                                             NotifyOnTargetUpdated=True,
-                                                             NotifyOnSourceUpdated=True}"
+                                       DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                        Text="{Binding Path=Name}"
                                        Visibility="Collapsed" />
                             <ListView x:Name="MonsterInfoListView"
                                       Grid.Row="1"
                                       BorderThickness="0"
-                                      ItemsSource="{Binding MonsterInfoSource,
-                                                            Source={StaticResource MainViewModel}}"
+                                      ItemsSource="{Binding MonsterInfoSource, Source={StaticResource MainViewModel}}"
                                       SelectionMode="Single"
                                       VirtualizingStackPanel.VirtualizationMode="Recycling"
                                       Visibility="Collapsed">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderBrush="{DynamicResource AccentColorBrush}"
-                                                BorderThickness="1">
-                                            <TextBlock Padding="5"
-                                                       Text="{Binding Name}" />
+                                        <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+                                            <TextBlock Padding="5" Text="{Binding Name}" />
                                         </Border>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
                         </Grid>
                     </Border>
-                    <TabControl x:Name="InfoViewResults"
-                                Grid.Column="1">
+                    <TabControl x:Name="InfoViewResults" Grid.Column="1">
                         <TabControl.ItemContainerStyle>
                             <Style TargetType="{x:Type TabItem}">
                                 <Setter Property="Visibility" Value="Collapsed" />
@@ -183,10 +146,8 @@
                             <ScrollViewer>
                                 <StackPanel>
                                     <GroupBox x:Name="OverallInfoScoreCard"
-                                              DataContext="{Binding OverallInfoSource,
-                                                                    Source={StaticResource MainViewModel}}"
-                                              Header="{Binding Locale[parse_ScoreCardHeader],
-                                                               Source={StaticResource PluginViewModel}}">
+                                              DataContext="{Binding OverallInfoSource, Source={StaticResource MainViewModel}}"
+                                              Header="{Binding Locale[parse_ScoreCardHeader], Source={StaticResource PluginViewModel}}">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
@@ -197,84 +158,59 @@
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-                                            <StackPanel Grid.Row="0"
-                                                        Grid.Column="0">
-                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallDamageLabel],
-                                                                          Source={StaticResource PluginViewModel}}" />
-                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallHealingLabel],
-                                                                          Source={StaticResource PluginViewModel}}" />
-                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallDamageTakenLabel],
-                                                                          Source={StaticResource PluginViewModel}}" />
+                                            <StackPanel Grid.Row="0" Grid.Column="0">
+                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallDamageLabel], Source={StaticResource PluginViewModel}}" />
+                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallHealingLabel], Source={StaticResource PluginViewModel}}" />
+                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallDamageTakenLabel], Source={StaticResource PluginViewModel}}" />
                                             </StackPanel>
-                                            <StackPanel Grid.Row="0"
-                                                        Grid.Column="1">
-                                                <TextBlock HorizontalAlignment="Right"
-                                                           Padding="5 0"
+                                            <StackPanel Grid.Row="0" Grid.Column="1">
+                                                <TextBlock Padding="5,0"
+                                                           HorizontalAlignment="Right"
                                                            Style="{StaticResource CommaNumberStyle}"
-                                                           Text="{Binding CombinedTotalOverallDamage,
-                                                                          StringFormat={}{0:N0}}"
+                                                           Text="{Binding CombinedTotalOverallDamage, StringFormat={}{0:N0}}"
                                                            TextWrapping="WrapWithOverflow" />
-                                                <TextBlock HorizontalAlignment="Right"
-                                                           Padding="5 0"
+                                                <TextBlock Padding="5,0"
+                                                           HorizontalAlignment="Right"
                                                            Style="{StaticResource CommaNumberStyle}"
-                                                           Text="{Binding CombinedTotalOverallHealing,
-                                                                          StringFormat={}{0:N0}}"
+                                                           Text="{Binding CombinedTotalOverallHealing, StringFormat={}{0:N0}}"
                                                            TextWrapping="WrapWithOverflow" />
-                                                <TextBlock HorizontalAlignment="Right"
-                                                           Padding="5 0"
+                                                <TextBlock Padding="5,0"
+                                                           HorizontalAlignment="Right"
                                                            Style="{StaticResource CommaNumberStyle}"
-                                                           Text="{Binding CombinedTotalOverallDamageTaken,
-                                                                          StringFormat={}{0:N0}}"
+                                                           Text="{Binding CombinedTotalOverallDamageTaken, StringFormat={}{0:N0}}"
                                                            TextWrapping="WrapWithOverflow" />
                                             </StackPanel>
-                                            <StackPanel Grid.Row="0"
-                                                        Grid.Column="2">
-                                                <TextBlock Text="{Binding Locale[parse_CombinedDPSLabel],
-                                                                          Source={StaticResource PluginViewModel}}"
-                                                           TextWrapping="WrapWithOverflow" />
-                                                <TextBlock Text="{Binding Locale[parse_CombinedHPSLabel],
-                                                                          Source={StaticResource PluginViewModel}}"
-                                                           TextWrapping="WrapWithOverflow" />
-                                                <TextBlock Text="{Binding Locale[parse_CombinedDTPSLabel],
-                                                                          Source={StaticResource PluginViewModel}}"
-                                                           TextWrapping="WrapWithOverflow" />
+                                            <StackPanel Grid.Row="0" Grid.Column="2">
+                                                <TextBlock Text="{Binding Locale[parse_CombinedDPSLabel], Source={StaticResource PluginViewModel}}" TextWrapping="WrapWithOverflow" />
+                                                <TextBlock Text="{Binding Locale[parse_CombinedHPSLabel], Source={StaticResource PluginViewModel}}" TextWrapping="WrapWithOverflow" />
+                                                <TextBlock Text="{Binding Locale[parse_CombinedDTPSLabel], Source={StaticResource PluginViewModel}}" TextWrapping="WrapWithOverflow" />
                                             </StackPanel>
-                                            <StackPanel Grid.Row="0"
-                                                        Grid.Column="3">
-                                                <TextBlock HorizontalAlignment="Right"
-                                                           Padding="5 0"
+                                            <StackPanel Grid.Row="0" Grid.Column="3">
+                                                <TextBlock Padding="5,0"
+                                                           HorizontalAlignment="Right"
                                                            Style="{StaticResource CommaNumberStyle}"
-                                                           Text="{Binding CombinedDPS,
-                                                                          StringFormat={}{0:N0}}" />
-                                                <TextBlock HorizontalAlignment="Right"
-                                                           Padding="5 0"
+                                                           Text="{Binding CombinedDPS, StringFormat={}{0:N0}}" />
+                                                <TextBlock Padding="5,0"
+                                                           HorizontalAlignment="Right"
                                                            Style="{StaticResource CommaNumberStyle}"
-                                                           Text="{Binding CombinedHPS,
-                                                                          StringFormat={}{0:N0}}" />
-                                                <TextBlock HorizontalAlignment="Right"
-                                                           Padding="5 0"
+                                                           Text="{Binding CombinedHPS, StringFormat={}{0:N0}}" />
+                                                <TextBlock Padding="5,0"
+                                                           HorizontalAlignment="Right"
                                                            Style="{StaticResource CommaNumberStyle}"
-                                                           Text="{Binding CombinedDTPS,
-                                                                          StringFormat={}{0:N0}}" />
+                                                           Text="{Binding CombinedDTPS, StringFormat={}{0:N0}}" />
                                             </StackPanel>
                                         </Grid>
                                     </GroupBox>
                                     <TextBlock HorizontalAlignment="Center"
                                                Foreground="{DynamicResource BlackColorBrush}"
-                                               Text="{Binding Locale[parse_BasicGlobalWarningLabel],
-                                                              Source={StaticResource PluginViewModel}}"
+                                               Text="{Binding Locale[parse_BasicGlobalWarningLabel], Source={StaticResource PluginViewModel}}"
                                                TextWrapping="WrapWithOverflow"
-                                               Visibility="{Binding EnableHelpLabels,
-                                                                    Source={StaticResource PluginViewModel},
-                                                                    Converter={StaticResource VisibilityConverter}}" />
+                                               Visibility="{Binding EnableHelpLabels, Source={StaticResource PluginViewModel}, Converter={StaticResource VisibilityConverter}}" />
 
-                                    <ItemsControl x:Name="PlayerInfoScoreCard"
-                                                  ItemsSource="{Binding PlayerInfoSource,
-                                                                        Source={StaticResource MainViewModel}}">
+                                    <ItemsControl x:Name="PlayerInfoScoreCard" ItemsSource="{Binding PlayerInfoSource, Source={StaticResource MainViewModel}}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <grids:PlayerInfoBox MaxWidth="300"
-                                                                     DataContext="{Binding}" />
+                                                <grids:PlayerInfoBox MaxWidth="300" DataContext="{Binding}" />
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                         <ItemsControl.ItemsPanel>
@@ -288,48 +224,35 @@
                         </TabItem>
                         <TabItem x:Name="PartyBreakDownInfo">
                             <TabControl x:Name="PlayerResults">
-                                <TabItem Header="{Binding Locale[parse_PartyDamageActionsHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_PartyDamageActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
-                                                    Command="{Binding ShowLast20PlayerActionsCommand,
-                                                                      Source={StaticResource MainViewModel}}"
+                                                    Command="{Binding ShowLast20PlayerActionsCommand, Source={StaticResource MainViewModel}}"
                                                     CommandParameter="Damage"
-                                                    Content="{Binding Locale[parse_ShowLast20DamageActions],
-                                                          Source={StaticResource PluginViewModel}}" />
+                                                    Content="{Binding Locale[parse_ShowLast20DamageActions], Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageDataGrid x:Name="PlayerDamageByAction"
                                                                       BorderThickness="0"
-                                                                      DataContext="{Binding SelectedItem,
-                                                                                            ElementName=PlayerInfoListView,
-                                                                                            NotifyOnTargetUpdated=True,
-                                                                                            NotifyOnSourceUpdated=True}"
+                                                                      DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                       ItemsSource="{Binding DamageByAction}"
                                                                       SelectionMode="Single"
                                                                       Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageOverTimeDataGrid x:Name="PlayerDamageOverTimeByAction"
                                                                               BorderThickness="0"
-                                                                              DataContext="{Binding SelectedItem,
-                                                                                                    ElementName=PlayerInfoListView,
-                                                                                                    NotifyOnTargetUpdated=True,
-                                                                                                    NotifyOnSourceUpdated=True}"
+                                                                              DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                               ItemsSource="{Binding DamageOverTimeByAction}"
                                                                               SelectionMode="Single"
                                                                               Style="{DynamicResource MetroDataGrid}" />
@@ -337,42 +260,31 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyDamageMonstersHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_PartyDamageMonstersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageDataGrid x:Name="PlayerDamageToMonsters"
                                                                       BorderThickness="0"
-                                                                      DataContext="{Binding SelectedItem,
-                                                                                            ElementName=PlayerInfoListView,
-                                                                                            NotifyOnTargetUpdated=True,
-                                                                                            NotifyOnSourceUpdated=True}"
+                                                                      DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                       ItemsSource="{Binding DamageToMonsters}"
                                                                       SelectionMode="Single"
                                                                       Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageDataGrid x:Name="PlayerDamageToMonstersByAction"
                                                                       BorderThickness="0"
-                                                                      DataContext="{Binding SelectedItem,
-                                                                                            ElementName=PlayerDamageToMonsters,
-                                                                                            NotifyOnTargetUpdated=True,
-                                                                                            NotifyOnSourceUpdated=True}"
+                                                                      DataContext="{Binding SelectedItem, ElementName=PlayerDamageToMonsters, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                       ItemsSource="{Binding DamageToMonstersByAction}"
                                                                       SelectionMode="Single"
                                                                       Style="{DynamicResource MetroDataGrid}" />
@@ -383,36 +295,26 @@
                                                                        IsIndeterminate="True" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageOverTimeDataGrid x:Name="PlayerDamageOverTimeToMonsters"
                                                                               BorderThickness="0"
-                                                                              DataContext="{Binding SelectedItem,
-                                                                                                    ElementName=PlayerInfoListView,
-                                                                                                    NotifyOnTargetUpdated=True,
-                                                                                                    NotifyOnSourceUpdated=True}"
+                                                                              DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                               ItemsSource="{Binding DamageOverTimeToMonsters}"
                                                                               SelectionMode="Single"
                                                                               Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageOverTimeDataGrid x:Name="PlayerDamageOverTimeToMonstersByAction"
                                                                               BorderThickness="0"
-                                                                              DataContext="{Binding SelectedItem,
-                                                                                                    ElementName=PlayerDamageOverTimeToMonsters,
-                                                                                                    NotifyOnTargetUpdated=True,
-                                                                                                    NotifyOnSourceUpdated=True}"
+                                                                              DataContext="{Binding SelectedItem, ElementName=PlayerDamageOverTimeToMonsters, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                               ItemsSource="{Binding DamageOverTimeToMonstersByAction}"
                                                                               SelectionMode="Single"
                                                                               Style="{DynamicResource MetroDataGrid}" />
@@ -420,84 +322,61 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyHealingActionsHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_PartyHealingActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
-                                                    Command="{Binding ShowLast20PlayerActionsCommand,
-                                                                      Source={StaticResource MainViewModel}}"
+                                                    Command="{Binding ShowLast20PlayerActionsCommand, Source={StaticResource MainViewModel}}"
                                                     CommandParameter="Healing"
-                                                    Content="{Binding Locale[parse_ShowLast20HealingActions],
-                                                                      Source={StaticResource PluginViewModel}}" />
+                                                    Content="{Binding Locale[parse_ShowLast20HealingActions], Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:HealingDataGrid x:Name="PlayerHealingByAction"
                                                                        BorderThickness="0"
-                                                                       DataContext="{Binding SelectedItem,
-                                                                                             ElementName=PlayerInfoListView,
-                                                                                             NotifyOnTargetUpdated=True,
-                                                                                             NotifyOnSourceUpdated=True}"
+                                                                       DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                        ItemsSource="{Binding HealingByAction}"
                                                                        SelectionMode="Single"
                                                                        Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverHealingHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverHealingHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:HealingOverHealingDataGrid x:Name="PlayerHealingOverHealingByAction"
                                                                                   BorderThickness="0"
-                                                                                  DataContext="{Binding SelectedItem,
-                                                                                                        ElementName=PlayerInfoListView,
-                                                                                                        NotifyOnTargetUpdated=True,
-                                                                                                        NotifyOnSourceUpdated=True}"
+                                                                                  DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                   ItemsSource="{Binding HealingOverHealingByAction}"
                                                                                   SelectionMode="Single"
                                                                                   Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:HealingOverTimeDataGrid x:Name="PlayerHealingOverTimeByAction"
                                                                                BorderThickness="0"
-                                                                               DataContext="{Binding SelectedItem,
-                                                                                                     ElementName=PlayerInfoListView,
-                                                                                                     NotifyOnTargetUpdated=True,
-                                                                                                     NotifyOnSourceUpdated=True}"
+                                                                               DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                ItemsSource="{Binding HealingOverTimeByAction}"
                                                                                SelectionMode="Single"
                                                                                Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsMitigatedHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsMitigatedHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:HealingMitigatedDataGrid x:Name="PlayerHealingMitigatedByAction"
                                                                                 BorderThickness="0"
-                                                                                DataContext="{Binding SelectedItem,
-                                                                                                      ElementName=PlayerInfoListView,
-                                                                                                      NotifyOnTargetUpdated=True,
-                                                                                                      NotifyOnSourceUpdated=True}"
+                                                                                DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                 ItemsSource="{Binding HealingMitigatedByAction}"
                                                                                 SelectionMode="Single"
                                                                                 Style="{DynamicResource MetroDataGrid}" />
@@ -505,42 +384,31 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyHealingPlayersHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_PartyHealingPlayersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:HealingDataGrid x:Name="PlayerHealingToPlayers"
                                                                        BorderThickness="0"
-                                                                       DataContext="{Binding SelectedItem,
-                                                                                             ElementName=PlayerInfoListView,
-                                                                                             NotifyOnTargetUpdated=True,
-                                                                                             NotifyOnSourceUpdated=True}"
+                                                                       DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                        ItemsSource="{Binding HealingToPlayers}"
                                                                        SelectionMode="Single"
                                                                        Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:HealingDataGrid x:Name="PlayerHealingToPlayersByAction"
                                                                        BorderThickness="0"
-                                                                       DataContext="{Binding SelectedItem,
-                                                                                             ElementName=PlayerHealingToPlayers,
-                                                                                             NotifyOnTargetUpdated=True,
-                                                                                             NotifyOnSourceUpdated=True}"
+                                                                       DataContext="{Binding SelectedItem, ElementName=PlayerHealingToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                        ItemsSource="{Binding HealingToPlayersByAction}"
                                                                        SelectionMode="Single"
                                                                        Style="{DynamicResource MetroDataGrid}" />
@@ -551,36 +419,26 @@
                                                                        IsIndeterminate="True" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverHealingHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverHealingHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:HealingOverHealingDataGrid x:Name="PlayerHealingOverHealingToPlayers"
                                                                                   BorderThickness="0"
-                                                                                  DataContext="{Binding SelectedItem,
-                                                                                                        ElementName=PlayerInfoListView,
-                                                                                                        NotifyOnTargetUpdated=True,
-                                                                                                        NotifyOnSourceUpdated=True}"
+                                                                                  DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                   ItemsSource="{Binding HealingOverHealingToPlayers}"
                                                                                   SelectionMode="Single"
                                                                                   Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:HealingOverHealingDataGrid x:Name="PlayerHealingOverHealingToPlayersByAction"
                                                                                   BorderThickness="0"
-                                                                                  DataContext="{Binding SelectedItem,
-                                                                                                        ElementName=PlayerHealingOverHealingToPlayers,
-                                                                                                        NotifyOnTargetUpdated=True,
-                                                                                                        NotifyOnSourceUpdated=True}"
+                                                                                  DataContext="{Binding SelectedItem, ElementName=PlayerHealingOverHealingToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                   ItemsSource="{Binding HealingOverHealingToPlayersByAction}"
                                                                                   SelectionMode="Single"
                                                                                   Style="{DynamicResource MetroDataGrid}" />
@@ -591,36 +449,26 @@
                                                                        IsIndeterminate="True" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:HealingOverTimeDataGrid x:Name="PlayerHealingOverTimeToPlayers"
                                                                                BorderThickness="0"
-                                                                               DataContext="{Binding SelectedItem,
-                                                                                                     ElementName=PlayerInfoListView,
-                                                                                                     NotifyOnTargetUpdated=True,
-                                                                                                     NotifyOnSourceUpdated=True}"
+                                                                               DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                ItemsSource="{Binding HealingOverTimeToPlayers}"
                                                                                SelectionMode="Single"
                                                                                Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:HealingOverTimeDataGrid x:Name="PlayerHealingOverTimeToPlayersByAction"
                                                                                BorderThickness="0"
-                                                                               DataContext="{Binding SelectedItem,
-                                                                                                     ElementName=PlayerHealingOverTimeToPlayers,
-                                                                                                     NotifyOnTargetUpdated=True,
-                                                                                                     NotifyOnSourceUpdated=True}"
+                                                                               DataContext="{Binding SelectedItem, ElementName=PlayerHealingOverTimeToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                ItemsSource="{Binding HealingOverTimeToPlayersByAction}"
                                                                                SelectionMode="Single"
                                                                                Style="{DynamicResource MetroDataGrid}" />
@@ -631,36 +479,26 @@
                                                                        IsIndeterminate="True" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsMitigatedHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsMitigatedHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:HealingMitigatedDataGrid x:Name="PlayerHealingMitigatedToPlayers"
                                                                                 BorderThickness="0"
-                                                                                DataContext="{Binding SelectedItem,
-                                                                                                      ElementName=PlayerInfoListView,
-                                                                                                      NotifyOnTargetUpdated=True,
-                                                                                                      NotifyOnSourceUpdated=True}"
+                                                                                DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                 ItemsSource="{Binding HealingMitigatedToPlayers}"
                                                                                 SelectionMode="Single"
                                                                                 Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:HealingMitigatedDataGrid x:Name="PlayerHealingMitigatedToPlayersByAction"
                                                                                 BorderThickness="0"
-                                                                                DataContext="{Binding SelectedItem,
-                                                                                                      ElementName=PlayerHealingMitigatedToPlayers,
-                                                                                                      NotifyOnTargetUpdated=True,
-                                                                                                      NotifyOnSourceUpdated=True}"
+                                                                                DataContext="{Binding SelectedItem, ElementName=PlayerHealingMitigatedToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                 ItemsSource="{Binding HealingMitigatedToPlayersByAction}"
                                                                                 SelectionMode="Single"
                                                                                 Style="{DynamicResource MetroDataGrid}" />
@@ -668,62 +506,44 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyBuffsHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_PartyBuffsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
-                                                    Command="{Binding ShowLast20PlayerItemsUsedCommand,
-                                                                      Source={StaticResource MainViewModel}}"
-                                                    Content="{Binding Locale[parse_ShowLast20ItemsUsed],
-                                                                      Source={StaticResource PluginViewModel}}" />
+                                                    Command="{Binding ShowLast20PlayerItemsUsedCommand, Source={StaticResource MainViewModel}}"
+                                                    Content="{Binding Locale[parse_ShowLast20ItemsUsed], Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverallHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverallHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:BuffDataGrid x:Name="PlayerBuffByAction"
-                                                                    DataContext="{Binding SelectedItem,
-                                                                                          ElementName=PlayerInfoListView,
-                                                                                          NotifyOnTargetUpdated=True,
-                                                                                          NotifyOnSourceUpdated=True}"
+                                                                    DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                     ItemsSource="{Binding BuffByAction}"
                                                                     SelectionMode="Single"
                                                                     Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsPlayersHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsPlayersHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:BuffDataGrid x:Name="PlayerBuffToPlayers"
-                                                                    DataContext="{Binding SelectedItem,
-                                                                                          ElementName=PlayerInfoListView,
-                                                                                          NotifyOnTargetUpdated=True,
-                                                                                          NotifyOnSourceUpdated=True}"
+                                                                    DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                     ItemsSource="{Binding BuffToPlayers}"
                                                                     SelectionMode="Single"
                                                                     Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsPlayersByActionHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsPlayersByActionHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:BuffDataGrid x:Name="PlayerBuffToPlayersByAction"
-                                                                    DataContext="{Binding SelectedItem,
-                                                                                          ElementName=PlayerBuffToPlayers,
-                                                                                          NotifyOnTargetUpdated=True,
-                                                                                          NotifyOnSourceUpdated=True}"
+                                                                    DataContext="{Binding SelectedItem, ElementName=PlayerBuffToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                     ItemsSource="{Binding BuffToPlayersByAction}"
                                                                     SelectionMode="Single"
                                                                     Style="{DynamicResource MetroDataGrid}" />
@@ -731,48 +551,35 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyDamageTakenActionsHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_PartyDamageTakenActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
-                                                    Command="{Binding ShowLast20PlayerActionsCommand,
-                                                                      Source={StaticResource MainViewModel}}"
+                                                    Command="{Binding ShowLast20PlayerActionsCommand, Source={StaticResource MainViewModel}}"
                                                     CommandParameter="DamageTaken"
-                                                    Content="{Binding Locale[parse_ShowLast20DamageTakenActions],
-                                                                      Source={StaticResource PluginViewModel}}" />
+                                                    Content="{Binding Locale[parse_ShowLast20DamageTakenActions], Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageTakenDataGrid x:Name="PlayerDamageTakenByAction"
                                                                            BorderThickness="0"
-                                                                           DataContext="{Binding SelectedItem,
-                                                                                                 ElementName=PlayerInfoListView,
-                                                                                                 NotifyOnTargetUpdated=True,
-                                                                                                 NotifyOnSourceUpdated=True}"
+                                                                           DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                            ItemsSource="{Binding DamageTakenByAction}"
                                                                            SelectionMode="Single"
                                                                            Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageTakenOverTimeDataGrid x:Name="PlayerDamageTakenOverTimeByAction"
                                                                                    BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem,
-                                                                                                         ElementName=PlayerInfoListView,
-                                                                                                         NotifyOnTargetUpdated=True,
-                                                                                                         NotifyOnSourceUpdated=True}"
+                                                                                   DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                    ItemsSource="{Binding DamageTakenOverTimeByAction}"
                                                                                    SelectionMode="Single"
                                                                                    Style="{DynamicResource MetroDataGrid}" />
@@ -780,42 +587,31 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyDamageTakenMonstersHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_PartyDamageTakenMonstersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageTakenDataGrid x:Name="PlayerDamageTakenByMonsters"
                                                                            BorderThickness="0"
-                                                                           DataContext="{Binding SelectedItem,
-                                                                                                 ElementName=PlayerInfoListView,
-                                                                                                 NotifyOnTargetUpdated=True,
-                                                                                                 NotifyOnSourceUpdated=True}"
+                                                                           DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                            ItemsSource="{Binding DamageTakenByMonsters}"
                                                                            SelectionMode="Single"
                                                                            Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageTakenDataGrid x:Name="PlayerDamageTakenByMonstersByAction"
                                                                            BorderThickness="0"
-                                                                           DataContext="{Binding SelectedItem,
-                                                                                                 ElementName=PlayerDamageTakenByMonsters,
-                                                                                                 NotifyOnTargetUpdated=True,
-                                                                                                 NotifyOnSourceUpdated=True}"
+                                                                           DataContext="{Binding SelectedItem, ElementName=PlayerDamageTakenByMonsters, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                            ItemsSource="{Binding DamageTakenByMonstersByAction}"
                                                                            SelectionMode="Single"
                                                                            Style="{DynamicResource MetroDataGrid}" />
@@ -826,36 +622,26 @@
                                                                        IsIndeterminate="True" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageTakenOverTimeDataGrid x:Name="PlayerDamageTakenOverTimeByMonsters"
                                                                                    BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem,
-                                                                                                         ElementName=PlayerInfoListView,
-                                                                                                         NotifyOnTargetUpdated=True,
-                                                                                                         NotifyOnSourceUpdated=True}"
+                                                                                   DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                    ItemsSource="{Binding DamageTakenOverTimeByMonsters}"
                                                                                    SelectionMode="Single"
                                                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageTakenOverTimeDataGrid x:Name="PlayerDamageTakenOverTimeByMonstersByAction"
                                                                                    BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem,
-                                                                                                         ElementName=PlayerDamageTakenOverTimeByMonsters,
-                                                                                                         NotifyOnTargetUpdated=True,
-                                                                                                         NotifyOnSourceUpdated=True}"
+                                                                                   DataContext="{Binding SelectedItem, ElementName=PlayerDamageTakenOverTimeByMonsters, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                    ItemsSource="{Binding DamageTakenOverTimeByMonstersByAction}"
                                                                                    SelectionMode="Single"
                                                                                    Style="{DynamicResource MetroDataGrid}" />
@@ -867,16 +653,12 @@
                         </TabItem>
                         <TabItem x:Name="PartyTotalInfo">
                             <ScrollViewer>
-                                <StackPanel DataContext="{Binding PlayerInfoSource,
-                                                                  Source={StaticResource MainViewModel}}">
-                                    <Expander IsExpanded="True"
-                                              Padding="0">
+                                <StackPanel DataContext="{Binding PlayerInfoSource, Source={StaticResource MainViewModel}}">
+                                    <Expander Padding="0" IsExpanded="True">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsCombinedDamageHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsCombinedDamageHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:CombinedDamageDataGrid x:Name="PlayerCombinedDamageStats"
                                                                       BorderThickness="0"
@@ -884,41 +666,33 @@
                                                                       SelectionMode="Single"
                                                                       Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander IsExpanded="False"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="False">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsDamageHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsDamageHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:DamageDataGrid BorderThickness="0"
                                                               ItemsSource="{Binding}"
                                                               SelectionMode="Single"
                                                               Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander Padding="0">
+                                    <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsDamageOverTimeHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsDamageOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:DamageOverTimeDataGrid BorderThickness="0"
                                                                       ItemsSource="{Binding}"
                                                                       SelectionMode="Single"
                                                                       Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander IsExpanded="True"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="True">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsCombinedHealingHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsCombinedHealingHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:CombinedHealingDataGrid x:Name="PlayerCombinedHealingStats"
                                                                        BorderThickness="0"
@@ -926,81 +700,66 @@
                                                                        SelectionMode="Single"
                                                                        Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander IsExpanded="False"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="False">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsHealingHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsHealingHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:HealingDataGrid BorderThickness="0"
                                                                ItemsSource="{Binding}"
                                                                SelectionMode="Single"
                                                                Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander Padding="0">
+                                    <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsHealingOverHealingHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsHealingOverHealingHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:HealingOverHealingDataGrid BorderThickness="0"
                                                                           ItemsSource="{Binding}"
                                                                           SelectionMode="Single"
                                                                           Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander Padding="0">
+                                    <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsHealingOverTimeHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsHealingOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:HealingOverTimeDataGrid BorderThickness="0"
                                                                        ItemsSource="{Binding}"
                                                                        SelectionMode="Single"
                                                                        Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander Padding="0">
+                                    <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsHealingMitigatedHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsHealingMitigatedHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:HealingMitigatedDataGrid BorderThickness="0"
                                                                         ItemsSource="{Binding}"
                                                                         SelectionMode="Single"
                                                                         Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander IsExpanded="True"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="True">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsBuffsHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsBuffsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:BuffDataGrid BorderThickness="0"
                                                             ItemsSource="{Binding}"
                                                             SelectionMode="Single"
                                                             Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander IsExpanded="True"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="True">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsCombinedDamageTakenHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsCombinedDamageTakenHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:CombinedDamageTakenDataGrid x:Name="PlayerCombinedDamageTakenStats"
                                                                            BorderThickness="0"
@@ -1008,27 +767,22 @@
                                                                            SelectionMode="Single"
                                                                            Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander IsExpanded="False"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="False">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsDamageTakenHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsDamageTakenHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:DamageTakenDataGrid BorderThickness="0"
                                                                    ItemsSource="{Binding}"
                                                                    SelectionMode="Single"
                                                                    Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander Padding="0">
+                                    <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsDamageTakenOverTimeHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsDamageTakenOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:DamageTakenOverTimeDataGrid BorderThickness="0"
                                                                            ItemsSource="{Binding}"
@@ -1040,47 +794,35 @@
                         </TabItem>
                         <TabItem x:Name="MonsterBreakDownInfo">
                             <TabControl>
-                                <TabItem Header="{Binding Locale[parse_MonsterDamageActionsHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_MonsterDamageActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
-                                                    Command="{Binding ShowLast20MonsterActionsCommand,
-                                                                      Source={StaticResource MainViewModel}}"
+                                                    Command="{Binding ShowLast20MonsterActionsCommand, Source={StaticResource MainViewModel}}"
                                                     CommandParameter="Damage"
                                                     Content="Show Last 20 Damage Actions (Selected Monster)" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageDataGrid x:Name="MonsterDamageByAction"
                                                                       BorderThickness="0"
-                                                                      DataContext="{Binding SelectedItem,
-                                                                                            ElementName=MonsterInfoListView,
-                                                                                            NotifyOnTargetUpdated=True,
-                                                                                            NotifyOnSourceUpdated=True}"
+                                                                      DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                       ItemsSource="{Binding DamageByAction}"
                                                                       SelectionMode="Single"
                                                                       Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageOverTimeDataGrid x:Name="MonsterDamageOverTimeByAction"
                                                                               BorderThickness="0"
-                                                                              DataContext="{Binding SelectedItem,
-                                                                                                    ElementName=MonsterInfoListView,
-                                                                                                    NotifyOnTargetUpdated=True,
-                                                                                                    NotifyOnSourceUpdated=True}"
+                                                                              DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                               ItemsSource="{Binding DamageOverTimeByAction}"
                                                                               SelectionMode="Single"
                                                                               Style="{DynamicResource MetroDataGrid}" />
@@ -1088,42 +830,31 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_MonsterDamagePlayersHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_MonsterDamagePlayersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageDataGrid x:Name="MonsterDamageToPlayers"
                                                                       BorderThickness="0"
-                                                                      DataContext="{Binding SelectedItem,
-                                                                                            ElementName=MonsterInfoListView,
-                                                                                            NotifyOnTargetUpdated=True,
-                                                                                            NotifyOnSourceUpdated=True}"
+                                                                      DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                       ItemsSource="{Binding DamageToPlayers}"
                                                                       SelectionMode="Single"
                                                                       Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageDataGrid x:Name="MonsterDamageToPlayersByAction"
                                                                       BorderThickness="0"
-                                                                      DataContext="{Binding SelectedItem,
-                                                                                            ElementName=MonsterDamageToPlayers,
-                                                                                            NotifyOnTargetUpdated=True,
-                                                                                            NotifyOnSourceUpdated=True}"
+                                                                      DataContext="{Binding SelectedItem, ElementName=MonsterDamageToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                       ItemsSource="{Binding DamageToPlayersByAction}"
                                                                       SelectionMode="Single"
                                                                       Style="{DynamicResource MetroDataGrid}" />
@@ -1134,36 +865,26 @@
                                                                        IsIndeterminate="True" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageOverTimeDataGrid x:Name="MonsterDamageOverTimeToPlayers"
                                                                               BorderThickness="0"
-                                                                              DataContext="{Binding SelectedItem,
-                                                                                                    ElementName=MonsterInfoListView,
-                                                                                                    NotifyOnTargetUpdated=True,
-                                                                                                    NotifyOnSourceUpdated=True}"
+                                                                              DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                               ItemsSource="{Binding DamageOverTimeToPlayers}"
                                                                               SelectionMode="Single"
                                                                               Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageOverTimeDataGrid x:Name="MonsterDamageOverTimeToPlayersByAction"
                                                                               BorderThickness="0"
-                                                                              DataContext="{Binding SelectedItem,
-                                                                                                    ElementName=MonsterDamageOverTimeToPlayers,
-                                                                                                    NotifyOnTargetUpdated=True,
-                                                                                                    NotifyOnSourceUpdated=True}"
+                                                                              DataContext="{Binding SelectedItem, ElementName=MonsterDamageOverTimeToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                               ItemsSource="{Binding DamageOverTimeToPlayersByAction}"
                                                                               SelectionMode="Single"
                                                                               Style="{DynamicResource MetroDataGrid}" />
@@ -1171,48 +892,35 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_MonsterDamageTakenActionsHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_MonsterDamageTakenActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
-                                                    Command="{Binding ShowLast20MonsterActionsCommand,
-                                                                      Source={StaticResource MainViewModel}}"
+                                                    Command="{Binding ShowLast20MonsterActionsCommand, Source={StaticResource MainViewModel}}"
                                                     CommandParameter="DamageTaken"
-                                                    Content="{Binding Locale[parse_ShowLast20DamageTakenActions],
-                                                          Source={StaticResource PluginViewModel}}" />
+                                                    Content="{Binding Locale[parse_ShowLast20DamageTakenActions], Source={StaticResource PluginViewModel}}" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageTakenDataGrid x:Name="MonsterDamageTakenByAction"
                                                                            BorderThickness="0"
-                                                                           DataContext="{Binding SelectedItem,
-                                                                                                 ElementName=MonsterInfoListView,
-                                                                                                 NotifyOnTargetUpdated=True,
-                                                                                                 NotifyOnSourceUpdated=True}"
+                                                                           DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                            ItemsSource="{Binding DamageTakenByAction}"
                                                                            SelectionMode="Single"
                                                                            Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageTakenOverTimeDataGrid x:Name="MonsterDamageTakenOverTimeByAction"
                                                                                    BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem,
-                                                                                                         ElementName=MonsterInfoListView,
-                                                                                                         NotifyOnTargetUpdated=True,
-                                                                                                         NotifyOnSourceUpdated=True}"
+                                                                                   DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                    ItemsSource="{Binding DamageTakenOverTimeByAction}"
                                                                                    SelectionMode="Single"
                                                                                    Style="{DynamicResource MetroDataGrid}" />
@@ -1220,42 +928,31 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_MonsterDamageTakenPlayersHeader],
-                                                          Source={StaticResource PluginViewModel}}">
+                                <TabItem Header="{Binding Locale[parse_MonsterDamageTakenPlayersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsNormalHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsNormalHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageTakenDataGrid x:Name="MonsterDamageTakenByPlayers"
                                                                            BorderThickness="0"
-                                                                           DataContext="{Binding SelectedItem,
-                                                                                                 ElementName=MonsterInfoListView,
-                                                                                                 NotifyOnTargetUpdated=True,
-                                                                                                 NotifyOnSourceUpdated=True}"
+                                                                           DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                            ItemsSource="{Binding DamageTakenByPlayers}"
                                                                            SelectionMode="Single"
                                                                            Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageTakenDataGrid x:Name="MonsterDamageTakenByPlayersByAction"
                                                                            BorderThickness="0"
-                                                                           DataContext="{Binding SelectedItem,
-                                                                                                 ElementName=MonsterDamageTakenByPlayers,
-                                                                                                 NotifyOnTargetUpdated=True,
-                                                                                                 NotifyOnSourceUpdated=True}"
+                                                                           DataContext="{Binding SelectedItem, ElementName=MonsterDamageTakenByPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                            ItemsSource="{Binding DamageTakenByPlayersByAction}"
                                                                            SelectionMode="Single"
                                                                            Style="{DynamicResource MetroDataGrid}" />
@@ -1266,36 +963,26 @@
                                                                        IsIndeterminate="True" />
                                             <GroupBox Padding="0">
                                                 <GroupBox.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
                                                 <grids:DamageTakenOverTimeDataGrid x:Name="MonsterDamageTakenOverTimeByPlayers"
                                                                                    BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem,
-                                                                                                         ElementName=MonsterInfoListView,
-                                                                                                         NotifyOnTargetUpdated=True,
-                                                                                                         NotifyOnSourceUpdated=True}"
+                                                                                   DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                    ItemsSource="{Binding DamageTakenOverTimeByPlayers}"
                                                                                    SelectionMode="Single"
                                                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
-                                            <Expander Padding="0">
+                                            <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
-                                                    <TextBlock Foreground="White"
-                                                               Padding="5"
-                                                               Text="{Binding Locale[parse_TotalsActionsHeader],
-                                                                              Source={StaticResource PluginViewModel},
-                                                                              Converter={StaticResource ToUpperConverter}}" />
+                                                    <TextBlock Padding="5"
+                                                               Foreground="White"
+                                                               Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:DamageTakenOverTimeDataGrid x:Name="MonsterDamageTakenOverTimeByPlayersByAction"
                                                                                    BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem,
-                                                                                                         ElementName=MonsterDamageTakenOverTimeByPlayers,
-                                                                                                         NotifyOnTargetUpdated=True,
-                                                                                                         NotifyOnSourceUpdated=True}"
+                                                                                   DataContext="{Binding SelectedItem, ElementName=MonsterDamageTakenOverTimeByPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
                                                                                    ItemsSource="{Binding DamageTakenOverTimeByPlayersByAction}"
                                                                                    SelectionMode="Single"
                                                                                    Style="{DynamicResource MetroDataGrid}" />
@@ -1307,8 +994,7 @@
                         </TabItem>
                         <TabItem x:Name="MonsterTotalInfo">
                             <ScrollViewer>
-                                <StackPanel DataContext="{Binding MonsterInfoSource,
-                                                                  Source={StaticResource MainViewModel}}">
+                                <StackPanel DataContext="{Binding MonsterInfoSource, Source={StaticResource MainViewModel}}">
                                     <!--
                                         <Expander IsExpanded="True"
                                         Padding="0">
@@ -1326,14 +1012,11 @@
                                         Style="{DynamicResource MetroDataGrid}" />
                                         </Expander>
                                     -->
-                                    <Expander IsExpanded="True"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="True">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsDamageHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsDamageHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:DamageDataGrid BorderThickness="0"
                                                               ItemsSource="{Binding}"
@@ -1341,7 +1024,7 @@
                                                               Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
                                     <!--
-                                        <Expander Padding="0">
+                                        <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
                                         <TextBlock Foreground="White"
                                         Padding="5"
@@ -1389,7 +1072,7 @@
                                         </Expander>
                                     -->
                                     <!--
-                                        <Expander Padding="0">
+                                        <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
                                         <TextBlock Foreground="White"
                                         Padding="5"
@@ -1404,7 +1087,7 @@
                                         </Expander>
                                     -->
                                     <!--
-                                        <Expander Padding="0">
+                                        <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
                                         <TextBlock Foreground="White"
                                         Padding="5"
@@ -1419,7 +1102,7 @@
                                         </Expander>
                                     -->
                                     <!--
-                                        <Expander Padding="0">
+                                        <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
                                         <TextBlock Foreground="White"
                                         Padding="5"
@@ -1433,14 +1116,11 @@
                                         Style="{DynamicResource MetroDataGrid}" />
                                         </Expander>
                                     -->
-                                    <Expander IsExpanded="True"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="True">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsCombinedDamageTakenHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsCombinedDamageTakenHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:CombinedDamageTakenDataGrid x:Name="MonsterCombinedDamageTakenStats"
                                                                            BorderThickness="0"
@@ -1448,27 +1128,22 @@
                                                                            SelectionMode="Single"
                                                                            Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander IsExpanded="False"
-                                              Padding="0">
+                                    <Expander Padding="0" IsExpanded="False">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsDamageTakenHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsDamageTakenHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:DamageTakenDataGrid BorderThickness="0"
                                                                    ItemsSource="{Binding}"
                                                                    SelectionMode="Single"
                                                                    Style="{DynamicResource MetroDataGrid}" />
                                     </Expander>
-                                    <Expander Padding="0">
+                                    <Expander Margin="5,0" Padding="0">
                                         <Expander.Header>
-                                            <TextBlock Foreground="White"
-                                                       Padding="5"
-                                                       Text="{Binding Locale[parse_OverallTotalsDamageTakenOverTimeHeader],
-                                                                      Source={StaticResource PluginViewModel},
-                                                                      Converter={StaticResource ToUpperConverter}}" />
+                                            <TextBlock Padding="5"
+                                                       Foreground="White"
+                                                       Text="{Binding Locale[parse_OverallTotalsDamageTakenOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                         </Expander.Header>
                                         <grids:DamageTakenOverTimeDataGrid BorderThickness="0"
                                                                            ItemsSource="{Binding}"
@@ -1485,29 +1160,19 @@
         <DockPanel Grid.Row="1"
                    Margin="3"
                    LastChildFill="True">
-            <Button MinWidth="28"
+            <Button MinWidth="35"
                     Command="{Binding ResetStatsCommand}"
-                    ToolTip="{Binding Locale[parse_ResetStatsToolTip],
-                                      Source={StaticResource PluginViewModel}}">
+                    ToolTip="{Binding Locale[parse_ResetStatsToolTip], Source={StaticResource PluginViewModel}}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Width="16"
-                           Height="16"
-                           RenderOptions.BitmapScalingMode="HighQuality"
-                           Source="/FFXIVAPP.Plugin.Parse;component/Media/Images/Refresh.png" />
+                    <iconPacks:PackIconFontAwesome Kind="Refresh" Spin="True" />
                     <TextBlock Padding="3,0,3,0"
-                               Text="{Binding Locale[parse_ResetStatsToolTip],
-                                              Converter={StaticResource ToUpperConverter},
-                                              Source={StaticResource PluginViewModel}}"
-                               Visibility="{Binding EnableHelpLabels,
-                                                    Converter={StaticResource VisibilityConverter},
-                                                    Source={StaticResource PluginViewModel}}" />
+                               Text="{Binding Locale[parse_ResetStatsToolTip], Converter={StaticResource ToUpperConverter}, Source={StaticResource PluginViewModel}}"
+                               Visibility="{Binding EnableHelpLabels, Converter={StaticResource VisibilityConverter}, Source={StaticResource PluginViewModel}}" />
                 </StackPanel>
             </Button>
-            <CheckBox Margin="5 0"
-                      Content="{Binding Locale[parse_AdvancedCHBLabel],
-                                              Source={StaticResource PluginViewModel}}"
-                      IsChecked="{Binding ParseAdvanced,
-                                          Source={StaticResource Settings}}" />
+            <CheckBox Margin="5,7"
+                      Content="{Binding Locale[parse_AdvancedCHBLabel], Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ParseAdvanced, Source={StaticResource Settings}}" />
             <!--
                 <Button Width="100"
                 Margin="3 0 0 0"
@@ -1535,10 +1200,9 @@
                 Command="{Binding Convert2JsonCommand}"
                 Content="Convert 2 Json" />
             -->
-            <Button Margin="3 0 0 0"
+            <Button Margin="3,0,0,0"
                     Command="{Binding ProcessSampleCommand}"
-                    Content="{Binding Locale[parse_LoadExistingLogFileButtonText],
-                                      Source={StaticResource PluginViewModel}}" />
+                    Content="{Binding Locale[parse_LoadExistingLogFileButtonText], Source={StaticResource PluginViewModel}}" />
 
         </DockPanel>
     </Grid>

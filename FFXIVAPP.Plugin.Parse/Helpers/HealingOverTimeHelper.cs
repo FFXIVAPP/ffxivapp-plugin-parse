@@ -16,14 +16,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using FFXIVAPP.Plugin.Parse.Models;
+using Sharlayan.Helpers;
+using Sharlayan.Models;
 
 namespace FFXIVAPP.Plugin.Parse.Helpers
 {
     public static class HealingOverTimeHelper
     {
-        private static Dictionary<string, XOverTimeAction> _playerActions;
-        private static Dictionary<string, XOverTimeAction> _monsterActions;
         private static Dictionary<string, List<string>> _cureActions;
         private static Dictionary<string, List<string>> _medicaActions;
 
@@ -94,7 +93,11 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
             }
         }
 
-        public static Dictionary<string, XOverTimeAction> PlayerActions
+        #region Player Actions
+
+        private static Dictionary<string, ActionItem> _playerActions;
+
+        public static Dictionary<string, ActionItem> PlayerActions
         {
             get
             {
@@ -102,77 +105,53 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                 {
                     return _playerActions;
                 }
-                _playerActions = new Dictionary<string, XOverTimeAction>();
+                _playerActions = new Dictionary<string, ActionItem>();
 
-                _playerActions.Add("medica ii", new XOverTimeAction
+                foreach (var action in ActionHelper.HealingOverTimeActions())
                 {
-                    ActionPotency = 200,
-                    ActionOverTimePotency = 50,
-                    Duration = 30,
-                    HasNoInitialResult = false
-                });
-                _playerActions.Add("extra médica", _playerActions["medica ii"]);
-                _playerActions.Add("resedra", _playerActions["medica ii"]);
-                _playerActions.Add("メディカラ", _playerActions["medica ii"]);
-                _playerActions.Add("医济", _playerActions["medica ii"]);
-
-                _playerActions.Add("regen", new XOverTimeAction
-                {
-                    ActionPotency = 0,
-                    ActionOverTimePotency = 150,
-                    Duration = 21,
-                    HasNoInitialResult = true
-                });
-                _playerActions.Add("récup", _playerActions["regen"]);
-                _playerActions.Add("regena", _playerActions["regen"]);
-                _playerActions.Add("リジェネ", _playerActions["regen"]);
-                _playerActions.Add("再生", _playerActions["regen"]);
-
-                _playerActions.Add("choco regen", new XOverTimeAction
-                {
-                    ActionPotency = 0,
-                    ActionOverTimePotency = 25,
-                    Duration = 18,
-                    HasNoInitialResult = true
-                });
-                _playerActions.Add("choco-récup", _playerActions["choco regen"]);
-                _playerActions.Add("chocobo-regena", _playerActions["choco regen"]);
-                _playerActions.Add("チョコリジェネ", _playerActions["choco regen"]);
-                _playerActions.Add("陆行鸟再生", _playerActions["choco regen"]);
-
-                _playerActions.Add("whispering dawn", new XOverTimeAction
-                {
-                    ActionPotency = 0,
-                    ActionOverTimePotency = 100,
-                    Duration = 21,
-                    HasNoInitialResult = true
-                });
-                _playerActions.Add("erhebendes flüstern", _playerActions["whispering dawn"]);
-                _playerActions.Add("murmure de l'aurore", _playerActions["whispering dawn"]);
-                _playerActions.Add("光の囁き", _playerActions["whispering dawn"]);
-                _playerActions.Add("日光的低语", _playerActions["whispering dawn"]);
-
-                _playerActions.Add("sacred prism", new XOverTimeAction
-                {
-                    ActionPotency = 0,
-                    ActionOverTimePotency = 70,
-                    Duration = 24,
-                    HasNoInitialResult = false
-                });
-                _playerActions.Add("prisme sacré", _playerActions["sacred prism"]);
-                _playerActions.Add("barmherzigkeit", _playerActions["sacred prism"]);
-                _playerActions.Add("女神の慈悲", _playerActions["sacred prism"]);
-                _playerActions.Add("女神的慈悲", _playerActions["sacred prism"]);
+                    if (!string.IsNullOrWhiteSpace(action.Name.English))
+                    {
+                        _playerActions.Add(action.Name.English.ToLowerInvariant(), action);
+                    }
+                    if (!string.IsNullOrWhiteSpace(action.Name.Chinese))
+                    {
+                        _playerActions.Add(action.Name.Chinese.ToLowerInvariant(), action);
+                    }
+                    if (!string.IsNullOrWhiteSpace(action.Name.French))
+                    {
+                        _playerActions.Add(action.Name.French.ToLowerInvariant(), action);
+                    }
+                    if (!string.IsNullOrWhiteSpace(action.Name.German))
+                    {
+                        _playerActions.Add(action.Name.German.ToLowerInvariant(), action);
+                    }
+                    if (!string.IsNullOrWhiteSpace(action.Name.Japanese))
+                    {
+                        _playerActions.Add(action.Name.Japanese.ToLowerInvariant(), action);
+                    }
+                    if (!string.IsNullOrWhiteSpace(action.Name.Korean))
+                    {
+                        _playerActions.Add(action.Name.Korean.ToLowerInvariant(), action);
+                    }
+                }
 
                 return _playerActions;
             }
             set { _playerActions = value; }
         }
 
-        public static Dictionary<string, XOverTimeAction> MonsterActions
+        #endregion
+
+        #region Monster Actions
+
+        private static Dictionary<string, ActionItem> _monsterActions;
+
+        public static Dictionary<string, ActionItem> MonsterActions
         {
-            get { return _monsterActions ?? (_monsterActions = new Dictionary<string, XOverTimeAction>()); }
+            get { return _monsterActions ?? (_monsterActions = new Dictionary<string, ActionItem>()); }
             set { _monsterActions = value; }
         }
+
+        #endregion
     }
 }

@@ -13,118 +13,74 @@
           VirtualizingStackPanel.VirtualizationMode="Recycling">
     <DataGrid.Resources>
         <Converters:VisibilityConverter x:Key="VisibilityConverter" />
-        <x:Static x:Key="PluginViewModel"
-                  Member="Parse:PluginViewModel.Instance" />
-        <x:Static x:Key="Settings"
-                  Member="PluginProperties:Settings.Default" />
+        <x:Static x:Key="PluginViewModel" Member="Parse:PluginViewModel.Instance" />
+        <x:Static x:Key="Settings" Member="PluginProperties:Settings.Default" />
     </DataGrid.Resources>
     <DataGrid.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="{Binding Locale[parse_PercentOfTotalOverallHealingOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+            <MenuItem Header="{Binding Locale[parse_PercentOfTotalOverallHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfTotalOverallHealingOverTime,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_PercentOfRegularHealingOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnPercentOfTotalOverallHealingOverTime, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_PercentOfRegularHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfRegularHealingOverTime,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_PercentOfCriticalHealingOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnPercentOfRegularHealingOverTime, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_PercentOfCriticalHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfCriticalHealingOverTime,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_TotalOverallHealingOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnPercentOfCriticalHealingOverTime, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_TotalOverallHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnTotalOverallHealingOverTime,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_RegularHealingOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnTotalOverallHealingOverTime, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_RegularHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnRegularHealingOverTime,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_CriticalHealingOverTimeHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnRegularHealingOverTime, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_CriticalHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnCriticalHealingOverTime,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_TotalHealingOverTimeActionsUsedHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnCriticalHealingOverTime, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_TotalHealingOverTimeActionsUsedHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnTotalHealingActionsUsed,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HOTPSHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnTotalHealingActionsUsed, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HOTPSHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHPS,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegHitHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHPS, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegHitHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegHit,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegLowHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingRegHit, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegLowHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegLow,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegHighHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingRegLow, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegHighHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegHigh,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegAverageHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingRegHigh, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegAverageHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegAverage,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegModHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingRegAverage, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegMod,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegModAverageHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingRegMod, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeRegModAverageHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegModAverage,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritHitHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingRegModAverage, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritHitHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritHit,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritPercentHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingCritHit, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritPercentHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritPercent,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritLowHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingCritPercent, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritLowHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritLow,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritHighHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingCritLow, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritHighHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritHigh,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritAverageHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingCritHigh, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritAverageHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritAverage,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritModHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingCritAverage, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritMod,
-                                          Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritModAverageHeader],
-                                       Source={StaticResource PluginViewModel}}"
+                      IsChecked="{Binding ShowColumnHealingCritMod, Source={StaticResource Settings}}" />
+            <MenuItem Header="{Binding Locale[parse_HealingOverTimeCritModAverageHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritModAverage,
-                                          Source={StaticResource Settings}}" />
+                      IsChecked="{Binding ShowColumnHealingCritModAverage, Source={StaticResource Settings}}" />
         </ContextMenu>
     </DataGrid.ContextMenu>
     <i:Interaction.Behaviors>
@@ -132,167 +88,92 @@
     </i:Interaction.Behaviors>
     <DataGrid.Columns>
         <!--  <DataGridTextColumn Header="Avatar" CellTemplate="{StaticResource avatarTemplate}" />  -->
-        <DataGridTextColumn Binding="{Binding Name}"
-                            Header="{Binding Locale[parse_NameHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="Name" />
-        <DataGridTextColumn Binding="{Binding PercentOfTotalOverallHealingOverTime,
-                                              StringFormat=\{0:P2\}}"
-                            Header="{Binding Locale[parse_PercentOfTotalOverallHealingOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="PercentOfTotalOverallHealingOverTime"
-                            Visibility="{Binding ShowColumnPercentOfTotalOverallHealingOverTime,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding PercentOfRegularHealingOverTime,
-                                              StringFormat=\{0:P2\}}"
-                            Header="{Binding Locale[parse_PercentOfRegularHealingOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="PercentOfRegularHealingOverTime"
-                            Visibility="{Binding ShowColumnPercentOfRegularHealingOverTime,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding PercentOfCriticalHealingOverTime,
-                                              StringFormat=\{0:P2\}}"
-                            Header="{Binding Locale[parse_PercentOfCriticalHealingOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="PercentOfCriticalHealingOverTime"
-                            Visibility="{Binding ShowColumnPercentOfCriticalHealingOverTime,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding TotalOverallHealingOverTime}"
-                            Header="{Binding Locale[parse_TotalOverallHealingOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="TotalOverallHealingOverTime"
-                            Visibility="{Binding ShowColumnTotalOverallHealingOverTime,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding RegularHealingOverTime}"
-                            Header="{Binding Locale[parse_RegularHealingOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="RegularHealingOverTime"
-                            Visibility="{Binding ShowColumnRegularHealingOverTime,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding CriticalHealingOverTime}"
-                            Header="{Binding Locale[parse_CriticalHealingOverTimeHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="CriticalHealingOverTime"
-                            Visibility="{Binding ShowColumnCriticalHealingOverTime,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding TotalHealingOverTimeActionsUsed}"
-                            Header="{Binding Locale[parse_TotalHealingOverTimeActionsUsedHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="TotalHealingOverTimeActionsUsed"
-                            Visibility="{Binding ShowColumnTotalHealingActionsUsed,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HOTPS,
-                                              StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HOTPSHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HOTPS"
-                            Visibility="{Binding ShowColumnHPS,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeRegHit}"
-                            Header="{Binding Locale[parse_HealingOverTimeRegHitHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeRegHit"
-                            Visibility="{Binding ShowColumnHealingRegHit,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeRegLow}"
-                            Header="{Binding Locale[parse_HealingOverTimeRegLowHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeRegLow"
-                            Visibility="{Binding ShowColumnHealingRegLow,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeRegHigh}"
-                            Header="{Binding Locale[parse_HealingOverTimeRegHighHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeRegHigh"
-                            Visibility="{Binding ShowColumnHealingRegHigh,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeRegAverage,
-                                              StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverTimeRegAverageHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeRegAverage"
-                            Visibility="{Binding ShowColumnHealingRegAverage,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeRegMod,
-                                              StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverTimeRegModHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeRegMod"
-                            Visibility="{Binding ShowColumnHealingRegMod,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeRegModAverage,
-                                              StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverTimeRegModAverageHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeRegModAverage"
-                            Visibility="{Binding ShowColumnHealingRegModAverage,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeCritHit}"
-                            Header="{Binding Locale[parse_HealingOverTimeCritHitHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeCritHit"
-                            Visibility="{Binding ShowColumnHealingCritHit,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeCritPercent,
-                                              StringFormat=\{0:P2\}}"
-                            Header="{Binding Locale[parse_HealingOverTimeCritPercentHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeCritPercent"
-                            Visibility="{Binding ShowColumnHealingCritPercent,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeCritLow}"
-                            Header="{Binding Locale[parse_HealingOverTimeCritLowHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeCritLow"
-                            Visibility="{Binding ShowColumnHealingCritLow,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeCritHigh}"
-                            Header="{Binding Locale[parse_HealingOverTimeCritHighHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeCritHigh"
-                            Visibility="{Binding ShowColumnHealingCritHigh,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeCritAverage,
-                                              StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverTimeCritAverageHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeCritAverage"
-                            Visibility="{Binding ShowColumnHealingCritAverage,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeCritMod,
-                                              StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverTimeCritModHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeCritMod"
-                            Visibility="{Binding ShowColumnHealingCritMod,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverTimeCritModAverage,
-                                              StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverTimeCritModAverageHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverTimeCritModAverage"
-                            Visibility="{Binding ShowColumnHealingCritModAverage,
-                                                 Source={StaticResource Settings},
-                                                 Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="Name"
+                            Binding="{Binding Name}"
+                            Header="{Binding Locale[parse_NameHeader], Source={StaticResource PluginViewModel}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="PercentOfTotalOverallHealingOverTime"
+                            Binding="{Binding PercentOfTotalOverallHealingOverTime, StringFormat=\{0:P2\}}"
+                            Header="{Binding Locale[parse_PercentOfTotalOverallHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnPercentOfTotalOverallHealingOverTime, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="PercentOfRegularHealingOverTime"
+                            Binding="{Binding PercentOfRegularHealingOverTime, StringFormat=\{0:P2\}}"
+                            Header="{Binding Locale[parse_PercentOfRegularHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnPercentOfRegularHealingOverTime, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="PercentOfCriticalHealingOverTime"
+                            Binding="{Binding PercentOfCriticalHealingOverTime, StringFormat=\{0:P2\}}"
+                            Header="{Binding Locale[parse_PercentOfCriticalHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnPercentOfCriticalHealingOverTime, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="TotalOverallHealingOverTime"
+                            Binding="{Binding TotalOverallHealingOverTime}"
+                            Header="{Binding Locale[parse_TotalOverallHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnTotalOverallHealingOverTime, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="RegularHealingOverTime"
+                            Binding="{Binding RegularHealingOverTime}"
+                            Header="{Binding Locale[parse_RegularHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnRegularHealingOverTime, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="CriticalHealingOverTime"
+                            Binding="{Binding CriticalHealingOverTime}"
+                            Header="{Binding Locale[parse_CriticalHealingOverTimeHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnCriticalHealingOverTime, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="TotalHealingOverTimeActionsUsed"
+                            Binding="{Binding TotalHealingOverTimeActionsUsed}"
+                            Header="{Binding Locale[parse_TotalHealingOverTimeActionsUsedHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnTotalHealingActionsUsed, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HOTPS"
+                            Binding="{Binding HOTPS, StringFormat=\{0:F2\}}"
+                            Header="{Binding Locale[parse_HOTPSHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHPS, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeRegHit"
+                            Binding="{Binding HealingOverTimeRegHit}"
+                            Header="{Binding Locale[parse_HealingOverTimeRegHitHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingRegHit, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeRegLow"
+                            Binding="{Binding HealingOverTimeRegLow}"
+                            Header="{Binding Locale[parse_HealingOverTimeRegLowHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingRegLow, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeRegHigh"
+                            Binding="{Binding HealingOverTimeRegHigh}"
+                            Header="{Binding Locale[parse_HealingOverTimeRegHighHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingRegHigh, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeRegAverage"
+                            Binding="{Binding HealingOverTimeRegAverage, StringFormat=\{0:F2\}}"
+                            Header="{Binding Locale[parse_HealingOverTimeRegAverageHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingRegAverage, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeRegMod"
+                            Binding="{Binding HealingOverTimeRegMod, StringFormat=\{0:F2\}}"
+                            Header="{Binding Locale[parse_HealingOverTimeRegModHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingRegMod, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeRegModAverage"
+                            Binding="{Binding HealingOverTimeRegModAverage, StringFormat=\{0:F2\}}"
+                            Header="{Binding Locale[parse_HealingOverTimeRegModAverageHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingRegModAverage, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeCritHit"
+                            Binding="{Binding HealingOverTimeCritHit}"
+                            Header="{Binding Locale[parse_HealingOverTimeCritHitHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingCritHit, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeCritPercent"
+                            Binding="{Binding HealingOverTimeCritPercent, StringFormat=\{0:P2\}}"
+                            Header="{Binding Locale[parse_HealingOverTimeCritPercentHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingCritPercent, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeCritLow"
+                            Binding="{Binding HealingOverTimeCritLow}"
+                            Header="{Binding Locale[parse_HealingOverTimeCritLowHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingCritLow, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeCritHigh"
+                            Binding="{Binding HealingOverTimeCritHigh}"
+                            Header="{Binding Locale[parse_HealingOverTimeCritHighHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingCritHigh, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeCritAverage"
+                            Binding="{Binding HealingOverTimeCritAverage, StringFormat=\{0:F2\}}"
+                            Header="{Binding Locale[parse_HealingOverTimeCritAverageHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingCritAverage, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeCritMod"
+                            Binding="{Binding HealingOverTimeCritMod, StringFormat=\{0:F2\}}"
+                            Header="{Binding Locale[parse_HealingOverTimeCritModHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingCritMod, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="HealingOverTimeCritModAverage"
+                            Binding="{Binding HealingOverTimeCritModAverage, StringFormat=\{0:F2\}}"
+                            Header="{Binding Locale[parse_HealingOverTimeCritModAverageHeader], Source={StaticResource PluginViewModel}}"
+                            Visibility="{Binding ShowColumnHealingCritModAverage, Source={StaticResource Settings}, Converter={StaticResource VisibilityConverter}}" />
     </DataGrid.Columns>
 </DataGrid>

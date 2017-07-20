@@ -20,13 +20,14 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using FFXIVAPP.Common.Utilities;
+using FFXIVAPP.Plugin.Parse.Helpers;
 using NLog;
 
 namespace FFXIVAPP.Plugin.Parse.Converters
 {
     public class JobToIconConverter : IValueConverter
     {
-        private const string BasePath = Constants.LibraryPack + "Media/Images/Jobs/";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -39,26 +40,12 @@ namespace FFXIVAPP.Plugin.Parse.Converters
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            try
-            {
-                return GetIcon(value.ToString());
-            }
-            catch (InvalidCastException ex)
-            {
-                Logger.Error("Failed to convert job to job icon", ex);
-                return GetIcon("Unknown");
-            }
+            return ResourceFiles.Game.GetIconByName(value?.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
-        }
-
-        private BitmapImage GetIcon(string job)
-        {
-            var path = new Uri(Path.Combine(BasePath, job + ".png"));
-            return new BitmapImage(path);
         }
     }
 }

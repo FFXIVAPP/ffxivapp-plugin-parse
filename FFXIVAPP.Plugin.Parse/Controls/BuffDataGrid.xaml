@@ -13,35 +13,26 @@
           BorderThickness="1">
 
     <DataGrid.Resources>
-        <x:Static x:Key="PluginViewModel"
-                  Member="Parse:PluginViewModel.Instance" />
-        <x:Static x:Key="Settings"
-                  Member="PluginProperties:Settings.Default" />
-        <x:Static x:Key="Parser"
-                  Member="Models:ParseControl.Instance" />
+        <x:Static x:Key="PluginViewModel" Member="Parse:PluginViewModel.Instance" />
+        <x:Static x:Key="Settings" Member="PluginProperties:Settings.Default" />
+        <x:Static x:Key="Parser" Member="Models:ParseControl.Instance" />
     </DataGrid.Resources>
     <i:Interaction.Behaviors>
         <behaviors:IgnoreMouseWheelBehavior />
     </i:Interaction.Behaviors>
     <DataGrid.Columns>
         <!--  <DataGridTextColumn Header="Avatar" CellTemplate="{StaticResource avatarTemplate}" />  -->
-        <DataGridTextColumn Binding="{Binding Name}"
-                            Header="{Binding Locale[parse_NameHeader],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="Name" />
-        <DataGridTextColumn Binding="{Binding TotalBuffHours}"
-                            Header="{Binding Locale[parse_TimeHoursShortLabel],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="TotalBuffHours" />
-        <DataGridTextColumn Binding="{Binding TotalBuffMinutes,
-                                              StringFormat=\{0:00\}}"
-                            Header="{Binding Locale[parse_TimeMinutesShortLabel],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="TotalBuffMinutes" />
-        <DataGridTextColumn Binding="{Binding TotalBuffSeconds,
-                                              StringFormat=\{0:00\}}"
-                            Header="{Binding Locale[parse_TimeSecondsShortLabel],
-                                             Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="TotalBuffSeconds" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="Name"
+                            Binding="{Binding Name}"
+                            Header="{Binding Locale[parse_NameHeader], Source={StaticResource PluginViewModel}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="TotalBuffHours"
+                            Binding="{Binding TotalBuffHours}"
+                            Header="{Binding Locale[parse_TimeHoursShortLabel], Source={StaticResource PluginViewModel}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="TotalBuffMinutes"
+                            Binding="{Binding TotalBuffMinutes, StringFormat=\{0:00\}}"
+                            Header="{Binding Locale[parse_TimeMinutesShortLabel], Source={StaticResource PluginViewModel}}" />
+        <DataGridTextColumn Utilities:GridViewSort.PropertyName="TotalBuffSeconds"
+                            Binding="{Binding TotalBuffSeconds, StringFormat=\{0:00\}}"
+                            Header="{Binding Locale[parse_TimeSecondsShortLabel], Source={StaticResource PluginViewModel}}" />
     </DataGrid.Columns>
 </DataGrid>

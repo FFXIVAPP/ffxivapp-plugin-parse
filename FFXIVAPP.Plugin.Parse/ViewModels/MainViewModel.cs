@@ -502,7 +502,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels
         {
             try
             {
-                var index = MainView.View.InfoViewSource.SelectedIndex;
+                var index = MainView.View?.InfoViewSource.SelectedIndex ?? 0;
                 switch (index)
                 {
                     case 0:

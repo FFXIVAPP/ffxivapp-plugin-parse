@@ -38,17 +38,23 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FFXIVAPP.Common, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ffxivapp-aio\packages\FFXIVAPP.Common.3.0.2\lib\net461\FFXIVAPP.Common.dll</HintPath>
+    <Reference Include="FFXIVAPP.Common, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FFXIVAPP.Common.4.0.2\lib\net461\FFXIVAPP.Common.dll</HintPath>
     </Reference>
-    <Reference Include="FFXIVAPP.IPluginInterface, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ffxivapp-aio\packages\FFXIVAPP.IPluginInterface.3.0.2\lib\net461\FFXIVAPP.IPluginInterface.dll</HintPath>
+    <Reference Include="FFXIVAPP.IPluginInterface, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FFXIVAPP.IPluginInterface.4.0.2\lib\net461\FFXIVAPP.IPluginInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="FFXIVAPP.ResourceFiles, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FFXIVAPP.ResourceFiles.1.0.1\lib\net461\FFXIVAPP.ResourceFiles.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.2.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.2.0.0\lib\net45\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.1.9.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NAudio, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -63,7 +69,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Sharlayan, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ffxivapp-aio\packages\Sharlayan.3.0.1\lib\net461\Sharlayan.dll</HintPath>
+      <HintPath>..\packages\Sharlayan.3.0.1\lib\net461\Sharlayan.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -72,7 +78,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -295,41 +301,6 @@
   <ItemGroup>
     <Resource Include="Defaults\Settings.xml" />
     <Resource Include="Defaults\RegularExpressions.xml" />
-    <Resource Include="Media\Images\Jobs\ACN.png" />
-    <Resource Include="Media\Images\Jobs\ALC.png" />
-    <Resource Include="Media\Images\Jobs\ARC.png" />
-    <Resource Include="Media\Images\Jobs\ARM.png" />
-    <Resource Include="Media\Images\Jobs\BLM.png" />
-    <Resource Include="Media\Images\Jobs\BRD.png" />
-    <Resource Include="Media\Images\Jobs\BSM.png" />
-    <Resource Include="Media\Images\Jobs\BTN.png" />
-    <Resource Include="Media\Images\Jobs\CNJ.png" />
-    <Resource Include="Media\Images\Jobs\CPT.png" />
-    <Resource Include="Media\Images\Jobs\CUL.png" />
-    <Resource Include="Media\Images\Jobs\DRG.png" />
-    <Resource Include="Media\Images\Jobs\FSH.png" />
-    <Resource Include="Media\Images\Jobs\GLD.png" />
-    <Resource Include="Media\Images\Jobs\GSM.png" />
-    <Resource Include="Media\Images\Jobs\LNC.png" />
-    <Resource Include="Media\Images\Jobs\LTW.png" />
-    <Resource Include="Media\Images\Jobs\MIN.png" />
-    <Resource Include="Media\Images\Jobs\MNK.png" />
-    <Resource Include="Media\Images\Jobs\MRD.png" />
-    <Resource Include="Media\Images\Jobs\NIN.png" />
-    <Resource Include="Media\Images\Jobs\PGL.png" />
-    <Resource Include="Media\Images\Jobs\PLD.png" />
-    <Resource Include="Media\Images\Jobs\ROG.png" />
-    <Resource Include="Media\Images\Jobs\SCH.png" />
-    <Resource Include="Media\Images\Jobs\SMN.png" />
-    <Resource Include="Media\Images\Jobs\THM.png" />
-    <Resource Include="Media\Images\Jobs\Unknown.png" />
-    <Resource Include="Media\Images\Jobs\WAR.png" />
-    <Resource Include="Media\Images\Jobs\WHM.png" />
-    <Resource Include="Media\Images\Jobs\WVR.png" />
-    <Resource Include="Media\Images\Jobs\AST.png" />
-    <Resource Include="Media\Images\Jobs\DRK.png" />
-    <Resource Include="Media\Images\Jobs\MCH.png" />
-    <Content Include="FodyWeavers.xml" />
     <Content Include="Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -346,11 +317,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <Resource Include="Media\Images\License.png" />
-    <Resource Include="Media\Images\Refresh.png" />
-    <Resource Include="Media\Images\About.png" />
-    <Resource Include="Media\Images\Main.png" />
-    <Resource Include="Media\Images\Settings.png" />
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
@@ -458,6 +424,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Media\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

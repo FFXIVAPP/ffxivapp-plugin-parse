@@ -28,6 +28,7 @@ using FFXIVAPP.Plugin.Parse.Properties;
 using FFXIVAPP.Plugin.Parse.ViewModels;
 using Sharlayan.Core;
 using Sharlayan.Helpers;
+using Sharlayan.Models;
 
 namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
 {
@@ -60,6 +61,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         case "Chinese":
                             statusKey = statusInfo.Name.Chinese;
                             break;
+                        case "Korean":
+                            statusKey = statusInfo.Name.Korean;
+                            break;
                     }
                     if (String.IsNullOrWhiteSpace(statusKey))
                     {
@@ -72,7 +76,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     }
                     var amount = NPCEntry.Level / (difference * .025);
                     var key = statusKey;
-                    XOverTimeAction actionData = null;
+                    ActionItem actionData = null;
                     foreach (var damageOverTimeAction in DamageOverTimeHelper.PlayerActions.ToList()
                                                                              .Where(d => String.Equals(d.Key, key, Constants.InvariantComparer)))
                     {
@@ -88,7 +92,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     var lastDamageAmountByActions = ParseHelper.LastAmountByAction.GetPlayer(Name)
                                                                .ToList();
                     var resolvedPotency = 80;
-                    var thunderDuration = 24;
+                    var thunderDuration = 24.0;
                     double originalThunderDamage = 0;
                     foreach (var lastDamageAmountByAction in lastDamageAmountByActions)
                     {
@@ -101,28 +105,28 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                                 .Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
                             {
                                 found = true;
-                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder iii"]
-                                                                      .Duration;
+                                thunderDuration = (double) DamageOverTimeHelper.PlayerActions["thunder iii"]
+                                                                               .Duration;
                                 originalThunderDamage = action.Value;
                                 amount = action.Value / DamageOverTimeHelper.PlayerActions["thunder iii"]
-                                                                            .ActionPotency * 30;
+                                                                            .Potency * 30;
                             }
                             if (thunderActions["II"]
                                 .Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
                             {
                                 found = true;
-                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder ii"]
-                                                                      .Duration;
+                                thunderDuration = (double) DamageOverTimeHelper.PlayerActions["thunder ii"]
+                                                                               .Duration;
                                 originalThunderDamage = action.Value;
                                 amount = action.Value / DamageOverTimeHelper.PlayerActions["thunder ii"]
-                                                                            .ActionPotency * 30;
+                                                                            .Potency * 30;
                             }
                             if (thunderActions["I"]
                                 .Any(thunderAction => String.Equals(action.Key, thunderAction, Constants.InvariantComparer)))
                             {
                                 found = true;
-                                thunderDuration = DamageOverTimeHelper.PlayerActions["thunder"]
-                                                                      .Duration;
+                                thunderDuration = (double) DamageOverTimeHelper.PlayerActions["thunder"]
+                                                                               .Duration;
                                 originalThunderDamage = action.Value;
                                 amount = action.Value;
                             }
@@ -164,8 +168,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     {
                         amount = 75;
                     }
-                    resolvedPotency = zeroFoundInList ? resolvedPotency : bio ? resolvedPotency : actionData.ActionPotency;
-                    var tickDamage = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
+                    resolvedPotency = zeroFoundInList ? resolvedPotency : bio ? resolvedPotency : actionData.Potency;
+                    var tickDamage = Math.Ceiling(amount / resolvedPotency * actionData.OverTimePotency / 3);
                     if (actionData.HasNoInitialResult && !zeroFoundInList)
                     {
                         var nonZeroActions = lastDamageAmountByActions.Where(d => !d.Key.Contains("•"));
@@ -174,7 +178,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         switch (bio)
                         {
                             case true:
-                                damage = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
+                                damage = Math.Ceiling(amount / resolvedPotency * actionData.OverTimePotency / 3);
                                 break;
                             case false:
                                 if (keyValuePairs.Any())
@@ -182,7 +186,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                                     amount = keyValuePairs.Sum(action => action.Value);
                                     amount = amount / keyValuePairs.Count();
                                 }
-                                damage = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
+                                damage = Math.Ceiling(amount / resolvedPotency * actionData.OverTimePotency / 3);
                                 break;
                         }
                         tickDamage = damage > 0 ? damage : tickDamage;
@@ -259,6 +263,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         case "Chinese":
                             statusKey = statusInfo.Name.Chinese;
                             break;
+                        case "Korean":
+                            statusKey = statusInfo.Name.Korean;
+                            break;
                     }
                     if (String.IsNullOrWhiteSpace(statusKey))
                     {
@@ -266,7 +273,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     }
                     var amount = NPCEntry.Level / ((60 - NPCEntry.Level) * .025);
                     var key = statusKey;
-                    XOverTimeAction actionData = null;
+                    ActionItem actionData = null;
                     foreach (var healingOverTimeAction in HealingOverTimeHelper.PlayerActions.ToList()
                                                                                .Where(d => String.Equals(d.Key, key, Constants.InvariantComparer)))
                     {
@@ -339,8 +346,8 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                     {
                         amount = 75;
                     }
-                    resolvedPotency = zeroFoundInList ? resolvedPotency : regen ? resolvedPotency : actionData.ActionPotency;
-                    var tickHealing = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
+                    resolvedPotency = zeroFoundInList ? resolvedPotency : regen ? resolvedPotency : actionData.Potency;
+                    var tickHealing = Math.Ceiling(amount / resolvedPotency * actionData.OverTimePotency / 3);
                     if (actionData.HasNoInitialResult && !zeroFoundInList)
                     {
                         var nonZeroActions = healingHistoryList.Where(d => !d.Key.Contains("•"));
@@ -349,7 +356,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                         switch (regen)
                         {
                             case true:
-                                healing = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
+                                healing = Math.Ceiling(amount / resolvedPotency * actionData.OverTimePotency / 3);
                                 break;
                             case false:
                                 if (keyValuePairs.Any())
@@ -357,7 +364,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                                     amount = keyValuePairs.Sum(action => action.Value);
                                     amount = amount / keyValuePairs.Count();
                                 }
-                                healing = Math.Ceiling(amount / resolvedPotency * actionData.ActionOverTimePotency / 3);
+                                healing = Math.Ceiling(amount / resolvedPotency * actionData.OverTimePotency / 3);
                                 break;
                         }
                         tickHealing = healing > 0 ? healing : tickHealing;
@@ -470,6 +477,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
                             break;
                         case "Chinese":
                             statusKey = statusInfo.Name.Chinese;
+                            break;
+                        case "Korean":
+                            statusKey = statusInfo.Name.Korean;
                             break;
                     }
                     if (String.IsNullOrWhiteSpace(statusKey))

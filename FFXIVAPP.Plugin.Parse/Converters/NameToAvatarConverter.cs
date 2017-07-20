@@ -29,6 +29,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using FFXIVAPP.Common.Models;
 using FFXIVAPP.Common.Utilities;
+using FFXIVAPP.ResourceFiles;
 using HtmlAgilityPack;
 using NLog;
 
@@ -36,8 +37,6 @@ namespace FFXIVAPP.Plugin.Parse.Converters
 {
     public class NameToAvatarConverter : IMultiValueConverter
     {
-        private const string DefaultAvatar = Common.Constants.DefaultAvatar;
-
         #region Logger
 
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -84,12 +83,11 @@ namespace FFXIVAPP.Plugin.Parse.Converters
             {
                 return null;
             }
-            var source = new BitmapImage(new Uri(DefaultAvatar));
             var image = values[0] as Image;
             var name = values[1] as String;
             if (image == null || name == null || Regex.IsMatch(name, @"\[[(A|[\?]+]\]"))
             {
-                return source;
+                return Theme.DefaultAvatar;
             }
             name = Regex.Replace(name, @"\[[\w]+\]", string.Empty)
                         .Trim();
@@ -102,7 +100,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
             var useAvatars = !String.IsNullOrWhiteSpace(Constants.ServerName);
             if (!useAvatars || IsProcessing)
             {
-                return source;
+                return Theme.DefaultAvatar;
             }
             IsProcessing = true;
             Func<bool> downloadFunc = delegate
@@ -132,12 +130,15 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                                                    .Replace("50x50", "96x96");
                                 image.Dispatcher.Invoke(DispatcherPriority.Background, (ThreadStart) delegate
                                 {
-                                    var imageUri = imageUrl;
-                                    if (imageUri != DefaultAvatar)
+                                    var imageUri = _cachingEnabled ? SaveToCache(fileName, new Uri(imageUrl)) : imageUrl;
+                                    if (imageUri == null)
                                     {
-                                        imageUri = _cachingEnabled ? SaveToCache(fileName, new Uri(imageUri)) : imageUri;
+                                        image.Source = Theme.DefaultAvatar;
                                     }
-                                    image.Source = ImageUtilities.LoadImageFromStream(imageUri);
+                                    else
+                                    {
+                                        image.Source = ImageUtilities.LoadImageFromStream(imageUri);
+                                    }
                                 });
                             }
                         }
@@ -151,7 +152,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                 return true;
             };
             downloadFunc.BeginInvoke(delegate { }, downloadFunc);
-            return source;
+            return Theme.DefaultAvatar;
         }
 
         /// <summary>
@@ -200,7 +201,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
             {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
-            return DefaultAvatar;
+            return null;
         }
     }
 }

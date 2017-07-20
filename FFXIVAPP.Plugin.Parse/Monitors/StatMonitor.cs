@@ -202,6 +202,10 @@ namespace FFXIVAPP.Plugin.Parse.Monitors
                             zone = ZoneHelper.MapInfo(mapIndex)
                                              .Name.Chinese;
                             break;
+                        case "Korean":
+                            zone = ZoneHelper.MapInfo(mapIndex)
+                                             .Name.Korean;
+                            break;
                     }
                 }
                 var monsterName = "NULL";

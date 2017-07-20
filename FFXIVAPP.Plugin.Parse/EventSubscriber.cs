@@ -70,10 +70,10 @@ namespace FFXIVAPP.Plugin.Parse
             var constantsEntity = constantsEntityEvent.ConstantsEntity;
             Constants.AutoTranslate = constantsEntity.AutoTranslate;
             Constants.ChatCodes = constantsEntity.ChatCodes;
-            Constants.ChatCodesXml = constantsEntity.ChatCodesXml;
-            if (!String.IsNullOrWhiteSpace(Constants.ChatCodesXml))
+            Constants.ChatCodesXML = constantsEntity.ChatCodesXML;
+            if (!String.IsNullOrWhiteSpace(Constants.ChatCodesXML))
             {
-                EventParser.Instance.Initialize(Constants.ChatCodesXml);
+                EventParser.Instance.Initialize(Constants.ChatCodesXML);
             }
             Constants.Colors = constantsEntity.Colors;
             Constants.CultureInfo = constantsEntity.CultureInfo;
