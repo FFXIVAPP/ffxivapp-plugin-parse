@@ -103,7 +103,8 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                 return Theme.DefaultAvatar;
             }
             IsProcessing = true;
-            Func<bool> downloadFunc = delegate
+
+            Func<bool> downloadAvatar = delegate
             {
                 try
                 {
@@ -151,7 +152,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                 IsProcessing = false;
                 return true;
             };
-            downloadFunc.BeginInvoke(delegate { }, downloadFunc);
+            downloadAvatar.BeginInvoke(delegate { }, downloadAvatar);
             return Theme.DefaultAvatar;
         }
 

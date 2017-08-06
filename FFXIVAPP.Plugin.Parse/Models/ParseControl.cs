@@ -64,7 +64,8 @@ namespace FFXIVAPP.Plugin.Parse.Models
                 return;
             }
             ParseEntityTimerProcessing = true;
-            Func<bool> parseEntityProcessor = delegate
+
+            Func<bool> processor = delegate
             {
                 try
                 {
@@ -72,8 +73,9 @@ namespace FFXIVAPP.Plugin.Parse.Models
                     {
                         Players = new List<PlayerEntity>()
                     };
-                    foreach (Player player in Timeline.Party)
+                    foreach (var statGroup in Timeline.Party)
                     {
+                        var player = (Player) statGroup;
                         try
                         {
                             var type = Regex.Match(player.Name, @"\[(?<type>.+)\]", SharedRegEx.DefaultOptions)
@@ -214,7 +216,7 @@ namespace FFXIVAPP.Plugin.Parse.Models
                 ParseEntityTimerProcessing = false;
                 return true;
             };
-            parseEntityProcessor.BeginInvoke(delegate { }, parseEntityProcessor);
+            processor.BeginInvoke(delegate { }, processor);
         }
 
         #region Auto Properties

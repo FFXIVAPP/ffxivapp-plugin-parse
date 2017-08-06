@@ -1164,7 +1164,7 @@
                     Command="{Binding ResetStatsCommand}"
                     ToolTip="{Binding Locale[parse_ResetStatsToolTip], Source={StaticResource PluginViewModel}}">
                 <StackPanel Orientation="Horizontal">
-                    <iconPacks:PackIconFontAwesome Kind="Refresh" Spin="True" />
+                    <iconPacks:PackIconFontAwesome Kind="PowerOff" />
                     <TextBlock Padding="3,0,3,0"
                                Text="{Binding Locale[parse_ResetStatsToolTip], Converter={StaticResource ToUpperConverter}, Source={StaticResource PluginViewModel}}"
                                Visibility="{Binding EnableHelpLabels, Converter={StaticResource VisibilityConverter}, Source={StaticResource PluginViewModel}}" />
