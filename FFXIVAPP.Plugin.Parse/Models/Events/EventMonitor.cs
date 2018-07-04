@@ -1,151 +1,129 @@
-// FFXIVAPP.Plugin.Parse ~ EventMonitor.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EventMonitor.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   EventMonitor.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using FFXIVAPP.Plugin.Parse.Models.Stats;
+namespace FFXIVAPP.Plugin.Parse.Models.Events {
+    using System;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
-namespace FFXIVAPP.Plugin.Parse.Models.Events
-{
-    public class EventMonitor : StatGroup
-    {
+    using FFXIVAPP.Plugin.Parse.Models.Stats;
+
+    public class EventMonitor : StatGroup {
+        private ulong _filter;
+
+        private DateTime _lastEventReceived;
+
+        private ParseControl _parseControl;
+
         /// <summary>
         /// </summary>
         /// <param name="name"> </param>
         /// <param name="parseControl"> </param>
-        protected EventMonitor(string name, ParseControl parseControl) : base(name)
-        {
-            Initialize(parseControl);
-            EventParser.Instance.OnLogEvent += FilterEvent;
-            EventParser.Instance.OnUnknownLogEvent += FilterUnknownEvent;
+        protected EventMonitor(string name, ParseControl parseControl)
+            : base(name) {
+            this.Initialize(parseControl);
+            EventParser.Instance.OnLogEvent += this.FilterEvent;
+            EventParser.Instance.OnUnknownLogEvent += this.FilterUnknownEvent;
+        }
+
+        public event EventHandler<StatChangedEvent> OnStatChanged = delegate { };
+
+        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        protected internal ulong Filter {
+            get {
+                return this._filter;
+            }
+
+            set {
+                this._filter = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        protected ParseControl ParseControl {
+            get {
+                return this._parseControl;
+            }
+
+            private set {
+                this._parseControl = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private DateTime LastEventReceived {
+            get {
+                return this._lastEventReceived;
+            }
+
+            set {
+                this._lastEventReceived = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="e"> </param>
+        protected virtual void HandleEvent(Event e) { }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="e"> </param>
+        protected virtual void HandleUnknownEvent(Event e) { }
+
+        /// <summary>
+        /// </summary>
+        protected virtual void InitStats() {
+            foreach (Stat<double> stat in this.Stats) {
+                stat.OnValueChanged += this.DoStatChanged;
+            }
+        }
+
+        private void DoStatChanged(object source, StatChangedEvent e) {
+            this.OnStatChanged(this, e);
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="source"> </param>
+        /// <param name="e"> </param>
+        private void FilterEvent(object source, Event e) {
+            if (!e.MatchesFilter(this.Filter, e)) {
+                return;
+            }
+
+            this.LastEventReceived = e.Timestamp;
+            this.HandleEvent(e);
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="source"> </param>
+        /// <param name="e"> </param>
+        private void FilterUnknownEvent(object source, Event e) {
+            this.LastEventReceived = e.Timestamp;
+            this.HandleUnknownEvent(e);
         }
 
         /// <summary>
         /// </summary>
         /// <param name="instance"> </param>
-        private void Initialize(ParseControl instance)
-        {
-            ParseControl = instance;
-            InitStats();
+        private void Initialize(ParseControl instance) {
+            this.ParseControl = instance;
+            this.InitStats();
         }
 
-        /// <summary>
-        /// </summary>
-        protected virtual void InitStats()
-        {
-            foreach (var stat in Stats)
-            {
-                stat.OnValueChanged += DoStatChanged;
-            }
+        private new void RaisePropertyChanged([CallerMemberName] string caller = "") {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="source"> </param>
-        /// <param name="e"> </param>
-        private void FilterEvent(object source, Event e)
-        {
-            if (!e.MatchesFilter(Filter, e))
-            {
-                return;
-            }
-            LastEventReceived = e.Timestamp;
-            HandleEvent(e);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="source"> </param>
-        /// <param name="e"> </param>
-        private void FilterUnknownEvent(object source, Event e)
-        {
-            LastEventReceived = e.Timestamp;
-            HandleUnknownEvent(e);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="e"> </param>
-        protected virtual void HandleEvent(Event e)
-        {
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="e"> </param>
-        protected virtual void HandleUnknownEvent(Event e)
-        {
-        }
-
-        public event EventHandler<StatChangedEvent> OnStatChanged = delegate { };
-
-        private void DoStatChanged(object source, StatChangedEvent e)
-        {
-            OnStatChanged(this, e);
-        }
-
-        #region Property Bindings
-
-        private UInt64 _filter;
-        private DateTime _lastEventReceived;
-        private ParseControl _parseControl;
-
-        private DateTime LastEventReceived
-        {
-            get { return _lastEventReceived; }
-            set
-            {
-                _lastEventReceived = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        protected internal UInt64 Filter
-        {
-            get { return _filter; }
-            set
-            {
-                _filter = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        protected ParseControl ParseControl
-        {
-            get { return _parseControl; }
-            private set
-            {
-                _parseControl = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
-
-        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        private new void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
-        }
-
-        #endregion
     }
 }

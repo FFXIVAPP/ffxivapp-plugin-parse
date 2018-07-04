@@ -1,52 +1,39 @@
-﻿// FFXIVAPP.Plugin.Parse ~ FilterHelper.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FilterHelper.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   FilterHelper.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
+namespace FFXIVAPP.Plugin.Parse.Helpers {
+    public static class FilterHelper {
+        public static ulong Disable(ulong filters, ulong filter) {
+            if (IsEnabled(filters, filter)) {
+                return filters & ~filter;
+            }
 
-namespace FFXIVAPP.Plugin.Parse.Helpers
-{
-    public static class FilterHelper
-    {
-        private static bool IsEnabled(UInt64 filters, UInt64 filter)
-        {
-            return (filters & filter) != 0;
+            return filters;
         }
 
-        public static UInt64 Toggle(UInt64 filters, UInt64 filter)
-        {
-            return IsEnabled(filters, filter) ? Disable(filters, filter) : Enable(filters, filter);
-        }
-
-        public static UInt64 Enable(UInt64 filters, UInt64 filter)
-        {
-            if (IsEnabled(filters, filter))
-            {
+        public static ulong Enable(ulong filters, ulong filter) {
+            if (IsEnabled(filters, filter)) {
                 return filters;
             }
+
             return filters | filter;
         }
 
-        public static UInt64 Disable(UInt64 filters, UInt64 filter)
-        {
-            if (IsEnabled(filters, filter))
-            {
-                return filters & ~filter;
-            }
-            return filters;
+        public static ulong Toggle(ulong filters, ulong filter) {
+            return IsEnabled(filters, filter)
+                       ? Disable(filters, filter)
+                       : Enable(filters, filter);
+        }
+
+        private static bool IsEnabled(ulong filters, ulong filter) {
+            return (filters & filter) != 0;
         }
     }
 }

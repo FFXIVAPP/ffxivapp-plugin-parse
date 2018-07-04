@@ -1,121 +1,96 @@
-﻿// FFXIVAPP.Plugin.Parse ~ HistoryContainer.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HistoryContainer.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   HistoryContainer.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+namespace FFXIVAPP.Plugin.Parse.Models.History {
+    using System.Collections;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
 
-namespace FFXIVAPP.Plugin.Parse.Models.History
-{
-    public class HistoryContainer : IHistoryContainer
-    {
+    public class HistoryContainer : IHistoryContainer {
         private readonly ConcurrentDictionary<string, HistoryStat<double>> _statDict = new ConcurrentDictionary<string, HistoryStat<double>>();
-        public string Name { get; set; }
 
-        public HistoryStat<double> GetStat(string name)
-        {
-            HistoryStat<double> result;
-            _statDict.TryGetValue(name, out result);
-            return result;
+        public int Count {
+            get {
+                return this._statDict.Count;
+            }
         }
 
-        public HistoryStat<double> EnsureStatValue(string name, double value)
-        {
+        public bool IsReadOnly {
+            get {
+                return false;
+            }
+        }
+
+        public string Name { get; set; }
+
+        public void Add(HistoryStat<double> stat) {
+            this._statDict.TryAdd(stat.Name, stat);
+        }
+
+        public void Clear() {
+            this._statDict.Clear();
+        }
+
+        public bool Contains(HistoryStat<double> stat) {
+            return this._statDict.ContainsKey(stat.Name);
+        }
+
+        public void CopyTo(HistoryStat<double>[] array, int arrayIndex) {
+            this._statDict.Values.CopyTo(array, arrayIndex);
+        }
+
+        public HistoryStat<double> EnsureStatValue(string name, double value) {
             HistoryStat<double> stat;
-            if (HasStat(name))
-            {
-                stat = GetStat(name);
+            if (this.HasStat(name)) {
+                stat = this.GetStat(name);
                 stat.Value = value;
             }
-            else
-            {
+            else {
                 stat = new NumericHistoryStat(name, value);
-                Add(stat);
+                this.Add(stat);
             }
+
             return stat;
         }
 
-        public double GetStatValue(string name)
-        {
-            return HasStat(name) ? GetStat(name)
-                .Value : 0;
+        public IEnumerator<HistoryStat<double>> GetEnumerator() {
+            return this._statDict.Values.GetEnumerator();
         }
 
-        public bool HasStat(string name)
-        {
-            return _statDict.ContainsKey(name);
+        public HistoryStat<double> GetStat(string name) {
+            HistoryStat<double> result;
+            this._statDict.TryGetValue(name, out result);
+            return result;
         }
 
-        #region Implementation of IEnumerable
-
-        public IEnumerator<HistoryStat<double>> GetEnumerator()
-        {
-            return _statDict.Values.GetEnumerator();
+        public double GetStatValue(string name) {
+            return this.HasStat(name)
+                       ? this.GetStat(name).Value
+                       : 0;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
+        public bool HasStat(string name) {
+            return this._statDict.ContainsKey(name);
         }
 
-        #endregion
-
-        #region Implementation of ICollection<Stat<double>>
-
-        public void Add(HistoryStat<double> stat)
-        {
-            _statDict.TryAdd(stat.Name, stat);
-        }
-
-        public void Clear()
-        {
-            _statDict.Clear();
-        }
-
-        public bool Contains(HistoryStat<double> stat)
-        {
-            return _statDict.ContainsKey(stat.Name);
-        }
-
-        public void CopyTo(HistoryStat<double>[] array, int arrayIndex)
-        {
-            _statDict.Values.CopyTo(array, arrayIndex);
-        }
-
-        public bool Remove(HistoryStat<double> stat)
-        {
+        public bool Remove(HistoryStat<double> stat) {
             HistoryStat<double> removed;
-            if (_statDict.TryRemove(stat.Name, out removed))
-            {
+            if (this._statDict.TryRemove(stat.Name, out removed)) {
                 return true;
             }
+
             return false;
         }
 
-        public int Count
-        {
-            get { return _statDict.Count; }
+        IEnumerator IEnumerable.GetEnumerator() {
+            return this.GetEnumerator();
         }
-
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
-
-        #endregion
     }
 }

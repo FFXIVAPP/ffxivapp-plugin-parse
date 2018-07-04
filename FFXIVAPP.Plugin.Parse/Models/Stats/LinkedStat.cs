@@ -1,74 +1,69 @@
-// FFXIVAPP.Plugin.Parse ~ LinkedStat.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LinkedStat.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   LinkedStat.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
+namespace FFXIVAPP.Plugin.Parse.Models.Stats {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-namespace FFXIVAPP.Plugin.Parse.Models.Stats
-{
-    public abstract class LinkedStat : Stat<double>, ILinkedStat
-    {
+    public abstract class LinkedStat : Stat<double>, ILinkedStat {
         private List<Stat<double>> _dependencies;
 
-        protected LinkedStat(string name, params Stat<double>[] dependencies) : base(name, 0)
-        {
-            SetupStats(dependencies);
+        protected LinkedStat(string name, params Stat<double>[] dependencies)
+            : base(name, 0) {
+            this.SetupStats(dependencies);
         }
 
-        protected LinkedStat(string name, double value) : base(name, 0)
-        {
-        }
+        protected LinkedStat(string name, double value)
+            : base(name, 0) { }
 
-        protected LinkedStat(string name) : base(name, 0)
-        {
-        }
-
-        #region Declarations
-
-        private List<Stat<double>> Dependencies
-        {
-            get { return _dependencies ?? (_dependencies = new List<Stat<double>>()); }
-            set { _dependencies = value; }
-        }
-
-        #endregion
-
-        #region Events
+        protected LinkedStat(string name)
+            : base(name, 0) { }
 
         public event EventHandler<StatChangedEvent> OnDependencyValueChanged = delegate { };
 
-        #endregion
+        private List<Stat<double>> Dependencies {
+            get {
+                return this._dependencies ?? (this._dependencies = new List<Stat<double>>());
+            }
+
+            set {
+                this._dependencies = value;
+            }
+        }
 
         /// <summary>
         /// </summary>
         /// <param name="dependency"> </param>
-        public virtual void AddDependency(Stat<double> dependency)
-        {
-            dependency.OnValueChanged += DependencyValueChanged;
-            Dependencies.Add(dependency);
+        public virtual void AddDependency(Stat<double> dependency) {
+            dependency.OnValueChanged += this.DependencyValueChanged;
+            this.Dependencies.Add(dependency);
+        }
+
+        /// <summary>
+        /// </summary>
+        public void ClearDependencies() {
+            if (this.Dependencies.Any()) {
+                foreach (Stat<double> dependency in this.Dependencies) {
+                    dependency.OnValueChanged -= this.DependencyValueChanged;
+                }
+            }
+
+            this.Dependencies.Clear();
         }
 
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        public IEnumerable<Stat<double>> GetDependencies()
-        {
-            return Dependencies.AsReadOnly();
+        public IEnumerable<Stat<double>> CloneDependentStats() {
+            return this.GetDependencies();
         }
 
         /// <summary>
@@ -76,65 +71,45 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats
         /// <param name="sender"> </param>
         /// <param name="previousValue"> </param>
         /// <param name="newValue"> </param>
-        public virtual void DoDependencyValueChanged(object sender, object previousValue, object newValue)
-        {
-            Value = (double) newValue;
-        }
-
-        /// <summary>
-        /// </summary>
-        public void ClearDependencies()
-        {
-            if (Dependencies.Any())
-            {
-                foreach (var dependency in Dependencies)
-                {
-                    dependency.OnValueChanged -= DependencyValueChanged;
-                }
-            }
-            Dependencies.Clear();
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="dependency"> </param>
-        public void RemoveDependency(Stat<double> dependency)
-        {
-            if (!Dependencies.Any())
-            {
-                return;
-            }
-            dependency.OnValueChanged -= DependencyValueChanged;
-            Dependencies.Remove(dependency);
+        public virtual void DoDependencyValueChanged(object sender, object previousValue, object newValue) {
+            this.Value = (double) newValue;
         }
 
         /// <summary>
         /// </summary>
         /// <returns> </returns>
-        public IEnumerable<Stat<double>> CloneDependentStats()
-        {
-            return GetDependencies();
+        public IEnumerable<Stat<double>> GetDependencies() {
+            return this.Dependencies.AsReadOnly();
         }
 
         /// <summary>
         /// </summary>
-        /// <param name="dependencies"> </param>
-        private void SetupStats(IEnumerable<Stat<double>> dependencies)
-        {
-            foreach (var dependency in dependencies)
-            {
-                AddDependency(dependency);
+        /// <param name="dependency"> </param>
+        public void RemoveDependency(Stat<double> dependency) {
+            if (!this.Dependencies.Any()) {
+                return;
             }
+
+            dependency.OnValueChanged -= this.DependencyValueChanged;
+            this.Dependencies.Remove(dependency);
         }
 
         /// <summary>
         /// </summary>
         /// <param name="sender"> </param>
         /// <param name="e"> </param>
-        private void DependencyValueChanged(object sender, StatChangedEvent e)
-        {
-            OnDependencyValueChanged(this, new StatChangedEvent(sender, e.PreviousValue, e.NewValue));
-            DoDependencyValueChanged(sender, e.PreviousValue, e.NewValue);
+        private void DependencyValueChanged(object sender, StatChangedEvent e) {
+            this.OnDependencyValueChanged(this, new StatChangedEvent(sender, e.PreviousValue, e.NewValue));
+            this.DoDependencyValueChanged(sender, e.PreviousValue, e.NewValue);
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="dependencies"> </param>
+        private void SetupStats(IEnumerable<Stat<double>> dependencies) {
+            foreach (Stat<double> dependency in dependencies) {
+                this.AddDependency(dependency);
+            }
         }
     }
 }

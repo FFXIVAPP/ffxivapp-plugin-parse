@@ -1,32 +1,25 @@
-﻿// FFXIVAPP.Plugin.Parse ~ LineHelper.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LineHelper.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   LineHelper.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using FFXIVAPP.Plugin.Parse.Enums;
-using FFXIVAPP.Plugin.Parse.Models;
-using FFXIVAPP.Plugin.Parse.Properties;
+namespace FFXIVAPP.Plugin.Parse.Helpers {
+    using FFXIVAPP.Plugin.Parse.Enums;
+    using FFXIVAPP.Plugin.Parse.Models;
+    using FFXIVAPP.Plugin.Parse.Properties;
 
-namespace FFXIVAPP.Plugin.Parse.Helpers
-{
-    public static class LineHelper
-    {
-        public static void SetTimelineTypes(ref Line line)
-        {
-            switch (line.EventSubject)
-            {
+    public static class LineHelper {
+        public static bool IsIgnored(Line line) {
+            return IgnoreType(line.SourceTimelineType) || IgnoreType(line.TargetTimelineType);
+        }
+
+        public static void SetTimelineTypes(ref Line line) {
+            switch (line.EventSubject) {
                 case EventSubject.You:
                 case EventSubject.Pet:
                     line.SourceTimelineType = TimelineType.You;
@@ -44,11 +37,10 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     line.SourceTimelineType = TimelineType.Other;
                     break;
             }
-            switch (line.EventDirection)
-            {
+
+            switch (line.EventDirection) {
                 case EventDirection.Self:
-                    switch (line.EventSubject)
-                    {
+                    switch (line.EventSubject) {
                         case EventSubject.You:
                         case EventSubject.Pet:
                             line.TargetTimelineType = TimelineType.You;
@@ -66,6 +58,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                             line.TargetTimelineType = TimelineType.Other;
                             break;
                     }
+
                     break;
                 case EventDirection.You:
                 case EventDirection.Pet:
@@ -86,20 +79,18 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
             }
         }
 
-        public static bool IsIgnored(Line line)
-        {
-            return IgnoreType(line.SourceTimelineType) || IgnoreType(line.TargetTimelineType);
-        }
-
-        private static bool IgnoreType(TimelineType timelineType)
-        {
-            switch (timelineType)
-            {
-                case TimelineType.You: return !Settings.Default.ParseYou;
-                case TimelineType.Party: return !Settings.Default.ParseParty;
-                case TimelineType.Alliance: return !Settings.Default.ParseAlliance;
-                case TimelineType.Other: return !Settings.Default.ParseOther;
+        private static bool IgnoreType(TimelineType timelineType) {
+            switch (timelineType) {
+                case TimelineType.You:
+                    return !Settings.Default.ParseYou;
+                case TimelineType.Party:
+                    return !Settings.Default.ParseParty;
+                case TimelineType.Alliance:
+                    return !Settings.Default.ParseAlliance;
+                case TimelineType.Other:
+                    return !Settings.Default.ParseOther;
             }
+
             return false;
         }
     }

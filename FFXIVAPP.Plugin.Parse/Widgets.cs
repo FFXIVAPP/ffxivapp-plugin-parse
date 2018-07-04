@@ -1,93 +1,80 @@
-﻿// FFXIVAPP.Plugin.Parse ~ Widgets.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Widgets.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Widgets.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using FFXIVAPP.Common.Models;
-using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Plugin.Parse.Windows;
-using NLog;
+namespace FFXIVAPP.Plugin.Parse {
+    using System;
 
-namespace FFXIVAPP.Plugin.Parse
-{
-    public class Widgets
-    {
-        #region Logger
+    using FFXIVAPP.Common.Models;
+    using FFXIVAPP.Common.Utilities;
+    using FFXIVAPP.Plugin.Parse.Windows;
 
+    using NLog;
+
+    public class Widgets {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
-
         private static Lazy<Widgets> _instance = new Lazy<Widgets>(() => new Widgets());
+
         private DPSWidget _dpsWidget;
+
         private DTPSWidget _dtpsWidget;
+
         private HPSWidget _hpsWidget;
 
-        public static Widgets Instance
-        {
-            get { return _instance.Value; }
-        }
-
-        public DPSWidget DPSWidget
-        {
-            get { return _dpsWidget ?? (_dpsWidget = new DPSWidget()); }
-        }
-
-        public DTPSWidget DTPSWidget
-        {
-            get { return _dtpsWidget ?? (_dtpsWidget = new DTPSWidget()); }
-        }
-
-        public HPSWidget HPSWidget
-        {
-            get { return _hpsWidget ?? (_hpsWidget = new HPSWidget()); }
-        }
-
-        public void ShowDPSWidget()
-        {
-            try
-            {
-                DPSWidget.Show();
+        public static Widgets Instance {
+            get {
+                return _instance.Value;
             }
-            catch (Exception ex)
-            {
+        }
+
+        public DPSWidget DPSWidget {
+            get {
+                return this._dpsWidget ?? (this._dpsWidget = new DPSWidget());
+            }
+        }
+
+        public DTPSWidget DTPSWidget {
+            get {
+                return this._dtpsWidget ?? (this._dtpsWidget = new DTPSWidget());
+            }
+        }
+
+        public HPSWidget HPSWidget {
+            get {
+                return this._hpsWidget ?? (this._hpsWidget = new HPSWidget());
+            }
+        }
+
+        public void ShowDPSWidget() {
+            try {
+                this.DPSWidget.Show();
+            }
+            catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
-        public void ShowDTPSWidget()
-        {
-            try
-            {
-                DTPSWidget.Show();
+        public void ShowDTPSWidget() {
+            try {
+                this.DTPSWidget.Show();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
-        public void ShowHPSWidget()
-        {
-            try
-            {
-                HPSWidget.Show();
+        public void ShowHPSWidget() {
+            try {
+                this.HPSWidget.Show();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
         }

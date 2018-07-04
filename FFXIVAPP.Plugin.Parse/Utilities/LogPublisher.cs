@@ -1,81 +1,64 @@
-﻿// FFXIVAPP.Plugin.Parse ~ LogPublisher.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LogPublisher.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   LogPublisher.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using FFXIVAPP.Common.Helpers;
-using FFXIVAPP.Common.Models;
-using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Plugin.Parse.Models;
-using FFXIVAPP.Plugin.Parse.Models.Events;
-using NLog;
-using Sharlayan.Core;
+namespace FFXIVAPP.Plugin.Parse.Utilities {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
 
-namespace FFXIVAPP.Plugin.Parse.Utilities
-{
-    public static class LogPublisher
-    {
-        #region Logger
+    using FFXIVAPP.Common.Helpers;
+    using FFXIVAPP.Common.Models;
+    using FFXIVAPP.Common.Utilities;
+    using FFXIVAPP.Plugin.Parse.Models;
+    using FFXIVAPP.Plugin.Parse.Models.Events;
+
+    using NLog;
+
+    using Sharlayan.Core;
+
+    public static class LogPublisher {
+        public static bool IsPaused;
 
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
+        private static List<string> _needGreedHistory;
 
-        public static bool IsPaused;
-        public static bool Processing { get; set; }
-
-        public static void Process(ChatLogEntry chatLogEntry)
-        {
-            if (IsPaused)
-            {
-                return;
+        public static List<string> NeedGreedHistory {
+            get {
+                return _needGreedHistory ?? (_needGreedHistory = new List<string>());
             }
-            try
-            {
-                chatLogEntry.Line = chatLogEntry.Line.Replace("  ", " ");
-                if (Constants.NeedGreed.Any(chatLogEntry.Line.Contains))
-                {
-                    NeedGreedHistory.Add(chatLogEntry.Line);
+
+            set {
+                if (_needGreedHistory == null) {
+                    _needGreedHistory = new List<string>();
                 }
-                DispatcherHelper.Invoke(() => EventParser.Instance.ParseAndPublish(chatLogEntry));
-                HandleCommands(chatLogEntry);
-            }
-            catch (Exception ex)
-            {
-                Logging.Log(Logger, new LogItem(ex, true));
+
+                _needGreedHistory = value;
             }
         }
 
-        public static void HandleCommands(ChatLogEntry chatLogEntry)
-        {
+        public static bool Processing { get; set; }
+
+        public static void HandleCommands(ChatLogItem chatLogItem) {
             // process commands
-            if (chatLogEntry.Code == "0038")
-            {
-                var commandsRegEx = CommandBuilder.CommandsRegEx.Match(chatLogEntry.Line.Trim());
-                if (!commandsRegEx.Success)
-                {
+            if (chatLogItem.Code == "0038") {
+                Match commandsRegEx = CommandBuilder.CommandsRegEx.Match(chatLogItem.Line.Trim());
+                if (!commandsRegEx.Success) {
                     return;
                 }
-                var command = commandsRegEx.Groups["command"]
-                                           .Success ? commandsRegEx.Groups["command"]
-                                                                   .Value : string.Empty;
-                switch (command)
-                {
+
+                var command = commandsRegEx.Groups["command"].Success
+                                  ? commandsRegEx.Groups["command"].Value
+                                  : string.Empty;
+                switch (command) {
                     case "on":
                         IsPaused = false;
                         break;
@@ -89,23 +72,23 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
             }
         }
 
-        #region Property Bindings
+        public static void Process(ChatLogItem chatLogItem) {
+            if (IsPaused) {
+                return;
+            }
 
-        private static List<string> _needGreedHistory;
-
-        public static List<string> NeedGreedHistory
-        {
-            get { return _needGreedHistory ?? (_needGreedHistory = new List<string>()); }
-            set
-            {
-                if (_needGreedHistory == null)
-                {
-                    _needGreedHistory = new List<string>();
+            try {
+                chatLogItem.Line = chatLogItem.Line.Replace("  ", " ");
+                if (Constants.NeedGreed.Any(chatLogItem.Line.Contains)) {
+                    NeedGreedHistory.Add(chatLogItem.Line);
                 }
-                _needGreedHistory = value;
+
+                DispatcherHelper.Invoke(() => EventParser.Instance.ParseAndPublish(chatLogItem));
+                HandleCommands(chatLogItem);
+            }
+            catch (Exception ex) {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
-
-        #endregion
     }
 }

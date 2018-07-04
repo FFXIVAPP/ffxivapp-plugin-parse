@@ -1,36 +1,36 @@
-﻿// FFXIVAPP.Plugin.Parse ~ IParsingControl.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IParsingControl.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   IParsingControl.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using FFXIVAPP.Plugin.Parse.Models.Timelines;
-using FFXIVAPP.Plugin.Parse.Monitors;
+namespace FFXIVAPP.Plugin.Parse.Models {
+    using System;
 
-namespace FFXIVAPP.Plugin.Parse.Models
-{
-    public interface IParsingControl
-    {
-        string Name { get; set; }
-        DateTime StartTime { get; set; }
+    using FFXIVAPP.Plugin.Parse.Models.Timelines;
+    using FFXIVAPP.Plugin.Parse.Monitors;
+
+    public interface IParsingControl {
         DateTime EndTime { get; set; }
+
         IParsingControl Instance { get; }
-        Timeline Timeline { get; set; }
+
+        string Name { get; set; }
+
+        DateTime StartTime { get; set; }
+
         StatMonitor StatMonitor { get; set; }
+
+        Timeline Timeline { get; set; }
+
         TimelineMonitor TimelineMonitor { get; set; }
+
         void Initialize();
+
         void Reset();
     }
 }

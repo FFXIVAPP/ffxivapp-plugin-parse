@@ -18,9 +18,10 @@
     </DataGrid.Resources>
     <DataGrid.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="{Binding Locale[parse_TotalOverallDamageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnTotalOverallDamage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_TotalOverallDamageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnTotalOverallDamage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_RegularDamageHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnRegularDamage, Source={StaticResource Settings}}" />
@@ -42,9 +43,10 @@
             <MenuItem Header="{Binding Locale[parse_DamageRegModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageRegMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageRegModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageRegModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageRegModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageRegModAverage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageCritLowHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageCritLow, Source={StaticResource Settings}}" />
@@ -57,9 +59,10 @@
             <MenuItem Header="{Binding Locale[parse_DamageCritModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageCritMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageCritModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageCritModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageCritModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageCritModAverage, Source={StaticResource Settings}}" />
         </ContextMenu>
     </DataGrid.ContextMenu>
     <i:Interaction.Behaviors>

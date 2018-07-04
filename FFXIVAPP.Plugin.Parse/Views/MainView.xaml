@@ -72,12 +72,19 @@
                                 <TextBlock Margin="5"
                                            HorizontalAlignment="Center"
                                            Text="{Binding Locale[parse_ViewTypeLabel], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
-                                <ComboBox x:Name="InfoViewType" utilities:SelectionBehavior.SelectionChanged="{Binding SwitchInfoViewTypeCommand, Source={StaticResource MainViewModel}}">
-                                    <ComboBoxItem Content="{Binding Locale[parse_ScoreCardsComboBoxItemText], Source={StaticResource PluginViewModel}}" IsSelected="True" />
-                                    <ComboBoxItem Content="{Binding Locale[parse_PartyComboBoxItemText], Source={StaticResource PluginViewModel}}" />
-                                    <ComboBoxItem Content="{Binding Locale[parse_PartyAllComboBoxItemText], Source={StaticResource PluginViewModel}}" />
-                                    <ComboBoxItem Content="{Binding Locale[parse_MonsterComboBoxItemText], Source={StaticResource PluginViewModel}}" />
-                                    <ComboBoxItem Content="{Binding Locale[parse_MonsterAllComboBoxItemText], Source={StaticResource PluginViewModel}}" />
+                                <ComboBox x:Name="InfoViewType"
+                                          utilities:SelectionBehavior.SelectionChanged="{Binding SwitchInfoViewTypeCommand, Source={StaticResource MainViewModel}}">
+                                    <ComboBoxItem
+                                        Content="{Binding Locale[parse_ScoreCardsComboBoxItemText], Source={StaticResource PluginViewModel}}"
+                                        IsSelected="True" />
+                                    <ComboBoxItem
+                                        Content="{Binding Locale[parse_PartyComboBoxItemText], Source={StaticResource PluginViewModel}}" />
+                                    <ComboBoxItem
+                                        Content="{Binding Locale[parse_PartyAllComboBoxItemText], Source={StaticResource PluginViewModel}}" />
+                                    <ComboBoxItem
+                                        Content="{Binding Locale[parse_MonsterComboBoxItemText], Source={StaticResource PluginViewModel}}" />
+                                    <ComboBoxItem
+                                        Content="{Binding Locale[parse_MonsterAllComboBoxItemText], Source={StaticResource PluginViewModel}}" />
                                 </ComboBox>
                                 <Button x:Name="RefreshSelectedButton"
                                         MinHeight="28"
@@ -90,7 +97,8 @@
                                                Height="16"
                                                RenderOptions.BitmapScalingMode="HighQuality"
                                                Source="/FFXIVAPP.Plugin.Parse;component/Media/Images/Refresh.png" />
-                                        <TextBlock Padding="3,0" Text="{Binding Locale[parse_RefreshSelectedButtonText], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
+                                        <TextBlock Padding="3,0"
+                                                   Text="{Binding Locale[parse_RefreshSelectedButtonText], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
@@ -159,9 +167,12 @@
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Grid.Row="0" Grid.Column="0">
-                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallDamageLabel], Source={StaticResource PluginViewModel}}" />
-                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallHealingLabel], Source={StaticResource PluginViewModel}}" />
-                                                <TextBlock Text="{Binding Locale[parse_CombinedTotalOverallDamageTakenLabel], Source={StaticResource PluginViewModel}}" />
+                                                <TextBlock
+                                                    Text="{Binding Locale[parse_CombinedTotalOverallDamageLabel], Source={StaticResource PluginViewModel}}" />
+                                                <TextBlock
+                                                    Text="{Binding Locale[parse_CombinedTotalOverallHealingLabel], Source={StaticResource PluginViewModel}}" />
+                                                <TextBlock
+                                                    Text="{Binding Locale[parse_CombinedTotalOverallDamageTakenLabel], Source={StaticResource PluginViewModel}}" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="0" Grid.Column="1">
                                                 <TextBlock Padding="5,0"
@@ -181,9 +192,15 @@
                                                            TextWrapping="WrapWithOverflow" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="0" Grid.Column="2">
-                                                <TextBlock Text="{Binding Locale[parse_CombinedDPSLabel], Source={StaticResource PluginViewModel}}" TextWrapping="WrapWithOverflow" />
-                                                <TextBlock Text="{Binding Locale[parse_CombinedHPSLabel], Source={StaticResource PluginViewModel}}" TextWrapping="WrapWithOverflow" />
-                                                <TextBlock Text="{Binding Locale[parse_CombinedDTPSLabel], Source={StaticResource PluginViewModel}}" TextWrapping="WrapWithOverflow" />
+                                                <TextBlock
+                                                    Text="{Binding Locale[parse_CombinedDPSLabel], Source={StaticResource PluginViewModel}}"
+                                                    TextWrapping="WrapWithOverflow" />
+                                                <TextBlock
+                                                    Text="{Binding Locale[parse_CombinedHPSLabel], Source={StaticResource PluginViewModel}}"
+                                                    TextWrapping="WrapWithOverflow" />
+                                                <TextBlock
+                                                    Text="{Binding Locale[parse_CombinedDTPSLabel], Source={StaticResource PluginViewModel}}"
+                                                    TextWrapping="WrapWithOverflow" />
                                             </StackPanel>
                                             <StackPanel Grid.Row="0" Grid.Column="3">
                                                 <TextBlock Padding="5,0"
@@ -207,7 +224,8 @@
                                                TextWrapping="WrapWithOverflow"
                                                Visibility="{Binding EnableHelpLabels, Source={StaticResource PluginViewModel}, Converter={StaticResource VisibilityConverter}}" />
 
-                                    <ItemsControl x:Name="PlayerInfoScoreCard" ItemsSource="{Binding PlayerInfoSource, Source={StaticResource MainViewModel}}">
+                                    <ItemsControl x:Name="PlayerInfoScoreCard"
+                                                  ItemsSource="{Binding PlayerInfoSource, Source={StaticResource MainViewModel}}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <grids:PlayerInfoBox MaxWidth="300" DataContext="{Binding}" />
@@ -224,7 +242,8 @@
                         </TabItem>
                         <TabItem x:Name="PartyBreakDownInfo">
                             <TabControl x:Name="PlayerResults">
-                                <TabItem Header="{Binding Locale[parse_PartyDamageActionsHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_PartyDamageActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
@@ -260,7 +279,8 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyDamageMonstersHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_PartyDamageMonstersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
@@ -312,17 +332,19 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:DamageOverTimeDataGrid x:Name="PlayerDamageOverTimeToMonstersByAction"
-                                                                              BorderThickness="0"
-                                                                              DataContext="{Binding SelectedItem, ElementName=PlayerDamageOverTimeToMonsters, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                              ItemsSource="{Binding DamageOverTimeToMonstersByAction}"
-                                                                              SelectionMode="Single"
-                                                                              Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:DamageOverTimeDataGrid
+                                                    x:Name="PlayerDamageOverTimeToMonstersByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerDamageOverTimeToMonsters, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding DamageOverTimeToMonstersByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyHealingActionsHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_PartyHealingActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
@@ -348,12 +370,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsOverHealingHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:HealingOverHealingDataGrid x:Name="PlayerHealingOverHealingByAction"
-                                                                                  BorderThickness="0"
-                                                                                  DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                  ItemsSource="{Binding HealingOverHealingByAction}"
-                                                                                  SelectionMode="Single"
-                                                                                  Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:HealingOverHealingDataGrid
+                                                    x:Name="PlayerHealingOverHealingByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding HealingOverHealingByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                             <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
@@ -384,7 +407,8 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyHealingPlayersHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_PartyHealingPlayersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
@@ -423,12 +447,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsOverHealingHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
-                                                <grids:HealingOverHealingDataGrid x:Name="PlayerHealingOverHealingToPlayers"
-                                                                                  BorderThickness="0"
-                                                                                  DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                  ItemsSource="{Binding HealingOverHealingToPlayers}"
-                                                                                  SelectionMode="Single"
-                                                                                  Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:HealingOverHealingDataGrid
+                                                    x:Name="PlayerHealingOverHealingToPlayers"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding HealingOverHealingToPlayers}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
                                             <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
@@ -436,12 +461,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:HealingOverHealingDataGrid x:Name="PlayerHealingOverHealingToPlayersByAction"
-                                                                                  BorderThickness="0"
-                                                                                  DataContext="{Binding SelectedItem, ElementName=PlayerHealingOverHealingToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                  ItemsSource="{Binding HealingOverHealingToPlayersByAction}"
-                                                                                  SelectionMode="Single"
-                                                                                  Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:HealingOverHealingDataGrid
+                                                    x:Name="PlayerHealingOverHealingToPlayersByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerHealingOverHealingToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding HealingOverHealingToPlayersByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                             <controls:MetroProgressBar Height="5"
                                                                        Margin="5"
@@ -466,12 +492,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:HealingOverTimeDataGrid x:Name="PlayerHealingOverTimeToPlayersByAction"
-                                                                               BorderThickness="0"
-                                                                               DataContext="{Binding SelectedItem, ElementName=PlayerHealingOverTimeToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                               ItemsSource="{Binding HealingOverTimeToPlayersByAction}"
-                                                                               SelectionMode="Single"
-                                                                               Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:HealingOverTimeDataGrid
+                                                    x:Name="PlayerHealingOverTimeToPlayersByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerHealingOverTimeToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding HealingOverTimeToPlayersByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                             <controls:MetroProgressBar Height="5"
                                                                        Margin="5"
@@ -483,12 +510,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsMitigatedHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
-                                                <grids:HealingMitigatedDataGrid x:Name="PlayerHealingMitigatedToPlayers"
-                                                                                BorderThickness="0"
-                                                                                DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                ItemsSource="{Binding HealingMitigatedToPlayers}"
-                                                                                SelectionMode="Single"
-                                                                                Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:HealingMitigatedDataGrid
+                                                    x:Name="PlayerHealingMitigatedToPlayers"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding HealingMitigatedToPlayers}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
                                             <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
@@ -496,17 +524,19 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:HealingMitigatedDataGrid x:Name="PlayerHealingMitigatedToPlayersByAction"
-                                                                                BorderThickness="0"
-                                                                                DataContext="{Binding SelectedItem, ElementName=PlayerHealingMitigatedToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                ItemsSource="{Binding HealingMitigatedToPlayersByAction}"
-                                                                                SelectionMode="Single"
-                                                                                Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:HealingMitigatedDataGrid
+                                                    x:Name="PlayerHealingMitigatedToPlayersByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerHealingMitigatedToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding HealingMitigatedToPlayersByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyBuffsHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_PartyBuffsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
@@ -551,7 +581,8 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyDamageTakenActionsHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_PartyDamageTakenActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
@@ -577,17 +608,19 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:DamageTakenOverTimeDataGrid x:Name="PlayerDamageTakenOverTimeByAction"
-                                                                                   BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                   ItemsSource="{Binding DamageTakenOverTimeByAction}"
-                                                                                   SelectionMode="Single"
-                                                                                   Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:DamageTakenOverTimeDataGrid
+                                                    x:Name="PlayerDamageTakenOverTimeByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding DamageTakenOverTimeByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_PartyDamageTakenMonstersHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_PartyDamageTakenMonstersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
@@ -626,12 +659,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
-                                                <grids:DamageTakenOverTimeDataGrid x:Name="PlayerDamageTakenOverTimeByMonsters"
-                                                                                   BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                   ItemsSource="{Binding DamageTakenOverTimeByMonsters}"
-                                                                                   SelectionMode="Single"
-                                                                                   Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:DamageTakenOverTimeDataGrid
+                                                    x:Name="PlayerDamageTakenOverTimeByMonsters"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding DamageTakenOverTimeByMonsters}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
                                             <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
@@ -639,12 +673,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:DamageTakenOverTimeDataGrid x:Name="PlayerDamageTakenOverTimeByMonstersByAction"
-                                                                                   BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem, ElementName=PlayerDamageTakenOverTimeByMonsters, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                   ItemsSource="{Binding DamageTakenOverTimeByMonstersByAction}"
-                                                                                   SelectionMode="Single"
-                                                                                   Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:DamageTakenOverTimeDataGrid
+                                                    x:Name="PlayerDamageTakenOverTimeByMonstersByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerDamageTakenOverTimeByMonsters, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding DamageTakenOverTimeByMonstersByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                         </StackPanel>
                                     </ScrollViewer>
@@ -653,7 +688,8 @@
                         </TabItem>
                         <TabItem x:Name="PartyTotalInfo">
                             <ScrollViewer>
-                                <StackPanel DataContext="{Binding PlayerInfoSource, Source={StaticResource MainViewModel}}">
+                                <StackPanel
+                                    DataContext="{Binding PlayerInfoSource, Source={StaticResource MainViewModel}}">
                                     <Expander Padding="0" IsExpanded="True">
                                         <Expander.Header>
                                             <TextBlock Padding="5"
@@ -794,7 +830,8 @@
                         </TabItem>
                         <TabItem x:Name="MonsterBreakDownInfo">
                             <TabControl>
-                                <TabItem Header="{Binding Locale[parse_MonsterDamageActionsHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_MonsterDamageActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
@@ -830,7 +867,8 @@
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_MonsterDamagePlayersHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_MonsterDamagePlayersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
@@ -882,17 +920,19 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:DamageOverTimeDataGrid x:Name="MonsterDamageOverTimeToPlayersByAction"
-                                                                              BorderThickness="0"
-                                                                              DataContext="{Binding SelectedItem, ElementName=MonsterDamageOverTimeToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                              ItemsSource="{Binding DamageOverTimeToPlayersByAction}"
-                                                                              SelectionMode="Single"
-                                                                              Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:DamageOverTimeDataGrid
+                                                    x:Name="MonsterDamageOverTimeToPlayersByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=MonsterDamageOverTimeToPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding DamageOverTimeToPlayersByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_MonsterDamageTakenActionsHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_MonsterDamageTakenActionsHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <Button Margin="3"
@@ -918,17 +958,19 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:DamageTakenOverTimeDataGrid x:Name="MonsterDamageTakenOverTimeByAction"
-                                                                                   BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                   ItemsSource="{Binding DamageTakenOverTimeByAction}"
-                                                                                   SelectionMode="Single"
-                                                                                   Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:DamageTakenOverTimeDataGrid
+                                                    x:Name="MonsterDamageTakenOverTimeByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding DamageTakenOverTimeByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                         </StackPanel>
                                     </ScrollViewer>
                                 </TabItem>
-                                <TabItem Header="{Binding Locale[parse_MonsterDamageTakenPlayersHeader], Source={StaticResource PluginViewModel}}">
+                                <TabItem
+                                    Header="{Binding Locale[parse_MonsterDamageTakenPlayersHeader], Source={StaticResource PluginViewModel}}">
                                     <ScrollViewer>
                                         <StackPanel>
                                             <GroupBox Padding="0">
@@ -967,12 +1009,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsOverTimeHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </GroupBox.Header>
-                                                <grids:DamageTakenOverTimeDataGrid x:Name="MonsterDamageTakenOverTimeByPlayers"
-                                                                                   BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                   ItemsSource="{Binding DamageTakenOverTimeByPlayers}"
-                                                                                   SelectionMode="Single"
-                                                                                   Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:DamageTakenOverTimeDataGrid
+                                                    x:Name="MonsterDamageTakenOverTimeByPlayers"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=MonsterInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding DamageTakenOverTimeByPlayers}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </GroupBox>
                                             <Expander Margin="5,0" Padding="0">
                                                 <Expander.Header>
@@ -980,12 +1023,13 @@
                                                                Foreground="White"
                                                                Text="{Binding Locale[parse_TotalsActionsHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
-                                                <grids:DamageTakenOverTimeDataGrid x:Name="MonsterDamageTakenOverTimeByPlayersByAction"
-                                                                                   BorderThickness="0"
-                                                                                   DataContext="{Binding SelectedItem, ElementName=MonsterDamageTakenOverTimeByPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                   ItemsSource="{Binding DamageTakenOverTimeByPlayersByAction}"
-                                                                                   SelectionMode="Single"
-                                                                                   Style="{DynamicResource MetroDataGrid}" />
+                                                <grids:DamageTakenOverTimeDataGrid
+                                                    x:Name="MonsterDamageTakenOverTimeByPlayersByAction"
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=MonsterDamageTakenOverTimeByPlayers, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding DamageTakenOverTimeByPlayersByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                         </StackPanel>
                                     </ScrollViewer>
@@ -994,7 +1038,8 @@
                         </TabItem>
                         <TabItem x:Name="MonsterTotalInfo">
                             <ScrollViewer>
-                                <StackPanel DataContext="{Binding MonsterInfoSource, Source={StaticResource MainViewModel}}">
+                                <StackPanel
+                                    DataContext="{Binding MonsterInfoSource, Source={StaticResource MainViewModel}}">
                                     <!--
                                         <Expander IsExpanded="True"
                                         Padding="0">

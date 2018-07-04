@@ -47,16 +47,18 @@
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
             <commonConverters:VisibilityConverter x:Key="VisibilityConverter" />
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/FFXIVAPP.Plugin.Parse;component/Resources/WidgetStyle.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/FFXIVAPP.Plugin.Parse;component/Resources/WidgetStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid x:Name="LayoutRoot">
         <Grid.LayoutTransform>
-            <ScaleTransform ScaleX="{Binding DTPSWidgetUIScale,
+            <ScaleTransform
+                ScaleX="{Binding DTPSWidgetUIScale,
                                              Source={StaticResource Settings}}"
-                            ScaleY="{Binding DTPSWidgetUIScale,
+                ScaleY="{Binding DTPSWidgetUIScale,
                                              Source={StaticResource Settings}}" />
         </Grid.LayoutTransform>
         <StackPanel>

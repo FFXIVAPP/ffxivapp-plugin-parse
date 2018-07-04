@@ -20,110 +20,131 @@
     </DataGrid.Resources>
     <DataGrid.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="{Binding Locale[parse_PercentOfTotalOverallHealingOverHealingHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_PercentOfTotalOverallHealingOverHealingHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfTotalOverallHealingOverHealing,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnPercentOfTotalOverallHealingOverHealing,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_PercentOfRegularHealingOverHealingHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_PercentOfRegularHealingOverHealingHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfRegularHealingOverHealing,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnPercentOfRegularHealingOverHealing,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_PercentOfCriticalHealingOverHealingHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_PercentOfCriticalHealingOverHealingHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfCriticalHealingOverHealing,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnPercentOfCriticalHealingOverHealing,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_TotalOverallHealingOverHealingHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_TotalOverallHealingOverHealingHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnTotalOverallHealingOverHealing,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnTotalOverallHealingOverHealing,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_RegularHealingOverHealingHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_RegularHealingOverHealingHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnRegularHealingOverHealing,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnRegularHealingOverHealing,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_CriticalHealingOverHealingHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_CriticalHealingOverHealingHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnCriticalHealingOverHealing,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnCriticalHealingOverHealing,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_TotalHealingOverHealingActionsUsedHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_TotalHealingOverHealingActionsUsedHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnTotalHealingActionsUsed,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnTotalHealingActionsUsed,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HOHPSHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HOHPSHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHPS,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHPS,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingRegHitHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingRegHitHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegHit,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingRegHit,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingRegLowHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingRegLowHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegLow,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingRegLow,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingRegHighHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingRegHighHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegHigh,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingRegHigh,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingRegAverageHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingRegAverageHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegAverage,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingRegAverage,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingRegModHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingRegModHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegMod,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingRegMod,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingRegModAverageHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingRegModAverageHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingRegModAverage,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingRegModAverage,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingCritHitHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingCritHitHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritHit,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingCritHit,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingCritPercentHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingCritPercentHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritPercent,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingCritPercent,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingCritLowHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingCritLowHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritLow,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingCritLow,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingCritHighHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingCritHighHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritHigh,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingCritHigh,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingCritAverageHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingCritAverageHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritAverage,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingCritAverage,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingCritModHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingCritModHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritMod,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingCritMod,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_HealingOverHealingCritModAverageHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_HealingOverHealingCritModAverageHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnHealingCritModAverage,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnHealingCritModAverage,
                                           Source={StaticResource Settings}}" />
         </ContextMenu>
     </DataGrid.ContextMenu>
@@ -136,28 +157,31 @@
                             Header="{Binding Locale[parse_NameHeader],
                                              Source={StaticResource PluginViewModel}}"
                             Utilities:GridViewSort.PropertyName="Name" />
-        <DataGridTextColumn Binding="{Binding PercentOfTotalOverallHealingOverHealing,
+        <DataGridTextColumn
+            Binding="{Binding PercentOfTotalOverallHealingOverHealing,
                                               StringFormat=\{0:P2\}}"
-                            Header="{Binding Locale[parse_PercentOfTotalOverallHealingOverHealingHeader],
+            Header="{Binding Locale[parse_PercentOfTotalOverallHealingOverHealingHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="PercentOfTotalOverallHealingOverHealing"
-                            Visibility="{Binding ShowColumnPercentOfTotalOverallHealingOverHealing,
+            Utilities:GridViewSort.PropertyName="PercentOfTotalOverallHealingOverHealing"
+            Visibility="{Binding ShowColumnPercentOfTotalOverallHealingOverHealing,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding PercentOfRegularHealingOverHealing,
+        <DataGridTextColumn
+            Binding="{Binding PercentOfRegularHealingOverHealing,
                                               StringFormat=\{0:P2\}}"
-                            Header="{Binding Locale[parse_PercentOfRegularHealingOverHealingHeader],
+            Header="{Binding Locale[parse_PercentOfRegularHealingOverHealingHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="PercentOfRegularHealingOverHealing"
-                            Visibility="{Binding ShowColumnPercentOfRegularHealingOverHealing,
+            Utilities:GridViewSort.PropertyName="PercentOfRegularHealingOverHealing"
+            Visibility="{Binding ShowColumnPercentOfRegularHealingOverHealing,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding PercentOfCriticalHealingOverHealing,
+        <DataGridTextColumn
+            Binding="{Binding PercentOfCriticalHealingOverHealing,
                                               StringFormat=\{0:P2\}}"
-                            Header="{Binding Locale[parse_PercentOfCriticalHealingOverHealingHeader],
+            Header="{Binding Locale[parse_PercentOfCriticalHealingOverHealingHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="PercentOfCriticalHealingOverHealing"
-                            Visibility="{Binding ShowColumnPercentOfCriticalHealingOverHealing,
+            Utilities:GridViewSort.PropertyName="PercentOfCriticalHealingOverHealing"
+            Visibility="{Binding ShowColumnPercentOfCriticalHealingOverHealing,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
         <DataGridTextColumn Binding="{Binding TotalOverallHealingOverHealing}"
@@ -188,12 +212,13 @@
                             Visibility="{Binding ShowColumnTotalHealingActionsUsed,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HOHPS,
+        <DataGridTextColumn
+            Binding="{Binding HOHPS,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HOHPSHeader],
+            Header="{Binding Locale[parse_HOHPSHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HOHPS"
-                            Visibility="{Binding ShowColumnHPS,
+            Utilities:GridViewSort.PropertyName="HOHPS"
+            Visibility="{Binding ShowColumnHPS,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
         <DataGridTextColumn Binding="{Binding HealingOverHealingRegHit}"
@@ -217,28 +242,31 @@
                             Visibility="{Binding ShowColumnHealingRegHigh,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverHealingRegAverage,
+        <DataGridTextColumn
+            Binding="{Binding HealingOverHealingRegAverage,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverHealingRegAverageHeader],
+            Header="{Binding Locale[parse_HealingOverHealingRegAverageHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverHealingRegAverage"
-                            Visibility="{Binding ShowColumnHealingRegAverage,
+            Utilities:GridViewSort.PropertyName="HealingOverHealingRegAverage"
+            Visibility="{Binding ShowColumnHealingRegAverage,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverHealingRegMod,
+        <DataGridTextColumn
+            Binding="{Binding HealingOverHealingRegMod,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverHealingRegModHeader],
+            Header="{Binding Locale[parse_HealingOverHealingRegModHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverHealingRegMod"
-                            Visibility="{Binding ShowColumnHealingRegMod,
+            Utilities:GridViewSort.PropertyName="HealingOverHealingRegMod"
+            Visibility="{Binding ShowColumnHealingRegMod,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverHealingRegModAverage,
+        <DataGridTextColumn
+            Binding="{Binding HealingOverHealingRegModAverage,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverHealingRegModAverageHeader],
+            Header="{Binding Locale[parse_HealingOverHealingRegModAverageHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverHealingRegModAverage"
-                            Visibility="{Binding ShowColumnHealingRegModAverage,
+            Utilities:GridViewSort.PropertyName="HealingOverHealingRegModAverage"
+            Visibility="{Binding ShowColumnHealingRegModAverage,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
         <DataGridTextColumn Binding="{Binding HealingOverHealingCritHit}"
@@ -248,12 +276,13 @@
                             Visibility="{Binding ShowColumnHealingCritHit,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverHealingCritPercent,
+        <DataGridTextColumn
+            Binding="{Binding HealingOverHealingCritPercent,
                                               StringFormat=\{0:P2\}}"
-                            Header="{Binding Locale[parse_HealingOverHealingCritPercentHeader],
+            Header="{Binding Locale[parse_HealingOverHealingCritPercentHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverHealingCritPercent"
-                            Visibility="{Binding ShowColumnHealingCritPercent,
+            Utilities:GridViewSort.PropertyName="HealingOverHealingCritPercent"
+            Visibility="{Binding ShowColumnHealingCritPercent,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
         <DataGridTextColumn Binding="{Binding HealingOverHealingCritLow}"
@@ -270,28 +299,31 @@
                             Visibility="{Binding ShowColumnHealingCritHigh,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverHealingCritAverage,
+        <DataGridTextColumn
+            Binding="{Binding HealingOverHealingCritAverage,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverHealingCritAverageHeader],
+            Header="{Binding Locale[parse_HealingOverHealingCritAverageHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverHealingCritAverage"
-                            Visibility="{Binding ShowColumnHealingCritAverage,
+            Utilities:GridViewSort.PropertyName="HealingOverHealingCritAverage"
+            Visibility="{Binding ShowColumnHealingCritAverage,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverHealingCritMod,
+        <DataGridTextColumn
+            Binding="{Binding HealingOverHealingCritMod,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverHealingCritModHeader],
+            Header="{Binding Locale[parse_HealingOverHealingCritModHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverHealingCritMod"
-                            Visibility="{Binding ShowColumnHealingCritMod,
+            Utilities:GridViewSort.PropertyName="HealingOverHealingCritMod"
+            Visibility="{Binding ShowColumnHealingCritMod,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding HealingOverHealingCritModAverage,
+        <DataGridTextColumn
+            Binding="{Binding HealingOverHealingCritModAverage,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_HealingOverHealingCritModAverageHeader],
+            Header="{Binding Locale[parse_HealingOverHealingCritModAverageHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="HealingOverHealingCritModAverage"
-                            Visibility="{Binding ShowColumnHealingCritModAverage,
+            Utilities:GridViewSort.PropertyName="HealingOverHealingCritModAverage"
+            Visibility="{Binding ShowColumnHealingCritModAverage,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
     </DataGrid.Columns>

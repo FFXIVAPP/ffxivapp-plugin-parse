@@ -1,59 +1,83 @@
-﻿// FFXIVAPP.Plugin.Parse ~ IPlayerEntity.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IPlayerEntity.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   IPlayerEntity.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using FFXIVAPP.Plugin.Parse.Enums;
-using Sharlayan.Core.Enums;
+namespace FFXIVAPP.Plugin.Parse.Interfaces {
+    using FFXIVAPP.Plugin.Parse.Enums;
 
-namespace FFXIVAPP.Plugin.Parse.Interfaces
-{
-    public interface IPlayerEntity
-    {
-        PlayerType Type { get; set; }
-        string Name { get; set; }
-        Actor.Job Job { get; set; }
+    using Sharlayan.Core.Enums;
+
+    public interface IPlayerEntity {
         double CombinedDPS { get; set; }
-        double DPS { get; set; }
-        double DOTPS { get; set; }
-        double CombinedHPS { get; set; }
-        double HPS { get; set; }
-        double HOTPS { get; set; }
-        double HOHPS { get; set; }
-        double HMPS { get; set; }
+
         double CombinedDTPS { get; set; }
-        double DTPS { get; set; }
-        double DTOTPS { get; set; }
+
+        double CombinedHPS { get; set; }
+
         double CombinedTotalOverallDamage { get; set; }
-        double TotalOverallDamage { get; set; }
-        double TotalOverallDamageOverTime { get; set; }
-        double CombinedTotalOverallHealing { get; set; }
-        double TotalOverallHealing { get; set; }
-        double TotalOverallHealingOverTime { get; set; }
-        double TotalOverallHealingOverHealing { get; set; }
-        double TotalOverallHealingMitigated { get; set; }
+
         double CombinedTotalOverallDamageTaken { get; set; }
-        double TotalOverallDamageTaken { get; set; }
-        double TotalOverallDamageTakenOverTime { get; set; }
+
+        double CombinedTotalOverallHealing { get; set; }
+
+        double DOTPS { get; set; }
+
+        double DPS { get; set; }
+
+        double DTOTPS { get; set; }
+
+        double DTPS { get; set; }
+
+        double HMPS { get; set; }
+
+        double HOHPS { get; set; }
+
+        double HOTPS { get; set; }
+
+        double HPS { get; set; }
+
+        Actor.Job Job { get; set; }
+
+        string Name { get; set; }
+
         double PercentOfTotalOverallDamage { get; set; }
+
         double PercentOfTotalOverallDamageOverTime { get; set; }
-        double PercentOfTotalOverallHealing { get; set; }
-        double PercentOfTotalOverallHealingOverTime { get; set; }
-        double PercentOfTotalOverallHealingOverHealing { get; set; }
-        double PercentOfTotalOverallHealingMitigated { get; set; }
+
         double PercentOfTotalOverallDamageTaken { get; set; }
+
         double PercentOfTotalOverallDamageTakenOverTime { get; set; }
+
+        double PercentOfTotalOverallHealing { get; set; }
+
+        double PercentOfTotalOverallHealingMitigated { get; set; }
+
+        double PercentOfTotalOverallHealingOverHealing { get; set; }
+
+        double PercentOfTotalOverallHealingOverTime { get; set; }
+
+        double TotalOverallDamage { get; set; }
+
+        double TotalOverallDamageOverTime { get; set; }
+
+        double TotalOverallDamageTaken { get; set; }
+
+        double TotalOverallDamageTakenOverTime { get; set; }
+
+        double TotalOverallHealing { get; set; }
+
+        double TotalOverallHealingMitigated { get; set; }
+
+        double TotalOverallHealingOverHealing { get; set; }
+
+        double TotalOverallHealingOverTime { get; set; }
+
+        PlayerType Type { get; set; }
     }
 }
