@@ -1,57 +1,39 @@
-// FFXIVAPP.Plugin.Parse ~ Fight.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Fight.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Fight.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+namespace FFXIVAPP.Plugin.Parse.Models.Fights {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
-namespace FFXIVAPP.Plugin.Parse.Models.Fights
-{
-    public sealed class Fight : INotifyPropertyChanged
-    {
-        public Fight(string monsterName = "")
-        {
-            MonsterName = monsterName;
-        }
-
-        #region Property Bindings
-
+    public sealed class Fight : INotifyPropertyChanged {
         private string _monsterName;
 
-        public string MonsterName
-        {
-            get { return _monsterName; }
-            private set
-            {
-                _monsterName = value;
-                RaisePropertyChanged();
-            }
+        public Fight(string monsterName = "") {
+            this.MonsterName = monsterName;
         }
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
+        public string MonsterName {
+            get {
+                return this._monsterName;
+            }
+
+            private set {
+                this._monsterName = value;
+                this.RaisePropertyChanged();
+            }
         }
 
-        #endregion
+        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
+        }
     }
 }

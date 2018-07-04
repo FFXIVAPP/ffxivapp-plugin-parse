@@ -20,75 +20,89 @@
     </DataGrid.Resources>
     <DataGrid.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="{Binding Locale[parse_TotalOverallDamageTakenHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_TotalOverallDamageTakenHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnTotalOverallDamageTaken,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnTotalOverallDamageTaken,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_RegularDamageTakenHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_RegularDamageTakenHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnRegularDamageTaken,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnRegularDamageTaken,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_CriticalDamageTakenHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_CriticalDamageTakenHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnCriticalDamageTaken,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnCriticalDamageTaken,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DTPSHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DTPSHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDTPS,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDTPS,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenRegLowHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenRegLowHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenRegLow,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenRegLow,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenRegHighHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenRegHighHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenRegHigh,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenRegHigh,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenRegAverageHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenRegAverageHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenRegAverage,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenRegAverage,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenRegModHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenRegModHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenRegMod,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenRegMod,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenRegModAverageHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenRegModAverageHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenRegModAverage,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenRegModAverage,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenCritLowHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenCritLowHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenCritLow,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenCritLow,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenCritHighHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenCritHighHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenCritHigh,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenCritHigh,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenCritAverageHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenCritAverageHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenCritAverage,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenCritAverage,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenCritModHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenCritModHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenCritMod,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenCritMod,
                                           Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageTakenCritModAverageHeader],
+            <MenuItem
+                Header="{Binding Locale[parse_DamageTakenCritModAverageHeader],
                                        Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageTakenCritModAverage,
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageTakenCritModAverage,
                                           Source={StaticResource Settings}}" />
         </ContextMenu>
     </DataGrid.ContextMenu>
@@ -122,12 +136,13 @@
                             Visibility="{Binding ShowColumnCriticalDamageTaken,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding CombinedDTPS,
+        <DataGridTextColumn
+            Binding="{Binding CombinedDTPS,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_DTPSHeader],
+            Header="{Binding Locale[parse_DTPSHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DTPS"
-                            Visibility="{Binding ShowColumnDTPS,
+            Utilities:GridViewSort.PropertyName="DTPS"
+            Visibility="{Binding ShowColumnDTPS,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
         <DataGridTextColumn Binding="{Binding CombinedDamageTakenRegLow}"
@@ -144,28 +159,31 @@
                             Visibility="{Binding ShowColumnDamageTakenRegHigh,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding CombinedDamageTakenRegAverage,
+        <DataGridTextColumn
+            Binding="{Binding CombinedDamageTakenRegAverage,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_DamageTakenRegAverageHeader],
+            Header="{Binding Locale[parse_DamageTakenRegAverageHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenRegAverage"
-                            Visibility="{Binding ShowColumnDamageTakenRegAverage,
+            Utilities:GridViewSort.PropertyName="DamageTakenRegAverage"
+            Visibility="{Binding ShowColumnDamageTakenRegAverage,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding CombinedDamageTakenRegMod,
+        <DataGridTextColumn
+            Binding="{Binding CombinedDamageTakenRegMod,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_DamageTakenRegModHeader],
+            Header="{Binding Locale[parse_DamageTakenRegModHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenRegMod"
-                            Visibility="{Binding ShowColumnDamageTakenRegMod,
+            Utilities:GridViewSort.PropertyName="DamageTakenRegMod"
+            Visibility="{Binding ShowColumnDamageTakenRegMod,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding CombinedDamageTakenRegModAverage,
+        <DataGridTextColumn
+            Binding="{Binding CombinedDamageTakenRegModAverage,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_DamageTakenRegModAverageHeader],
+            Header="{Binding Locale[parse_DamageTakenRegModAverageHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenRegModAverage"
-                            Visibility="{Binding ShowColumnDamageTakenRegModAverage,
+            Utilities:GridViewSort.PropertyName="DamageTakenRegModAverage"
+            Visibility="{Binding ShowColumnDamageTakenRegModAverage,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
         <DataGridTextColumn Binding="{Binding CombinedDamageTakenCritLow}"
@@ -182,28 +200,31 @@
                             Visibility="{Binding ShowColumnDamageTakenCritHigh,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding CombinedDamageTakenCritAverage,
+        <DataGridTextColumn
+            Binding="{Binding CombinedDamageTakenCritAverage,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_DamageTakenCritAverageHeader],
+            Header="{Binding Locale[parse_DamageTakenCritAverageHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenCritAverage"
-                            Visibility="{Binding ShowColumnDamageTakenCritAverage,
+            Utilities:GridViewSort.PropertyName="DamageTakenCritAverage"
+            Visibility="{Binding ShowColumnDamageTakenCritAverage,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding CombinedDamageTakenCritMod,
+        <DataGridTextColumn
+            Binding="{Binding CombinedDamageTakenCritMod,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_DamageTakenCritModHeader],
+            Header="{Binding Locale[parse_DamageTakenCritModHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenCritMod"
-                            Visibility="{Binding ShowColumnDamageTakenCritMod,
+            Utilities:GridViewSort.PropertyName="DamageTakenCritMod"
+            Visibility="{Binding ShowColumnDamageTakenCritMod,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
-        <DataGridTextColumn Binding="{Binding CombinedDamageTakenCritModAverage,
+        <DataGridTextColumn
+            Binding="{Binding CombinedDamageTakenCritModAverage,
                                               StringFormat=\{0:F2\}}"
-                            Header="{Binding Locale[parse_DamageTakenCritModAverageHeader],
+            Header="{Binding Locale[parse_DamageTakenCritModAverageHeader],
                                              Source={StaticResource PluginViewModel}}"
-                            Utilities:GridViewSort.PropertyName="DamageTakenCritModAverage"
-                            Visibility="{Binding ShowColumnDamageTakenCritModAverage,
+            Utilities:GridViewSort.PropertyName="DamageTakenCritModAverage"
+            Visibility="{Binding ShowColumnDamageTakenCritModAverage,
                                                  Source={StaticResource Settings},
                                                  Converter={StaticResource VisibilityConverter}}" />
     </DataGrid.Columns>

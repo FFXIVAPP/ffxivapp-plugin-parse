@@ -18,27 +18,32 @@
     </DataGrid.Resources>
     <DataGrid.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="{Binding Locale[parse_PercentOfTotalOverallDamageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfTotalOverallDamage, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_PercentOfRegularDamageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfRegularDamage, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_PercentOfCriticalDamageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnPercentOfCriticalDamage, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_TotalOverallDamageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnTotalOverallDamage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_PercentOfTotalOverallDamageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnPercentOfTotalOverallDamage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_PercentOfRegularDamageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnPercentOfRegularDamage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_PercentOfCriticalDamageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnPercentOfCriticalDamage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_TotalOverallDamageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnTotalOverallDamage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_RegularDamageHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnRegularDamage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_CriticalDamageHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnCriticalDamage, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_TotalDamageActionsUsedHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnTotalDamageActionsUsed, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_TotalDamageActionsUsedHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnTotalDamageActionsUsed, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DPSHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDPS, Source={StaticResource Settings}}" />
@@ -63,9 +68,10 @@
             <MenuItem Header="{Binding Locale[parse_DamageRegModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageRegMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageRegModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageRegModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageRegModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageRegModAverage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageCritHitHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageCritHit, Source={StaticResource Settings}}" />
@@ -84,69 +90,80 @@
             <MenuItem Header="{Binding Locale[parse_DamageCritModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageCritMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageCritModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageCritModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageCritModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageCritModAverage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageCounterHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageCounter, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageCounterPercentHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageCounterPercent, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageCounterPercentHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageCounterPercent, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageCounterModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageCounterMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageCounterModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageCounterModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageCounterModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageCounterModAverage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageBlockHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageBlock, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageBlockPercentHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageBlockPercent, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageBlockPercentHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageBlockPercent, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageBlockModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageBlockMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageBlockModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageBlockModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageBlockModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageBlockModAverage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageParryHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageParry, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageParryPercentHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageParryPercent, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageParryPercentHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageParryPercent, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageParryModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageParryMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageParryModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageParryModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageParryModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageParryModAverage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageResistHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageResist, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageResistPercentHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageResistPercent, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageResistPercentHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageResistPercent, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageResistModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageResistMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageResistModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageResistModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageResistModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageResistModAverage, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageEvadeHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageEvade, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageEvadePercentHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageEvadePercent, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageEvadePercentHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageEvadePercent, Source={StaticResource Settings}}" />
             <MenuItem Header="{Binding Locale[parse_DamageEvadeModHeader], Source={StaticResource PluginViewModel}}"
                       IsCheckable="True"
                       IsChecked="{Binding ShowColumnDamageEvadeMod, Source={StaticResource Settings}}" />
-            <MenuItem Header="{Binding Locale[parse_DamageEvadeModAverageHeader], Source={StaticResource PluginViewModel}}"
-                      IsCheckable="True"
-                      IsChecked="{Binding ShowColumnDamageEvadeModAverage, Source={StaticResource Settings}}" />
+            <MenuItem
+                Header="{Binding Locale[parse_DamageEvadeModAverageHeader], Source={StaticResource PluginViewModel}}"
+                IsCheckable="True"
+                IsChecked="{Binding ShowColumnDamageEvadeModAverage, Source={StaticResource Settings}}" />
         </ContextMenu>
     </DataGrid.ContextMenu>
     <i:Interaction.Behaviors>

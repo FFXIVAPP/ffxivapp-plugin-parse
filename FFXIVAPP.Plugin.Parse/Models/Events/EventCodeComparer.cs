@@ -1,33 +1,23 @@
-// FFXIVAPP.Plugin.Parse ~ EventCodeComparer.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EventCodeComparer.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   EventCodeComparer.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
+namespace FFXIVAPP.Plugin.Parse.Models.Events {
+    using System.Collections.Generic;
 
-namespace FFXIVAPP.Plugin.Parse.Models.Events
-{
-    public class EventCodeComparer : IEqualityComparer<EventCode>
-    {
+    public class EventCodeComparer : IEqualityComparer<EventCode> {
         /// <summary>
         /// </summary>
         /// <param name="eventCode1"> </param>
         /// <param name="eventCode2"> </param>
         /// <returns> </returns>
-        public bool Equals(EventCode eventCode1, EventCode eventCode2)
-        {
+        public bool Equals(EventCode eventCode1, EventCode eventCode2) {
             return eventCode1.Code == eventCode2.Code;
         }
 
@@ -35,8 +25,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         /// </summary>
         /// <param name="eventCode"> </param>
         /// <returns> </returns>
-        public int GetHashCode(EventCode eventCode)
-        {
+        public int GetHashCode(EventCode eventCode) {
             return eventCode.Code.GetHashCode();
         }
     }

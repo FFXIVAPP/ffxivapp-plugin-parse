@@ -1,54 +1,41 @@
-﻿// FFXIVAPP.Plugin.Parse ~ HistoryTimeline.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HistoryTimeline.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   HistoryTimeline.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using NLog;
+namespace FFXIVAPP.Plugin.Parse.Models.History {
+    using NLog;
 
-namespace FFXIVAPP.Plugin.Parse.Models.History
-{
-    public class HistoryTimeline
-    {
-        #region Logger
-
+    public class HistoryTimeline {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
-
-        public HistoryTimeline()
-        {
-            Overall = new HistoryGroup("Overall");
-            Party = new HistoryGroup("Party");
-            Monster = new HistoryGroup("Monster");
+        public HistoryTimeline() {
+            this.Overall = new HistoryGroup("Overall");
+            this.Party = new HistoryGroup("Party");
+            this.Monster = new HistoryGroup("Monster");
         }
 
-        public HistoryGroup Overall { get; set; }
-        public HistoryGroup Party { get; set; }
         public HistoryGroup Monster { get; set; }
+
+        public HistoryGroup Overall { get; set; }
+
+        public HistoryGroup Party { get; set; }
 
         /// <summary>
         /// </summary>
         /// <param name="monsterName"> </param>
         /// <returns> </returns>
-        public HistoryGroup GetSetMonster(string monsterName)
-        {
-            if (!Monster.HasGroup(monsterName))
-            {
-                Monster.AddGroup(new HistoryGroup(monsterName));
+        public HistoryGroup GetSetMonster(string monsterName) {
+            if (!this.Monster.HasGroup(monsterName)) {
+                this.Monster.AddGroup(new HistoryGroup(monsterName));
             }
-            var monster = Monster.GetGroup(monsterName);
+
+            HistoryGroup monster = this.Monster.GetGroup(monsterName);
             return monster;
         }
 
@@ -56,13 +43,12 @@ namespace FFXIVAPP.Plugin.Parse.Models.History
         /// </summary>
         /// <param name="playerName"> </param>
         /// <returns> </returns>
-        public HistoryGroup GetSetPlayer(string playerName)
-        {
-            if (!Party.HasGroup(playerName))
-            {
-                Party.AddGroup(new HistoryGroup(playerName));
+        public HistoryGroup GetSetPlayer(string playerName) {
+            if (!this.Party.HasGroup(playerName)) {
+                this.Party.AddGroup(new HistoryGroup(playerName));
             }
-            var player = Party.GetGroup(playerName);
+
+            HistoryGroup player = this.Party.GetGroup(playerName);
             return player;
         }
     }

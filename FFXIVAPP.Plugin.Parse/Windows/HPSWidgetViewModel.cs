@@ -1,76 +1,46 @@
-﻿// FFXIVAPP.Plugin.Parse ~ HPSWidgetViewModel.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HPSWidgetViewModel.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   HPSWidgetViewModel.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using FFXIVAPP.Plugin.Parse.Models;
+namespace FFXIVAPP.Plugin.Parse.Windows {
+    using System;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
-namespace FFXIVAPP.Plugin.Parse.Windows
-{
-    internal sealed class HPSWidgetViewModel : INotifyPropertyChanged
-    {
-        #region Property Bindings
+    using FFXIVAPP.Plugin.Parse.Models;
 
+    internal sealed class HPSWidgetViewModel : INotifyPropertyChanged {
         private static Lazy<HPSWidgetViewModel> _instance = new Lazy<HPSWidgetViewModel>(() => new HPSWidgetViewModel());
+
         private ParseEntity _parseEntity;
-
-        public static HPSWidgetViewModel Instance
-        {
-            get { return _instance.Value; }
-        }
-
-        public ParseEntity ParseEntity
-        {
-            get { return _parseEntity ?? (_parseEntity = new ParseEntity()); }
-            set
-            {
-                _parseEntity = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region Declarations
-
-        #endregion
-
-        #region Loading Functions
-
-        #endregion
-
-        #region Utility Functions
-
-        #endregion
-
-        #region Command Bindings
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
+        public static HPSWidgetViewModel Instance {
+            get {
+                return _instance.Value;
+            }
         }
 
-        #endregion
+        public ParseEntity ParseEntity {
+            get {
+                return this._parseEntity ?? (this._parseEntity = new ParseEntity());
+            }
+
+            set {
+                this._parseEntity = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
+        }
     }
 }

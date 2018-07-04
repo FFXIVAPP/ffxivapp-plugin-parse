@@ -1,80 +1,66 @@
-﻿// FFXIVAPP.Plugin.Parse ~ Player.Stats.Buffs.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Player.Stats.Buffs.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Player.Stats.Buffs.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using FFXIVAPP.Plugin.Parse.Models.Stats;
+namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
+    using System;
 
-namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
-{
-    public partial class Player
-    {
+    using FFXIVAPP.Plugin.Parse.Models.Stats;
+
+    public partial class Player {
         /// <summary>
         /// </summary>
         /// <param name="line"> </param>
-        public void SetBuff(Line line)
-        {
-            if (Name == Constants.CharacterName)
-            {
-                //LineHistory.Add(new LineHistory(line));
+        public void SetBuff(Line line) {
+            if (this.Name == Constants.CharacterName) {
+                // LineHistory.Add(new LineHistory(line));
             }
 
-            var abilityGroup = GetGroup("BuffByAction");
+            StatGroup abilityGroup = this.GetGroup("BuffByAction");
             StatGroup subAbilityGroup;
-            if (!abilityGroup.TryGetGroup(line.Action, out subAbilityGroup))
-            {
+            if (!abilityGroup.TryGetGroup(line.Action, out subAbilityGroup)) {
                 subAbilityGroup = new StatGroup(line.Action);
-                subAbilityGroup.Stats.AddStats(BuffStatList(null));
+                subAbilityGroup.Stats.AddStats(this.BuffStatList(null));
                 abilityGroup.AddGroup(subAbilityGroup);
             }
-            var playerGroup = GetGroup("BuffToPlayers");
+
+            StatGroup playerGroup = this.GetGroup("BuffToPlayers");
             StatGroup subPlayerGroup;
-            if (!playerGroup.TryGetGroup(line.Target, out subPlayerGroup))
-            {
+            if (!playerGroup.TryGetGroup(line.Target, out subPlayerGroup)) {
                 subPlayerGroup = new StatGroup(line.Target);
-                subPlayerGroup.Stats.AddStats(BuffStatList(null));
+                subPlayerGroup.Stats.AddStats(this.BuffStatList(null));
                 playerGroup.AddGroup(subPlayerGroup);
             }
-            var abilities = subPlayerGroup.GetGroup("BuffToPlayersByAction");
+
+            StatGroup abilities = subPlayerGroup.GetGroup("BuffToPlayersByAction");
             StatGroup subPlayerAbilityGroup;
-            if (!abilities.TryGetGroup(line.Action, out subPlayerAbilityGroup))
-            {
+            if (!abilities.TryGetGroup(line.Action, out subPlayerAbilityGroup)) {
                 subPlayerAbilityGroup = new StatGroup(line.Action);
-                subPlayerAbilityGroup.Stats.AddStats(BuffStatList(subPlayerGroup, true));
+                subPlayerAbilityGroup.Stats.AddStats(this.BuffStatList(subPlayerGroup, true));
                 abilities.AddGroup(subPlayerAbilityGroup);
             }
-            Stats.IncrementStat("TotalBuffTime");
+
+            this.Stats.IncrementStat("TotalBuffTime");
             subAbilityGroup.Stats.IncrementStat("TotalBuffTime");
             subPlayerGroup.Stats.IncrementStat("TotalBuffTime");
             subPlayerAbilityGroup.Stats.IncrementStat("TotalBuffTime");
-            AdjustBuffTime(this);
-            AdjustBuffTime(subAbilityGroup);
-            AdjustBuffTime(subPlayerGroup);
-            AdjustBuffTime(subPlayerAbilityGroup);
+            this.AdjustBuffTime(this);
+            this.AdjustBuffTime(subAbilityGroup);
+            this.AdjustBuffTime(subPlayerGroup);
+            this.AdjustBuffTime(subPlayerAbilityGroup);
         }
 
-        private void AdjustBuffTime(StatGroup statGroup)
-        {
-            var timeSpan = TimeSpan.FromSeconds(statGroup.Stats.GetStatValue("TotalBuffTime"));
-            statGroup.Stats.GetStat("TotalBuffHours")
-                     .Value = timeSpan.Hours;
-            statGroup.Stats.GetStat("TotalBuffMinutes")
-                     .Value = timeSpan.Minutes;
-            statGroup.Stats.GetStat("TotalBuffSeconds")
-                     .Value = timeSpan.Seconds;
+        private void AdjustBuffTime(StatGroup statGroup) {
+            TimeSpan timeSpan = TimeSpan.FromSeconds(statGroup.Stats.GetStatValue("TotalBuffTime"));
+            statGroup.Stats.GetStat("TotalBuffHours").Value = timeSpan.Hours;
+            statGroup.Stats.GetStat("TotalBuffMinutes").Value = timeSpan.Minutes;
+            statGroup.Stats.GetStat("TotalBuffSeconds").Value = timeSpan.Seconds;
         }
     }
 }

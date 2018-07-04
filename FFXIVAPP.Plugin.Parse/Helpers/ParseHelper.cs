@@ -1,34 +1,27 @@
-﻿// FFXIVAPP.Plugin.Parse ~ ParseHelper.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ParseHelper.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   ParseHelper.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using FFXIVAPP.Plugin.Parse.Enums;
-using FFXIVAPP.Plugin.Parse.Models;
+namespace FFXIVAPP.Plugin.Parse.Helpers {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
 
-namespace FFXIVAPP.Plugin.Parse.Helpers
-{
-    public static class ParseHelper
-    {
+    using FFXIVAPP.Plugin.Parse.Enums;
+    using FFXIVAPP.Plugin.Parse.Models;
+
+    public static class ParseHelper {
+        private static List<string> _healingActions;
+
         // setup pet info that comes through as "YOU"
-        private static List<string> _pets = new List<string>
-        {
+        private static List<string> _pets = new List<string> {
             "eos",
             "selene",
             "topaz carbuncle",
@@ -53,16 +46,10 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
             "カーバンクル・アンバー"
         };
 
-        private static List<string> _healingActions;
-
-        public static List<string> HealingActions
-        {
-            get
-            {
-                if (_healingActions == null)
-                {
-                    _healingActions = new List<string>
-                    {
+        public static List<string> HealingActions {
+            get {
+                if (_healingActions == null) {
+                    _healingActions = new List<string> {
                         "内丹",
                         "Second Wind",
                         "Second souffle",
@@ -125,9 +112,13 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                         "Chocobo-Vita"
                     };
                 }
+
                 return _healingActions;
             }
-            set { _healingActions = value; }
+
+            set {
+                _healingActions = value;
+            }
         }
 
         /// <summary>
@@ -135,8 +126,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
         /// <param name="amount"></param>
         /// <param name="modifier"></param>
         /// <returns></returns>
-        public static double GetBonusAmount(double amount, double modifier)
-        {
+        public static double GetBonusAmount(double amount, double modifier) {
             return Math.Abs(amount / (modifier + 1) - amount);
         }
 
@@ -145,8 +135,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
         /// <param name="amount"></param>
         /// <param name="modifier"></param>
         /// <returns></returns>
-        public static double GetOriginalAmount(double amount, double modifier)
-        {
+        public static double GetOriginalAmount(double amount, double modifier) {
             return Math.Abs(amount - GetBonusAmount(amount, modifier));
         }
 
@@ -156,27 +145,24 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
         /// <param name="exp"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static string GetTaggedName(string name, Expressions exp, TimelineType type)
-        {
-            if (type == TimelineType.Unknown)
-            {
+        public static string GetTaggedName(string name, Expressions exp, TimelineType type) {
+            if (type == TimelineType.Unknown) {
                 return name;
             }
+
             var tag = "???";
             name = name.Trim();
-            if (String.IsNullOrWhiteSpace(name))
-            {
+            if (string.IsNullOrWhiteSpace(name)) {
                 return string.Empty;
             }
-            name = Regex.Replace(name, @"\[[\w]+\]", string.Empty)
-                        .Trim();
+
+            name = Regex.Replace(name, @"\[[\w]+\]", string.Empty).Trim();
             var petFound = false;
-            foreach (var pet in _pets.Where(pet => String.Equals(pet, name, Constants.InvariantComparer)))
-            {
+            foreach (var pet in _pets.Where(pet => string.Equals(pet, name, Constants.InvariantComparer))) {
                 petFound = true;
             }
-            switch (type)
-            {
+
+            switch (type) {
                 case TimelineType.You:
                     tag = exp.YouString;
                     break;
@@ -190,127 +176,108 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                     tag = "O";
                     break;
             }
+
             return $"[{tag}] {name}";
         }
 
-        #region LastAction Helper Dictionaries
-
-        public static class LastAmountByAction
-        {
+        public static class LastAmountByAction {
             private static Dictionary<string, List<Tuple<string, double>>> Monster = new Dictionary<string, List<Tuple<string, double>>>();
+
             private static Dictionary<string, List<Tuple<string, double>>> Player = new Dictionary<string, List<Tuple<string, double>>>();
 
-            public static Dictionary<string, double> GetMonster(string name)
-            {
-                var results = new Dictionary<string, double>();
+            public static void EnsureMonsterAction(string name, string action, double amount) {
                 EnsureMonster(name);
-                lock (Monster)
-                {
-                    var actionList = new List<string>();
-                    var actionUpdateCount = new Dictionary<string, int>();
-                    foreach (var actionTuple in Monster[name])
-                    {
-                        if (!results.ContainsKey(actionTuple.Item1))
-                        {
+                lock (Monster) {
+                    Monster[name].Add(new Tuple<string, double>(action, amount));
+                }
+            }
+
+            public static void EnsurePlayerAction(string name, string action, double amount) {
+                EnsurePlayer(name);
+                lock (Player) {
+                    Player[name].Add(new Tuple<string, double>(action, amount));
+                }
+            }
+
+            public static Dictionary<string, double> GetMonster(string name) {
+                Dictionary<string, double> results = new Dictionary<string, double>();
+                EnsureMonster(name);
+                lock (Monster) {
+                    List<string> actionList = new List<string>();
+                    Dictionary<string, int> actionUpdateCount = new Dictionary<string, int>();
+                    foreach (Tuple<string, double> actionTuple in Monster[name]) {
+                        if (!results.ContainsKey(actionTuple.Item1)) {
                             results.Add(actionTuple.Item1, 0);
                         }
-                        //results[actionTuple.Item1] += actionTuple.Item2;
+
+                        // results[actionTuple.Item1] += actionTuple.Item2;
                         results[actionTuple.Item1] = actionTuple.Item2;
-                        if (!actionList.Contains(actionTuple.Item1))
-                        {
+                        if (!actionList.Contains(actionTuple.Item1)) {
                             actionList.Add(actionTuple.Item1);
                         }
-                        if (!actionUpdateCount.ContainsKey(actionTuple.Item1))
-                        {
+
+                        if (!actionUpdateCount.ContainsKey(actionTuple.Item1)) {
                             actionUpdateCount.Add(actionTuple.Item1, 0);
                         }
+
                         actionUpdateCount[actionTuple.Item1]++;
                     }
-                    foreach (var action in actionList)
-                    {
-                        //results[action] = results[action] / actionUpdateCount[action];
+
+                    foreach (var action in actionList) {
+                        // results[action] = results[action] / actionUpdateCount[action];
                     }
                 }
+
                 return results;
             }
 
-            private static void EnsureMonster(string name)
-            {
-                lock (Monster)
-                {
-                    if (!Monster.ContainsKey(name))
-                    {
+            public static Dictionary<string, double> GetPlayer(string name) {
+                Dictionary<string, double> results = new Dictionary<string, double>();
+                EnsurePlayer(name);
+                lock (Player) {
+                    List<string> actionList = new List<string>();
+                    Dictionary<string, int> actionUpdateCount = new Dictionary<string, int>();
+                    foreach (Tuple<string, double> actionTuple in Player[name]) {
+                        if (!results.ContainsKey(actionTuple.Item1)) {
+                            results.Add(actionTuple.Item1, 0);
+                        }
+
+                        // results[actionTuple.Item1] += actionTuple.Item2;
+                        results[actionTuple.Item1] = actionTuple.Item2;
+                        if (!actionList.Contains(actionTuple.Item1)) {
+                            actionList.Add(actionTuple.Item1);
+                        }
+
+                        if (!actionUpdateCount.ContainsKey(actionTuple.Item1)) {
+                            actionUpdateCount.Add(actionTuple.Item1, 0);
+                        }
+
+                        actionUpdateCount[actionTuple.Item1]++;
+                    }
+
+                    foreach (var action in actionList) {
+                        // results[action] = results[action] / actionUpdateCount[action];
+                    }
+                }
+
+                return results;
+            }
+
+            private static void EnsureMonster(string name) {
+                lock (Monster) {
+                    if (!Monster.ContainsKey(name)) {
                         Monster.Add(name, new List<Tuple<string, double>>());
                     }
                 }
             }
 
-            public static void EnsureMonsterAction(string name, string action, double amount)
-            {
-                EnsureMonster(name);
-                lock (Monster)
-                {
-                    Monster[name]
-                        .Add(new Tuple<string, double>(action, amount));
-                }
-            }
-
-            public static Dictionary<string, double> GetPlayer(string name)
-            {
-                var results = new Dictionary<string, double>();
-                EnsurePlayer(name);
-                lock (Player)
-                {
-                    var actionList = new List<string>();
-                    var actionUpdateCount = new Dictionary<string, int>();
-                    foreach (var actionTuple in Player[name])
-                    {
-                        if (!results.ContainsKey(actionTuple.Item1))
-                        {
-                            results.Add(actionTuple.Item1, 0);
-                        }
-                        //results[actionTuple.Item1] += actionTuple.Item2;
-                        results[actionTuple.Item1] = actionTuple.Item2;
-                        if (!actionList.Contains(actionTuple.Item1))
-                        {
-                            actionList.Add(actionTuple.Item1);
-                        }
-                        if (!actionUpdateCount.ContainsKey(actionTuple.Item1))
-                        {
-                            actionUpdateCount.Add(actionTuple.Item1, 0);
-                        }
-                        actionUpdateCount[actionTuple.Item1]++;
-                    }
-                    foreach (var action in actionList)
-                    {
-                        //results[action] = results[action] / actionUpdateCount[action];
-                    }
-                }
-                return results;
-            }
-
-            private static void EnsurePlayer(string name)
-            {
-                lock (Player)
-                {
-                    if (!Player.ContainsKey(name))
-                    {
+            private static void EnsurePlayer(string name) {
+                lock (Player) {
+                    if (!Player.ContainsKey(name)) {
                         Player.Add(name, new List<Tuple<string, double>>());
                     }
                 }
             }
-
-            public static void EnsurePlayerAction(string name, string action, double amount)
-            {
-                EnsurePlayer(name);
-                lock (Player)
-                {
-                    Player[name]
-                        .Add(new Tuple<string, double>(action, amount));
-                }
-            }
         }
-
-        #endregion
     }
 }

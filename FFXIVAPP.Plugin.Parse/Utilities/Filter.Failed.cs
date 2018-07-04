@@ -1,240 +1,227 @@
-﻿// FFXIVAPP.Plugin.Parse ~ Filter.Failed.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Filter.Failed.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Filter.Failed.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Text.RegularExpressions;
-using FFXIVAPP.Plugin.Parse.Enums;
-using FFXIVAPP.Plugin.Parse.Helpers;
-using FFXIVAPP.Plugin.Parse.Models;
-using FFXIVAPP.Plugin.Parse.Models.Events;
+namespace FFXIVAPP.Plugin.Parse.Utilities {
+    using System;
+    using System.Text.RegularExpressions;
 
-namespace FFXIVAPP.Plugin.Parse.Utilities
-{
-    public static partial class Filter
-    {
-        private static void ProcessFailed(Event e, Expressions exp)
-        {
-            var line = new Line(e.ChatLogEntry)
-            {
+    using FFXIVAPP.Plugin.Parse.Enums;
+    using FFXIVAPP.Plugin.Parse.Helpers;
+    using FFXIVAPP.Plugin.Parse.Models;
+    using FFXIVAPP.Plugin.Parse.Models.Events;
+
+    public static partial class Filter {
+        private static void ProcessFailed(Event e, Expressions exp) {
+            var line = new Line(e.ChatLogItem) {
                 EventDirection = e.Direction,
                 EventSubject = e.Subject,
                 EventType = e.Type
             };
             LineHelper.SetTimelineTypes(ref line);
-            if (LineHelper.IsIgnored(line))
-            {
+            if (LineHelper.IsIgnored(line)) {
                 return;
             }
-            var failed = Regex.Match("ph", @"^\.$");
-            switch (e.Subject)
-            {
+
+            Match failed = Regex.Match("ph", @"^\.$");
+            switch (e.Subject) {
                 case EventSubject.You:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.Engaged:
                         case EventDirection.UnEngaged:
                             failed = exp.pFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = You;
                                     UpdateFailed(failed, line, exp, FilterType.You);
                                     break;
                                 case false:
                                     failed = exp.pFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         line.Source = You;
                                         UpdateFailed(failed, line, exp, FilterType.You);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
                 case EventSubject.Pet:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.Engaged:
                         case EventDirection.UnEngaged:
                             failed = exp.pFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNamePet;
                                     UpdateFailed(failed, line, exp, FilterType.Pet);
                                     break;
                                 case false:
                                     failed = exp.pFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailed(failed, line, exp, FilterType.Pet);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
                 case EventSubject.Party:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.Engaged:
                         case EventDirection.UnEngaged:
                             failed = exp.pFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNamePartyFrom;
                                     UpdateFailed(failed, line, exp, FilterType.Party);
                                     break;
                                 case false:
                                     failed = exp.pFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailed(failed, line, exp, FilterType.Party);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
                 case EventSubject.PetParty:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.Engaged:
                         case EventDirection.UnEngaged:
                             failed = exp.pFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNamePetPartyFrom;
                                     UpdateFailed(failed, line, exp, FilterType.PetParty);
                                     break;
                                 case false:
                                     failed = exp.pFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailed(failed, line, exp, FilterType.PetParty);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
                 case EventSubject.Alliance:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.Engaged:
                         case EventDirection.UnEngaged:
                             failed = exp.pFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameAllianceFrom;
                                     UpdateFailed(failed, line, exp, FilterType.Alliance);
                                     break;
                                 case false:
                                     failed = exp.pFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailed(failed, line, exp, FilterType.Alliance);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
                 case EventSubject.PetAlliance:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.Engaged:
                         case EventDirection.UnEngaged:
                             failed = exp.pFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNamePetAllianceFrom;
                                     UpdateFailed(failed, line, exp, FilterType.PetAlliance);
                                     break;
                                 case false:
                                     failed = exp.pFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailed(failed, line, exp, FilterType.PetAlliance);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
                 case EventSubject.Other:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.Engaged:
                         case EventDirection.UnEngaged:
                             failed = exp.pFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameOtherFrom;
                                     UpdateFailed(failed, line, exp, FilterType.Other);
                                     break;
                                 case false:
                                     failed = exp.pFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailed(failed, line, exp, FilterType.Other);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
                 case EventSubject.PetOther:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.Engaged:
                         case EventDirection.UnEngaged:
                             failed = exp.pFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNamePetOtherFrom;
                                     UpdateFailed(failed, line, exp, FilterType.PetOther);
                                     break;
                                 case false:
                                     failed = exp.pFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailed(failed, line, exp, FilterType.PetOther);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
                 case EventSubject.Engaged:
                 case EventSubject.UnEngaged:
-                    switch (e.Direction)
-                    {
+                    switch (e.Direction) {
                         case EventDirection.You:
                             failed = exp.mFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameMonster;
                                     line.Target = You;
@@ -242,18 +229,18 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                     break;
                                 case false:
                                     failed = exp.mFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         line.Target = You;
                                         UpdateFailedMonster(failed, line, exp, FilterType.You);
                                     }
+
                                     break;
                             }
+
                             break;
                         case EventDirection.Pet:
                             failed = exp.mFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameMonster;
                                     line.Target = _lastNamePet;
@@ -261,17 +248,17 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                     break;
                                 case false:
                                     failed = exp.mFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailedMonster(failed, line, exp, FilterType.Pet);
                                     }
+
                                     break;
                             }
+
                             break;
                         case EventDirection.Party:
                             failed = exp.mFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameMonster;
                                     line.Target = _lastNamePartyTo;
@@ -279,17 +266,17 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                     break;
                                 case false:
                                     failed = exp.mFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailedMonster(failed, line, exp, FilterType.Party);
                                     }
+
                                     break;
                             }
+
                             break;
                         case EventDirection.PetParty:
                             failed = exp.mFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameMonster;
                                     line.Target = _lastNamePetPartyTo;
@@ -297,17 +284,17 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                     break;
                                 case false:
                                     failed = exp.mFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailedMonster(failed, line, exp, FilterType.PetParty);
                                     }
+
                                     break;
                             }
+
                             break;
                         case EventDirection.Alliance:
                             failed = exp.mFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameMonster;
                                     line.Target = _lastNameAllianceTo;
@@ -315,17 +302,17 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                     break;
                                 case false:
                                     failed = exp.mFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailedMonster(failed, line, exp, FilterType.Alliance);
                                     }
+
                                     break;
                             }
+
                             break;
                         case EventDirection.PetAlliance:
                             failed = exp.mFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameMonster;
                                     line.Target = _lastNamePetAllianceTo;
@@ -333,17 +320,17 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                     break;
                                 case false:
                                     failed = exp.mFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailedMonster(failed, line, exp, FilterType.PetAlliance);
                                     }
+
                                     break;
                             }
+
                             break;
                         case EventDirection.Other:
                             failed = exp.mFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameMonster;
                                     line.Target = _lastNameOtherTo;
@@ -351,17 +338,17 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                     break;
                                 case false:
                                     failed = exp.mFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailedMonster(failed, line, exp, FilterType.Other);
                                     }
+
                                     break;
                             }
+
                             break;
                         case EventDirection.PetOther:
                             failed = exp.mFailed;
-                            switch (failed.Success)
-                            {
+                            switch (failed.Success) {
                                 case true:
                                     line.Source = _lastNameMonster;
                                     line.Target = _lastNamePetOtherTo;
@@ -369,48 +356,44 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                     break;
                                 case false:
                                     failed = exp.mFailedAuto;
-                                    if (failed.Success)
-                                    {
+                                    if (failed.Success) {
                                         UpdateFailedMonster(failed, line, exp, FilterType.PetOther);
                                     }
+
                                     break;
                             }
+
                             break;
                     }
+
                     break;
             }
-            if (failed.Success)
-            {
+
+            if (failed.Success) {
                 return;
             }
+
             ParsingLogHelper.Log(Logger, "Failed", e, exp);
         }
 
-        private static void UpdateFailed(Match failed, Line line, Expressions exp, FilterType type)
-        {
+        private static void UpdateFailed(Match failed, Line line, Expressions exp, FilterType type) {
             _type = type;
-            try
-            {
+            try {
                 line.Miss = true;
-                if (String.IsNullOrWhiteSpace(line.Source))
-                {
-                    line.Source = Convert.ToString(failed.Groups["source"]
-                                                         .Value);
+                if (string.IsNullOrWhiteSpace(line.Source)) {
+                    line.Source = Convert.ToString(failed.Groups["source"].Value);
                 }
-                if (String.IsNullOrWhiteSpace(line.Target))
-                {
-                    line.Target = Convert.ToString(failed.Groups["target"]
-                                                         .Value);
+
+                if (string.IsNullOrWhiteSpace(line.Target)) {
+                    line.Target = Convert.ToString(failed.Groups["target"].Value);
                 }
-                switch (failed.Groups["source"]
-                              .Success)
-                {
+
+                switch (failed.Groups["source"].Success) {
                     case true:
                         line.Action = exp.Attack;
                         break;
                     case false:
-                        switch (type)
-                        {
+                        switch (type) {
                             case FilterType.You:
                                 line.Action = _lastActionYou;
                                 break;
@@ -436,10 +419,11 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                                 line.Action = _lastActionPetOtherFrom;
                                 break;
                         }
+
                         break;
                 }
-                switch (type)
-                {
+
+                switch (type) {
                     case FilterType.Pet:
                         _lastNamePet = line.Source;
                         break;
@@ -462,46 +446,38 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         _lastNamePetOtherTo = line.Source;
                         break;
                 }
-                if (line.IsEmpty())
-                {
+
+                if (line.IsEmpty()) {
                     return;
                 }
-                switch (type)
-                {
+
+                switch (type) {
                     default:
                         ParseControl.Instance.Timeline.PublishTimelineEvent(TimelineEventType.PartyMonsterFighting, line.Target);
                         break;
                 }
-                ParseControl.Instance.Timeline.GetSetMonster(line.Target)
-                            .SetDamageTaken(line);
-                ParseControl.Instance.Timeline.GetSetPlayer(line.Source)
-                            .SetDamage(line);
+
+                ParseControl.Instance.Timeline.GetSetMonster(line.Target).SetDamageTaken(line);
+                ParseControl.Instance.Timeline.GetSetPlayer(line.Source).SetDamage(line);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 ParsingLogHelper.Error(Logger, "Failed", exp.Event, ex);
             }
         }
 
-        private static void UpdateFailedMonster(Match failed, Line line, Expressions exp, FilterType type)
-        {
+        private static void UpdateFailedMonster(Match failed, Line line, Expressions exp, FilterType type) {
             _type = type;
-            try
-            {
+            try {
                 line.Miss = true;
-                if (String.IsNullOrWhiteSpace(line.Source))
-                {
-                    line.Source = Convert.ToString(failed.Groups["source"]
-                                                         .Value);
+                if (string.IsNullOrWhiteSpace(line.Source)) {
+                    line.Source = Convert.ToString(failed.Groups["source"].Value);
                 }
-                if (String.IsNullOrWhiteSpace(line.Target))
-                {
-                    line.Target = Convert.ToString(failed.Groups["target"]
-                                                         .Value);
+
+                if (string.IsNullOrWhiteSpace(line.Target)) {
+                    line.Target = Convert.ToString(failed.Groups["target"].Value);
                 }
-                switch (failed.Groups["source"]
-                              .Success)
-                {
+
+                switch (failed.Groups["source"].Success) {
                     case true:
                         line.Action = exp.Attack;
                         break;
@@ -509,8 +485,8 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         line.Action = _lastActionMonster;
                         break;
                 }
-                switch (type)
-                {
+
+                switch (type) {
                     case FilterType.Pet:
                         _lastNamePet = line.Target;
                         break;
@@ -533,23 +509,21 @@ namespace FFXIVAPP.Plugin.Parse.Utilities
                         _lastNamePetOtherTo = line.Target;
                         break;
                 }
-                if (line.IsEmpty())
-                {
+
+                if (line.IsEmpty()) {
                     return;
                 }
-                switch (type)
-                {
+
+                switch (type) {
                     default:
                         ParseControl.Instance.Timeline.PublishTimelineEvent(TimelineEventType.PartyMonsterFighting, line.Source);
                         break;
                 }
-                ParseControl.Instance.Timeline.GetSetPlayer(line.Target)
-                            .SetDamageTaken(line);
-                ParseControl.Instance.Timeline.GetSetMonster(line.Source)
-                            .SetDamage(line);
+
+                ParseControl.Instance.Timeline.GetSetPlayer(line.Target).SetDamageTaken(line);
+                ParseControl.Instance.Timeline.GetSetMonster(line.Source).SetDamage(line);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 ParsingLogHelper.Error(Logger, "Failed", exp.Event, ex);
             }
         }

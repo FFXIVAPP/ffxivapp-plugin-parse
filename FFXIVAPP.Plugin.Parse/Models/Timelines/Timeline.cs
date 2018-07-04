@@ -1,116 +1,229 @@
-﻿// FFXIVAPP.Plugin.Parse ~ Timeline.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Timeline.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Timeline.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Timers;
-using FFXIVAPP.Common.Models;
-using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Plugin.Parse.Enums;
-using FFXIVAPP.Plugin.Parse.Models.Fights;
-using FFXIVAPP.Plugin.Parse.Models.LinkedStats;
-using FFXIVAPP.Plugin.Parse.Models.StatGroups;
-using FFXIVAPP.Plugin.Parse.Models.Stats;
-using FFXIVAPP.Plugin.Parse.Properties;
-using NLog;
+namespace FFXIVAPP.Plugin.Parse.Models.Timelines {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Timers;
 
-namespace FFXIVAPP.Plugin.Parse.Models.Timelines
-{
-    public sealed class Timeline : INotifyPropertyChanged
-    {
-        #region Logger
+    using FFXIVAPP.Common.Models;
+    using FFXIVAPP.Common.Utilities;
+    using FFXIVAPP.Plugin.Parse.Enums;
+    using FFXIVAPP.Plugin.Parse.Models.Fights;
+    using FFXIVAPP.Plugin.Parse.Models.LinkedStats;
+    using FFXIVAPP.Plugin.Parse.Models.StatGroups;
+    using FFXIVAPP.Plugin.Parse.Models.Stats;
+    using FFXIVAPP.Plugin.Parse.Properties;
 
+    using NLog;
+
+    public sealed class Timeline : INotifyPropertyChanged {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
+        public readonly Timer FightingTimer = new Timer(2500);
+
+        public readonly Timer StoreHistoryTimer = new Timer(5000);
+
+        private ParseControl _controller;
+
+        private bool _deathFound;
+
+        private bool _fightingRightNow;
+
+        private FightList _fights;
+
+        private string _lastEngaged;
+
+        private string _lastKilled;
+
+        private StatGroup _monster;
+
+        private StatGroup _overall;
+
+        private StatGroup _party;
+
+        private Dictionary<string, int> _playerCurables;
 
         /// <summary>
         /// </summary>
-        public Timeline(ParseControl parseControl)
-        {
-            Controller = parseControl;
-            FightingRightNow = false;
-            DeathFound = false;
-            Fights = new FightList();
+        public Timeline(ParseControl parseControl) {
+            this.Controller = parseControl;
+            this.FightingRightNow = false;
+            this.DeathFound = false;
+            this.Fights = new FightList();
+
             // setup party
-            Overall = new StatGroup("Overall");
-            Party = new StatGroup("Party")
-            {
+            this.Overall = new StatGroup("Overall");
+            this.Party = new StatGroup("Party") {
                 IncludeSelf = false
             };
-            Monster = new StatGroup("Monster")
-            {
+            this.Monster = new StatGroup("Monster") {
                 IncludeSelf = false
             };
-            PlayerCurables = new Dictionary<string, int>();
-            SetStoreHistoryInterval();
-            InitStats();
-            StoreHistoryTimer.Elapsed += StoreHistoryTimerOnElapsed;
-            FightingTimer.Elapsed += FightingTimerOnElapsed;
+            this.PlayerCurables = new Dictionary<string, int>();
+            this.SetStoreHistoryInterval();
+            this.InitStats();
+            this.StoreHistoryTimer.Elapsed += this.StoreHistoryTimerOnElapsed;
+            this.FightingTimer.Elapsed += this.FightingTimerOnElapsed;
         }
 
-        private void FightingTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
-        {
-            FightingRightNow = false;
-            FightingTimer.Stop();
-        }
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private void SetStoreHistoryInterval()
-        {
-            try
-            {
-                double interval;
-                double.TryParse(Settings.Default.StoreHistoryInterval, out interval);
-                StoreHistoryTimer.Interval = interval;
+        public event EventHandler<TimelineChangedEvent> TimelineChangedEvent = delegate { };
+
+        public bool DeathFound {
+            get {
+                return this._deathFound;
             }
-            catch (Exception ex)
-            {
-                Logging.Log(Logger, new LogItem(ex, true));
+
+            private set {
+                this._deathFound = value;
+                this.RaisePropertyChanged();
             }
         }
 
-        private void StoreHistoryTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
-        {
-            SetStoreHistoryInterval();
-            if (Settings.Default.EnableStoreHistoryReset)
-            {
-                if (!FightingRightNow)
-                {
-                    Controller.Reset();
-                }
+        public bool FightingRightNow {
+            get {
+                return this._fightingRightNow;
             }
-            StoreHistoryTimer.Stop();
+
+            set {
+                this._fightingRightNow = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public FightList Fights {
+            get {
+                return this._fights;
+            }
+
+            internal set {
+                this._fights = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public string LastEngaged {
+            get {
+                return this._lastEngaged;
+            }
+
+            set {
+                this._lastEngaged = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public string LastKilled {
+            get {
+                return this._lastKilled;
+            }
+
+            set {
+                this._lastKilled = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public StatGroup Monster {
+            get {
+                return this._monster;
+            }
+
+            internal set {
+                this._monster = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public StatGroup Overall {
+            get {
+                return this._overall;
+            }
+
+            internal set {
+                this._overall = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public StatGroup Party {
+            get {
+                return this._party;
+            }
+
+            internal set {
+                this._party = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private ParseControl Controller {
+            get {
+                return this._controller;
+            }
+
+            set {
+                this._controller = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private Dictionary<string, int> PlayerCurables {
+            get {
+                return this._playerCurables;
+            }
+
+            set {
+                this._playerCurables = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        public void Clear() {
+            this.Fights.Clear();
+            this.Overall.Clear();
+            this.Party.Clear();
+            this.Monster.Clear();
+            this.InitStats();
+        }
+
+        public void ClearPlayerCurables() {
+            lock (this.PlayerCurables) {
+                this.PlayerCurables.Clear();
+            }
+        }
+
+        public Dictionary<string, int> GetPlayerCurables() {
+            lock (this.PlayerCurables) {
+                return this.PlayerCurables.ToDictionary(playerCurable => playerCurable.Key, playerCurable => playerCurable.Value);
+            }
         }
 
         /// <summary>
         /// </summary>
         /// <param name="monsterName"> </param>
         /// <returns> </returns>
-        public Monster GetSetMonster(string monsterName)
-        {
-            if (!Monster.HasGroup(monsterName))
-            {
+        public Monster GetSetMonster(string monsterName) {
+            if (!this.Monster.HasGroup(monsterName)) {
                 Logging.Log(Logger, $"StatEvent : Adding new stat group for monster : {monsterName}");
-                Monster.AddGroup(new Monster(monsterName, Controller));
+                this.Monster.AddGroup(new Monster(monsterName, this.Controller));
             }
-            var monster = (Monster) Monster.GetGroup(monsterName);
+
+            var monster = (Monster) this.Monster.GetGroup(monsterName);
             return monster;
         }
 
@@ -118,14 +231,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
         /// </summary>
         /// <param name="playerName"> </param>
         /// <returns> </returns>
-        public Player GetSetPlayer(string playerName)
-        {
-            if (!Party.HasGroup(playerName))
-            {
+        public Player GetSetPlayer(string playerName) {
+            if (!this.Party.HasGroup(playerName)) {
                 Logging.Log(Logger, $"StatEvent : Adding new stat group for player : {playerName}");
-                Party.AddGroup(new Player(playerName, Controller));
+                this.Party.AddGroup(new Player(playerName, this.Controller));
             }
-            var player = (Player) Party.GetGroup(playerName);
+
+            var player = (Player) this.Party.GetGroup(playerName);
             return player;
         }
 
@@ -133,86 +245,102 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
         /// </summary>
         /// <param name="eventType"> </param>
         /// <param name="eventArgs"> </param>
-        public void PublishTimelineEvent(TimelineEventType eventType, params object[] eventArgs)
-        {
-            var args = eventArgs != null && eventArgs.Any() ? eventArgs[0] : "(no args)";
+        public void PublishTimelineEvent(TimelineEventType eventType, params object[] eventArgs) {
+            object args = eventArgs != null && eventArgs.Any()
+                              ? eventArgs[0]
+                              : "(no args)";
             Logging.Log(Logger, $"TimelineEvent : {eventType} {args}");
-            if (eventArgs != null)
-            {
-                var monsterName = eventArgs.First() as String;
-                switch (eventType)
-                {
+            if (eventArgs != null) {
+                var monsterName = eventArgs.First() as string;
+                switch (eventType) {
                     case TimelineEventType.PartyJoin:
                     case TimelineEventType.PartyDisband:
-                    case TimelineEventType.PartyLeave: break;
+                    case TimelineEventType.PartyLeave:
+                        break;
                     case TimelineEventType.PartyMonsterFighting:
                     case TimelineEventType.AllianceMonsterFighting:
                     case TimelineEventType.OtherMonsterFighting:
-                        DeathFound = false;
-                        if (monsterName != null && (monsterName.ToLower()
-                                                               .Contains("target") || monsterName == string.Empty))
-                        {
+                        this.DeathFound = false;
+                        if (monsterName != null && (monsterName.ToLower().Contains("target") || monsterName == string.Empty)) {
                             break;
                         }
+
                         Fight fighting;
-                        if (!Fights.TryGet(monsterName, out fighting))
-                        {
+                        if (!this.Fights.TryGet(monsterName, out fighting)) {
                             fighting = new Fight(monsterName);
-                            Fights.Add(fighting);
+                            this.Fights.Add(fighting);
                         }
-                        Controller.Timeline.LastEngaged = monsterName;
+
+                        this.Controller.Timeline.LastEngaged = monsterName;
                         break;
                     case TimelineEventType.PartyMonsterKilled:
                     case TimelineEventType.AllianceMonsterKilled:
                     case TimelineEventType.OtherMonsterKilled:
-                        DeathFound = true;
-                        if (monsterName != null && (monsterName.ToLower()
-                                                               .Contains("target") || monsterName == string.Empty))
-                        {
+                        this.DeathFound = true;
+                        if (monsterName != null && (monsterName.ToLower().Contains("target") || monsterName == string.Empty)) {
                             break;
                         }
+
                         Fight killed;
-                        if (!Fights.TryGet(monsterName, out killed))
-                        {
+                        if (!this.Fights.TryGet(monsterName, out killed)) {
                             killed = new Fight(monsterName);
-                            Fights.Add(killed);
+                            this.Fights.Add(killed);
                         }
-                        switch (eventType)
-                        {
+
+                        switch (eventType) {
                             case TimelineEventType.PartyMonsterKilled:
-                                GetSetMonster(monsterName)
-                                    .SetKill(killed);
+                                this.GetSetMonster(monsterName).SetKill(killed);
                                 break;
                             case TimelineEventType.AllianceMonsterKilled:
-                                GetSetMonster(monsterName)
-                                    .SetKill(killed);
+                                this.GetSetMonster(monsterName).SetKill(killed);
                                 break;
                             case TimelineEventType.OtherMonsterKilled:
-                                GetSetMonster(monsterName)
-                                    .SetKill(killed);
+                                this.GetSetMonster(monsterName).SetKill(killed);
                                 break;
                         }
-                        Controller.Timeline.LastKilled = monsterName;
+
+                        this.Controller.Timeline.LastKilled = monsterName;
                         break;
                 }
             }
-            RaiseTimelineChangedEvent(this, new TimelineChangedEvent(eventType, eventArgs));
+
+            this.RaiseTimelineChangedEvent(this, new TimelineChangedEvent(eventType, eventArgs));
         }
 
-        private void InitStats()
-        {
-            Overall.Stats.Clear();
-            var overallStats = OverallStats()
-                .Select(s => s.Value)
-                .ToList();
-            Overall.Stats.AddStats(overallStats);
+        public int TryGetPlayerCurable(string key) {
+            lock (this.PlayerCurables) {
+                return this.PlayerCurables.ContainsKey(key)
+                           ? this.PlayerCurables[key]
+                           : 0;
+            }
         }
 
-        private Dictionary<string, Stat<double>> OverallStats()
-        {
-            var stats = new Dictionary<string, Stat<double>>();
+        public void TrySetPlayerCurable(string key, int value) {
+            lock (this.PlayerCurables) {
+                if (this.PlayerCurables.ContainsKey(key)) {
+                    this.PlayerCurables[key] = value;
+                }
+                else {
+                    this.PlayerCurables.Add(key, value);
+                }
+            }
+        }
 
-            #region Player
+        private void FightingTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs) {
+            this.FightingRightNow = false;
+            this.FightingTimer.Stop();
+        }
+
+        private void InitStats() {
+            this.Overall.Stats.Clear();
+            List<Stat<double>> overallStats = this.OverallStats().Select(s => s.Value).ToList();
+            this.Overall.Stats.AddStats(overallStats);
+        }
+
+        private Dictionary<string, Stat<double>> OverallStats() {
+            Dictionary<string, Stat<double>> stats = new Dictionary<string, Stat<double>>();
+
+            
 
             #region Combined
 
@@ -292,7 +420,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
             stats.Add("TotalOverallTP", new TotalStat("TotalOverallTP"));
             stats.Add("TotalOverallMP", new TotalStat("TotalOverallMP"));
 
-            #endregion
+            
 
             #region Monster
 
@@ -374,203 +502,34 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines
             return stats;
         }
 
-        /// <summary>
-        /// </summary>
-        public void Clear()
-        {
-            Fights.Clear();
-            Overall.Clear();
-            Party.Clear();
-            Monster.Clear();
-            InitStats();
+        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }
 
-        #region Property Bindings
+        private void RaiseTimelineChangedEvent(object sender, TimelineChangedEvent e) {
+            this.TimelineChangedEvent(sender, e);
+        }
 
-        private ParseControl _controller;
-        private bool _deathFound;
-        private bool _fightingRightNow;
-        private FightList _fights;
-        private string _lastEngaged;
-        private string _lastKilled;
-        private StatGroup _monster;
-        private StatGroup _overall;
-        private StatGroup _party;
-
-        public bool FightingRightNow
-        {
-            get { return _fightingRightNow; }
-            set
-            {
-                _fightingRightNow = value;
-                RaisePropertyChanged();
+        private void SetStoreHistoryInterval() {
+            try {
+                double interval;
+                double.TryParse(Settings.Default.StoreHistoryInterval, out interval);
+                this.StoreHistoryTimer.Interval = interval;
+            }
+            catch (Exception ex) {
+                Logging.Log(Logger, new LogItem(ex, true));
             }
         }
 
-        public bool DeathFound
-        {
-            get { return _deathFound; }
-            private set
-            {
-                _deathFound = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string LastKilled
-        {
-            get { return _lastKilled; }
-            set
-            {
-                _lastKilled = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string LastEngaged
-        {
-            get { return _lastEngaged; }
-            set
-            {
-                _lastEngaged = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public FightList Fights
-        {
-            get { return _fights; }
-            internal set
-            {
-                _fights = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private ParseControl Controller
-        {
-            get { return _controller; }
-            set
-            {
-                _controller = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public StatGroup Overall
-        {
-            get { return _overall; }
-            internal set
-            {
-                _overall = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public StatGroup Party
-        {
-            get { return _party; }
-            internal set
-            {
-                _party = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public StatGroup Monster
-        {
-            get { return _monster; }
-            internal set
-            {
-                _monster = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #region Player Curables Accessors and Setters
-
-        private Dictionary<string, int> _playerCurables;
-
-        private Dictionary<string, int> PlayerCurables
-        {
-            get { return _playerCurables; }
-            set
-            {
-                _playerCurables = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public void TrySetPlayerCurable(string key, int value)
-        {
-            lock (PlayerCurables)
-            {
-                if (PlayerCurables.ContainsKey(key))
-                {
-                    PlayerCurables[key] = value;
-                }
-                else
-                {
-                    PlayerCurables.Add(key, value);
+        private void StoreHistoryTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs) {
+            this.SetStoreHistoryInterval();
+            if (Settings.Default.EnableStoreHistoryReset) {
+                if (!this.FightingRightNow) {
+                    this.Controller.Reset();
                 }
             }
+
+            this.StoreHistoryTimer.Stop();
         }
-
-        public int TryGetPlayerCurable(string key)
-        {
-            lock (PlayerCurables)
-            {
-                return PlayerCurables.ContainsKey(key) ? PlayerCurables[key] : 0;
-            }
-        }
-
-        public void ClearPlayerCurables()
-        {
-            lock (PlayerCurables)
-            {
-                PlayerCurables.Clear();
-            }
-        }
-
-        public Dictionary<string, int> GetPlayerCurables()
-        {
-            lock (PlayerCurables)
-            {
-                return PlayerCurables.ToDictionary(playerCurable => playerCurable.Key, playerCurable => playerCurable.Value);
-            }
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Implementation of TimelineChangedEvent
-
-        public event EventHandler<TimelineChangedEvent> TimelineChangedEvent = delegate { };
-
-        private void RaiseTimelineChangedEvent(object sender, TimelineChangedEvent e)
-        {
-            TimelineChangedEvent(sender, e);
-        }
-
-        #endregion
-
-        #region Declarations
-
-        public readonly Timer FightingTimer = new Timer(2500);
-        public readonly Timer StoreHistoryTimer = new Timer(5000);
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
-        }
-
-        #endregion
     }
 }

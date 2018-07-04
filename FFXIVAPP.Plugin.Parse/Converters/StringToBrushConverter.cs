@@ -1,54 +1,39 @@
-﻿// FFXIVAPP.Plugin.Parse ~ StringToBrushConverter.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="StringToBrushConverter.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   StringToBrushConverter.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media;
-using FFXIVAPP.Common.Models;
-using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Plugin.Parse.Properties;
-using NLog;
+namespace FFXIVAPP.Plugin.Parse.Converters {
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
+    using System.Windows.Media;
 
-namespace FFXIVAPP.Plugin.Parse.Converters
-{
-    public class StringToBrushConverter : IValueConverter
-    {
-        #region Logger
+    using FFXIVAPP.Common.Models;
+    using FFXIVAPP.Common.Utilities;
+    using FFXIVAPP.Plugin.Parse.Properties;
 
+    using NLog;
+
+    public class StringToBrushConverter : IValueConverter {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             var param = "DEFAULT";
-            try
-            {
-                param = value.ToString()
-                             .ToUpperInvariant();
+            try {
+                param = value.ToString().ToUpperInvariant();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
-            var brush = ColorStringToBrush(Settings.Default.DefaultProgressBarForeground);
-            switch (param)
-            {
+
+            SolidColorBrush brush = ColorStringToBrush(Settings.Default.DefaultProgressBarForeground);
+            switch (param) {
                 case "PLD":
                     brush = ColorStringToBrush(Settings.Default.PLDProgressBarForeground);
                     break;
@@ -77,36 +62,34 @@ namespace FFXIVAPP.Plugin.Parse.Converters
                     brush = ColorStringToBrush(Settings.Default.SMNProgressBarForeground);
                     break;
             }
+
             return brush;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
             throw new NotImplementedException();
         }
 
-        private static SolidColorBrush ColorStringToBrush(string color)
-        {
+        private static SolidColorBrush ColorStringToBrush(string color) {
             color = color.Replace("#", string.Empty);
-            try
-            {
+            try {
                 return (SolidColorBrush) new BrushConverter().ConvertFrom(color);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 Logging.Log(Logger, new LogItem(ex, true));
             }
-            try
-            {
-                switch (color.Length)
-                {
-                    case 8: return new SolidColorBrush(Color.FromArgb(Byte.Parse(color.Substring(0, 2), NumberStyles.HexNumber), Byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber), Byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber), Byte.Parse(color.Substring(6, 2), NumberStyles.HexNumber)));
-                    case 6: return new SolidColorBrush(Color.FromRgb(Byte.Parse(color.Substring(0, 2), NumberStyles.HexNumber), Byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber), Byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber)));
-                    default: return Brushes.Green;
+
+            try {
+                switch (color.Length) {
+                    case 8:
+                        return new SolidColorBrush(Color.FromArgb(byte.Parse(color.Substring(0, 2), NumberStyles.HexNumber), byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber), byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber), byte.Parse(color.Substring(6, 2), NumberStyles.HexNumber)));
+                    case 6:
+                        return new SolidColorBrush(Color.FromRgb(byte.Parse(color.Substring(0, 2), NumberStyles.HexNumber), byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber), byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber)));
+                    default:
+                        return Brushes.Green;
                 }
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 return Brushes.Green;
             }
         }

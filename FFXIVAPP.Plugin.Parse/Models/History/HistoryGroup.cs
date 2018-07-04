@@ -1,172 +1,160 @@
-﻿// FFXIVAPP.Plugin.Parse ~ HistoryGroup.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HistoryGroup.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   HistoryGroup.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+namespace FFXIVAPP.Plugin.Parse.Models.History {
+    using System.Collections;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
 
-namespace FFXIVAPP.Plugin.Parse.Models.History
-{
-    public class HistoryGroup : HistoryGroupTypeDescriptor, ICollection<HistoryGroup>
-    {
-        public HistoryGroup(string name)
-        {
-            HistoryGroup = this;
-            Name = name;
-            Last20DamageActions = new List<LineHistory>();
-            Last20DamageTakenActions = new List<LineHistory>();
-            Last20HealingActions = new List<LineHistory>();
-            Last20Items = new List<LineHistory>();
+    public class HistoryGroup : HistoryGroupTypeDescriptor, ICollection<HistoryGroup> {
+        private ConcurrentDictionary<string, HistoryGroup> _childContainer;
+
+        private List<HistoryGroup> _children;
+
+        private HistoryContainer _stats;
+
+        public HistoryGroup(string name) {
+            this.HistoryGroup = this;
+            this.Name = name;
+            this.Last20DamageActions = new List<LineHistory>();
+            this.Last20DamageTakenActions = new List<LineHistory>();
+            this.Last20HealingActions = new List<LineHistory>();
+            this.Last20Items = new List<LineHistory>();
         }
 
-        #region Property Bindings
+        public List<HistoryGroup> Children {
+            get {
+                return this._children ?? (this._children = new List<HistoryGroup>(this.ChildContainer.Values));
+            }
+
+            set {
+                this._children = value;
+            }
+        }
+
+        public int Count {
+            get {
+                return this.ChildContainer.Count;
+            }
+        }
+
+        public bool IsReadOnly {
+            get {
+                return false;
+            }
+        }
+
+        public List<LineHistory> Last20DamageActions { get; set; }
+
+        public List<LineHistory> Last20DamageTakenActions { get; set; }
+
+        public List<LineHistory> Last20HealingActions { get; set; }
+
+        public List<LineHistory> Last20Items { get; set; }
 
         public string Name { get; set; }
 
-        #endregion
-
-        public List<LineHistory> Last20DamageActions { get; set; }
-        public List<LineHistory> Last20DamageTakenActions { get; set; }
-        public List<LineHistory> Last20HealingActions { get; set; }
-        public List<LineHistory> Last20Items { get; set; }
-
-        public HistoryGroup this[int i]
-        {
-            get { return Children[i]; }
-            set { Children[i] = value; }
-        }
-
-        public bool HasGroup(string name)
-        {
-            return ChildContainer.ContainsKey(name);
-        }
-
-        public void AddGroup(HistoryGroup item)
-        {
-            ChildContainer.TryAdd(item.Name, item);
-        }
-
-        public HistoryGroup GetGroup(string name)
-        {
-            HistoryGroup result;
-            TryGetGroup(name, out result);
-            if (result == null)
-            {
-                AddGroup(new HistoryGroup(name));
+        public HistoryContainer Stats {
+            get {
+                return this._stats ?? (this._stats = new HistoryContainer());
             }
-            return TryGetGroup(name, out result) ? result : null;
         }
 
-        public bool TryGetGroup(string name, out HistoryGroup result)
-        {
+        private ConcurrentDictionary<string, HistoryGroup> ChildContainer {
+            get {
+                return this._childContainer ?? (this._childContainer = new ConcurrentDictionary<string, HistoryGroup>());
+            }
+
+            set {
+                this._childContainer = value;
+            }
+        }
+
+        public HistoryGroup this[int i] {
+            get {
+                return this.Children[i];
+            }
+
+            set {
+                this.Children[i] = value;
+            }
+        }
+
+        public void Add(HistoryGroup item) {
+            this.ChildContainer.TryAdd(item.Name, item);
+        }
+
+        public void AddGroup(HistoryGroup item) {
+            this.ChildContainer.TryAdd(item.Name, item);
+        }
+
+        public virtual void Clear() {
+            this.ChildContainer.Clear();
+        }
+
+        public bool Contains(HistoryGroup item) {
+            return this.ChildContainer.ContainsKey(item.Name);
+        }
+
+        public void CopyTo(HistoryGroup[] array, int arrayIndex) {
+            this.ChildContainer.Values.CopyTo(array, arrayIndex);
+        }
+
+        public IEnumerator<HistoryGroup> GetEnumerator() {
+            List<HistoryGroup> list = new List<HistoryGroup>();
+            list.AddRange(this.ChildContainer.Values);
+            return list.GetEnumerator();
+        }
+
+        public HistoryGroup GetGroup(string name) {
+            HistoryGroup result;
+            this.TryGetGroup(name, out result);
+            if (result == null) {
+                this.AddGroup(new HistoryGroup(name));
+            }
+
+            return this.TryGetGroup(name, out result)
+                       ? result
+                       : null;
+        }
+
+        public object GetStatValue(string name) {
+            if (name.ToLower() == "name") {
+                return this.Name;
+            }
+
+            return this.Stats.GetStatValue(name);
+        }
+
+        public bool HasGroup(string name) {
+            return this.ChildContainer.ContainsKey(name);
+        }
+
+        public bool Remove(HistoryGroup item) {
+            HistoryGroup result;
+            return this.ChildContainer.TryRemove(item.Name, out result);
+        }
+
+        public bool TryGetGroup(string name, out HistoryGroup result) {
             HistoryGroup historyGroup;
-            if (ChildContainer.TryGetValue(name, out historyGroup))
-            {
+            if (this.ChildContainer.TryGetValue(name, out historyGroup)) {
                 result = historyGroup;
                 return true;
             }
+
             result = null;
             return false;
         }
 
-        public object GetStatValue(string name)
-        {
-            if (name.ToLower() == "name")
-            {
-                return Name;
-            }
-            return Stats.GetStatValue(name);
+        IEnumerator IEnumerable.GetEnumerator() {
+            return this.GetEnumerator();
         }
-
-        #region Declarations
-
-        private ConcurrentDictionary<string, HistoryGroup> _childContainer;
-        private List<HistoryGroup> _children;
-        private HistoryContainer _stats;
-
-        private ConcurrentDictionary<string, HistoryGroup> ChildContainer
-        {
-            get { return _childContainer ?? (_childContainer = new ConcurrentDictionary<string, HistoryGroup>()); }
-            set { _childContainer = value; }
-        }
-
-        public List<HistoryGroup> Children
-        {
-            get { return _children ?? (_children = new List<HistoryGroup>(ChildContainer.Values)); }
-            set { _children = value; }
-        }
-
-        public HistoryContainer Stats
-        {
-            get { return _stats ?? (_stats = new HistoryContainer()); }
-        }
-
-        #endregion
-
-        #region Implementation of ICollection<HistoryGroup>
-
-        public IEnumerator<HistoryGroup> GetEnumerator()
-        {
-            var list = new List<HistoryGroup>();
-            list.AddRange(ChildContainer.Values);
-            return list.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public void Add(HistoryGroup item)
-        {
-            ChildContainer.TryAdd(item.Name, item);
-        }
-
-        public virtual void Clear()
-        {
-            ChildContainer.Clear();
-        }
-
-        public bool Contains(HistoryGroup item)
-        {
-            return ChildContainer.ContainsKey(item.Name);
-        }
-
-        public void CopyTo(HistoryGroup[] array, int arrayIndex)
-        {
-            ChildContainer.Values.CopyTo(array, arrayIndex);
-        }
-
-        public bool Remove(HistoryGroup item)
-        {
-            HistoryGroup result;
-            return ChildContainer.TryRemove(item.Name, out result);
-        }
-
-        public int Count
-        {
-            get { return ChildContainer.Count; }
-        }
-
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
-
-        #endregion
     }
 }

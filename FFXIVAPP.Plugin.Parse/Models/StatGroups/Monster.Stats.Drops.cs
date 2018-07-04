@@ -1,39 +1,29 @@
-﻿// FFXIVAPP.Plugin.Parse ~ Monster.Stats.Drops.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Monster.Stats.Drops.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Monster.Stats.Drops.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using FFXIVAPP.Plugin.Parse.Models.Stats;
+namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
+    using FFXIVAPP.Plugin.Parse.Models.Stats;
 
-namespace FFXIVAPP.Plugin.Parse.Models.StatGroups
-{
-    public partial class Monster
-    {
+    public partial class Monster {
         /// <summary>
         /// </summary>
         /// <param name="name"> </param>
-        public void SetDrop(string name)
-        {
-            var dropGroup = GetGroup("DropsByMonster");
+        public void SetDrop(string name) {
+            StatGroup dropGroup = this.GetGroup("DropsByMonster");
             StatGroup subGroup;
-            if (!dropGroup.TryGetGroup(name, out subGroup))
-            {
+            if (!dropGroup.TryGetGroup(name, out subGroup)) {
                 subGroup = new StatGroup(name);
-                subGroup.Stats.AddStats(DropStatList());
+                subGroup.Stats.AddStats(this.DropStatList());
                 dropGroup.AddGroup(subGroup);
             }
+
             subGroup.Stats.IncrementStat("TotalDrops");
         }
     }

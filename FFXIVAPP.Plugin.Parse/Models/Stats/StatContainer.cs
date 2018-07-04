@@ -1,219 +1,175 @@
-// FFXIVAPP.Plugin.Parse ~ StatContainer.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="StatContainer.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   StatContainer.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using FFXIVAPP.Plugin.Parse.Models.LinkedStats;
+namespace FFXIVAPP.Plugin.Parse.Models.Stats {
+    using System.Collections;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
 
-namespace FFXIVAPP.Plugin.Parse.Models.Stats
-{
-    public sealed class StatContainer : IStatContainer
-    {
+    using FFXIVAPP.Plugin.Parse.Models.LinkedStats;
+
+    public sealed class StatContainer : IStatContainer {
         private readonly ConcurrentDictionary<string, Stat<double>> _statDict = new ConcurrentDictionary<string, Stat<double>>();
-
-        #region Implementation of IEnumerable
-
-        public IEnumerator<Stat<double>> GetEnumerator()
-        {
-            return _statDict.Values.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        #endregion
-
-        #region Implementation of ICollection<Stat<double>>
-
-        public void Add(Stat<double> stat)
-        {
-            if (!_statDict.TryAdd(stat.Name, stat))
-            {
-                return;
-            }
-            stat.OnValueChanged += HandleStatValueChanged;
-            DoCollectionChanged(NotifyCollectionChangedAction.Add, stat);
-        }
-
-        public void Clear()
-        {
-            foreach (var s in _statDict.Values)
-            {
-                s.OnValueChanged -= HandleStatValueChanged;
-            }
-            _statDict.Clear();
-            DoCollectionChanged(NotifyCollectionChangedAction.Reset, null);
-        }
-
-        public bool Contains(Stat<double> stat)
-        {
-            return _statDict.ContainsKey(stat.Name);
-        }
-
-        public void CopyTo(Stat<double>[] array, int arrayIndex)
-        {
-            _statDict.Values.CopyTo(array, arrayIndex);
-        }
-
-        public bool Remove(Stat<double> stat)
-        {
-            Stat<double> removed;
-            if (_statDict.TryRemove(stat.Name, out removed))
-            {
-                removed.OnValueChanged -= HandleStatValueChanged;
-                DoCollectionChanged(NotifyCollectionChangedAction.Remove, removed);
-                return true;
-            }
-            return false;
-        }
-
-        public int Count
-        {
-            get { return _statDict.Count; }
-        }
-
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
-
-        private void HandleStatValueChanged(object sender, StatChangedEvent e)
-        {
-            var stat = (Stat<double>) sender;
-            RaisePropertyChanged(stat.Name);
-        }
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
-        }
-
-        #endregion
-
-        #region Implementation of INotifyCollectionChanged
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged = delegate { };
-
-        private void DoCollectionChanged(NotifyCollectionChangedAction action, Stat<double> whichStat)
-        {
-            CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, whichStat));
-        }
-
-        #endregion
-
-        #region Implementation of IStatContainer
 
         private string _name;
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                RaisePropertyChanged();
+        public event NotifyCollectionChangedEventHandler CollectionChanged = delegate { };
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        public int Count {
+            get {
+                return this._statDict.Count;
             }
         }
 
-        public bool HasStat(string name)
-        {
-            return _statDict.ContainsKey(name);
+        public bool IsReadOnly {
+            get {
+                return false;
+            }
         }
 
-        public Stat<double> GetStat(string name)
-        {
+        public string Name {
+            get {
+                return this._name;
+            }
+
+            set {
+                this._name = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public void Add(Stat<double> stat) {
+            if (!this._statDict.TryAdd(stat.Name, stat)) {
+                return;
+            }
+
+            stat.OnValueChanged += this.HandleStatValueChanged;
+            this.DoCollectionChanged(NotifyCollectionChangedAction.Add, stat);
+        }
+
+        public void AddStats(IEnumerable<Stat<double>> stats) {
+            foreach (Stat<double> stat in stats) {
+                this.Add(stat);
+            }
+        }
+
+        public void Clear() {
+            foreach (Stat<double> s in this._statDict.Values) {
+                s.OnValueChanged -= this.HandleStatValueChanged;
+            }
+
+            this._statDict.Clear();
+            this.DoCollectionChanged(NotifyCollectionChangedAction.Reset, null);
+        }
+
+        public bool Contains(Stat<double> stat) {
+            return this._statDict.ContainsKey(stat.Name);
+        }
+
+        public void CopyTo(Stat<double>[] array, int arrayIndex) {
+            this._statDict.Values.CopyTo(array, arrayIndex);
+        }
+
+        public Stat<double> EnsureStatValue(string name, double value) {
+            Stat<double> stat;
+            if (this.HasStat(name)) {
+                stat = this.GetStat(name);
+                stat.Value = value;
+            }
+            else {
+                stat = new NumericStat(name, value);
+                this.Add(stat);
+            }
+
+            return stat;
+        }
+
+        public IEnumerator<Stat<double>> GetEnumerator() {
+            return this._statDict.Values.GetEnumerator();
+        }
+
+        public Stat<double> GetStat(string name) {
             Stat<double> result;
-            _statDict.TryGetValue(name, out result);
+            this._statDict.TryGetValue(name, out result);
             return result;
         }
 
-        public bool TryGetStat(string name, out object result)
-        {
-            if (HasStat(name))
-            {
-                result = GetStat(name);
+        public double GetStatValue(string name) {
+            return this.HasStat(name)
+                       ? this.GetStat(name).Value
+                       : 0;
+        }
+
+        public bool HasStat(string name) {
+            return this._statDict.ContainsKey(name);
+        }
+
+        public void IncrementStat(string name, double value = 1) {
+            if (!this.HasStat(name)) {
+                return;
+            }
+
+            Stat<double> result = this.GetStat(name);
+            result.Value += value;
+        }
+
+        public bool Remove(Stat<double> stat) {
+            Stat<double> removed;
+            if (this._statDict.TryRemove(stat.Name, out removed)) {
+                removed.OnValueChanged -= this.HandleStatValueChanged;
+                this.DoCollectionChanged(NotifyCollectionChangedAction.Remove, removed);
                 return true;
             }
+
+            return false;
+        }
+
+        public void ResetAll() {
+            foreach (Stat<double> s in this._statDict.Values) {
+                s.Reset();
+            }
+
+            this.DoCollectionChanged(NotifyCollectionChangedAction.Reset, this._statDict.Values.First());
+        }
+
+        public bool TryGetStat(string name, out object result) {
+            if (this.HasStat(name)) {
+                result = this.GetStat(name);
+                return true;
+            }
+
             result = null;
             return false;
         }
 
-        public Stat<double> EnsureStatValue(string name, double value)
-        {
-            Stat<double> stat;
-            if (HasStat(name))
-            {
-                stat = GetStat(name);
-                stat.Value = value;
-            }
-            else
-            {
-                stat = new NumericStat(name, value);
-                Add(stat);
-            }
-            return stat;
+        IEnumerator IEnumerable.GetEnumerator() {
+            return this.GetEnumerator();
         }
 
-        public double GetStatValue(string name)
-        {
-            return HasStat(name) ? GetStat(name)
-                .Value : 0;
+        private void DoCollectionChanged(NotifyCollectionChangedAction action, Stat<double> whichStat) {
+            this.CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, whichStat));
         }
 
-        public void IncrementStat(string name, double value = 1)
-        {
-            if (!HasStat(name))
-            {
-                return;
-            }
-            var result = GetStat(name);
-            result.Value += value;
+        private void HandleStatValueChanged(object sender, StatChangedEvent e) {
+            Stat<double> stat = (Stat<double>) sender;
+            this.RaisePropertyChanged(stat.Name);
         }
 
-        public void AddStats(IEnumerable<Stat<double>> stats)
-        {
-            foreach (var stat in stats)
-            {
-                Add(stat);
-            }
+        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
         }
-
-        public void ResetAll()
-        {
-            foreach (var s in _statDict.Values)
-            {
-                s.Reset();
-            }
-            DoCollectionChanged(NotifyCollectionChangedAction.Reset, _statDict.Values.First());
-        }
-
-        #endregion
     }
 }

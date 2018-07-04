@@ -1,149 +1,166 @@
-// FFXIVAPP.Plugin.Parse ~ Line.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Line.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Line.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using FFXIVAPP.Plugin.Parse.Enums;
-using FFXIVAPP.Plugin.Parse.Helpers;
-using FFXIVAPP.Plugin.Parse.Models.Events;
-using Sharlayan.Core;
-using Sharlayan.Helpers;
+namespace FFXIVAPP.Plugin.Parse.Models {
+    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
 
-namespace FFXIVAPP.Plugin.Parse.Models
-{
-    public class Line
-    {
+    using FFXIVAPP.Plugin.Parse.Enums;
+    using FFXIVAPP.Plugin.Parse.Helpers;
+    using FFXIVAPP.Plugin.Parse.Models.Events;
+
+    using Sharlayan.Core;
+    using Sharlayan.Extensions;
+
+    public class Line {
+        private string _action;
+
+        private string _direction;
+
+        private string _part;
+
+        private string _source;
+
+        private List<StatusItem> _sourceStatusEntries;
+
+        private string _target;
+
+        private List<StatusItem> _targetStatusEntries;
+
         // battle data
-        public Line(ChatLogEntry chatLogEntry = null)
-        {
-            if (chatLogEntry != null)
-            {
-                ChatLogEntry = chatLogEntry;
+        public Line(ChatLogItem chatLogItem = null) {
+            if (chatLogItem != null) {
+                this.ChatLogItem = chatLogItem;
             }
         }
 
-        public bool XOverTime { get; set; }
+        public string Action {
+            get {
+                return this._action ?? string.Empty;
+            }
+
+            set {
+                this._action = value.ToTitleCase();
+            }
+        }
+
         public double Amount { get; set; }
-        public double Modifier { get; set; }
-        public string RecLossType { get; set; }
-        public bool Hit { get; set; }
-        public bool DirectHit { get; set; }
-        public bool Miss { get; set; }
-        public bool Crit { get; set; }
-        public bool Counter { get; set; }
+
         public bool Block { get; set; }
-        public bool Parry { get; set; }
-        public bool Resist { get; set; }
+
+        public ChatLogItem ChatLogItem { get; set; }
+
+        public bool Counter { get; set; }
+
+        public bool Crit { get; set; }
+
+        public bool DirectHit { get; set; }
+
+        public string Direction {
+            get {
+                return this._direction ?? string.Empty;
+            }
+
+            set {
+                this._direction = value.ToTitleCase();
+            }
+        }
+
         public bool Evade { get; set; }
-        public ChatLogEntry ChatLogEntry { get; set; }
-
-        public bool IsEmpty()
-        {
-            return String.IsNullOrWhiteSpace(Source) || String.IsNullOrWhiteSpace(Target) || String.IsNullOrWhiteSpace(Action);
-        }
-
-        private bool IsYou(string name)
-        {
-            return Regex.IsMatch(name, @"^(([Dd](ich|ie|u))|You|Vous)$") || String.Equals(name, Constants.CharacterName, Constants.InvariantComparer);
-        }
-
-        #region NPC ActorEntity Information
-
-        public ActorEntity SourceEntity { get; set; }
-        public ActorEntity TargetEntity { get; set; }
-
-        public List<StatusEntry> SourceStatusEntries
-        {
-            get { return _sourceStatusEntries ?? (_sourceStatusEntries = new List<StatusEntry>()); }
-            set { _sourceStatusEntries = value; }
-        }
-
-        public List<StatusEntry> TargetStatusEntries
-        {
-            get { return _targetStatusEntries ?? (_targetStatusEntries = new List<StatusEntry>()); }
-            set { _targetStatusEntries = value; }
-        }
-
-        #endregion
-
-        #region Event Information
 
         public EventDirection EventDirection { get; set; }
+
         public EventSubject EventSubject { get; set; }
+
         public EventType EventType { get; set; }
 
-        #endregion
+        public bool Hit { get; set; }
 
-        #region Type Information
+        public bool Miss { get; set; }
+
+        public double Modifier { get; set; }
+
+        public bool Parry { get; set; }
+
+        public string Part {
+            get {
+                return this._part ?? string.Empty;
+            }
+
+            set {
+                this._part = value.ToTitleCase();
+            }
+        }
+
+        public string RecLossType { get; set; }
+
+        public bool Resist { get; set; }
+
+        public string Source {
+            get {
+                return this._source ?? string.Empty;
+            }
+
+            set {
+                var name = value.ToTitleCase();
+                this._source = ParseHelper.GetTaggedName(name, new Expressions(new Event()), this.SourceTimelineType);
+            }
+        }
+
+        public ActorItem SourceEntity { get; set; }
+
+        public List<StatusItem> SourceStatusEntries {
+            get {
+                return this._sourceStatusEntries ?? (this._sourceStatusEntries = new List<StatusItem>());
+            }
+
+            set {
+                this._sourceStatusEntries = value;
+            }
+        }
 
         public TimelineType SourceTimelineType { get; set; }
+
+        public string Target {
+            get {
+                return this._target ?? string.Empty;
+            }
+
+            set {
+                var name = value.ToTitleCase();
+                this._target = ParseHelper.GetTaggedName(name, new Expressions(new Event()), this.TargetTimelineType);
+            }
+        }
+
+        public ActorItem TargetEntity { get; set; }
+
+        public List<StatusItem> TargetStatusEntries {
+            get {
+                return this._targetStatusEntries ?? (this._targetStatusEntries = new List<StatusItem>());
+            }
+
+            set {
+                this._targetStatusEntries = value;
+            }
+        }
+
         public TimelineType TargetTimelineType { get; set; }
 
-        #endregion
+        public bool XOverTime { get; set; }
 
-        #region Property Backings
-
-        private string _action;
-        private string _direction;
-        private string _part;
-        private string _source;
-        private List<StatusEntry> _sourceStatusEntries;
-        private string _target;
-        private List<StatusEntry> _targetStatusEntries;
-
-        public string Source
-        {
-            get { return _source ?? string.Empty; }
-            set
-            {
-                var name = StringHelper.TitleCase(value);
-                _source = ParseHelper.GetTaggedName(name, new Expressions(new Event()), SourceTimelineType);
-            }
+        public bool IsEmpty() {
+            return string.IsNullOrWhiteSpace(this.Source) || string.IsNullOrWhiteSpace(this.Target) || string.IsNullOrWhiteSpace(this.Action);
         }
 
-        public string Target
-        {
-            get { return _target ?? string.Empty; }
-            set
-            {
-                var name = StringHelper.TitleCase(value);
-                _target = ParseHelper.GetTaggedName(name, new Expressions(new Event()), TargetTimelineType);
-            }
+        private bool IsYou(string name) {
+            return Regex.IsMatch(name, @"^(([Dd](ich|ie|u))|You|Vous)$") || string.Equals(name, Constants.CharacterName, Constants.InvariantComparer);
         }
-
-        public string Action
-        {
-            get { return _action ?? string.Empty; }
-            set { _action = StringHelper.TitleCase(value); }
-        }
-
-        public string Direction
-        {
-            get { return _direction ?? string.Empty; }
-            set { _direction = StringHelper.TitleCase(value); }
-        }
-
-        public string Part
-        {
-            get { return _part ?? string.Empty; }
-            set { _part = StringHelper.TitleCase(value); }
-        }
-
-        #endregion
     }
 }

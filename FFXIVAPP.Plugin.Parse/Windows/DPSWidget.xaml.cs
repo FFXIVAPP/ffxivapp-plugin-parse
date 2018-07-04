@@ -1,60 +1,49 @@
-﻿// FFXIVAPP.Plugin.Parse ~ DPSWidget.xaml.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DPSWidget.xaml.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   DPSWidget.xaml.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
-using FFXIVAPP.Plugin.Parse.Interop;
-using FFXIVAPP.Plugin.Parse.Properties;
+namespace FFXIVAPP.Plugin.Parse.Windows {
+    using System.ComponentModel;
+    using System.Windows;
+    using System.Windows.Input;
 
-namespace FFXIVAPP.Plugin.Parse.Windows
-{
+    using FFXIVAPP.Plugin.Parse.Interop;
+    using FFXIVAPP.Plugin.Parse.Properties;
+
     /// <summary>
     ///     Interaction logic for DPSWidget.xaml
     /// </summary>
-    public partial class DPSWidget
-    {
+    public partial class DPSWidget {
         public static DPSWidget View;
 
-        public DPSWidget()
-        {
+        public DPSWidget() {
             View = this;
-            InitializeComponent();
-            View.SourceInitialized += delegate { WinAPI.ToggleClickThrough(this); };
+            this.InitializeComponent();
+            View.SourceInitialized += delegate {
+                WinAPI.ToggleClickThrough(this);
+            };
         }
 
-        private void TitleBar_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
+        private void TitleBar_OnPreviewMouseDown(object sender, MouseButtonEventArgs e) {
+            if (Mouse.LeftButton == MouseButtonState.Pressed) {
+                this.DragMove();
             }
         }
 
-        private void WidgetClose_OnClick(object sender, RoutedEventArgs e)
-        {
-            Settings.Default.ShowDPSWidgetOnLoad = false;
-            Close();
+        private void Widget_OnClosing(object sender, CancelEventArgs e) {
+            e.Cancel = true;
+            this.Hide();
         }
 
-        private void Widget_OnClosing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            Hide();
+        private void WidgetClose_OnClick(object sender, RoutedEventArgs e) {
+            Settings.Default.ShowDPSWidgetOnLoad = false;
+            this.Close();
         }
     }
 }

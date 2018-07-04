@@ -1,481 +1,512 @@
-﻿// FFXIVAPP.Plugin.Parse ~ Expressions.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Expressions.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   Expressions.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using FFXIVAPP.Plugin.Parse.Models.Events;
-using FFXIVAPP.Plugin.Parse.RegularExpressions;
+namespace FFXIVAPP.Plugin.Parse.Models {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Text.RegularExpressions;
 
-namespace FFXIVAPP.Plugin.Parse.Models
-{
-    public class Expressions : INotifyPropertyChanged
-    {
+    using FFXIVAPP.Plugin.Parse.Models.Events;
+    using FFXIVAPP.Plugin.Parse.RegularExpressions;
+
+    public class Expressions : INotifyPropertyChanged {
         private Match _mActions;
+
         private Match _mBeneficialGain;
+
         private Match _mBeneficialLose;
+
         private Match _mCure;
+
         private Match _mDamage;
+
         private Match _mDamageAuto;
+
         private Match _mDetrimentalGain;
+
         private Match _mDetrimentalLose;
+
         private Match _mFailed;
+
         private Match _mFailedAuto;
+
         private Match _mItems;
+
         private Match _pActions;
+
         private Match _pBeneficialGain;
+
         private Match _pBeneficialLose;
+
         private Match _pCure;
+
         private Match _pDamage;
+
         private Match _pDamageAuto;
+
         private Match _pDetrimentalGain;
+
         private Match _pDetrimentalLose;
+
         private Match _pFailed;
+
         private Match _pFailedAuto;
+
         private Match _pItems;
 
-        public Expressions(Event e)
-        {
-            Event = e;
-            Cleaned = e.ChatLogEntry == null ? string.Empty : e.ChatLogEntry.Line;
-            Initialize();
+        public Expressions(Event e) {
+            this.Event = e;
+            this.Cleaned = e.ChatLogItem == null
+                               ? string.Empty
+                               : e.ChatLogItem.Line;
+            this.Initialize();
         }
-
-        public Event Event { get; set; }
-        public string Cleaned { get; set; }
-        public string Counter { get; private set; }
-        public string Added { get; private set; }
-        public string HealingType { get; private set; }
-        public string DAttack { get; private set; }
-        public string RAttack { get; private set; }
-        public string Attack { get; private set; }
-        public string You { get; private set; }
-        public string YouString { get; private set; }
-        public string Mitigated { get; private set; }
-
-        private void Initialize()
-        {
-            switch (Constants.GameLanguage)
-            {
-                case "French":
-                    pDamage = PlayerRegEx.DamageFr.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoFr.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedFr.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoFr.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsFr.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsFr.Match(Cleaned);
-                    pCure = PlayerRegEx.CureFr.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainFr.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseFr.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainFr.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseFr.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageFr.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoFr.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedFr.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoFr.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsFr.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsFr.Match(Cleaned);
-                    mCure = MonsterRegEx.CureFr.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainFr.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseFr.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainFr.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseFr.Match(Cleaned);
-                    Counter = "Contre";
-                    Added = "Effet Supplémentaire";
-                    HealingType = "PV";
-                    RAttack = "D'Attaque À Distance";
-                    DAttack = "Direct Attack";
-                    Attack = "Attaque";
-                    You = @"^[Vv]ous$";
-                    YouString = "Vous";
-                    Mitigated = "Dommages Atténué (Bouclier Magique)";
-                    break;
-                case "Japanese":
-                    pDamage = PlayerRegEx.DamageJa.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoJa.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedJa.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoJa.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsJa.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsJa.Match(Cleaned);
-                    pCure = PlayerRegEx.CureJa.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainJa.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseJa.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainJa.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseJa.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageJa.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoJa.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedJa.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoJa.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsJa.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsJa.Match(Cleaned);
-                    mCure = MonsterRegEx.CureJa.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainJa.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseJa.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainJa.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseJa.Match(Cleaned);
-                    Counter = "カウンター";
-                    Added = "追加効果";
-                    HealingType = "ＨＰ";
-                    RAttack = "Ranged Attack";
-                    Attack = "Attack";
-                    DAttack = "Direct Attack";
-                    You = @"^\.$";
-                    YouString = "君";
-                    Mitigated = "軽減ダメージ（魔法の盾）";
-                    break;
-                case "German":
-                    pDamage = PlayerRegEx.DamageDe.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoDe.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedDe.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoDe.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsDe.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsDe.Match(Cleaned);
-                    pCure = PlayerRegEx.CureDe.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainDe.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseDe.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainDe.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseDe.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageDe.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoDe.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedDe.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoDe.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsDe.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsDe.Match(Cleaned);
-                    mCure = MonsterRegEx.CureDe.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainDe.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseDe.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainDe.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseDe.Match(Cleaned);
-                    Counter = "Counter";
-                    Added = "Zusatzefeckt";
-                    HealingType = "LP";
-                    RAttack = "Ranged Attack";
-                    Attack = "Attack";
-                    DAttack = "Direct Attack";
-                    You = @"^[Dd](ich|ie|u)$";
-                    YouString = "Du";
-                    Mitigated = "Schäden Gemildert (Zauberschild)";
-                    break;
-                case "Chinese":
-                    pDamage = PlayerRegEx.DamageZh.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoZh.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedZh.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoZh.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsZh.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsZh.Match(Cleaned);
-                    pCure = PlayerRegEx.CureZh.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainZh.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseZh.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainZh.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseZh.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageZh.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoZh.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedZh.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoZh.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsZh.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsZh.Match(Cleaned);
-                    mCure = MonsterRegEx.CureZh.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainZh.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseZh.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainZh.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseZh.Match(Cleaned);
-                    Counter = "Counter";
-                    Added = "附加效果";
-                    HealingType = "体力";
-                    RAttack = "Ranged Attack";
-                    Attack = "Attack";
-                    DAttack = "Direct Attack";
-                    You = @"^[Yy]ou?$";
-                    YouString = "You";
-                    Mitigated = "Mitigated Damage (Magic Shield)";
-                    break;
-                default:
-                    pDamage = PlayerRegEx.DamageEn.Match(Cleaned);
-                    pDamageAuto = PlayerRegEx.DamageAutoEn.Match(Cleaned);
-                    pFailed = PlayerRegEx.FailedEn.Match(Cleaned);
-                    pFailedAuto = PlayerRegEx.FailedAutoEn.Match(Cleaned);
-                    pActions = PlayerRegEx.ActionsEn.Match(Cleaned);
-                    pItems = PlayerRegEx.ItemsEn.Match(Cleaned);
-                    pCure = PlayerRegEx.CureEn.Match(Cleaned);
-                    pBeneficialGain = PlayerRegEx.BeneficialGainEn.Match(Cleaned);
-                    pBeneficialLose = PlayerRegEx.BeneficialLoseEn.Match(Cleaned);
-                    pDetrimentalGain = PlayerRegEx.DetrimentalGainEn.Match(Cleaned);
-                    pDetrimentalLose = PlayerRegEx.DetrimentalLoseEn.Match(Cleaned);
-                    mDamage = MonsterRegEx.DamageEn.Match(Cleaned);
-                    mDamageAuto = MonsterRegEx.DamageAutoEn.Match(Cleaned);
-                    mFailed = MonsterRegEx.FailedEn.Match(Cleaned);
-                    mFailedAuto = MonsterRegEx.FailedAutoEn.Match(Cleaned);
-                    mActions = MonsterRegEx.ActionsEn.Match(Cleaned);
-                    mItems = MonsterRegEx.ItemsEn.Match(Cleaned);
-                    mCure = MonsterRegEx.CureEn.Match(Cleaned);
-                    mBeneficialGain = MonsterRegEx.BeneficialGainEn.Match(Cleaned);
-                    mBeneficialLose = MonsterRegEx.BeneficialLoseEn.Match(Cleaned);
-                    mDetrimentalGain = MonsterRegEx.DetrimentalGainEn.Match(Cleaned);
-                    mDetrimentalLose = MonsterRegEx.DetrimentalLoseEn.Match(Cleaned);
-                    Counter = "Counter";
-                    Added = "Additional Effect";
-                    HealingType = "HP";
-                    RAttack = "Ranged Attack";
-                    Attack = "Attack";
-                    DAttack = "Direct Attack";
-                    You = @"^[Yy]ou?$";
-                    YouString = "You";
-                    Mitigated = "Mitigated Damage (Magic Shield)";
-                    break;
-            }
-        }
-
-        #region Monster
-
-        public Match mDamage
-        {
-            get { return _mDamage ?? (_mDamage = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mDamage = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mDamageAuto
-        {
-            get { return _mDamageAuto ?? (_mDamageAuto = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mDamageAuto = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mFailed
-        {
-            get { return _mFailed ?? (_mFailed = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mFailed = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mFailedAuto
-        {
-            get { return _mFailedAuto ?? (_mFailedAuto = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mFailedAuto = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mActions
-        {
-            get { return _mActions ?? (_mActions = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mActions = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mItems
-        {
-            get { return _mItems ?? (_mItems = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mItems = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mCure
-        {
-            get { return _mCure ?? (_mCure = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mCure = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mBeneficialGain
-        {
-            get { return _mBeneficialGain ?? (_mBeneficialGain = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mBeneficialGain = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mBeneficialLose
-        {
-            get { return _mBeneficialLose ?? (_mBeneficialLose = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mBeneficialLose = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mDetrimentalGain
-        {
-            get { return _mDetrimentalGain ?? (_mDetrimentalGain = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mDetrimentalGain = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match mDetrimentalLose
-        {
-            get { return _mDetrimentalLose ?? (_mDetrimentalLose = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _mDetrimentalLose = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region Player
-
-        public Match pDamage
-        {
-            get { return _pDamage ?? (_pDamage = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pDamage = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pDamageAuto
-        {
-            get { return _pDamageAuto ?? (_pDamageAuto = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pDamageAuto = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pFailed
-        {
-            get { return _pFailed ?? (_pFailed = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pFailed = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pFailedAuto
-        {
-            get { return _pFailedAuto ?? (_pFailedAuto = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pFailedAuto = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pActions
-        {
-            get { return _pActions ?? (_pActions = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pActions = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pItems
-        {
-            get { return _pItems ?? (_pItems = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pItems = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pCure
-        {
-            get { return _pCure ?? (_pCure = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pCure = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pBeneficialGain
-        {
-            get { return _pBeneficialGain ?? (_pBeneficialGain = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pBeneficialGain = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pBeneficialLose
-        {
-            get { return _pBeneficialLose ?? (_pBeneficialLose = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pBeneficialLose = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pDetrimentalGain
-        {
-            get { return _pDetrimentalGain ?? (_pDetrimentalGain = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pDetrimentalGain = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Match pDetrimentalLose
-        {
-            get { return _pDetrimentalLose ?? (_pDetrimentalLose = Regex.Match("ph", @"^\.$")); }
-            private set
-            {
-                _pDetrimentalLose = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private void RaisePropertyChanged([CallerMemberName] string caller = "")
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(caller));
+        public string Added { get; private set; }
+
+        public string Attack { get; private set; }
+
+        public string Cleaned { get; set; }
+
+        public string Counter { get; private set; }
+
+        public string DAttack { get; private set; }
+
+        public Event Event { get; set; }
+
+        public string HealingType { get; private set; }
+
+        public Match mActions {
+            get {
+                return this._mActions ?? (this._mActions = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mActions = value;
+                this.RaisePropertyChanged();
+            }
         }
 
-        #endregion
+        public Match mBeneficialGain {
+            get {
+                return this._mBeneficialGain ?? (this._mBeneficialGain = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mBeneficialGain = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mBeneficialLose {
+            get {
+                return this._mBeneficialLose ?? (this._mBeneficialLose = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mBeneficialLose = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mCure {
+            get {
+                return this._mCure ?? (this._mCure = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mCure = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mDamage {
+            get {
+                return this._mDamage ?? (this._mDamage = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mDamage = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mDamageAuto {
+            get {
+                return this._mDamageAuto ?? (this._mDamageAuto = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mDamageAuto = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mDetrimentalGain {
+            get {
+                return this._mDetrimentalGain ?? (this._mDetrimentalGain = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mDetrimentalGain = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mDetrimentalLose {
+            get {
+                return this._mDetrimentalLose ?? (this._mDetrimentalLose = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mDetrimentalLose = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mFailed {
+            get {
+                return this._mFailed ?? (this._mFailed = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mFailed = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mFailedAuto {
+            get {
+                return this._mFailedAuto ?? (this._mFailedAuto = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mFailedAuto = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match mItems {
+            get {
+                return this._mItems ?? (this._mItems = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._mItems = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public string Mitigated { get; private set; }
+
+        public Match pActions {
+            get {
+                return this._pActions ?? (this._pActions = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pActions = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pBeneficialGain {
+            get {
+                return this._pBeneficialGain ?? (this._pBeneficialGain = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pBeneficialGain = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pBeneficialLose {
+            get {
+                return this._pBeneficialLose ?? (this._pBeneficialLose = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pBeneficialLose = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pCure {
+            get {
+                return this._pCure ?? (this._pCure = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pCure = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pDamage {
+            get {
+                return this._pDamage ?? (this._pDamage = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pDamage = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pDamageAuto {
+            get {
+                return this._pDamageAuto ?? (this._pDamageAuto = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pDamageAuto = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pDetrimentalGain {
+            get {
+                return this._pDetrimentalGain ?? (this._pDetrimentalGain = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pDetrimentalGain = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pDetrimentalLose {
+            get {
+                return this._pDetrimentalLose ?? (this._pDetrimentalLose = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pDetrimentalLose = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pFailed {
+            get {
+                return this._pFailed ?? (this._pFailed = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pFailed = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pFailedAuto {
+            get {
+                return this._pFailedAuto ?? (this._pFailedAuto = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pFailedAuto = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public Match pItems {
+            get {
+                return this._pItems ?? (this._pItems = Regex.Match("ph", @"^\.$"));
+            }
+
+            private set {
+                this._pItems = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public string RAttack { get; private set; }
+
+        public string You { get; private set; }
+
+        public string YouString { get; private set; }
+
+        private void Initialize() {
+            switch (Constants.GameLanguage) {
+                case "French":
+                    this.pDamage = PlayerRegEx.DamageFr.Match(this.Cleaned);
+                    this.pDamageAuto = PlayerRegEx.DamageAutoFr.Match(this.Cleaned);
+                    this.pFailed = PlayerRegEx.FailedFr.Match(this.Cleaned);
+                    this.pFailedAuto = PlayerRegEx.FailedAutoFr.Match(this.Cleaned);
+                    this.pActions = PlayerRegEx.ActionsFr.Match(this.Cleaned);
+                    this.pItems = PlayerRegEx.ItemsFr.Match(this.Cleaned);
+                    this.pCure = PlayerRegEx.CureFr.Match(this.Cleaned);
+                    this.pBeneficialGain = PlayerRegEx.BeneficialGainFr.Match(this.Cleaned);
+                    this.pBeneficialLose = PlayerRegEx.BeneficialLoseFr.Match(this.Cleaned);
+                    this.pDetrimentalGain = PlayerRegEx.DetrimentalGainFr.Match(this.Cleaned);
+                    this.pDetrimentalLose = PlayerRegEx.DetrimentalLoseFr.Match(this.Cleaned);
+                    this.mDamage = MonsterRegEx.DamageFr.Match(this.Cleaned);
+                    this.mDamageAuto = MonsterRegEx.DamageAutoFr.Match(this.Cleaned);
+                    this.mFailed = MonsterRegEx.FailedFr.Match(this.Cleaned);
+                    this.mFailedAuto = MonsterRegEx.FailedAutoFr.Match(this.Cleaned);
+                    this.mActions = MonsterRegEx.ActionsFr.Match(this.Cleaned);
+                    this.mItems = MonsterRegEx.ItemsFr.Match(this.Cleaned);
+                    this.mCure = MonsterRegEx.CureFr.Match(this.Cleaned);
+                    this.mBeneficialGain = MonsterRegEx.BeneficialGainFr.Match(this.Cleaned);
+                    this.mBeneficialLose = MonsterRegEx.BeneficialLoseFr.Match(this.Cleaned);
+                    this.mDetrimentalGain = MonsterRegEx.DetrimentalGainFr.Match(this.Cleaned);
+                    this.mDetrimentalLose = MonsterRegEx.DetrimentalLoseFr.Match(this.Cleaned);
+                    this.Counter = "Contre";
+                    this.Added = "Effet Supplémentaire";
+                    this.HealingType = "PV";
+                    this.RAttack = "D'Attaque À Distance";
+                    this.DAttack = "Direct Attack";
+                    this.Attack = "Attaque";
+                    this.You = @"^[Vv]ous$";
+                    this.YouString = "Vous";
+                    this.Mitigated = "Dommages Atténué (Bouclier Magique)";
+                    break;
+                case "Japanese":
+                    this.pDamage = PlayerRegEx.DamageJa.Match(this.Cleaned);
+                    this.pDamageAuto = PlayerRegEx.DamageAutoJa.Match(this.Cleaned);
+                    this.pFailed = PlayerRegEx.FailedJa.Match(this.Cleaned);
+                    this.pFailedAuto = PlayerRegEx.FailedAutoJa.Match(this.Cleaned);
+                    this.pActions = PlayerRegEx.ActionsJa.Match(this.Cleaned);
+                    this.pItems = PlayerRegEx.ItemsJa.Match(this.Cleaned);
+                    this.pCure = PlayerRegEx.CureJa.Match(this.Cleaned);
+                    this.pBeneficialGain = PlayerRegEx.BeneficialGainJa.Match(this.Cleaned);
+                    this.pBeneficialLose = PlayerRegEx.BeneficialLoseJa.Match(this.Cleaned);
+                    this.pDetrimentalGain = PlayerRegEx.DetrimentalGainJa.Match(this.Cleaned);
+                    this.pDetrimentalLose = PlayerRegEx.DetrimentalLoseJa.Match(this.Cleaned);
+                    this.mDamage = MonsterRegEx.DamageJa.Match(this.Cleaned);
+                    this.mDamageAuto = MonsterRegEx.DamageAutoJa.Match(this.Cleaned);
+                    this.mFailed = MonsterRegEx.FailedJa.Match(this.Cleaned);
+                    this.mFailedAuto = MonsterRegEx.FailedAutoJa.Match(this.Cleaned);
+                    this.mActions = MonsterRegEx.ActionsJa.Match(this.Cleaned);
+                    this.mItems = MonsterRegEx.ItemsJa.Match(this.Cleaned);
+                    this.mCure = MonsterRegEx.CureJa.Match(this.Cleaned);
+                    this.mBeneficialGain = MonsterRegEx.BeneficialGainJa.Match(this.Cleaned);
+                    this.mBeneficialLose = MonsterRegEx.BeneficialLoseJa.Match(this.Cleaned);
+                    this.mDetrimentalGain = MonsterRegEx.DetrimentalGainJa.Match(this.Cleaned);
+                    this.mDetrimentalLose = MonsterRegEx.DetrimentalLoseJa.Match(this.Cleaned);
+                    this.Counter = "カウンター";
+                    this.Added = "追加効果";
+                    this.HealingType = "ＨＰ";
+                    this.RAttack = "Ranged Attack";
+                    this.Attack = "Attack";
+                    this.DAttack = "Direct Attack";
+                    this.You = @"^\.$";
+                    this.YouString = "君";
+                    this.Mitigated = "軽減ダメージ（魔法の盾）";
+                    break;
+                case "German":
+                    this.pDamage = PlayerRegEx.DamageDe.Match(this.Cleaned);
+                    this.pDamageAuto = PlayerRegEx.DamageAutoDe.Match(this.Cleaned);
+                    this.pFailed = PlayerRegEx.FailedDe.Match(this.Cleaned);
+                    this.pFailedAuto = PlayerRegEx.FailedAutoDe.Match(this.Cleaned);
+                    this.pActions = PlayerRegEx.ActionsDe.Match(this.Cleaned);
+                    this.pItems = PlayerRegEx.ItemsDe.Match(this.Cleaned);
+                    this.pCure = PlayerRegEx.CureDe.Match(this.Cleaned);
+                    this.pBeneficialGain = PlayerRegEx.BeneficialGainDe.Match(this.Cleaned);
+                    this.pBeneficialLose = PlayerRegEx.BeneficialLoseDe.Match(this.Cleaned);
+                    this.pDetrimentalGain = PlayerRegEx.DetrimentalGainDe.Match(this.Cleaned);
+                    this.pDetrimentalLose = PlayerRegEx.DetrimentalLoseDe.Match(this.Cleaned);
+                    this.mDamage = MonsterRegEx.DamageDe.Match(this.Cleaned);
+                    this.mDamageAuto = MonsterRegEx.DamageAutoDe.Match(this.Cleaned);
+                    this.mFailed = MonsterRegEx.FailedDe.Match(this.Cleaned);
+                    this.mFailedAuto = MonsterRegEx.FailedAutoDe.Match(this.Cleaned);
+                    this.mActions = MonsterRegEx.ActionsDe.Match(this.Cleaned);
+                    this.mItems = MonsterRegEx.ItemsDe.Match(this.Cleaned);
+                    this.mCure = MonsterRegEx.CureDe.Match(this.Cleaned);
+                    this.mBeneficialGain = MonsterRegEx.BeneficialGainDe.Match(this.Cleaned);
+                    this.mBeneficialLose = MonsterRegEx.BeneficialLoseDe.Match(this.Cleaned);
+                    this.mDetrimentalGain = MonsterRegEx.DetrimentalGainDe.Match(this.Cleaned);
+                    this.mDetrimentalLose = MonsterRegEx.DetrimentalLoseDe.Match(this.Cleaned);
+                    this.Counter = "Counter";
+                    this.Added = "Zusatzefeckt";
+                    this.HealingType = "LP";
+                    this.RAttack = "Ranged Attack";
+                    this.Attack = "Attack";
+                    this.DAttack = "Direct Attack";
+                    this.You = @"^[Dd](ich|ie|u)$";
+                    this.YouString = "Du";
+                    this.Mitigated = "Schäden Gemildert (Zauberschild)";
+                    break;
+                case "Chinese":
+                    this.pDamage = PlayerRegEx.DamageZh.Match(this.Cleaned);
+                    this.pDamageAuto = PlayerRegEx.DamageAutoZh.Match(this.Cleaned);
+                    this.pFailed = PlayerRegEx.FailedZh.Match(this.Cleaned);
+                    this.pFailedAuto = PlayerRegEx.FailedAutoZh.Match(this.Cleaned);
+                    this.pActions = PlayerRegEx.ActionsZh.Match(this.Cleaned);
+                    this.pItems = PlayerRegEx.ItemsZh.Match(this.Cleaned);
+                    this.pCure = PlayerRegEx.CureZh.Match(this.Cleaned);
+                    this.pBeneficialGain = PlayerRegEx.BeneficialGainZh.Match(this.Cleaned);
+                    this.pBeneficialLose = PlayerRegEx.BeneficialLoseZh.Match(this.Cleaned);
+                    this.pDetrimentalGain = PlayerRegEx.DetrimentalGainZh.Match(this.Cleaned);
+                    this.pDetrimentalLose = PlayerRegEx.DetrimentalLoseZh.Match(this.Cleaned);
+                    this.mDamage = MonsterRegEx.DamageZh.Match(this.Cleaned);
+                    this.mDamageAuto = MonsterRegEx.DamageAutoZh.Match(this.Cleaned);
+                    this.mFailed = MonsterRegEx.FailedZh.Match(this.Cleaned);
+                    this.mFailedAuto = MonsterRegEx.FailedAutoZh.Match(this.Cleaned);
+                    this.mActions = MonsterRegEx.ActionsZh.Match(this.Cleaned);
+                    this.mItems = MonsterRegEx.ItemsZh.Match(this.Cleaned);
+                    this.mCure = MonsterRegEx.CureZh.Match(this.Cleaned);
+                    this.mBeneficialGain = MonsterRegEx.BeneficialGainZh.Match(this.Cleaned);
+                    this.mBeneficialLose = MonsterRegEx.BeneficialLoseZh.Match(this.Cleaned);
+                    this.mDetrimentalGain = MonsterRegEx.DetrimentalGainZh.Match(this.Cleaned);
+                    this.mDetrimentalLose = MonsterRegEx.DetrimentalLoseZh.Match(this.Cleaned);
+                    this.Counter = "Counter";
+                    this.Added = "附加效果";
+                    this.HealingType = "体力";
+                    this.RAttack = "Ranged Attack";
+                    this.Attack = "Attack";
+                    this.DAttack = "Direct Attack";
+                    this.You = @"^[Yy]ou?$";
+                    this.YouString = "You";
+                    this.Mitigated = "Mitigated Damage (Magic Shield)";
+                    break;
+                default:
+                    this.pDamage = PlayerRegEx.DamageEn.Match(this.Cleaned);
+                    this.pDamageAuto = PlayerRegEx.DamageAutoEn.Match(this.Cleaned);
+                    this.pFailed = PlayerRegEx.FailedEn.Match(this.Cleaned);
+                    this.pFailedAuto = PlayerRegEx.FailedAutoEn.Match(this.Cleaned);
+                    this.pActions = PlayerRegEx.ActionsEn.Match(this.Cleaned);
+                    this.pItems = PlayerRegEx.ItemsEn.Match(this.Cleaned);
+                    this.pCure = PlayerRegEx.CureEn.Match(this.Cleaned);
+                    this.pBeneficialGain = PlayerRegEx.BeneficialGainEn.Match(this.Cleaned);
+                    this.pBeneficialLose = PlayerRegEx.BeneficialLoseEn.Match(this.Cleaned);
+                    this.pDetrimentalGain = PlayerRegEx.DetrimentalGainEn.Match(this.Cleaned);
+                    this.pDetrimentalLose = PlayerRegEx.DetrimentalLoseEn.Match(this.Cleaned);
+                    this.mDamage = MonsterRegEx.DamageEn.Match(this.Cleaned);
+                    this.mDamageAuto = MonsterRegEx.DamageAutoEn.Match(this.Cleaned);
+                    this.mFailed = MonsterRegEx.FailedEn.Match(this.Cleaned);
+                    this.mFailedAuto = MonsterRegEx.FailedAutoEn.Match(this.Cleaned);
+                    this.mActions = MonsterRegEx.ActionsEn.Match(this.Cleaned);
+                    this.mItems = MonsterRegEx.ItemsEn.Match(this.Cleaned);
+                    this.mCure = MonsterRegEx.CureEn.Match(this.Cleaned);
+                    this.mBeneficialGain = MonsterRegEx.BeneficialGainEn.Match(this.Cleaned);
+                    this.mBeneficialLose = MonsterRegEx.BeneficialLoseEn.Match(this.Cleaned);
+                    this.mDetrimentalGain = MonsterRegEx.DetrimentalGainEn.Match(this.Cleaned);
+                    this.mDetrimentalLose = MonsterRegEx.DetrimentalLoseEn.Match(this.Cleaned);
+                    this.Counter = "Counter";
+                    this.Added = "Additional Effect";
+                    this.HealingType = "HP";
+                    this.RAttack = "Ranged Attack";
+                    this.Attack = "Attack";
+                    this.DAttack = "Direct Attack";
+                    this.You = @"^[Yy]ou?$";
+                    this.YouString = "You";
+                    this.Mitigated = "Mitigated Damage (Magic Shield)";
+                    break;
+            }
+        }
+
+        private void RaisePropertyChanged([CallerMemberName] string caller = "") {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(caller));
+        }
     }
 }

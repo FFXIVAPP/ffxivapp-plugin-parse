@@ -1,81 +1,67 @@
-// FFXIVAPP.Plugin.Parse ~ AccuracyStat.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AccuracyStat.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   AccuracyStat.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using FFXIVAPP.Plugin.Parse.Models.Stats;
+namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats {
+    using System;
 
-namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats
-{
-    public class AccuracyStat : LinkedStat
-    {
-        public AccuracyStat(string name, params Stat<double>[] dependencies) : base(name, 0)
-        {
-            UsedStat = dependencies[0];
-            MissStat = dependencies[1];
-            SetupDepends();
+    using FFXIVAPP.Plugin.Parse.Models.Stats;
+
+    public class AccuracyStat : LinkedStat {
+        public AccuracyStat(string name, params Stat<double>[] dependencies)
+            : base(name, 0) {
+            this.UsedStat = dependencies[0];
+            this.MissStat = dependencies[1];
+            this.SetupDepends();
         }
 
-        public AccuracyStat(string name, double value) : base(name, 0)
-        {
-        }
+        public AccuracyStat(string name, double value)
+            : base(name, 0) { }
 
-        public AccuracyStat(string name) : base(name, 0)
-        {
-        }
+        public AccuracyStat(string name)
+            : base(name, 0) { }
 
-        private Stat<double> UsedStat { get; }
         private Stat<double> MissStat { get; }
 
-        /// <summary>
-        /// </summary>
-        private void SetupDepends()
-        {
-            AddDependency(UsedStat);
-            AddDependency(MissStat);
-            if (UsedStat.Value > 0 && MissStat.Value > 0)
-            {
-                UpdateAccuracy();
-            }
-        }
-
-        /// <summary>
-        /// </summary>
-        private void UpdateAccuracy()
-        {
-            if (UsedStat.Value == 0 && MissStat.Value == 0)
-            {
-                Value = 0;
-                return;
-            }
-            var totalHits = Convert.ToDouble(UsedStat.Value - MissStat.Value);
-            if (totalHits > -1)
-            {
-                Value = totalHits / UsedStat.Value;
-            }
-        }
+        private Stat<double> UsedStat { get; }
 
         /// <summary>
         /// </summary>
         /// <param name="sender"> </param>
         /// <param name="previousValue"> </param>
         /// <param name="newValue"> </param>
-        public override void DoDependencyValueChanged(object sender, object previousValue, object newValue)
-        {
-            UpdateAccuracy();
+        public override void DoDependencyValueChanged(object sender, object previousValue, object newValue) {
+            this.UpdateAccuracy();
+        }
+
+        /// <summary>
+        /// </summary>
+        private void SetupDepends() {
+            this.AddDependency(this.UsedStat);
+            this.AddDependency(this.MissStat);
+            if (this.UsedStat.Value > 0 && this.MissStat.Value > 0) {
+                this.UpdateAccuracy();
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        private void UpdateAccuracy() {
+            if (this.UsedStat.Value == 0 && this.MissStat.Value == 0) {
+                this.Value = 0;
+                return;
+            }
+
+            var totalHits = Convert.ToDouble(this.UsedStat.Value - this.MissStat.Value);
+            if (totalHits > -1) {
+                this.Value = totalHits / this.UsedStat.Value;
+            }
         }
     }
 }

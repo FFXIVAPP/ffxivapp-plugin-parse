@@ -1,55 +1,41 @@
-﻿// FFXIVAPP.Plugin.Parse ~ EntityHelper.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EntityHelper.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   EntityHelper.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using FFXIVAPP.Common.Models;
-using FFXIVAPP.Common.Utilities;
-using FFXIVAPP.Plugin.Parse.Models;
-using FFXIVAPP.Plugin.Parse.Properties;
-using FFXIVAPP.Plugin.Parse.Windows;
-using NLog;
+namespace FFXIVAPP.Plugin.Parse.Helpers {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-namespace FFXIVAPP.Plugin.Parse.Helpers
-{
-    public static class EntityHelper
-    {
-        #region Logger
+    using FFXIVAPP.Common.Models;
+    using FFXIVAPP.Common.Utilities;
+    using FFXIVAPP.Plugin.Parse.Models;
+    using FFXIVAPP.Plugin.Parse.Properties;
+    using FFXIVAPP.Plugin.Parse.Windows;
 
+    using NLog;
+
+    public static class EntityHelper {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
-
-        public static class Parse
-        {
-            public enum ParseType
-            {
+        public static class Parse {
+            public enum ParseType {
                 DPS,
+
                 DTPS,
+
                 HPS
             }
 
-            public static void CleanAndCopy(ParseEntity source, ParseType parseType)
-            {
-                try
-                {
-                    var target = new ParseEntity
-                    {
+            public static void CleanAndCopy(ParseEntity source, ParseType parseType) {
+                try {
+                    var target = new ParseEntity {
                         CombinedDPS = source.CombinedDPS,
                         DPS = source.DPS,
                         DOTPS = source.DOTPS,
@@ -82,39 +68,36 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                         PercentOfTotalOverallDamageTakenOverTime = source.PercentOfTotalOverallDamageTakenOverTime,
                         Players = new List<PlayerEntity>()
                     };
-                    foreach (var playerEntity in source.Players)
-                    {
-                        try
-                        {
-                            switch (parseType)
-                            {
+                    foreach (PlayerEntity playerEntity in source.Players) {
+                        try {
+                            switch (parseType) {
                                 case ParseType.DPS:
                                     double dps;
                                     double.TryParse(Settings.Default.DPSVisibility, out dps);
-                                    if (playerEntity.CombinedDPS <= dps)
-                                    {
+                                    if (playerEntity.CombinedDPS <= dps) {
                                         continue;
                                     }
+
                                     break;
                                 case ParseType.DTPS:
                                     double dtps;
                                     double.TryParse(Settings.Default.DTPSVisibility, out dtps);
-                                    if (playerEntity.CombinedDTPS <= dtps)
-                                    {
+                                    if (playerEntity.CombinedDTPS <= dtps) {
                                         continue;
                                     }
+
                                     break;
                                 case ParseType.HPS:
                                     double hps;
                                     double.TryParse(Settings.Default.HPSVisibility, out hps);
-                                    if (playerEntity.CombinedHPS <= hps)
-                                    {
+                                    if (playerEntity.CombinedHPS <= hps) {
                                         continue;
                                     }
+
                                     break;
                             }
-                            var entity = new PlayerEntity
-                            {
+
+                            var entity = new PlayerEntity {
                                 Name = playerEntity.Name,
                                 Job = playerEntity.Job,
                                 CombinedDPS = playerEntity.CombinedDPS,
@@ -151,22 +134,18 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                             };
                             target.Players.Add(entity);
                         }
-                        catch (Exception ex)
-                        {
+                        catch (Exception ex) {
                             Logging.Log(Logger, new LogItem(ex, true));
                         }
                     }
+
                     // sort entity based on settings
-                    switch (parseType)
-                    {
+                    switch (parseType) {
                         case ParseType.DPS:
-                            if (target.Players.Any())
-                            {
-                                switch (Settings.Default.DPSWidgetSortDirection)
-                                {
+                            if (target.Players.Any()) {
+                                switch (Settings.Default.DPSWidgetSortDirection) {
                                     case "Descending":
-                                        switch (Settings.Default.DPSWidgetSortProperty)
-                                        {
+                                        switch (Settings.Default.DPSWidgetSortProperty) {
                                             case "Name":
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderByDescending(p => p.Name));
                                                 break;
@@ -189,10 +168,10 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderByDescending(p => p.PercentOfTotalOverallDamage));
                                                 break;
                                         }
+
                                         break;
                                     default:
-                                        switch (Settings.Default.DPSWidgetSortProperty)
-                                        {
+                                        switch (Settings.Default.DPSWidgetSortProperty) {
                                             case "Name":
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderBy(p => p.Name));
                                                 break;
@@ -215,19 +194,18 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderBy(p => p.PercentOfTotalOverallDamage));
                                                 break;
                                         }
+
                                         break;
                                 }
                             }
+
                             DPSWidgetViewModel.Instance.ParseEntity = target;
                             break;
                         case ParseType.DTPS:
-                            if (target.Players.Any())
-                            {
-                                switch (Settings.Default.DTPSWidgetSortDirection)
-                                {
+                            if (target.Players.Any()) {
+                                switch (Settings.Default.DTPSWidgetSortDirection) {
                                     case "Descending":
-                                        switch (Settings.Default.DTPSWidgetSortProperty)
-                                        {
+                                        switch (Settings.Default.DTPSWidgetSortProperty) {
                                             case "Name":
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderByDescending(p => p.Name));
                                                 break;
@@ -250,10 +228,10 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderByDescending(p => p.PercentOfTotalOverallDamageTaken));
                                                 break;
                                         }
+
                                         break;
                                     default:
-                                        switch (Settings.Default.DTPSWidgetSortProperty)
-                                        {
+                                        switch (Settings.Default.DTPSWidgetSortProperty) {
                                             case "Name":
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderBy(p => p.Name));
                                                 break;
@@ -276,19 +254,18 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderBy(p => p.PercentOfTotalOverallDamageTaken));
                                                 break;
                                         }
+
                                         break;
                                 }
                             }
+
                             DTPSWidgetViewModel.Instance.ParseEntity = target;
                             break;
                         case ParseType.HPS:
-                            if (target.Players.Any())
-                            {
-                                switch (Settings.Default.HPSWidgetSortDirection)
-                                {
+                            if (target.Players.Any()) {
+                                switch (Settings.Default.HPSWidgetSortDirection) {
                                     case "Descending":
-                                        switch (Settings.Default.HPSWidgetSortProperty)
-                                        {
+                                        switch (Settings.Default.HPSWidgetSortProperty) {
                                             case "Name":
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderByDescending(p => p.Name));
                                                 break;
@@ -311,10 +288,10 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderByDescending(p => p.PercentOfTotalOverallHealing));
                                                 break;
                                         }
+
                                         break;
                                     default:
-                                        switch (Settings.Default.HPSWidgetSortProperty)
-                                        {
+                                        switch (Settings.Default.HPSWidgetSortProperty) {
                                             case "Name":
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderBy(p => p.Name));
                                                 break;
@@ -337,22 +314,21 @@ namespace FFXIVAPP.Plugin.Parse.Helpers
                                                 target.Players = new List<PlayerEntity>(target.Players.OrderBy(p => p.PercentOfTotalOverallHealing));
                                                 break;
                                         }
+
                                         break;
                                 }
                             }
+
                             HPSWidgetViewModel.Instance.ParseEntity = target;
                             break;
                     }
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     Logging.Log(Logger, new LogItem(ex, true));
                 }
             }
         }
 
-        public static class Target
-        {
-        }
+        public static class Target { }
     }
 }

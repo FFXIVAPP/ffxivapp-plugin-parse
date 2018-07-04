@@ -1,119 +1,129 @@
-// FFXIVAPP.Plugin.Parse ~ EventParser.cs
-// 
-// Copyright © 2007 - 2017 Ryan Wilson - All Rights Reserved
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EventParser.cs" company="SyndicatedLife">
+//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
+// </copyright>
+// <summary>
+//   EventParser.cs Implementation
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using FFXIVAPP.Plugin.Parse.Enums;
-using Sharlayan.Core;
+namespace FFXIVAPP.Plugin.Parse.Models.Events {
+    using System;
+    using System.Collections.Generic;
+    using System.Xml.Linq;
 
-namespace FFXIVAPP.Plugin.Parse.Models.Events
-{
-    public class EventParser
-    {
-        #region Property Bindings
+    using FFXIVAPP.Plugin.Parse.Enums;
 
-        private SortedDictionary<UInt64, EventCode> EventCodes
-        {
-            get { return _eventCodes; }
-        }
+    using Sharlayan.Core;
 
-        #endregion
+    public class EventParser {
+        public const ulong AllEvents = 0xFFFFFFFFFFF;
 
-        #region Events
+        public const ulong Alliance = (ulong) EventDirection.Alliance | (ulong) EventSubject.Alliance;
 
-        public event EventHandler<Event> OnLogEvent = delegate { };
-        public event EventHandler<Event> OnUnknownLogEvent = delegate { };
+        public const ulong DirectionMask = 0x1FFF;
 
-        #endregion
+        public const ulong Engaged = (ulong) EventDirection.Engaged | (ulong) EventSubject.Engaged;
 
-        #region Declarations
+        public const ulong FriendlyNPC = (ulong) EventDirection.FriendlyNPC | (ulong) EventSubject.FriendlyNPC;
 
-        #region Filtered Events
+        public const ulong NPC = (ulong) EventDirection.NPC | (ulong) EventSubject.NPC;
 
-        public const UInt64 Alliance = (UInt64) EventDirection.Alliance | (UInt64) EventSubject.Alliance;
-        public const UInt64 Engaged = (UInt64) EventDirection.Engaged | (UInt64) EventSubject.Engaged;
-        public const UInt64 FriendlyNPC = (UInt64) EventDirection.FriendlyNPC | (UInt64) EventSubject.FriendlyNPC;
-        public const UInt64 NPC = (UInt64) EventDirection.NPC | (UInt64) EventSubject.NPC;
-        public const UInt64 Other = (UInt64) EventDirection.Other | (UInt64) EventSubject.Other;
-        public const UInt64 Party = (UInt64) EventDirection.Party | (UInt64) EventSubject.Party;
-        public const UInt64 Pet = (UInt64) EventDirection.Pet | (UInt64) EventSubject.Pet;
-        public const UInt64 PetAlliance = (UInt64) EventDirection.PetAlliance | (UInt64) EventSubject.PetAlliance;
-        public const UInt64 PetOther = (UInt64) EventDirection.PetOther | (UInt64) EventSubject.PetOther;
-        public const UInt64 PetParty = (UInt64) EventDirection.PetParty | (UInt64) EventSubject.PetParty;
-        public const UInt64 Self = (UInt64) EventDirection.Self;
-        public const UInt64 UnEngaged = (UInt64) EventDirection.UnEngaged | (UInt64) EventSubject.UnEngaged;
-        public const UInt64 Unknown = (UInt64) EventDirection.Unknown | (UInt64) EventSubject.Unknown;
-        public const UInt64 You = (UInt64) EventDirection.You | (UInt64) EventSubject.You;
+        public const ulong Other = (ulong) EventDirection.Other | (ulong) EventSubject.Other;
 
-        #endregion
+        public const ulong Party = (ulong) EventDirection.Party | (ulong) EventSubject.Party;
 
-        public const UInt64 DirectionMask = 0x1FFF;
-        public const UInt64 SubjectMask = 0x1FFE000;
-        public const UInt64 TypeMask = 0x3FFFE000000;
-        public const UInt64 AllEvents = 0xFFFFFFFFFFF;
-        public const UInt64 UnknownEvent = 0x0;
+        public const ulong Pet = (ulong) EventDirection.Pet | (ulong) EventSubject.Pet;
+
+        public const ulong PetAlliance = (ulong) EventDirection.PetAlliance | (ulong) EventSubject.PetAlliance;
+
+        public const ulong PetOther = (ulong) EventDirection.PetOther | (ulong) EventSubject.PetOther;
+
+        public const ulong PetParty = (ulong) EventDirection.PetParty | (ulong) EventSubject.PetParty;
+
+        public const ulong Self = (ulong) EventDirection.Self;
+
+        public const ulong SubjectMask = 0x1FFE000;
+
+        public const ulong TypeMask = 0x3FFFE000000;
+
+        public const ulong UnEngaged = (ulong) EventDirection.UnEngaged | (ulong) EventSubject.UnEngaged;
+
+        public const ulong Unknown = (ulong) EventDirection.Unknown | (ulong) EventSubject.Unknown;
+
+        public const ulong UnknownEvent = 0x0;
+
+        public const ulong You = (ulong) EventDirection.You | (ulong) EventSubject.You;
+
         private static Lazy<EventParser> _instance = new Lazy<EventParser>(() => new EventParser(Constants.ChatCodesXML));
-        private readonly SortedDictionary<UInt64, EventCode> _eventCodes = new SortedDictionary<UInt64, EventCode>();
+
+        private readonly SortedDictionary<ulong, EventCode> _eventCodes = new SortedDictionary<ulong, EventCode>();
 
         private string LastKnownChatCodesXml = string.Empty;
-
-        #endregion
-
-        #region Initialization
 
         /// <summary>
         /// </summary>
         /// <param name="xml"> </param>
-        private EventParser(string xml)
-        {
-            Initialize(xml);
+        private EventParser(string xml) {
+            this.Initialize(xml);
+        }
+
+        public event EventHandler<Event> OnLogEvent = delegate { };
+
+        public event EventHandler<Event> OnUnknownLogEvent = delegate { };
+
+        /// <summary>
+        /// </summary>
+        public static EventParser Instance {
+            get {
+                return _instance.Value;
+            }
+        }
+
+        private SortedDictionary<ulong, EventCode> EventCodes {
+            get {
+                return this._eventCodes;
+            }
+        }
+
+        public void Initialize(string xml) {
+            if (string.IsNullOrWhiteSpace(xml)) {
+                return;
+            }
+
+            if (this.EventCodes.Count != 0 && this.LastKnownChatCodesXml == xml) {
+                return;
+            }
+
+            this.EventCodes.Clear();
+            this.LastKnownChatCodesXml = xml;
+            this.LoadCodes(XElement.Parse(xml));
         }
 
         /// <summary>
         /// </summary>
-        public static EventParser Instance
-        {
-            get { return _instance.Value; }
-        }
+        /// <param name="chatLogItem"></param>
+        public void ParseAndPublish(ChatLogItem chatLogItem) {
+            Event @event = this.Parse(chatLogItem);
+            EventHandler<Event> eventHandler = @event.IsUnknown
+                                                   ? this.OnUnknownLogEvent
+                                                   : this.OnLogEvent;
+            if (eventHandler == null) {
+                return;
+            }
 
-        public void Initialize(string xml)
-        {
-            if (String.IsNullOrWhiteSpace(xml))
-            {
-                return;
+            lock (eventHandler) {
+                eventHandler(this, @event);
             }
-            if (EventCodes.Count != 0 && LastKnownChatCodesXml == xml)
-            {
-                return;
-            }
-            EventCodes.Clear();
-            LastKnownChatCodesXml = xml;
-            LoadCodes(XElement.Parse(xml));
         }
 
         /// <summary>
         /// </summary>
         /// <param name="root"> </param>
-        private void LoadCodes(XContainer root)
-        {
-            foreach (var group in root.Elements("Group"))
-            {
-                LoadGroups(group, new EventGroup("All"));
+        private void LoadCodes(XContainer root) {
+            foreach (XElement group in root.Elements("Group")) {
+                this.LoadGroups(group, new EventGroup("All"));
             }
         }
 
@@ -121,16 +131,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
         /// </summary>
         /// <param name="root"> </param>
         /// <param name="parent"> </param>
-        private void LoadGroups(XElement root, EventGroup parent)
-        {
+        private void LoadGroups(XElement root, EventGroup parent) {
             var thisGroup = new EventGroup((string) root.Attribute("Name"), parent);
-            var type = (String) root.Attribute("Type");
-            var subject = (String) root.Attribute("Subject");
-            var direction = (String) root.Attribute("Direction");
-            if (type != null)
-            {
-                switch (type)
-                {
+            var type = (string) root.Attribute("Type");
+            var subject = (string) root.Attribute("Subject");
+            var direction = (string) root.Attribute("Direction");
+            if (type != null) {
+                switch (type) {
                     case "Damage":
                         thisGroup.Type = EventType.Damage;
                         break;
@@ -184,10 +191,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
                         break;
                 }
             }
-            if (subject != null)
-            {
-                switch (subject)
-                {
+
+            if (subject != null) {
+                switch (subject) {
                     case "You":
                         thisGroup.Subject = EventSubject.You;
                         break;
@@ -226,10 +232,9 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
                         break;
                 }
             }
-            if (direction != null)
-            {
-                switch (direction)
-                {
+
+            if (direction != null) {
+                switch (direction) {
                     case "Self":
                         thisGroup.Direction = EventDirection.Self;
                         break;
@@ -271,58 +276,33 @@ namespace FFXIVAPP.Plugin.Parse.Models.Events
                         break;
                 }
             }
-            foreach (var group in root.Elements("Group"))
-            {
-                LoadGroups(group, thisGroup);
+
+            foreach (XElement group in root.Elements("Group")) {
+                this.LoadGroups(group, thisGroup);
             }
-            foreach (var xElement in root.Elements("Code"))
-            {
+
+            foreach (XElement xElement in root.Elements("Code")) {
                 var xKey = Convert.ToUInt64((string) xElement.Attribute("Key"), 16);
                 var xDescription = (string) xElement.Element("Description");
-                _eventCodes.Add(xKey, new EventCode(xDescription, xKey, thisGroup));
+                this._eventCodes.Add(xKey, new EventCode(xDescription, xKey, thisGroup));
             }
         }
 
-        #endregion
-
-        #region Parsing
-
         /// <summary>
         /// </summary>
-        /// <param name="chatLogEntry"></param>
+        /// <param name="chatLogItem"></param>
         /// <returns></returns>
-        private Event Parse(ChatLogEntry chatLogEntry)
-        {
+        private Event Parse(ChatLogItem chatLogItem) {
             EventCode eventCode;
-            var code = Convert.ToUInt64(chatLogEntry.Code, 16);
-            if (EventCodes.TryGetValue(code, out eventCode))
-            {
-                return new Event(eventCode, chatLogEntry);
+            var code = Convert.ToUInt64(chatLogItem.Code, 16);
+            if (this.EventCodes.TryGetValue(code, out eventCode)) {
+                return new Event(eventCode, chatLogItem);
             }
-            var unknownEventCode = new EventCode
-            {
+
+            var unknownEventCode = new EventCode {
                 Code = code
             };
-            return new Event(unknownEventCode, chatLogEntry);
+            return new Event(unknownEventCode, chatLogItem);
         }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="chatLogEntry"></param>
-        public void ParseAndPublish(ChatLogEntry chatLogEntry)
-        {
-            var @event = Parse(chatLogEntry);
-            var eventHandler = @event.IsUnknown ? OnUnknownLogEvent : OnLogEvent;
-            if (eventHandler == null)
-            {
-                return;
-            }
-            lock (eventHandler)
-            {
-                eventHandler(this, @event);
-            }
-        }
-
-        #endregion
     }
 }
