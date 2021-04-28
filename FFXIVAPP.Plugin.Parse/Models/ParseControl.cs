@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ParseControl.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -124,7 +124,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
             this.Timeline.Clear();
             this.TimelineMonitor.Clear();
             var parseEntity = new ParseEntity {
-                Players = new List<PlayerEntity>()
+                Players = new List<PlayerEntity>(),
             };
             this.StartTime = DateTime.Now;
             EntityHelper.Parse.CleanAndCopy(parseEntity, EntityHelper.Parse.ParseType.DPS);
@@ -145,7 +145,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
             Func<bool> processor = delegate {
                 try {
                     var parseEntity = new ParseEntity {
-                        Players = new List<PlayerEntity>()
+                        Players = new List<PlayerEntity>(),
                     };
                     foreach (StatGroup statGroup in this.Timeline.Party) {
                         var player = (Player) statGroup;
@@ -183,7 +183,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
                                 PercentOfTotalOverallHealingOverHealing = (double) player.GetStatValue("PercentOfTotalOverallHealingOverHealing"),
                                 PercentOfTotalOverallHealingMitigated = (double) player.GetStatValue("PercentOfTotalOverallHealingMitigated"),
                                 PercentOfTotalOverallDamageTaken = (double) player.GetStatValue("PercentOfTotalOverallDamageTaken"),
-                                PercentOfTotalOverallDamageTakenOverTime = (double) player.GetStatValue("PercentOfTotalOverallDamageTakenOverTime")
+                                PercentOfTotalOverallDamageTakenOverTime = (double) player.GetStatValue("PercentOfTotalOverallDamageTakenOverTime"),
                             };
                             switch (type) {
                                 case "P":

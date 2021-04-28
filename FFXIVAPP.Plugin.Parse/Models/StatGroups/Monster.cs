@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Monster.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -26,7 +26,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
             "Block",
             "Parry",
             "Resist",
-            "Evade"
+            "Evade",
         };
 
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -43,8 +43,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
         /// </summary>
         /// <param name="name"> </param>
         /// <param name="parseControl"></param>
-        public Monster(string name, ParseControl parseControl)
-            : base(name) {
+        public Monster(string name, ParseControl parseControl) : base(name) {
             Controller = parseControl;
             this.ID = 0;
             this.LineHistory = new List<LineHistory>();
@@ -359,8 +358,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
             // link to main monster stats
             Dictionary<string, Stat<double>> oStats = Controller.Timeline.Overall.Stats.ToDictionary(o => o.Name);
 
-            
-
             ((TotalStat) oStats["TotalOverallDamageMonster"]).AddDependency(stats["TotalOverallDamage"]);
             ((TotalStat) oStats["RegularDamageMonster"]).AddDependency(stats["RegularDamage"]);
             ((TotalStat) oStats["CriticalDamageMonster"]).AddDependency(stats["CriticalDamage"]);
@@ -368,8 +365,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
             ((TotalStat) oStats["TotalOverallDamageOverTimeMonster"]).AddDependency(stats["TotalOverallDamageOverTime"]);
             ((TotalStat) oStats["RegularDamageOverTimeMonster"]).AddDependency(stats["RegularDamageOverTime"]);
             ((TotalStat) oStats["CriticalDamageOverTimeMonster"]).AddDependency(stats["CriticalDamageOverTime"]);
-
-            
 
             #region Healing
 

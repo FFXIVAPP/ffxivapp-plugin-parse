@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LinkedStat.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -16,16 +16,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats {
     public abstract class LinkedStat : Stat<double>, ILinkedStat {
         private List<Stat<double>> _dependencies;
 
-        protected LinkedStat(string name, params Stat<double>[] dependencies)
-            : base(name, 0) {
+        protected LinkedStat(string name, params Stat<double>[] dependencies) : base(name) {
             this.SetupStats(dependencies);
         }
 
-        protected LinkedStat(string name, double value)
-            : base(name, 0) { }
+        protected LinkedStat(string name, double value) : base(name) { }
 
-        protected LinkedStat(string name)
-            : base(name, 0) { }
+        protected LinkedStat(string name) : base(name) { }
 
         public event EventHandler<StatChangedEvent> OnDependencyValueChanged = delegate { };
 

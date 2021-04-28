@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Player.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -31,7 +31,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
             "Block",
             "Parry",
             "Resist",
-            "Evade"
+            "Evade",
         };
 
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -48,8 +48,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
 
         private ActorItem _npcEntry;
 
-        public Player(string name, ParseControl parseControl)
-            : base(name) {
+        public Player(string name, ParseControl parseControl) : base(name) {
             Controller = parseControl;
             this.ID = 0;
             this.LineHistory = new List<LineHistory>();
@@ -87,7 +86,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
             set {
                 if (this._npcEntry != value) {
                     this._npcEntry = value;
-                    this.RaisePropertyChanged("NPCEntry");
+                    this.RaisePropertyChanged();
                 }
             }
         }
@@ -488,8 +487,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
             // link to main party stats
             Dictionary<string, Stat<double>> oStats = Controller.Timeline.Overall.Stats.ToDictionary(o => o.Name);
 
-            
-
             ((TotalStat) oStats["TotalOverallDamage"]).AddDependency(stats["TotalOverallDamage"]);
             ((TotalStat) oStats["RegularDamage"]).AddDependency(stats["RegularDamage"]);
             ((TotalStat) oStats["CriticalDamage"]).AddDependency(stats["CriticalDamage"]);
@@ -497,8 +494,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
             ((TotalStat) oStats["TotalOverallDamageOverTime"]).AddDependency(stats["TotalOverallDamageOverTime"]);
             ((TotalStat) oStats["RegularDamageOverTime"]).AddDependency(stats["RegularDamageOverTime"]);
             ((TotalStat) oStats["CriticalDamageOverTime"]).AddDependency(stats["CriticalDamageOverTime"]);
-
-            
 
             #region Healing
 

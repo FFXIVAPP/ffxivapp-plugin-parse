@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="JsonHelper.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -51,7 +51,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 Dictionary<string, object> overall = new Dictionary<string, object> {
                     {
                         "Stats", new Dictionary<string, object>()
-                    }
+                    },
                 };
                 foreach (Stat<double> stat in currentOverallStats) {
                     ((Dictionary<string, object>) overall["Stats"]).Add(stat.Name, stat.Value);
@@ -72,7 +72,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                             "Last20HealingActions", ((Player) player).Last20HealingActions.ToList()
                         }, {
                             "Last20Items", ((Player) player).Last20Items.ToList()
-                        }
+                        },
                     };
                     foreach (Stat<double> stat in player.Stats) {
                         ((Dictionary<string, object>) playerItem["Stats"]).Add(stat.Name, stat.Value);
@@ -97,7 +97,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                             "Last20HealingActions", ((Monster) monster).Last20HealingActions.ToList()
                         }, {
                             "Last20Items", ((Monster) monster).Last20Items.ToList()
-                        }
+                        },
                     };
                     foreach (Stat<double> stat in monster.Stats) {
                         ((Dictionary<string, object>) monsterItem["Stats"]).Add(stat.Name, stat.Value);
@@ -109,8 +109,6 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
 
                 timeline.Add("Monster", monsters);
                 historyItem.Add("Timeline", timeline);
-
-                
 
                 DateTime start = ParseControl.Instance.StartTime;
                 DateTime end = DateTime.Now;
@@ -164,15 +162,12 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                     Logging.Log(Logger, new LogItem(ex, true));
                 }
 
-                
-
                 return new JsonParse {
                     Name = $"{zone} [{monsterName}] {parseTimeDetails}",
                     Parse = JsonConvert.SerializeObject(
-                        historyItem,
-                        new JsonSerializerSettings {
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                        })
+                        historyItem, new JsonSerializerSettings {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        }),
                 };
             }
 
@@ -196,7 +191,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                     Dictionary<string, object> newParent = new Dictionary<string, object> {
                         {
                             "Stats", new Dictionary<string, object>()
-                        }
+                        },
                     };
                     foreach (Stat<double> stat in group.Stats) {
                         ((Dictionary<string, object>) newParent["Stats"]).Add(stat.Name, stat.Value);

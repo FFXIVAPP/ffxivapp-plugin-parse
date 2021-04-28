@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="StatMonitor.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -15,7 +15,6 @@ namespace FFXIVAPP.Plugin.Parse.Monitors {
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using FFXIVAPP.Common;
     using FFXIVAPP.Common.Helpers;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
@@ -33,16 +32,13 @@ namespace FFXIVAPP.Plugin.Parse.Monitors {
     using Sharlayan.Models.XIVDatabase;
     using Sharlayan.Utilities;
 
-    using Constants = FFXIVAPP.Plugin.Parse.Constants;
-
     public class StatMonitor : EventMonitor {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// </summary>
         /// <param name="parseControl"> </param>
-        public StatMonitor(ParseControl parseControl)
-            : base("StatMonitor", parseControl) {
+        public StatMonitor(ParseControl parseControl) : base("StatMonitor", parseControl) {
             this.IncludeSelf = false;
             this.Filter = EventParser.TypeMask | EventParser.Self | EventParser.Engaged | EventParser.UnEngaged;
             if (Settings.Default.ParseYou) {
@@ -115,10 +111,6 @@ namespace FFXIVAPP.Plugin.Parse.Monitors {
         /// </summary>
         /// <param name="e"> </param>
         protected override void HandleEvent(Event e) {
-            
-
-            
-
             Utilities.Filter.Process(e);
         }
 

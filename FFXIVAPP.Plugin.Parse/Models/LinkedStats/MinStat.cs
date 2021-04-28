@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MinStat.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -14,17 +14,14 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats {
     using FFXIVAPP.Plugin.Parse.Models.Stats;
 
     public sealed class MinStat : LinkedStat {
-        public MinStat(string name, params Stat<double>[] dependencies)
-            : base(name, 0) {
+        public MinStat(string name, params Stat<double>[] dependencies) : base(name, 0) {
             this.AddDependency(dependencies[0]);
             this.GotValue = false;
         }
 
-        public MinStat(string name, double value)
-            : base(name, 0) { }
+        public MinStat(string name, double value) : base(name, 0) { }
 
-        public MinStat(string name)
-            : base(name, 0) { }
+        public MinStat(string name) : base(name, 0) { }
 
         private bool GotValue { get; set; }
 

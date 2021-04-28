@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Settings.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -37,7 +37,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties {
 
         private static Settings _default;
 
-        public new event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public static Settings Default {
             get {
@@ -7047,7 +7047,7 @@ namespace FFXIVAPP.Plugin.Parse.Properties {
             }
         }
 
-        public new void Reset() {
+        public void Reset() {
             this.DefaultSettings();
             foreach (var key in Constants.Settings) {
                 SettingsProperty settingsProperty = Default.Properties[key];
@@ -7081,8 +7081,6 @@ namespace FFXIVAPP.Plugin.Parse.Properties {
             Constants.Settings.Add("ParseAlliance");
             Constants.Settings.Add("ParseOther");
             Constants.Settings.Add("ParseAdvanced");
-
-            
 
             Constants.Settings.Add("ShowBasicTotalOverallDamage");
             Constants.Settings.Add("ShowBasicRegularDamage");
@@ -7307,8 +7305,6 @@ namespace FFXIVAPP.Plugin.Parse.Properties {
             Constants.Settings.Add("ShowBasicPercentOfTotalOverallDamageTakenOverTime");
             Constants.Settings.Add("ShowBasicPercentOfRegularDamageTakenOverTime");
             Constants.Settings.Add("ShowBasicPercentOfCriticalDamageTakenOverTime");
-
-            
 
             #region Basic Combined Settings
 
@@ -7604,8 +7600,8 @@ namespace FFXIVAPP.Plugin.Parse.Properties {
                     List<XValuePair> keyPairList = new List<XValuePair> {
                         new XValuePair {
                             Key = "Value",
-                            Value = xValue
-                        }
+                            Value = xValue,
+                        },
                     };
                     XmlHelper.SaveXmlNode(Constants.XSettings, "Settings", "Setting", xKey, keyPairList);
                 }

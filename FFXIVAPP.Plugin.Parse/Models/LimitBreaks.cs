@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LimitBreaks.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -46,7 +46,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
                         "生命の鼓動",
                         "ブレイバー",
                         "ブレードダンス",
-                        "ファイナルヘヴン"
+                        "ファイナルヘヴン",
                     };
                 case "de":
                     return new List<string> {
@@ -63,7 +63,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
                         "lebenspuls",
                         "mutangriff",
                         "schwertertanz",
-                        "endgültiger himmel"
+                        "endgültiger himmel",
                     };
                 case "fr":
                     return new List<string> {
@@ -79,7 +79,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
                         "pulsation vitale",
                         "ardeur courageuse",
                         "danse de la lame",
-                        "paradis final"
+                        "paradis final",
                     };
             }
 
@@ -96,7 +96,7 @@ namespace FFXIVAPP.Plugin.Parse.Models {
                 "pulse of life",
                 "braver",
                 "bladedance",
-                "final heaven"
+                "final heaven",
             };
         }
     }

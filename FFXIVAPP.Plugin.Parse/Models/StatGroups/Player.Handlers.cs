@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Player.Handlers.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -63,7 +63,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
                         EventType = EventType.Unknown,
                         EventSubject = EventSubject.Unknown,
                         Source = this.Name,
-                        SourceEntity = this.NPCEntry
+                        SourceEntity = this.NPCEntry,
                     };
                     try {
                         List<StatGroup> players = Controller.Timeline.Party.ToList();
@@ -245,7 +245,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
                         Source = this.Name,
                         SourceEntity = this.NPCEntry,
                         Target = statusEntry.TargetName,
-                        XOverTime = true
+                        XOverTime = true,
                     };
                     Controller.Timeline.FightingRightNow = true;
                     Controller.Timeline.FightingTimer.Stop();
@@ -405,7 +405,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.StatGroups {
                         EventSubject = EventSubject.Unknown,
                         Source = this.Name,
                         SourceEntity = this.NPCEntry,
-                        XOverTime = true
+                        XOverTime = true,
                     };
                     try {
                         List<StatGroup> players = Controller.Timeline.Party.ToList();

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DamageOverTimeHelper.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -34,21 +34,19 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 _bioActions = new Dictionary<string, List<string>>();
 
                 _bioActions.Add(
-                    "I",
-                    new List<string> {
+                    "I", new List<string> {
                         "bio",
                         "bactérie",
                         "バイオ",
-                        "毒菌"
+                        "毒菌",
                     });
                 _bioActions.Add(
-                    "II",
-                    new List<string> {
+                    "II", new List<string> {
                         "bio ii",
                         "biora",
                         "extra bactérie",
                         "バイオラ",
-                        "猛毒菌"
+                        "猛毒菌",
                     });
                 return _bioActions;
             }
@@ -115,21 +113,19 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 _ruinActions = new Dictionary<string, List<string>>();
 
                 _ruinActions.Add(
-                    "I",
-                    new List<string> {
+                    "I", new List<string> {
                         "ruin",
                         "ruine",
                         "ルイン",
-                        "毁灭"
+                        "毁灭",
                     });
                 _ruinActions.Add(
-                    "II",
-                    new List<string> {
+                    "II", new List<string> {
                         "ruin ii",
                         "ruinra",
                         "extra ruine",
                         "ルインラ",
-                        "毁坏"
+                        "毁坏",
                     });
                 return _ruinActions;
             }
@@ -144,31 +140,28 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 _thunderActions = new Dictionary<string, List<string>>();
 
                 _thunderActions.Add(
-                    "I",
-                    new List<string> {
+                    "I", new List<string> {
                         "thunder",
                         "blitz",
                         "foudre",
                         "サンダー",
-                        "闪雷"
+                        "闪雷",
                     });
                 _thunderActions.Add(
-                    "II",
-                    new List<string> {
+                    "II", new List<string> {
                         "thunder ii",
                         "blitzra",
                         "extra foudre",
                         "サンダラ",
-                        "震雷"
+                        "震雷",
                     });
                 _thunderActions.Add(
-                    "III",
-                    new List<string> {
+                    "III", new List<string> {
                         "thunder iii",
                         "blitzga",
                         "méga foudre",
                         "サンダガ",
-                        "暴雷"
+                        "暴雷",
                     });
                 return _thunderActions;
             }

@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="PerSecondAverageStat.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -16,16 +16,13 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats {
     using FFXIVAPP.Plugin.Parse.Properties;
 
     public class PerSecondAverageStat : LinkedStat {
-        public PerSecondAverageStat(string name, params Stat<double>[] dependencies)
-            : base(name, 0) {
+        public PerSecondAverageStat(string name, params Stat<double>[] dependencies) : base(name, 0) {
             this.SetupDepends(dependencies[0]);
         }
 
-        public PerSecondAverageStat(string name, double value)
-            : base(name, 0) { }
+        public PerSecondAverageStat(string name, double value) : base(name, 0) { }
 
-        public PerSecondAverageStat(string name)
-            : base(name, 0) { }
+        public PerSecondAverageStat(string name) : base(name, 0) { }
 
         public Timer UpdateTimer { get; set; }
 

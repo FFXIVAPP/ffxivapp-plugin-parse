@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="TimelineMonitor.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -29,8 +29,7 @@ namespace FFXIVAPP.Plugin.Parse.Monitors {
         /// <summary>
         /// </summary>
         /// <param name="parseControl"> </param>
-        public TimelineMonitor(ParseControl parseControl)
-            : base("Timeline", parseControl) {
+        public TimelineMonitor(ParseControl parseControl) : base("Timeline", parseControl) {
             this.Filter = EventParser.SubjectMask | EventParser.DirectionMask | (ulong) EventType.Loot | (ulong) EventType.Defeats;
         }
 

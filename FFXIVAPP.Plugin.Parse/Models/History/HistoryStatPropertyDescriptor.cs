@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="HistoryStatPropertyDescriptor.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -13,8 +13,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.History {
     using System.ComponentModel;
 
     public class HistoryStatPropertyDescriptor : PropertyDescriptor {
-        public HistoryStatPropertyDescriptor(string name)
-            : base(name, null) { }
+        public HistoryStatPropertyDescriptor(string name) : base(name, null) { }
 
         public override Type ComponentType {
             get {

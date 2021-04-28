@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MagicBarrierHelper.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -27,7 +27,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 _adloquium = new List<string> {
                     "adloquium",
                     "traité du réconfort",
-                    "鼓舞激励の策"
+                    "鼓舞激励の策",
                 };
                 return _adloquium;
             }
@@ -43,7 +43,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                     "stoneskin",
                     "steinhaut",
                     "cuirasse",
-                    "ストンスキン"
+                    "ストンスキン",
                 };
                 return _stoneSkin;
             }
@@ -59,7 +59,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                     "succor",
                     "kurieren",
                     "traité du soulagement",
-                    "士気高揚の策"
+                    "士気高揚の策",
                 };
                 return _succor;
             }

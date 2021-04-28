@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Timeline.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -65,10 +65,10 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines {
             // setup party
             this.Overall = new StatGroup("Overall");
             this.Party = new StatGroup("Party") {
-                IncludeSelf = false
+                IncludeSelf = false,
             };
             this.Monster = new StatGroup("Monster") {
-                IncludeSelf = false
+                IncludeSelf = false,
             };
             this.PlayerCurables = new Dictionary<string, int>();
             this.SetStoreHistoryInterval();
@@ -340,8 +340,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines {
         private Dictionary<string, Stat<double>> OverallStats() {
             Dictionary<string, Stat<double>> stats = new Dictionary<string, Stat<double>>();
 
-            
-
             #region Combined
 
             stats.Add("CombinedTotalOverallDamage", new TotalStat("CombinedTotalOverallDamage"));
@@ -419,8 +417,6 @@ namespace FFXIVAPP.Plugin.Parse.Models.Timelines {
             stats.Add("TotalOverallActiveTime", new TotalStat("TotalOverallActiveTime"));
             stats.Add("TotalOverallTP", new TotalStat("TotalOverallTP"));
             stats.Add("TotalOverallMP", new TotalStat("TotalOverallMP"));
-
-            
 
             #region Monster
 

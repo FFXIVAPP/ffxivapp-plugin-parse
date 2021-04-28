@@ -398,11 +398,11 @@
                                                                Text="{Binding Locale[parse_TotalsMitigatedHeader], Source={StaticResource PluginViewModel}, Converter={StaticResource ToUpperConverter}}" />
                                                 </Expander.Header>
                                                 <grids:HealingMitigatedDataGrid x:Name="PlayerHealingMitigatedByAction"
-                                                                                BorderThickness="0"
-                                                                                DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
-                                                                                ItemsSource="{Binding HealingMitigatedByAction}"
-                                                                                SelectionMode="Single"
-                                                                                Style="{DynamicResource MetroDataGrid}" />
+                                                    BorderThickness="0"
+                                                    DataContext="{Binding SelectedItem, ElementName=PlayerInfoListView, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}"
+                                                    ItemsSource="{Binding HealingMitigatedByAction}"
+                                                    SelectionMode="Single"
+                                                    Style="{DynamicResource MetroDataGrid}" />
                                             </Expander>
                                         </StackPanel>
                                     </ScrollViewer>

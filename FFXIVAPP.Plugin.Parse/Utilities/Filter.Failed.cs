@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Filter.Failed.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -22,7 +22,7 @@ namespace FFXIVAPP.Plugin.Parse.Utilities {
             var line = new Line(e.ChatLogItem) {
                 EventDirection = e.Direction,
                 EventSubject = e.Subject,
-                EventType = e.Type
+                EventType = e.Type,
             };
             LineHelper.SetTimelineTypes(ref line);
             if (LineHelper.IsIgnored(line)) {

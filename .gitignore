@@ -5,9 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
-*.csproj
-*.dll
-.gitignore
+
 # Build results
 
 [Dd]ebug*/
@@ -15,6 +13,7 @@
 [Bb]uild*/
 [Tt]est[Rr]esult
 [Bb]uild[Ll]og.*
+# packages/
 
 *_i.c
 *_p.c
@@ -116,4 +115,3 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
-/.vs/FFXIVAPP.Plugin.Parse

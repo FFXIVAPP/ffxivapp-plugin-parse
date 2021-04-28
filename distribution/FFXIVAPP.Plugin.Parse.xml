@@ -298,7 +298,7 @@
             <param name="stayOnTop"></param>
             <param name="force"></param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Initializer.LoadSettings">
+        <member name="M:FFXIVAPP.Plugin.Parse.Initializer.LoadMonsterRegEx">
             <summary>
             </summary>
         </member>
@@ -306,7 +306,7 @@
             <summary>
             </summary>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Initializer.LoadMonsterRegEx">
+        <member name="M:FFXIVAPP.Plugin.Parse.Initializer.LoadSettings">
             <summary>
             </summary>
         </member>
@@ -340,12 +340,6 @@
             </summary>
             <returns> </returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.Event.MatchesFilter(System.UInt64,FFXIVAPP.Plugin.Parse.Models.Events.Event)">
-            <summary>
-            </summary>
-            <param name="filter"> </param>
-            <returns> </returns>
-        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.Event.op_Equality(FFXIVAPP.Plugin.Parse.Models.Events.Event,FFXIVAPP.Plugin.Parse.Models.Events.Event)">
             <summary>
             </summary>
@@ -369,6 +363,12 @@
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.Event.GetHashCode">
             <summary>
             </summary>
+            <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.Event.MatchesFilter(System.UInt64,FFXIVAPP.Plugin.Parse.Models.Events.Event)">
+            <summary>
+            </summary>
+            <param name="filter"> </param>
             <returns> </returns>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventCode.#ctor(System.String,System.UInt64,FFXIVAPP.Plugin.Parse.Models.Events.EventGroup)">
@@ -401,17 +401,17 @@
             <param name="name"> </param>
             <param name="parent"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventGroup.Init(System.String,FFXIVAPP.Plugin.Parse.Models.Events.EventGroup)">
-            <summary>
-            </summary>
-            <param name="name"> </param>
-            <param name="parent"> </param>
-        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventGroup.AddChild(FFXIVAPP.Plugin.Parse.Models.Events.EventGroup)">
             <summary>
             </summary>
             <param name="kid"> </param>
             <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventGroup.Init(System.String,FFXIVAPP.Plugin.Parse.Models.Events.EventGroup)">
+            <summary>
+            </summary>
+            <param name="name"> </param>
+            <param name="parent"> </param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventMonitor.#ctor(System.String,FFXIVAPP.Plugin.Parse.Models.ParseControl)">
             <summary>
@@ -419,10 +419,15 @@
             <param name="name"> </param>
             <param name="parseControl"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventMonitor.Initialize(FFXIVAPP.Plugin.Parse.Models.ParseControl)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventMonitor.HandleEvent(FFXIVAPP.Plugin.Parse.Models.Events.Event)">
             <summary>
             </summary>
-            <param name="instance"> </param>
+            <param name="e"> </param>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventMonitor.HandleUnknownEvent(FFXIVAPP.Plugin.Parse.Models.Events.Event)">
+            <summary>
+            </summary>
+            <param name="e"> </param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventMonitor.InitStats">
             <summary>
@@ -440,15 +445,10 @@
             <param name="source"> </param>
             <param name="e"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventMonitor.HandleEvent(FFXIVAPP.Plugin.Parse.Models.Events.Event)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventMonitor.Initialize(FFXIVAPP.Plugin.Parse.Models.ParseControl)">
             <summary>
             </summary>
-            <param name="e"> </param>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventMonitor.HandleUnknownEvent(FFXIVAPP.Plugin.Parse.Models.Events.Event)">
-            <summary>
-            </summary>
-            <param name="e"> </param>
+            <param name="instance"> </param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventParser.#ctor(System.String)">
             <summary>
@@ -458,6 +458,11 @@
         <member name="P:FFXIVAPP.Plugin.Parse.Models.Events.EventParser.Instance">
             <summary>
             </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventParser.ParseAndPublish(Sharlayan.Core.ChatLogItem)">
+            <summary>
+            </summary>
+            <param name="chatLogItem"></param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventParser.LoadCodes(System.Xml.Linq.XContainer)">
             <summary>
@@ -470,16 +475,11 @@
             <param name="root"> </param>
             <param name="parent"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventParser.Parse(Sharlayan.Core.ChatLogEntry)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventParser.Parse(Sharlayan.Core.ChatLogItem)">
             <summary>
             </summary>
-            <param name="chatLogEntry"></param>
+            <param name="chatLogItem"></param>
             <returns></returns>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Events.EventParser.ParseAndPublish(Sharlayan.Core.ChatLogEntry)">
-            <summary>
-            </summary>
-            <param name="chatLogEntry"></param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Fights.FightList.#ctor(FFXIVAPP.Plugin.Parse.Models.Fights.Fight[])">
             <summary>
@@ -525,6 +525,13 @@
             <param name="playerName"> </param>
             <returns> </returns>
         </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.AccuracyStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
+            <summary>
+            </summary>
+            <param name="sender"> </param>
+            <param name="previousValue"> </param>
+            <param name="newValue"> </param>
+        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.AccuracyStat.SetupDepends">
             <summary>
             </summary>
@@ -533,7 +540,7 @@
             <summary>
             </summary>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.AccuracyStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.AverageStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
             <summary>
             </summary>
             <param name="sender"> </param>
@@ -544,13 +551,6 @@
             <summary>
             </summary>
             <param name="total"> </param>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.AverageStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
-            <summary>
-            </summary>
-            <param name="sender"> </param>
-            <param name="previousValue"> </param>
-            <param name="newValue"> </param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.CounterStat.Increment(System.Double)">
             <summary>
@@ -572,6 +572,13 @@
             <param name="previousValue"> </param>
             <param name="newValue"> </param>
         </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.PercentStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
+            <summary>
+            </summary>
+            <param name="sender"> </param>
+            <param name="previousValue"> </param>
+            <param name="newValue"> </param>
+        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.PercentStat.SetupDepends">
             <summary>
             </summary>
@@ -580,7 +587,7 @@
             <summary>
             </summary>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.PercentStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.PerSecondAverageStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
             <summary>
             </summary>
             <param name="sender"> </param>
@@ -591,13 +598,6 @@
             <summary>
             </summary>
             <param name="dependency"> </param>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.PerSecondAverageStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
-            <summary>
-            </summary>
-            <param name="sender"> </param>
-            <param name="previousValue"> </param>
-            <param name="newValue"> </param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.LinkedStats.TotalStat.DoDependencyValueChanged(System.Object,System.Object,System.Object)">
             <summary>
@@ -617,13 +617,11 @@
             <param name="name"> </param>
             <param name="parseControl"></param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.InitStats">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DamageOverTimeStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
             <summary>
             </summary>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.TotalStatList">
-            <summary>
-            </summary>
+            <param name="sub"> </param>
+            <param name="useSub"></param>
             <returns> </returns>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DamageStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
@@ -633,14 +631,26 @@
             <param name="useSub"></param>
             <returns> </returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DamageOverTimeStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DamageTakenOverTimeStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
             <summary>
             </summary>
-            <param name="sub"> </param>
+            <param name="sub"></param>
             <param name="useSub"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DamageTakenStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="sub"></param>
+            <param name="useSub"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DropStatList">
+            <summary>
+            </summary>
             <returns> </returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.HealingStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.HealingMitigatedStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
             <summary>
             </summary>
             <param name="sub"></param>
@@ -661,28 +671,18 @@
             <param name="useSub"></param>
             <returns></returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.HealingMitigatedStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.HealingStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
             <summary>
             </summary>
             <param name="sub"></param>
             <param name="useSub"></param>
             <returns></returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DamageTakenStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.InitStats">
             <summary>
             </summary>
-            <param name="sub"></param>
-            <param name="useSub"></param>
-            <returns></returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DamageTakenOverTimeStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
-            <summary>
-            </summary>
-            <param name="sub"></param>
-            <param name="useSub"></param>
-            <returns></returns>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.DropStatList">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Monster.TotalStatList">
             <summary>
             </summary>
             <returns> </returns>
@@ -723,9 +723,18 @@
             </summary>
             <param name="fight"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.TotalStatList">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.BuffStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
             <summary>
             </summary>
+            <param name="sub"></param>
+            <param name="useSub"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.DamageOverTimeStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="sub"> </param>
+            <param name="useSub"></param>
             <returns> </returns>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.DamageStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
@@ -735,14 +744,21 @@
             <param name="useSub"></param>
             <returns> </returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.DamageOverTimeStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.DamageTakenOverTimeStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
             <summary>
             </summary>
-            <param name="sub"> </param>
+            <param name="sub"></param>
             <param name="useSub"></param>
-            <returns> </returns>
+            <returns></returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.HealingStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.DamageTakenStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="sub"></param>
+            <param name="useSub"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.HealingMitigatedStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
             <summary>
             </summary>
             <param name="sub"></param>
@@ -763,40 +779,24 @@
             <param name="useSub"></param>
             <returns></returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.HealingMitigatedStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.HealingStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
             <summary>
             </summary>
             <param name="sub"></param>
             <param name="useSub"></param>
             <returns></returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.DamageTakenStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.TotalStatList">
             <summary>
             </summary>
-            <param name="sub"></param>
-            <param name="useSub"></param>
-            <returns></returns>
+            <returns> </returns>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.DamageTakenOverTimeStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
-            <summary>
-            </summary>
-            <param name="sub"></param>
-            <param name="useSub"></param>
-            <returns></returns>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.BuffStatList(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup,System.Boolean)">
-            <summary>
-            </summary>
-            <param name="sub"></param>
-            <param name="useSub"></param>
-            <returns></returns>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.ProcessDamageOverTime(System.Collections.Generic.IEnumerable{Sharlayan.Core.StatusEntry})">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.ProcessDamageOverTime(System.Collections.Generic.IEnumerable{Sharlayan.Core.StatusItem})">
             <summary>
             </summary>
             <param name="statusEntriesMonsters"></param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.ProcessHealingOverTime(System.Collections.Generic.IEnumerable{Sharlayan.Core.StatusEntry})">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.StatGroups.Player.ProcessHealingOverTime(System.Collections.Generic.IEnumerable{Sharlayan.Core.StatusItem})">
             <summary>
             </summary>
             <param name="statusEntriesPlayers"></param>
@@ -851,7 +851,11 @@
             </summary>
             <param name="dependency"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.GetDependencies">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.ClearDependencies">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.CloneDependentStats">
             <summary>
             </summary>
             <returns> </returns>
@@ -863,30 +867,26 @@
             <param name="previousValue"> </param>
             <param name="newValue"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.ClearDependencies">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.GetDependencies">
             <summary>
             </summary>
+            <returns> </returns>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.RemoveDependency(FFXIVAPP.Plugin.Parse.Models.Stats.Stat{System.Double})">
             <summary>
             </summary>
             <param name="dependency"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.CloneDependentStats">
-            <summary>
-            </summary>
-            <returns> </returns>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.SetupStats(System.Collections.Generic.IEnumerable{FFXIVAPP.Plugin.Parse.Models.Stats.Stat{System.Double}})">
-            <summary>
-            </summary>
-            <param name="dependencies"> </param>
-        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.DependencyValueChanged(System.Object,FFXIVAPP.Plugin.Parse.Models.Stats.StatChangedEvent)">
             <summary>
             </summary>
             <param name="sender"> </param>
             <param name="e"> </param>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.LinkedStat.SetupStats(System.Collections.Generic.IEnumerable{FFXIVAPP.Plugin.Parse.Models.Stats.Stat{System.Double}})">
+            <summary>
+            </summary>
+            <param name="dependencies"> </param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.Stat`1.#ctor(System.String,`0)">
             <summary>
@@ -905,56 +905,34 @@
             <param name="previousValue"> </param>
             <param name="newValue"> </param>
         </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="name"> </param>
+        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.#ctor(System.String,FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup[])">
             <summary>
             </summary>
             <param name="name"> </param>
             <param name="children"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.#ctor(System.String)">
+        <member name="P:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.Count">
             <summary>
             </summary>
-            <param name="name"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.DoInit(System.String)">
+        <member name="P:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.IsReadOnly">
             <summary>
             </summary>
-            <param name="name"> </param>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.HasGroup(System.String)">
-            <summary>
-            </summary>
-            <param name="name"> </param>
-            <returns> </returns>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.AddGroup(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup)">
-            <summary>
-            </summary>
-            <param name="child"> </param>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.GetGroup(System.String)">
-            <summary>
-            </summary>
-            <param name="name"> </param>
-            <returns> </returns>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.TryGetGroup(System.String,FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup@)">
-            <summary>
-            </summary>
-            <param name="name"> </param>
-            <param name="result"> </param>
-            <returns> </returns>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.GetStatValue(System.String)">
-            <summary>
-            </summary>
-            <param name="name"> </param>
-            <returns> </returns>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.Add(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup)">
             <summary>
             </summary>
             <param name="item"> </param>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.AddGroup(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup)">
+            <summary>
+            </summary>
+            <param name="child"> </param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.Clear">
             <summary>
@@ -972,21 +950,47 @@
             <param name="array"> </param>
             <param name="arrayIndex"> </param>
         </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.GetGroup(System.String)">
+            <summary>
+            </summary>
+            <param name="name"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.GetStatValue(System.String)">
+            <summary>
+            </summary>
+            <param name="name"> </param>
+            <returns> </returns>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.HasGroup(System.String)">
+            <summary>
+            </summary>
+            <param name="name"> </param>
+            <returns> </returns>
+        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.Remove(FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup)">
             <summary>
             </summary>
             <param name="item"> </param>
             <returns> </returns>
         </member>
-        <member name="P:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.Count">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.TryGetGroup(System.String,FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup@)">
             <summary>
             </summary>
+            <param name="name"> </param>
+            <param name="result"> </param>
+            <returns> </returns>
         </member>
-        <member name="P:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.IsReadOnly">
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Stats.StatGroup.DoInit(System.String)">
             <summary>
             </summary>
+            <param name="name"> </param>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Timelines.Timeline.#ctor(FFXIVAPP.Plugin.Parse.Models.ParseControl)">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Models.Timelines.Timeline.Clear">
             <summary>
             </summary>
         </member>
@@ -1007,10 +1011,6 @@
             </summary>
             <param name="eventType"> </param>
             <param name="eventArgs"> </param>
-        </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Models.Timelines.Timeline.Clear">
-            <summary>
-            </summary>
         </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Models.Timelines.TimelineChangedEvent.#ctor(FFXIVAPP.Plugin.Parse.Enums.TimelineEventType,System.Object[])">
             <summary>
@@ -1047,25 +1047,25 @@
             </summary>
             <param name="e"> </param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Monitors.TimelineMonitor.ProcessDefeated(FFXIVAPP.Plugin.Parse.Models.Events.Event)">
-            <summary>
-            </summary>
-        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Monitors.TimelineMonitor.AddKillToPartyMonster(System.String,System.String)">
             <summary>
             </summary>
             <param name="target"></param>
             <param name="source"></param>
         </member>
-        <member name="M:FFXIVAPP.Plugin.Parse.Monitors.TimelineMonitor.ProcessLoot(FFXIVAPP.Plugin.Parse.Models.Events.Event)">
-            <summary>
-            </summary>
-        </member>
         <member name="M:FFXIVAPP.Plugin.Parse.Monitors.TimelineMonitor.AttachDropToPartyMonster(System.String,FFXIVAPP.Plugin.Parse.Models.Events.Event)">
             <summary>
             </summary>
             <param name="thing"> </param>
             <param name="e"></param>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Monitors.TimelineMonitor.ProcessDefeated(FFXIVAPP.Plugin.Parse.Models.Events.Event)">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:FFXIVAPP.Plugin.Parse.Monitors.TimelineMonitor.ProcessLoot(FFXIVAPP.Plugin.Parse.Models.Events.Event)">
+            <summary>
+            </summary>
         </member>
         <member name="T:FFXIVAPP.Plugin.Parse.ShellView">
             <summary>

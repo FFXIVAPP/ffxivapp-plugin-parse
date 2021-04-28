@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Stat.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -22,7 +22,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats {
         /// </summary>
         /// <param name="name"> </param>
         /// <param name="value"> </param>
-        protected Stat(string name = "", T value = default(T)) {
+        protected Stat(string name = "", T value = default) {
             this.Name = name;
             this.Value = value;
         }
@@ -58,7 +58,7 @@ namespace FFXIVAPP.Plugin.Parse.Models.Stats {
         /// <summary>
         /// </summary>
         public void Reset() {
-            this.Value = default(T);
+            this.Value = default;
         }
 
         private void RaisePropertyChanged([CallerMemberName] string caller = "") {

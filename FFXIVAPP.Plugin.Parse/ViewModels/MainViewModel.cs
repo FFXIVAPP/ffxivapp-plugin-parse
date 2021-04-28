@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MainViewModel.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -18,14 +18,11 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Text;
-    using System.Text.RegularExpressions;
     using System.Windows;
     using System.Windows.Input;
 
-    using FFXIVAPP.Common;
     using FFXIVAPP.Common.Helpers;
     using FFXIVAPP.Common.Models;
-    using FFXIVAPP.Common.RegularExpressions;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.Common.ViewModelBase;
     using FFXIVAPP.Plugin.Parse.Helpers;
@@ -39,8 +36,6 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
     using Microsoft.Win32;
 
     using NLog;
-
-    using Constants = FFXIVAPP.Plugin.Parse.Constants;
 
     internal sealed class MainViewModel : INotifyPropertyChanged {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -129,18 +124,18 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
         public ObservableCollection<ParseHistoryItem> ParseHistory {
             get {
                 return this._parseHistory ?? (this._parseHistory = new ObservableCollection<ParseHistoryItem> {
-                    new ParseHistoryItem {
-                        Name = "Current"
-                    }
-                });
+                                                     new ParseHistoryItem {
+                                                         Name = "Current",
+                                                     },
+                                                 });
             }
 
             set {
                 if (this._parseHistory == null) {
                     this._parseHistory = new ObservableCollection<ParseHistoryItem> {
                         new ParseHistoryItem {
-                            Name = "Current"
-                        }
+                            Name = "Current",
+                        },
                     };
                 }
 
@@ -185,7 +180,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             var openFileDialog = new OpenFileDialog {
                 InitialDirectory = Path.Combine(Common.Constants.LogsPath, "Parser"),
                 Multiselect = false,
-                Filter = "JSON Files (*.json)|*.json"
+                Filter = "JSON Files (*.json)|*.json",
             };
             openFileDialog.FileOk += delegate {
                 try {
@@ -195,7 +190,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                 catch (Exception ex) {
                     var popupContent = new PopupContent {
                         Title = PluginViewModel.Instance.Locale["app_WarningMessage"],
-                        Message = ex.Message
+                        Message = ex.Message,
                     };
                     Plugin.PHost.PopupMessage(Plugin.PName, popupContent);
                 }
@@ -254,7 +249,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsHistory) {
-                monster = ((List<HistoryGroup>) monsters).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedMonsterName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<HistoryGroup>().FirstOrDefault();
+                monster = ((List<HistoryGroup>) monsters).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedMonsterName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).FirstOrDefault();
                 if (monster == null) {
                     return;
                 }
@@ -281,7 +276,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                                 Critical = action.Line.Crit.ToString(),
                                 Source = action.Line.Source,
                                 Target = action.Line.Target,
-                                TimeStamp = action.TimeStamp
+                                TimeStamp = action.TimeStamp,
                             });
                     }
 
@@ -295,7 +290,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                                 Critical = action.Line.Crit.ToString(),
                                 Source = action.Line.Source,
                                 Target = action.Line.Target,
-                                TimeStamp = action.TimeStamp
+                                TimeStamp = action.TimeStamp,
                             });
                     }
 
@@ -309,7 +304,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                                 Critical = action.Line.Crit.ToString(),
                                 Source = action.Line.Source,
                                 Target = action.Line.Target,
-                                TimeStamp = action.TimeStamp
+                                TimeStamp = action.TimeStamp,
                             });
                     }
 
@@ -323,8 +318,8 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             var x = new xMetroWindowDataGrid {
                 Title = title,
                 xMetroWindowDG = {
-                    ItemsSource = source
-                }
+                    ItemsSource = source,
+                },
             };
             x.Show();
         }
@@ -343,7 +338,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsHistory) {
-                player = ((List<HistoryGroup>) players).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<HistoryGroup>().FirstOrDefault();
+                player = ((List<HistoryGroup>) players).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).FirstOrDefault();
                 if (player == null) {
                     return;
                 }
@@ -370,7 +365,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                                 Critical = action.Line.Crit.ToString(),
                                 Source = action.Line.Source,
                                 Target = action.Line.Target,
-                                TimeStamp = action.TimeStamp
+                                TimeStamp = action.TimeStamp,
                             });
                     }
 
@@ -384,7 +379,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                                 Critical = action.Line.Crit.ToString(),
                                 Source = action.Line.Source,
                                 Target = action.Line.Target,
-                                TimeStamp = action.TimeStamp
+                                TimeStamp = action.TimeStamp,
                             });
                     }
 
@@ -398,7 +393,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
                                 Critical = action.Line.Crit.ToString(),
                                 Source = action.Line.Source,
                                 Target = action.Line.Target,
-                                TimeStamp = action.TimeStamp
+                                TimeStamp = action.TimeStamp,
                             });
                     }
 
@@ -412,8 +407,8 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             var x = new xMetroWindowDataGrid {
                 Title = title,
                 xMetroWindowDG = {
-                    ItemsSource = source
-                }
+                    ItemsSource = source,
+                },
             };
             x.Show();
         }
@@ -432,7 +427,7 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             }
 
             if (this.IsHistory) {
-                player = ((List<HistoryGroup>) players).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).Cast<HistoryGroup>().FirstOrDefault();
+                player = ((List<HistoryGroup>) players).Where(p => p != null).Where(p => string.Equals(p.Name, MainView.View.SelectedPlayerName.Text.ToString(CultureInfo.InvariantCulture), Constants.InvariantComparer)).FirstOrDefault();
                 if (player == null) {
                     return;
                 }
@@ -452,8 +447,8 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             foreach (dynamic item in player.Last20Items) {
                 source.Add(
                     new ItemUsedHistoryItem {
-                        Item = Regex.Replace(item.Line.Action, @"\[Hq\]", "[HQ]", SharedRegEx.DefaultOptions),
-                        TimeStamp = item.TimeStamp
+                        Item = item.Line.Action,
+                        TimeStamp = item.TimeStamp,
                     });
             }
 
@@ -464,8 +459,8 @@ namespace FFXIVAPP.Plugin.Parse.ViewModels {
             var x = new xMetroWindowDataGrid {
                 Title = title,
                 xMetroWindowDG = {
-                    ItemsSource = source
-                }
+                    ItemsSource = source,
+                },
             };
             x.Show();
         }

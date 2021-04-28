@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="PercentStat.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -16,18 +16,15 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats {
 
         private readonly Stat<double> _numerator;
 
-        public PercentStat(string name, params Stat<double>[] dependencies)
-            : base(name, 0) {
+        public PercentStat(string name, params Stat<double>[] dependencies) : base(name, 0) {
             this._numerator = dependencies[0];
             this._denominator = dependencies[1];
             this.SetupDepends();
         }
 
-        public PercentStat(string name, double value)
-            : base(name, 0) { }
+        public PercentStat(string name, double value) : base(name, 0) { }
 
-        public PercentStat(string name)
-            : base(name, 0) { }
+        public PercentStat(string name) : base(name, 0) { }
 
         /// <summary>
         /// </summary>

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="NameToAvatarConverter.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -21,7 +21,6 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
     using System.Windows.Data;
     using System.Windows.Threading;
 
-    using FFXIVAPP.Common;
     using FFXIVAPP.Common.Models;
     using FFXIVAPP.Common.Utilities;
     using FFXIVAPP.ResourceFiles;
@@ -29,8 +28,6 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
     using HtmlAgilityPack;
 
     using NLog;
-
-    using Constants = FFXIVAPP.Plugin.Parse.Constants;
 
     public class NameToAvatarConverter : IMultiValueConverter {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -109,8 +106,7 @@ namespace FFXIVAPP.Plugin.Parse.Converters {
                                 var imageUrl = src.Match(htmlSource).Groups["image"].Value;
                                 imageUrl = imageUrl.Substring(0, imageUrl.IndexOf("?", Constants.InvariantComparer)).Replace("50x50", "96x96");
                                 image.Dispatcher.Invoke(
-                                    DispatcherPriority.Background,
-                                    (ThreadStart) delegate {
+                                    DispatcherPriority.Background, (ThreadStart) delegate {
                                         var imageUri = this._cachingEnabled
                                                            ? this.SaveToCache(fileName, new Uri(imageUrl))
                                                            : imageUrl;

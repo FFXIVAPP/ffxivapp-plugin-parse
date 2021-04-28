@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AccuracyStat.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -14,18 +14,15 @@ namespace FFXIVAPP.Plugin.Parse.Models.LinkedStats {
     using FFXIVAPP.Plugin.Parse.Models.Stats;
 
     public class AccuracyStat : LinkedStat {
-        public AccuracyStat(string name, params Stat<double>[] dependencies)
-            : base(name, 0) {
+        public AccuracyStat(string name, params Stat<double>[] dependencies) : base(name, 0) {
             this.UsedStat = dependencies[0];
             this.MissStat = dependencies[1];
             this.SetupDepends();
         }
 
-        public AccuracyStat(string name, double value)
-            : base(name, 0) { }
+        public AccuracyStat(string name, double value) : base(name, 0) { }
 
-        public AccuracyStat(string name)
-            : base(name, 0) { }
+        public AccuracyStat(string name) : base(name, 0) { }
 
         private Stat<double> MissStat { get; }
 

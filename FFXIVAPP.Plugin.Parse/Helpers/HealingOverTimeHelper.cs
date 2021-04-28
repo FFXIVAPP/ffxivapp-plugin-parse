@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="HealingOverTimeHelper.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -32,31 +32,28 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 _cureActions = new Dictionary<string, List<string>>();
 
                 _cureActions.Add(
-                    "I",
-                    new List<string> {
+                    "I", new List<string> {
                         "cure",
                         "vita",
                         "soin",
                         "ケアル",
-                        "治疗"
+                        "治疗",
                     });
                 _cureActions.Add(
-                    "II",
-                    new List<string> {
+                    "II", new List<string> {
                         "cure ii",
                         "vitra",
                         "extra soin",
                         "ケアルラ",
-                        "救疗"
+                        "救疗",
                     });
                 _cureActions.Add(
-                    "III",
-                    new List<string> {
+                    "III", new List<string> {
                         "cure iii",
                         "vitaga",
                         "méga soin",
                         "ケアルガ",
-                        "愈疗"
+                        "愈疗",
                     });
                 return _cureActions;
             }
@@ -71,21 +68,19 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                 _medicaActions = new Dictionary<string, List<string>>();
 
                 _medicaActions.Add(
-                    "I",
-                    new List<string> {
+                    "I", new List<string> {
                         "reseda",
                         "médica",
                         "メディカ",
-                        "医治"
+                        "医治",
                     });
                 _medicaActions.Add(
-                    "II",
-                    new List<string> {
+                    "II", new List<string> {
                         "medica ii",
                         "resedra",
                         "extra médica",
                         "メディカラ",
-                        "医济"
+                        "医济",
                     });
                 return _medicaActions;
             }

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="EntityHelper.cs" company="SyndicatedLife">
-//   Copyright(c) 2018 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (http://syndicated.life/)
+//   Copyright© 2007 - 2021 Ryan Wilson &amp;lt;syndicated.life@gmail.com&amp;gt; (https://syndicated.life/)
 //   Licensed under the MIT license. See LICENSE.md in the solution root for full license information.
 // </copyright>
 // <summary>
@@ -30,7 +30,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
 
                 DTPS,
 
-                HPS
+                HPS,
             }
 
             public static void CleanAndCopy(ParseEntity source, ParseType parseType) {
@@ -66,7 +66,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                         PercentOfTotalOverallHealingMitigated = source.PercentOfTotalOverallHealingMitigated,
                         PercentOfTotalOverallDamageTaken = source.PercentOfTotalOverallDamageTaken,
                         PercentOfTotalOverallDamageTakenOverTime = source.PercentOfTotalOverallDamageTakenOverTime,
-                        Players = new List<PlayerEntity>()
+                        Players = new List<PlayerEntity>(),
                     };
                     foreach (PlayerEntity playerEntity in source.Players) {
                         try {
@@ -130,7 +130,7 @@ namespace FFXIVAPP.Plugin.Parse.Helpers {
                                 PercentOfTotalOverallHealingMitigated = playerEntity.PercentOfTotalOverallHealingMitigated,
                                 PercentOfTotalOverallDamageTaken = playerEntity.PercentOfTotalOverallDamageTaken,
                                 PercentOfTotalOverallDamageTakenOverTime = playerEntity.PercentOfTotalOverallDamageTakenOverTime,
-                                Type = playerEntity.Type
+                                Type = playerEntity.Type,
                             };
                             target.Players.Add(entity);
                         }
